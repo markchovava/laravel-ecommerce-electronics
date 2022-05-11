@@ -14,6 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/add', function(){
+    $cat1 = \App\Models\Product\Category::create([
+        'name' => 'Laptop',
+    ]);
+    $cat2 = \App\Models\Product\Category::create([
+        'name' => 'Smartphone',
+    ]);
+});
+
+
+Route::get('/show', function(){});
+
+
+
+
+
 Route::get('/signin', function () {
     return view('auth.login1');
 });
