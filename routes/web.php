@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Product\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +15,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('admin')->group(function(){ 
 
-Route::get('/add', function(){
-    $cat1 = \App\Models\Product\Category::create([
-        'name' => 'Laptop',
-    ]);
-    $cat2 = \App\Models\Product\Category::create([
-        'name' => 'Smartphone',
-    ]);
+    /* :::::: Products ::::: */
+    Route::get('/prod', [ProductController::class, 'index'])->name('prod');
+    Route::get('/cat', [CategoryController::class, 'index'])->name('cat');
 });
 
 
-Route::get('/show', function(){});
+
+
+
+
+Route::get('/add', function(){
+   /*  $cat1 = \App\Models\Product\Product::create([
+        'name' => 'Product 1',
+    ]); */
+   
+    $product = \App\Models\Product\Product::find(2);
+    $category = \App\Models\Product\Category::find(2);
+    $product->categories()->detach([1,2,3]);
+    $product->categories()->attach([1,2,3]);
+    
+});
+
+
+Route::get('/show', function(){
+
+    $p = \App\Models\Product\Product::with('categories')->latest()->get();
+
+    return $p;
+});
 
 
 

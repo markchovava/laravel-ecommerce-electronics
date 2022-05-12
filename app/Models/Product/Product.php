@@ -20,6 +20,13 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id')
+            ->withTimestamps();
+    }
+
+    public function variations()
+    {
+        return $this->belongsToMany(Variation::class, 'product_variation', 'product_id', 'variation_id')
+            ->withTimestamps();
     }
 }

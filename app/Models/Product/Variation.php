@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Variation extends Model
 {
     use HasFactory;
+
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_variation', 'variation_id', 'product_id')
+            ->withTimestamps();
+    }
 }
