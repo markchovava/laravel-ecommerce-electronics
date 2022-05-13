@@ -28,23 +28,29 @@ Route::prefix('admin')->group(function(){
 
 
 Route::get('/add', function(){
-   /*  $cat1 = \App\Models\Product\Product::create([
-        'name' => 'Product 1',
-    ]); */
-   
+
+    $product = \App\Models\Product\Product::find(1);
+    $product->discounts()->create([
+        'discount_percent' => 10,
+    ]);
+
     $product = \App\Models\Product\Product::find(2);
-    $category = \App\Models\Product\Category::find(2);
-    $product->categories()->detach([1,2,3]);
-    $product->categories()->attach([1,2,3]);
-    
+    $product->discounts()->create([
+        'discount_percent' => 25,
+    ]);
+    $product = \App\Models\Product\Product::find(3);
+    $product->discounts()->create([
+        'discount_percent' => 33,
+    ]);
+      
 });
 
 
 Route::get('/show', function(){
 
-    $p = \App\Models\Product\Product::with('categories')->latest()->get();
+    $data['products']= \App\Models\Product\Product::with('discounts')->get();
 
-    return $p;
+    return view('frontend.test', $data);
 });
 
 

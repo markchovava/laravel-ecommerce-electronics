@@ -26,11 +26,28 @@ class Product extends Model
 
     public function variations()
     {
-        /* 
-            return $this->belongsToMany(Variation::class, 'product_variation', 'product_id', 'variation_id')
-                ->withTimestamps(); 
-        */
-        return $this->hasMany(Variation::class, 'product_id', 'id');
+        return $this->hasMany(Variation::class, 'product_id', 'id')
+            ->withDefault([
+                'name' => 'Info',
+                'value' => 'No variation',
+            ]);
+
+    }
+
+    public function inventories()
+    {
+        return $this->hasOne(Inventory::class, 'product_id', 'id')
+            ->withDefault([
+                'quantity' => 'Not in stock'
+            ]);
+    }
+
+    public function discounts()
+    {
+        return $this->hasOne(Discount::class, 'product_id', 'id')
+            ->withDefault([
+                'name' => 'No Discount'
+            ]);
     }
 
 

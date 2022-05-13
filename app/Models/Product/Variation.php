@@ -9,11 +9,19 @@ class Variation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'value',
+        'product_id'
+    ];
 
     public function products()
     {
-        /* return $this->belongsToMany(Product::class, 'product_variation', 'variation_id', 'product_id')
-            ->withTimestamps(); */
         return $this->belongsTo(Variation::class, 'product_id', 'id');
+    }
+
+    public function brands(){
+        return $this->belongsToMany(Brands::class, 'product_variation', 'variation_id', 'brand_id')
+            ->withTimestamps();
     }
 }
