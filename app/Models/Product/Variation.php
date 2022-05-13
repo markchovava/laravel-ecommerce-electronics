@@ -12,7 +12,8 @@ class Variation extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_variation', 'variation_id', 'product_id')
-            ->withTimestamps();
+        /* return $this->belongsToMany(Product::class, 'product_variation', 'variation_id', 'product_id')
+            ->withTimestamps(); */
+        return $this->belongsTo(Variation::class, 'product_id', 'id');
     }
 }

@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(function(){ 
 
     /* :::::: Products ::::: */
-    Route::get('/prod', [ProductController::class, 'index'])->name('prod');
-    Route::get('/cat', [CategoryController::class, 'index'])->name('cat');
+    Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
+    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
 });
 
 
@@ -117,7 +117,7 @@ Route::get('/terms', function () {
         START OF BACKEND
 ::::::::::::::::::::::::::::::::::::::
 */
-Route::prefix('/admin')->group(function(){
+Route::prefix('/backend')->group(function(){
     Route::get('/', function () {
         return view('backend.index');
     });

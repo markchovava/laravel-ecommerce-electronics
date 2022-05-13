@@ -26,7 +26,12 @@ class Product extends Model
 
     public function variations()
     {
-        return $this->belongsToMany(Variation::class, 'product_variation', 'product_id', 'variation_id')
-            ->withTimestamps();
+        /* 
+            return $this->belongsToMany(Variation::class, 'product_variation', 'product_id', 'variation_id')
+                ->withTimestamps(); 
+        */
+        return $this->hasMany(Variation::class, 'product_id', 'id');
     }
+
+
 }

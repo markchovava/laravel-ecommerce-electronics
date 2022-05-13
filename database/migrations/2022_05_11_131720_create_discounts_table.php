@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->integer('discount_percent');
-            $table->integer('start_period');
-            $table->integer('end_period');
+            $table->dateTime('start_period');
+            $table->dateTime('end_period');
             $table->string('status');
             $table->timestamps();
         });
