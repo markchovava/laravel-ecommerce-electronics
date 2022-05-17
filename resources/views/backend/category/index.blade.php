@@ -53,6 +53,7 @@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
+            <h1>{{ url()->current() }}...</h1>
             <!--begin::Actions-->
             <div class="d-flex align-items-center gap-2 gap-lg-3">
                 <!--begin::Filter menu-->

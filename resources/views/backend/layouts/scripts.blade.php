@@ -1,4 +1,35 @@
-<script>var hostUrl = "{{ asset('backend/assets/') }}";</script>
+@php
+$route = url()->current();
+@endphp
+
+@if( $route == 'http://127.0.0.1:8000/backend/products/add' )
+
+	<!--begin::Javascript-->
+	<script>var hostUrl = "{{ asset('backend/assets/') }}";</script>
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="{{ asset('backend/assets/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/scripts.bundle.js') }}"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Page Vendors Javascript(used by this page)-->
+		<script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+		<script src="{{ asset('backend/assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+		<!--end::Page Vendors Javascript-->
+		<!--begin::Page Custom Javascript(used by this page)-->
+		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/catalog/save-product.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/widgets.bundle.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/custom/widgets.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/custom/apps/chat/chat.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/custom/utilities/modals/create-app.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/custom/utilities/modals/users-search.js') }}"></script>
+		<!--end::Page Custom Javascript-->
+
+@else
+
+
+
+
+		<script>var hostUrl = "{{ asset('backend/assets/') }}";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('backend/assets/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/scripts.bundle.js') }}"></script>
@@ -13,6 +44,10 @@
 		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/customers/listing/listing.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/customers/listing/add.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/customers/listing/export.js') }}"></script>
+
+		<!-- Add Product -->
+		<script src="{{ asset('backend/assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/catalog/save-product.js') }}"></script>
 
 		<!-- cUSTOMER Custom JS -->
 		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/customers/details/transaction-history.js') }}"></script>
@@ -58,3 +93,10 @@
 		<script src="{{ asset('backend/assets/js/custom/utilities/modals/create-app.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/utilities/modals/users-search.js') }}"></script>
 		<!--end::Page Custom Javascript-->
+
+
+
+
+
+@endif
+

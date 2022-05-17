@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('product_id')->nullable();
             $table->string('name')->nullable();
-            $table->longText('description')->nullable();
             $table->integer('discount_percent')->nullable();
             $table->dateTime('start_period')->nullable();
             $table->dateTime('end_period')->nullable();

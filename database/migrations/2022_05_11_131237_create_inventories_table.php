@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')->nullable();
-            $table->bigInteger('product_option_id')->nullable();
             $table->bigInteger('quantity')->nullable();
             $table->timestamps();
         });

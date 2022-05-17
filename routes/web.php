@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function(){
 
     /* :::::: Products ::::: */
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
+    Route::get('/products/add', [ProductController::class, 'add'])->name('admin.products.add');
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
 });
 

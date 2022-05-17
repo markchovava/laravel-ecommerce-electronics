@@ -42,6 +42,14 @@ class Product extends Model
             ]);
     }
 
+    public function product_metas()
+    {
+        return $this->hasOne(ProductMeta::class, 'product_id', 'id')
+            ->withDefault([
+                'quantity' => 'No meta info'
+            ]);
+    }
+
     public function discounts()
     {
         return $this->hasOne(Discount::class, 'product_id', 'id')

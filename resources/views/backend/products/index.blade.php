@@ -229,6 +229,7 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
+                            @foreach($products as $product)
                             <!--begin::Table row-->
                             <tr>
                                 <!--begin::Checkbox-->
@@ -242,14 +243,15 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <!--begin::Thumbnail-->
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
+                                        <a href="#" class="symbol symbol-50px">
                                             <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media//stock/ecommerce/1.gif') }});"></span>
                                         </a>
                                         <!--end::Thumbnail-->
                                         <div class="ms-5">
                                             <!--begin::Title-->
-                                            <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">
-                                                Product 1</a>
+                                            <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="{{ $product->name }}">
+                                                {{ $product->name }}
+                                            </a>
                                             <!--end::Title-->
                                         </div>
                                     </div>
@@ -257,112 +259,32 @@
                                 <!--end::Category=-->
                                 <!--begin::SKU=-->
                                 <td class="text-end pe-0">
-                                    <span class="fw-bolder">04477003</span>
+                                    <span class="fw-bolder">{{ $product->sku }}</span>
                                 </td>
                                 <!--end::SKU=-->
                                 <!--begin::Qty=-->
-                                <td class="text-end pe-0" data-order="22">
-                                    <span class="fw-bolder ms-3">22</span>
+                                <td class="text-end pe-0" data-order="{{ $product->quantity }}">
+                                    <span class="fw-bolder ms-3">{{ $product->inventories->quantity }}</span>
                                 </td>
                                 <!--end::Qty=-->
                                 <!--begin::Price=-->
                                 <td class="text-end pe-0">
-                                    <span class="fw-bolder text-dark">$207.00</span>
+                                    <span class="fw-bolder text-dark">{{ $product->price }}</span>
                                 </td>
                                 <!--end::Price=-->
                                 <!--begin::Rating-->
-                                <td class="text-end pe-0" data-order="rating-3">
-                                    <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
-                                        Electronics
-                                    </a>
-                                </td>
-                                <!--end::Rating-->
-                                <!--begin::Status=-->
-                                <td class="text-end pe-0" data-order="Inactive">
-                                    <!--begin::Badges-->
-                                    <div class="badge badge-light-danger">Inactive</div>
-                                    <!--end::Badges-->
-                                </td>
-                                <!--end::Status=-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::Category=-->
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Thumbnail-->
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                            <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/stock/ecommerce/2.gif') }});"></span>
+                                    <td class="text-end pe-0" data-order="categories">
+                                        @foreach($product->categories as $_data)
+                                        <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
+                                            {{ $_data->name }}
                                         </a>
-                                        <!--end::Thumbnail-->
-                                        <div class="ms-5">
-                                            <!--begin::Title-->
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">Product 2</a>
-                                            <!--end::Title-->
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--end::Category=-->
-                                <!--begin::SKU=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder">01626006</span>
-                                </td>
-                                <!--end::SKU=-->
-                                <!--begin::Qty=-->
-                                <td class="text-end pe-0" data-order="46">
-                                    <span class="fw-bolder ms-3">46</span>
-                                </td>
-                                <!--end::Qty=-->
-                                <!--begin::Price=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder text-dark">$214.00</span>
-                                </td>
-                                <!--end::Price=-->
-                                <!--begin::Rating-->
-                                <td class="text-end pe-0" data-order="rating-3">
-                                    <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
-                                        Electronics
-                                    </a>
-                                </td>
+                                        @endforeach
+                                    </td>  
                                 <!--end::Rating-->
                                 <!--begin::Status=-->
-                                <td class="text-end pe-0" data-order="Scheduled">
+                                <td class="text-end pe-0" data-order="{{ $product->status }}">
                                     <!--begin::Badges-->
-                                    <div class="badge badge-light-primary">Scheduled</div>
+                                    <div class="badge badge-light-danger">Status{{ $product->status }}</div>
                                     <!--end::Badges-->
                                 </td>
                                 <!--end::Status=-->
@@ -380,7 +302,12 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="menu-link px-3">Edit</a>
+                                            <a href="#" class="menu-link px-3">Edit</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                         <!--begin::Menu item-->
+                                         <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3">View</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
@@ -394,252 +321,7 @@
                                 <!--end::Action=-->
                             </tr>
                             <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::Category=-->
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Thumbnail-->
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                            <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media//stock/ecommerce/3.gif') }});"></span>
-                                        </a>
-                                        <!--end::Thumbnail-->
-                                        <div class="ms-5">
-                                            <!--begin::Title-->
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">Product 3</a>
-                                            <!--end::Title-->
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--end::Category=-->
-                                <!--begin::SKU=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder">03236001</span>
-                                </td>
-                                <!--end::SKU=-->
-                                <!--begin::Qty=-->
-                                <td class="text-end pe-0" data-order="36">
-                                    <span class="fw-bolder ms-3">36</span>
-                                </td>
-                                <!--end::Qty=-->
-                                <!--begin::Price=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder text-dark">$186.00</span>
-                                </td>
-                                <!--end::Price=-->
-                                <!--begin::Rating-->
-                                <td class="text-end pe-0" data-order="rating-3">
-                                    <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
-                                        Electronics
-                                    </a>
-                                </td>
-                                <!--end::Rating-->
-                                <!--begin::Status=-->
-                                <td class="text-end pe-0" data-order="Inactive">
-                                    <!--begin::Badges-->
-                                    <div class="badge badge-light-danger">Inactive</div>
-                                    <!--end::Badges-->
-                                </td>
-                                <!--end::Status=-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::Category=-->
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Thumbnail-->
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                            <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media//stock/ecommerce/4.gif') }});"></span>
-                                        </a>
-                                        <!--end::Thumbnail-->
-                                        <div class="ms-5">
-                                            <!--begin::Title-->
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">Product 4</a>
-                                            <!--end::Title-->
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--end::Category=-->
-                                <!--begin::SKU=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder">02960001</span>
-                                </td>
-                                <!--end::SKU=-->
-                                <!--begin::Qty=-->
-                                <td class="text-end pe-0" data-order="42">
-                                    <span class="fw-bolder ms-3">42</span>
-                                </td>
-                                <!--end::Qty=-->
-                                <!--begin::Price=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder text-dark">$271.00</span>
-                                </td>
-                                <!--end::Price=-->
-                                <!--begin::Rating-->
-                                <td class="text-end pe-0" data-order="rating-3">
-                                    <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
-                                        Electronics
-                                    </a>
-                                </td>
-                                <!--end::Rating-->
-                                <!--begin::Status=-->
-                                <td class="text-end pe-0" data-order="Published">
-                                    <!--begin::Badges-->
-                                    <div class="badge badge-light-success">Published</div>
-                                    <!--end::Badges-->
-                                </td>
-                                <!--end::Status=-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::Category=-->
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Thumbnail-->
-                                        <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                                            <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media//stock/ecommerce/5.gif') }});"></span>
-                                        </a>
-                                        <!--end::Thumbnail-->
-                                        <div class="ms-5">
-                                            <!--begin::Title-->
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="product_name">Product 5</a>
-                                            <!--end::Title-->
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--end::Category=-->
-                                <!--begin::SKU=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder">01488004</span>
-                                </td>
-                                <!--end::SKU=-->
-                                <!--begin::Qty=-->
-                                <td class="text-end pe-0" data-order="26">
-                                    <span class="fw-bolder ms-3">26</span>
-                                </td>
-                                <!--end::Qty=-->
-                                <!--begin::Price=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder text-dark">$71.00</span>
-                                </td>
-                                <!--end::Price=-->
-                                <!--begin::Rating-->
-                                <td class="text-end pe-0" data-order="rating-3">
-                                    <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
-                                        Electronics
-                                    </a>
-                                </td>
-                                <!--end::Rating-->
-                                <!--begin::Status=-->
-                                <td class="text-end pe-0" data-order="Scheduled">
-                                    <!--begin::Badges-->
-                                    <div class="badge badge-light-primary">Scheduled</div>
-                                    <!--end::Badges-->
-                                </td>
-                                <!--end::Status=-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
+                           @endforeach
                         </tbody>
                         <!--end::Table body-->
                     </table>

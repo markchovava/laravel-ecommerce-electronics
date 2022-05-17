@@ -169,7 +169,7 @@
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2>Thumbnail</h2>
+                                <h2>Product Images</h2>
                             </div>
                             <!--end::Card title-->
                         </div>
@@ -177,7 +177,7 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url({{ asset('assets/media/svg/files/blank-image.svg') }})">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url(assets/media/svg/files/blank-image.svg)">
                                 <!--begin::Preview existing avatar-->
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <!--end::Preview existing avatar-->
@@ -220,7 +220,8 @@
                             <!--end::Card title-->
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
-                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
+                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status">
+                                </div>
                             </div>
                             <!--begin::Card toolbar-->
                         </div>
@@ -260,117 +261,65 @@
                             <!--end::Card title-->
                         </div>
                         <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Input group-->
-                            <!--begin::Label-->
-                            <label class="form-label">Categories</label>
-                            <!--end::Label-->
-                            <!--begin::Select2-->
-                            <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
-                                <option></option>
-                                <option value="Computers">Computers</option>
-                                <option value="Watches">Watches</option>
-                                <option value="Headphones">Headphones</option>
-                                <option value="Footwear">Footwear</option>
-                                <option value="Cameras">Cameras</option>
-                                <option value="Shirts">Shirts</option>
-                                <option value="Household">Household</option>
-                                <option value="Handbags">Handbags</option>
-                                <option value="Wines">Wines</option>
-                                <option value="Sandals">Sandals</option>
-                            </select>
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7 mb-7">Add product to a category.</div>
-                            <!--end::Description-->
-                            <!--end::Input group-->
-                            <!--begin::Button-->
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
-                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                            <span class="svg-icon svg-icon-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
-                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->Create new category</a>
-                            <!--end::Button-->
-                            <!--begin::Input group-->
-                            <!--begin::Label-->
-                            <label class="form-label d-block">Tags</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" class="form-control mb-2" value="" />
-                            <!--end::Input-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Add tags to a product.</div>
-                            <!--end::Description-->
-                            <!--end::Input group-->
-                        </div>
-                        <!--end::Card body-->
+                        @if($categories)
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Input group-->
+                                <!--begin::Label-->
+                                <label class="form-label">Categories</label>
+                                <!--end::Label-->
+                                <!--begin::Select2-->
+                                <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
+                                    <option></option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <!--end::Select2-->
+                                <!--begin::Description-->
+                                <div class="text-muted fs-7 mb-7">Add product to a category.</div>
+                                <!--end::Description-->
+                                <!--end::Input group-->
+                                <!--begin::Button-->
+                                <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
+                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Create new category</a>
+                                <!--end::Button-->
+                                @if($tags)
+                                    <!--begin::Input group-->
+                                    <!--begin::Label-->
+                                    <label class="form-label d-block">Tags</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" class="form-control mb-2" value="" />
+                                    <!--end::Input-->
+                                    <!--begin::Description-->
+                                    <div class="text-muted fs-7">Add tags to a product.</div>
+                                    <!--end::Description-->
+                                    <!--end::Input group-->
+                                @endif
+                            </div>
+                            <!--end::Card body-->
+                        @endif
                     </div>
                     <!--end::Category & tags-->
-                    <!--begin::Weekly sales-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Weekly Sales</h2>
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <span class="text-muted">No data available. Sales data will begin capturing once product has been published.</span>
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Weekly sales-->
-                    <!--begin::Template settings-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Product Template</h2>
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Select store template-->
-                            <label for="kt_ecommerce_add_product_store_template" class="form-label">Select a product template</label>
-                            <!--end::Select store template-->
-                            <!--begin::Select2-->
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_store_template">
-                                <option></option>
-                                <option value="default" selected="selected">Default template</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="office">Office stationary</option>
-                                <option value="fashion">Fashion</option>
-                            </select>
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Assign a template from your current theme to define how a single product is displayed.</div>
-                            <!--end::Description-->
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Template settings-->
+                    
                 </div>
                 <!--end::Aside column-->
                 <!--begin::Main column-->
                 <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                     <!--begin:::Tabs-->
                     <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
+                        
                         <!--begin:::Tab item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">
-                                Add Product</a>
+                            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Advanced</a>
                         </li>
                         <!--end:::Tab item-->
                     </ul>
@@ -378,8 +327,347 @@
                     <!--begin::Tab content-->
                     <div class="tab-content">
                         <!--begin::Tab pane-->
+                        <div class="tab-pane fade " id="kt_ecommerce_add_product_general" role="tab-panel">
+                            <div class="d-flex flex-column gap-7 gap-lg-10"> 
+                                <!--begin::Pricing-->
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Pricing</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Base Price</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="price" class="form-control mb-2" placeholder="Product price" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set the product price.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-10">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold mb-2">Discount Type
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Select a discount type that will be applied to this product"></i></label>
+                                            <!--End::Label-->
+                                            <!--begin::Row-->
+                                            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-1 row-cols-xl-3 g-9" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
+                                                <!--begin::Col-->
+                                                <div class="col">
+                                                    <!--begin::Option-->
+                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default active d-flex text-start p-6" data-kt-button="true">
+                                                        <!--begin::Radio-->
+                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                            <input class="form-check-input" type="radio" name="discount_option" value="1" checked="checked" />
+                                                        </span>
+                                                        <!--end::Radio-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-5">
+                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">No Discount</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+                                                <!--end::Col-->
+                                                <!--begin::Col-->
+                                                <div class="col">
+                                                    <!--begin::Option-->
+                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                        <!--begin::Radio-->
+                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                            <input class="form-check-input" type="radio" name="discount_option" value="2" />
+                                                        </span>
+                                                        <!--end::Radio-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-5">
+                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">Percentage %</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+                                                <!--end::Col-->
+                                                <!--begin::Col-->
+                                                <div class="col">
+                                                    <!--begin::Option-->
+                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                        <!--begin::Radio-->
+                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                            <input class="form-check-input" type="radio" name="discount_option" value="3" />
+                                                        </span>
+                                                        <!--end::Radio-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-5">
+                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">Fixed Price</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Row-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="d-none mb-10 fv-row" id="kt_ecommerce_add_product_discount_percentage">
+                                            <!--begin::Label-->
+                                            <label class="form-label">Set Discount Percentage</label>
+                                            <!--end::Label-->
+                                            <!--begin::Slider-->
+                                            <div class="d-flex flex-column text-center mb-5">
+                                                <div class="d-flex align-items-start justify-content-center mb-7">
+                                                    <span class="fw-bolder fs-3x" id="kt_ecommerce_add_product_discount_label">0</span>
+                                                    <span class="fw-bolder fs-4 mt-1 ms-2">%</span>
+                                                </div>
+                                                <div id="kt_ecommerce_add_product_discount_slider" class="noUi-sm"></div>
+                                            </div>
+                                            <!--end::Slider-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set a percentage discount to be applied on this product.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="d-none mb-10 fv-row" id="kt_ecommerce_add_product_discount_fixed">
+                                            <!--begin::Label-->
+                                            <label class="form-label">Fixed Discounted Price</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="dicsounted_price" class="form-control mb-2" placeholder="Discounted price" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set the discounted product price. The product will be reduced at the determined fixed price</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Tax-->
+                                        <div class="d-flex flex-wrap gap-5">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">Tax Class</label>
+                                                <!--end::Label-->
+                                                <!--begin::Select2-->
+                                                <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                    <option></option>
+                                                    <option value="0">Tax Free</option>
+                                                    <option value="1">Taxable Goods</option>
+                                                    <option value="2">Downloadable Product</option>
+                                                </select>
+                                                <!--end::Select2-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7">Set the product tax class.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <!--begin::Label-->
+                                                <label class="form-label">VAT Amount (%)</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="text" class="form-control mb-2" value="" />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7">Set the product VAT about.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--end:Tax-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::Pricing-->
+                            </div>
+                        </div>
+                        <!--end::Tab pane-->
+                        <!--begin::Tab pane-->
                         <div class="tab-pane fade show active" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                             <div class="d-flex flex-column gap-7 gap-lg-10">
+                                <!--begin::General options-->
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>General</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Product Name</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Product name" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">Description</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <div id="kt_ecommerce_add_product_description" name="kt_ecommerce_add_product_description" class="min-h-200px mb-2"></div>
+                                            <!--end::Editor-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set a description to the product for better visibility.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::General options-->
+                                 <!--begin::Pricing-->
+                                 <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Pricing</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Base Price</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="price" class="form-control mb-2" placeholder="Product price" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set the product price.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-10">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold mb-2">Discount Type
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Select a discount type that will be applied to this product"></i></label>
+                                            <!--End::Label-->
+                                            <!--begin::Row-->
+                                            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-1 row-cols-xl-3 g-9" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
+                                                <!--begin::Col-->
+                                                <div class="col">
+                                                    <!--begin::Option-->
+                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default active d-flex text-start p-6" data-kt-button="true">
+                                                        <!--begin::Radio-->
+                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                            <input class="form-check-input" type="radio" name="discount_option" value="1" checked="checked" />
+                                                        </span>
+                                                        <!--end::Radio-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-5">
+                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">No Discount</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+                                                <!--end::Col-->
+                                                <!--begin::Col-->
+                                                <div class="col">
+                                                    <!--begin::Option-->
+                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                        <!--begin::Radio-->
+                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                            <input class="form-check-input" type="radio" name="discount_option" value="2" />
+                                                        </span>
+                                                        <!--end::Radio-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-5">
+                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">Percentage %</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Row-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="d-none mb-10 fv-row" id="kt_ecommerce_add_product_discount_percentage">
+                                            <!--begin::Label-->
+                                            <label class="form-label">Set Discount Percentage</label>
+                                            <!--end::Label-->
+                                            <!--begin::Slider-->
+                                            <div class="d-flex flex-column text-center mb-5">
+                                                <div class="d-flex align-items-start justify-content-center mb-7">
+                                                    <span class="fw-bolder fs-3x" id="kt_ecommerce_add_product_discount_label">0</span>
+                                                    <span class="fw-bolder fs-4 mt-1 ms-2">%</span>
+                                                </div>
+                                                <div id="kt_ecommerce_add_product_discount_slider" class="noUi-sm"></div>
+                                            </div>
+                                            <!--end::Slider-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set a percentage discount to be applied on this product.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                       
+                                        <!--begin::Tax-->
+                                        <div class="d-flex flex-wrap gap-5">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">Tax Class</label>
+                                                <!--end::Label-->
+                                                <!--begin::Select2-->
+                                                <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                    <option></option>
+                                                    <option value="0">Tax Free</option>
+                                                    <option value="1">Taxable Goods</option>
+                                                    <option value="2">Downloadable Product</option>
+                                                </select>
+                                                <!--end::Select2-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7">Set the product tax class.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <!--begin::Label-->
+                                                <label class="form-label">VAT Amount (%)</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="text" class="form-control mb-2" value="" />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7">Set the product VAT about.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--end:Tax-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::Pricing-->
                                 <!--begin::Inventory-->
                                 <div class="card card-flush py-4">
                                     <!--begin::Card header-->
@@ -410,10 +698,36 @@
                                             <label class="required form-label">Barcode</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="sku" class="form-control mb-2" placeholder="Barcode Number" value="" />
+                                            <input type="text" name="barcode" class="form-control mb-2" placeholder="Barcode Number" value="" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product barcode number.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Serial Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="sku" class="form-control mb-2" placeholder="Serial Number" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Enter the product Serial Number.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">QR Code</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="qrcode" class="form-control mb-2" placeholder="QR Code" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Enter the product QR Code.</div>
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
@@ -430,22 +744,6 @@
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product quantity.</div>
-                                            <!--end::Description-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row">
-                                            <!--begin::Label-->
-                                            <label class="form-label">Allow Backorders</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <div class="form-check form-check-custom form-check-solid mb-2">
-                                                <input class="form-check-input" type="checkbox" value="" />
-                                                <label class="form-check-label">Yes</label>
-                                            </div>
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Allow customers to purchase products that are out of stock.</div>
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
@@ -549,7 +847,7 @@
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Shipping form-->
-                                        <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10">
+                                        <div id="kt_ecommerce_add_product_shipping" class=" mt-10">
                                             <!--begin::Input group-->
                                             <div class="mb-10 fv-row">
                                                 <!--begin::Label-->
