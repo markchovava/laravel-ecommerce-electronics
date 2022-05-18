@@ -17,11 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->bigInteger('sku')->nullable();
+            $table->text('sku')->nullable();
             $table->bigInteger('barcode')->nullable();
-            $table->bigInteger('serialnumber')->nullable();
-            $table->text('qrcode')->nullable();
-            $table->text('price')->nullable();
+            $table->longText('serialnumber')->nullable();
+            $table->longText('qrcode')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('weight')->nullable();
+            $table->integer('width')->nullable();
+            $table->integer('height')->nullable();
+            $table->integer('length')->nullable();
             $table->timestamps();
         });
     }

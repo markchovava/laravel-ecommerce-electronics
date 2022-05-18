@@ -444,41 +444,7 @@
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
-                                        <!--begin::Tax-->
-                                        <div class="d-flex flex-wrap gap-5">
-                                            <!--begin::Input group-->
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <!--begin::Label-->
-                                                <label class="required form-label">Tax Class</label>
-                                                <!--end::Label-->
-                                                <!--begin::Select2-->
-                                                <select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
-                                                    <option></option>
-                                                    <option value="0">Tax Free</option>
-                                                    <option value="1">Taxable Goods</option>
-                                                    <option value="2">Downloadable Product</option>
-                                                </select>
-                                                <!--end::Select2-->
-                                                <!--begin::Description-->
-                                                <div class="text-muted fs-7">Set the product tax class.</div>
-                                                <!--end::Description-->
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row w-100 flex-md-root">
-                                                <!--begin::Label-->
-                                                <label class="form-label">VAT Amount (%)</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="text" class="form-control mb-2" value="" />
-                                                <!--end::Input-->
-                                                <!--begin::Description-->
-                                                <div class="text-muted fs-7">Set the product VAT about.</div>
-                                                <!--end::Description-->
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--end:Tax-->
+                                        
                                     </div>
                                     <!--end::Card header-->
                                 </div>
@@ -626,14 +592,28 @@
                                                 <label class="required form-label">Tax Class</label>
                                                 <!--end::Label-->
                                                 <!--begin::Select2-->
-                                                <select name="tax_name" class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                <select class="form-select mb-2" name="tax_name" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
                                                     <option></option>
                                                     <option value="Tax Free">Tax Free</option>
                                                     <option value="Taxable Goods">Taxable Goods</option>
+                                                    <option value="Downloadable Product">Downloadable Product</option>
                                                 </select>
                                                 <!--end::Select2-->
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Set the product tax class.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <!--begin::Label-->
+                                                <label class="form-label">VAT Amount (%)</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" number name="tax_value" class="form-control mb-2" value="" />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7">Set the product VAT about.</div>
                                                 <!--end::Description-->
                                             </div>
                                             <!--end::Input group-->

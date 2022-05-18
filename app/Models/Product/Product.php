@@ -55,7 +55,8 @@ class Product extends Model
     {
         return $this->hasOne(Inventory::class, 'product_id', 'id')
             ->withDefault([
-                'quantity' => 'Not in stock'
+                'in_store_quantity' => 'Not in stock',
+                'in_warehouse_quantity' => 'Not in stock',
             ]);
     }
 
@@ -67,5 +68,12 @@ class Product extends Model
             ]);
     }
 
+    public function taxes()
+    {
+        return $this->hasOne(Tax::class, 'product_id', 'id')
+            ->withDefault([
+                'name' => 'No Tax Included'
+            ]);
+    }
 
 }

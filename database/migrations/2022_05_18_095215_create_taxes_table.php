@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->nullable();
-            $table->bigInteger('in_store_quantity')->nullable();
-            $table->bigInteger('in_warehouse_quantity')->nullable();
+            $table->bigInteger('product_id');
+            $table->string('name');
+            $table->string('amount_percent');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('taxes');
     }
 };
