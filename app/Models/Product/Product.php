@@ -24,6 +24,12 @@ class Product extends Model
             ->withTimestamps();
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id')
+            ->withTimestamps();
+    }
+
     public function variations()
     {
         return $this->hasMany(Variation::class, 'product_id', 'id')
@@ -34,19 +40,22 @@ class Product extends Model
 
     }
 
+    public function product_metas()
+    {
+        return $this->hasOne(ProductMeta::class, 'product_id', 'id')
+            ->withDefault([
+                'title' => 'Write Meta Title', 	
+                'description' => 'Write Meta Description',
+                'keywords' => 'Write Meta Keywords',
+            ]);
+
+    }
+
     public function inventories()
     {
         return $this->hasOne(Inventory::class, 'product_id', 'id')
             ->withDefault([
                 'quantity' => 'Not in stock'
-            ]);
-    }
-
-    public function product_metas()
-    {
-        return $this->hasOne(ProductMeta::class, 'product_id', 'id')
-            ->withDefault([
-                'quantity' => 'No meta info'
             ]);
     }
 
