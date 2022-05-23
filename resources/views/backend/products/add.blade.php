@@ -52,105 +52,7 @@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
-            <!--begin::Actions-->
-            <div class="d-flex align-items-center gap-2 gap-lg-3">
-                <!--begin::Filter menu-->
-                <div class="m-0">
-                    <!--begin::Menu toggle-->
-                    <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                    <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->Filter</a>
-                    <!--end::Menu toggle-->
-                    <!--begin::Menu 1-->
-                    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_620792fcbe9fd">
-                        <!--begin::Header-->
-                        <div class="px-7 py-5">
-                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Menu separator-->
-                        <div class="separator border-gray-200"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Form-->
-                        <div class="px-7 py-5">
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Status:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <div>
-                                    <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_620792fcbe9fd" data-allow-clear="true">
-                                        <option></option>
-                                        <option value="1">Approved</option>
-                                        <option value="2">Pending</option>
-                                        <option value="2">In Process</option>
-                                        <option value="2">Rejected</option>
-                                    </select>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Member Type:</label>
-                                <!--end::Label-->
-                                <!--begin::Options-->
-                                <div class="d-flex">
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                        <span class="form-check-label">Author</span>
-                                    </label>
-                                    <!--end::Options-->
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                        <span class="form-check-label">Customer</span>
-                                    </label>
-                                    <!--end::Options-->
-                                </div>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Notifications:</label>
-                                <!--end::Label-->
-                                <!--begin::Switch-->
-                                <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                    <label class="form-check-label">Enabled</label>
-                                </div>
-                                <!--end::Switch-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                                <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                            </div>
-                            <!--end::Actions-->
-                        </div>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Menu 1-->
-                </div>
-                <!--end::Filter menu-->
-                <!--begin::Secondary button-->
-                <!--end::Secondary button-->
-                <!--begin::Primary button-->
-                <a href="../../demo1/dist/.html" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-                <!--end::Primary button-->
-            </div>
-            <!--end::Actions-->
+           
         </div>
         <!--end::Container-->
     </div>
@@ -160,9 +62,11 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
-            <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
+            <form method="post" action="{{ route('admin.products.store') }}" enctype="multipart/form-data" class="form d-flex flex-column flex-lg-row">
+                @csrf
+
                 <!--begin::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-450px mb-7 me-lg-10">
                     <!--begin::Thumbnail settings-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -185,7 +89,7 @@
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--begin::Inputs-->
-                                    <input type="file" name="thumbnail" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="product_thumbnail" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
@@ -229,11 +133,11 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
-                            <select name="status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+                            <select name="product_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
                                 <option></option>
-                                <option value="published" selected="selected">Published</option>
-                                <option value="draft">Draft</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Published" selected="selected">Published</option>
+                                <option value="Draft">Draft</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
@@ -243,68 +147,189 @@
                         <!--end::Card body-->
                     </div>
                     <!--end::Status-->
-                    <!--begin::Category & tags-->
+                    <!--begin::Category-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2>Product Details</h2>
+                                <h2>Product Categories</h2>
                             </div>
                             <!--end::Card title-->
                         </div>
                         <!--end::Card header-->
-                        @if($categories)
+                        @if(!empty($categories))
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
-                                <!--begin::Input group-->
-                                <!--begin::Label-->
-                                <label class="form-label">Categories</label>
-                                <!--end::Label-->
-                                <!--begin::Select2-->
-                                <select name="category[]" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
-                                    <option></option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                                <!--end::Select2-->
-                                <!--begin::Description-->
-                                <div class="text-muted fs-7 mb-7">Add product to a category.</div>
-                                <!--end::Description-->
-                                <!--end::Input group-->
-                                <!--begin::Button-->
-                                <a href="#" class="btn btn-light-primary btn-sm mb-10">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
-                                        <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->Create new category</a>
-                                <!--end::Button-->
-                                @if($tags)
-                                    <!--begin::Input group-->
-                                    <!--begin::Label-->
-                                    <label class="form-label d-block">Tags</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input id="kt_ecommerce_add_product_tags" name="tag[]" class="form-control mb-2" value="" />
-                                    <!--end::Input-->
-                                    <!--begin::Description-->
-                                    <div class="text-muted fs-7">Add tags to a product.</div>
-                                    <!--end::Description-->
-                                    <!--end::Input group-->
-                                @endif
+                                <!--begin::Repeater-->
+                                <div id="category__repeaterBasic">
+                                    <!--begin::Form group-->
+                                    <div class="form-group">
+                                        <div data-repeater-list="category__repeaterBasic">
+                                            <div data-repeater-item>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9">
+                                                        <label class="form-label">Category Name:</label>
+                                                        <!--begin::Select2-->
+                                                        <select name="" class="form-control mb-2 p-2">
+                                                            <option selected="" disabled="">Select Option Below.</option>
+                                                            @foreach($categories as $category)   
+                                                                <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                        <!--begin::Description-->
+                                                        <div class="text-muted fs-7 mb-7">Add product to a category.</div>
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Form group-->
+                                    <!--begin::Form group-->
+                                    <div class="form-group mt-3">
+                                        <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                            <i class="la la-plus"></i>Add
+                                        </a>
+                                    </div>
+                                    <!--end::Form group-->
+                                </div>
+                                <!--end::Repeater-->
                             </div>
                             <!--end::Card body-->
                         @endif
                     </div>
                     <!--end::Category & tags-->
+                    <!--begin::Brands-->
+                    <div class="card card-flush py-4">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <h2>Product Brands</h2>
+                            </div>
+                            <!--end::Card title-->
+                        </div>
+                        <!--end::Card header-->
+                        @if(!empty($brands))
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Repeater-->
+                                <div id="brand__repeaterBasic">
+                                    <!--begin::Form group-->
+                                    <div class="form-group">
+                                        <div data-repeater-list="brand__repeaterBasic">
+                                            <div data-repeater-item>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9">
+                                                        <label class="form-label">Brand Name:</label>
+                                                        <!--begin::Select2-->
+                                                        <select name="" class="form-control mb-2 p-2">
+                                                            <option selected="" disabled="">Select Option Below.</option>
+                                                            @foreach($brands as $brand)   
+                                                                <option value="{{ $brand->id }}"> {{ $brand->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                        <!--begin::Description-->
+                                                        <div class="text-muted fs-7 mb-7">Add product Brand.</div>
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Form group-->
+                                    <!--begin::Form group-->
+                                    <div class="form-group mt-3">
+                                        <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                            <i class="la la-plus"></i>Add
+                                        </a>
+                                    </div>
+                                    <!--end::Form group-->
+                                </div>
+                                <!--end::Repeater-->
+                            </div>
+                            <!--end::Card body-->
+                        @endif
+                    </div>
+                    <!--end::Brands-->
+
+                    <!--begin::Tags-->
+                    <div class="card card-flush py-4">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <h2>Product Tags</h2>
+                            </div>
+                            <!--end::Card title-->
+                        </div>
+                        <!--end::Card header-->
+                        @if(!empty($tags))
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Repeater-->
+                                <div id="tag__repeaterBasic">
+                                    <!--begin::Form group-->
+                                    <div class="form-group">
+                                        <div data-repeater-list="tag__repeaterBasic">
+                                            <div data-repeater-item>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9">
+                                                        <label class="form-label">Tag Name:</label>
+                                                        <!--begin::Select2-->
+                                                        <select name="" class="form-control mb-2 p-2">
+                                                        <option selected="" disabled="">Select Option Below.</option>
+                                                            @foreach($tags as $tag)   
+                                                                <option value="{{ $tag->id }}"> {{ $tag->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                        <!--begin::Description-->
+                                                        <div class="text-muted fs-7 mb-7">Add product Brand.</div>
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Form group-->
+                                    <!--begin::Form group-->
+                                    <div class="form-group mt-3">
+                                        <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                            <i class="la la-plus"></i>Add
+                                        </a>
+                                    </div>
+                                    <!--end::Form group-->
+                                </div>
+                                <!--end::Repeater-->
+                            </div>
+                            <!--end::Card body-->
+                        @endif
+                    </div>
+                    <!--end::Tags-->
                     
                 </div>
                 <!--end::Aside column-->
+
+
                 <!--begin::Main column-->
                 <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                     <!--begin:::Tabs-->
@@ -319,139 +344,6 @@
                     <!--end:::Tabs-->
                     <!--begin::Tab content-->
                     <div class="tab-content">
-                        <!--begin::Tab pane-->
-                        <div class="tab-pane fade " id="kt_ecommerce_add_product_general" role="tab-panel">
-                            <div class="d-flex flex-column gap-7 gap-lg-10"> 
-                                <!--begin::Pricing-->
-                                <div class="card card-flush py-4">
-                                    <!--begin::Card header-->
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            <h2>Pricing</h2>
-                                        </div>
-                                    </div>
-                                    <!--end::Card header-->
-                                    <!--begin::Card body-->
-                                    <div class="card-body pt-0">
-                                        <!--begin::Input group-->
-                                        <div class="mb-10 fv-row">
-                                            <!--begin::Label-->
-                                            <label class="required form-label">Base Price</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="price" class="form-control mb-2" placeholder="Product price" value="" />
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Set the product price.</div>
-                                            <!--end::Description-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-10">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-bold mb-2">Discount Type
-                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Select a discount type that will be applied to this product"></i></label>
-                                            <!--End::Label-->
-                                            <!--begin::Row-->
-                                            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-1 row-cols-xl-3 g-9" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
-                                                <!--begin::Col-->
-                                                <div class="col">
-                                                    <!--begin::Option-->
-                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default active d-flex text-start p-6" data-kt-button="true">
-                                                        <!--begin::Radio-->
-                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                                            <input class="form-check-input" type="radio" name="discount_option" value="1" checked="checked" />
-                                                        </span>
-                                                        <!--end::Radio-->
-                                                        <!--begin::Info-->
-                                                        <span class="ms-5">
-                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">No Discount</span>
-                                                        </span>
-                                                        <!--end::Info-->
-                                                    </label>
-                                                    <!--end::Option-->
-                                                </div>
-                                                <!--end::Col-->
-                                                <!--begin::Col-->
-                                                <div class="col">
-                                                    <!--begin::Option-->
-                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
-                                                        <!--begin::Radio-->
-                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                                            <input class="form-check-input" type="radio" name="discount_option" value="2" />
-                                                        </span>
-                                                        <!--end::Radio-->
-                                                        <!--begin::Info-->
-                                                        <span class="ms-5">
-                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">Percentage %</span>
-                                                        </span>
-                                                        <!--end::Info-->
-                                                    </label>
-                                                    <!--end::Option-->
-                                                </div>
-                                                <!--end::Col-->
-                                                <!--begin::Col-->
-                                                <div class="col">
-                                                    <!--begin::Option-->
-                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
-                                                        <!--begin::Radio-->
-                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                                            <input class="form-check-input" type="radio" name="discount_option" value="3" />
-                                                        </span>
-                                                        <!--end::Radio-->
-                                                        <!--begin::Info-->
-                                                        <span class="ms-5">
-                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">Fixed Price</span>
-                                                        </span>
-                                                        <!--end::Info-->
-                                                    </label>
-                                                    <!--end::Option-->
-                                                </div>
-                                                <!--end::Col-->
-                                            </div>
-                                            <!--end::Row-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="d-none mb-10 fv-row" id="kt_ecommerce_add_product_discount_percentage">
-                                            <!--begin::Label-->
-                                            <label class="form-label">Set Discount Percentage</label>
-                                            <!--end::Label-->
-                                            <!--begin::Slider-->
-                                            <div class="d-flex flex-column text-center mb-5">
-                                                <div class="d-flex align-items-start justify-content-center mb-7">
-                                                    <span class="fw-bolder fs-3x" id="kt_ecommerce_add_product_discount_label">0</span>
-                                                    <span class="fw-bolder fs-4 mt-1 ms-2">%</span>
-                                                </div>
-                                                <div id="kt_ecommerce_add_product_discount_slider" class="noUi-sm"></div>
-                                            </div>
-                                            <!--end::Slider-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Set a percentage discount to be applied on this product.</div>
-                                            <!--end::Description-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="d-none mb-10 fv-row" id="kt_ecommerce_add_product_discount_fixed">
-                                            <!--begin::Label-->
-                                            <label class="form-label">Fixed Discounted Price</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="dicsounted_price" class="form-control mb-2" placeholder="Discounted price" />
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Set the discounted product price. The product will be reduced at the determined fixed price</div>
-                                            <!--end::Description-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        
-                                    </div>
-                                    <!--end::Card header-->
-                                </div>
-                                <!--end::Pricing-->
-                            </div>
-                        </div>
-                        <!--end::Tab pane-->
                         <!--begin::Tab pane-->
                         <div class="tab-pane fade show active" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                             <div class="d-flex flex-column gap-7 gap-lg-10">
@@ -485,7 +377,7 @@
                                             <label class="form-label">Description</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <div id="kt_ecommerce_add_product_description" name="product_description" class="min-h-200px mb-2"></div>
+                                            <textarea name="product_description" id="" cols="30" rows="10" class="form-control"></textarea>
                                             <!--end::Editor-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a description to the product for better visibility.</div>
@@ -513,7 +405,7 @@
                                             <label class="required form-label">Base Price</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="price" class="form-control mb-2" placeholder="Product price" value="" />
+                                            <input type="number" name="product_price" class="form-control mb-2" placeholder="Product price" value="" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set the product price.</div>
@@ -534,7 +426,7 @@
                                                     <label class="btn btn-outline btn-outline-dashed btn-outline-default active d-flex text-start p-6" data-kt-button="true">
                                                         <!--begin::Radio-->
                                                         <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                                            <input class="form-check-input" type="radio" name="discount_name" value="No Discount" checked="checked" />
+                                                            <input type="radio" class="form-check-input" name="discount_option" value="No Discount" checked="checked" />
                                                         </span>
                                                         <!--end::Radio-->
                                                         <!--begin::Info-->
@@ -552,7 +444,7 @@
                                                     <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
                                                         <!--begin::Radio-->
                                                         <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                                            <input class="form-check-input" type="radio" name="discount_name" value="Discount Percentage" />
+                                                            <input name="discount_option" class="form-check-input" type="radio" value="Discount Percentage" />
                                                         </span>
                                                         <!--end::Radio-->
                                                         <!--begin::Info-->
@@ -592,7 +484,7 @@
                                                 <label class="required form-label">Tax Class</label>
                                                 <!--end::Label-->
                                                 <!--begin::Select2-->
-                                                <select class="form-select mb-2" name="tax_name" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                <select name="tax_name" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
                                                     <option></option>
                                                     <option value="Tax Free">Tax Free</option>
                                                     <option value="Taxable Goods">Taxable Goods</option>
@@ -610,7 +502,7 @@
                                                 <label class="form-label">VAT Amount (%)</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" number name="tax_value" class="form-control mb-2" value="" />
+                                                <input type="number" number name="tax_percent" class="form-control mb-2" value="" />
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Set the product VAT about.</div>
@@ -636,7 +528,7 @@
                                     <div class="card-body pt-0">
                                         <!--begin::Info-->
                                         <div class="ms-4">
-                                            <input type="file" class="form-control mb-2" multiple="" name="product_image[]" id="">
+                                            <input type="file" multiple="" name="product_images[]" class="form-control mb-2" id="">
                                             <span class="fs-7 fw-bold text-gray-400">Upload up to 10 files</span>
                                         </div>
                                         <!--end::Info-->
@@ -661,7 +553,7 @@
                                             <label class="required form-label">SKU</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="sku" class="form-control mb-2" placeholder="SKU Number" value="" />
+                                            <input type="text" name="sku" class="form-control mb-2" placeholder="SKU Number" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product SKU.</div>
@@ -687,7 +579,7 @@
                                             <label class="required form-label">Serial Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="sku" class="form-control mb-2" placeholder="Serial Number" value="" />
+                                            <input type="text" name="serialnumber" class="form-control mb-2" placeholder="Serial Number" value="" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product Serial Number.</div>
@@ -714,8 +606,8 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div class="d-flex gap-3">
-                                                <input type="number" name="shelf_quantity" class="form-control mb-2" placeholder="On shelf" value="" />
-                                                <input type="number" name="warehouse_quantity" class="form-control mb-2" placeholder="In warehouse" />
+                                                <input type="number" name="in_store_quantity" class="form-control mb-2" placeholder="On shelf" value="" />
+                                                <input type="number" name="in_warehouse_quantity" class="form-control mb-2" placeholder="In warehouse" />
                                             </div>
                                             <!--end::Input-->
                                             <!--begin::Description-->
@@ -738,62 +630,42 @@
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
-                                        <!--begin::Input group-->
-                                        <div class="" data-kt-ecommerce-catalog-add-product="auto-options">
-                                            <!--begin::Label-->
-                                            <label class="form-label">Add Product Variations</label>
-                                            <!--end::Label-->
-                                            <!--begin::Repeater-->
-                                            <div id="kt_ecommerce_add_product_options">
-                                                <!--begin::Form group-->
-                                                <div class="form-group">
-                                                    <div data-repeater-list="kt_ecommerce_add_product_options" class="d-flex flex-column gap-3">
-                                                        <div data-repeater-item="" class="form-group d-flex flex-wrap gap-5">
-                                                            <!--begin::Select2-->
-                                                            <div class="w-100 w-md-200px">
-                                                                <select class="form-select" name="variation_name[]" data-placeholder="Select a variation" data-kt-ecommerce-catalog-add-product="product_option">
-                                                                    <option></option>
-                                                                    <option value="color">Color</option>
-                                                                    <option value="size">Size</option>
-                                                                    <option value="material">Material</option>
-                                                                    <option value="style">Style</option>
-                                                                </select>
+                                        <!--begin::Repeater-->
+                                        <div id="variation__addOptions">
+                                            <!--begin::Form group-->
+                                            <div class="form-group">
+                                                <div data-repeater-list="variation__addOptions">
+                                                    <div data-repeater-item>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-5">
+                                                                <label class="form-label">Name:</label>
+                                                                <input type="text" name="0" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
                                                             </div>
-                                                            <!--end::Select2-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" class="form-control mw-100 w-200px" name="variation_value[]" placeholder="Variation" />
-                                                            <!--end::Input-->
-                                                            <button type="button" data-repeater-delete="" class="btn btn-sm btn-icon btn-light-danger">
-                                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black" />
-                                                                        <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </button>
+                                                            <div class="col-md-5">
+                                                                <label class="form-label">Value:</label>
+                                                                <input type="text" name="1" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
+                                                            </div>
+                                                          
+                                                            <div class="col-md-2">
+                                                                <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                    <i class="la la-trash-o"></i>Delete
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--end::Form group-->
-                                                <!--begin::Form group-->
-                                                <div class="form-group mt-5">
-                                                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary">
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                                    <span class="svg-icon svg-icon-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
-                                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->Add another variation</button>
-                                                </div>
-                                                <!--end::Form group-->
                                             </div>
-                                            <!--end::Repeater-->
+                                            <!--end::Form group-->
+
+                                            <!--begin::Form group-->
+                                            <div class="form-group mt-5">
+                                                <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                                    <i class="la la-plus"></i>Add
+                                                </a>
+                                            </div>
+                                            <!--end::Form group-->
                                         </div>
-                                        <!--end::Input group-->
+                                        <!--end::Repeater-->
                                     </div>
                                     <!--end::Card header-->
                                 </div>
@@ -812,8 +684,8 @@
                                        <!--begin::Select2-->
                                         <select name="phtysical_delivery" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
                                             <option></option>
-                                            <option value="True">True</option>
-                                            <option value="False">False</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
                                         </select>
                                         <!--end::Select2-->
                                         <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping..</div>
@@ -885,7 +757,7 @@
                                             <label class="form-label">Meta Tag Description</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <div id="kt_ecommerce_add_product_meta_description" name="meta_description" class="min-h-100px mb-2"></div>
+                                            <textarea name="meta_description" id="" cols="30" rows="10" class="form-control"></textarea>
                                             <!--end::Editor-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
@@ -938,5 +810,71 @@
 </div>
 <!--end::Content-->
 
+
+<script>
+   
+    $('#category__repeaterBasic').repeater({
+        initEmpty: false,
+        defaultValues: {
+            'text-input': 'foo'
+        },
+        show: function () {
+            $(this).slideDown();
+        },
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+
+    $('#tag__repeaterBasic').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+    $('#brand__repeaterBasic').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+    $('#variation__addOptions').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+</script>
 
 @endsection

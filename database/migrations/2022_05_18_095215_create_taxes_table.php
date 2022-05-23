@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id');
-            $table->string('name');
-            $table->string('amount_percent');
+            $table->bigInteger('product_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('amount_percent')->nullable();
             $table->timestamps();
         });
     }

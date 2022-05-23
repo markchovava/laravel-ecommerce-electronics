@@ -16,28 +16,37 @@ class Product extends Model
         'barcode',
         'qrcode',
         'price', 
+        'weight',
+        'height',
+        'width',
+        'length'
     ];
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'product_brands', 'product_id', 'brand_id')
+            ->withTimestamps();
+    }
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id')
+        return $this->belongsToMany(Category::class, 'product_categories', 'product_id', 'category_id')
             ->withTimestamps();
     }
+
+    public function discounts()
+    {
+        return $this->hasOne(Discount::class, 'product_id', 'id')
+            ->withDefault([
+                'name' => 'No Discount'
+            ]);
+    }
+
 
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id')
             ->withTimestamps();
-    }
-
-    public function variations()
-    {
-        return $this->hasMany(Variation::class, 'product_id', 'id')
-            ->withDefault([
-                'name' => 'Info',
-                'value' => 'No variation',
-            ]);
-
     }
 
     public function product_metas()
@@ -60,20 +69,24 @@ class Product extends Model
             ]);
     }
 
-    public function discounts()
-    {
-        return $this->hasOne(Discount::class, 'product_id', 'id')
-            ->withDefault([
-                'name' => 'No Discount'
-            ]);
-    }
-
     public function taxes()
     {
         return $this->hasOne(Tax::class, 'product_id', 'id')
             ->withDefault([
                 'name' => 'No Tax Included'
             ]);
+    }
+
+    /* public function variations(){
+        return $this->hasMany(Variation::class, 'product_id', 'id')
+            ->withDefault([
+                'name' => 'Info',
+                'value' => 'No variation',
+            ]);
+    } */
+
+    public function variations(){
+        return $this->hasMany(Variation::class, 'product_id', 'id');
     }
 
 }

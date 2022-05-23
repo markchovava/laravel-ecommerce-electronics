@@ -17,11 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->string('product_thumbnail')->nullable();
             $table->text('sku')->nullable();
+            $table->text('status')->nullable();
             $table->bigInteger('barcode')->nullable();
             $table->longText('serialnumber')->nullable();
             $table->longText('qrcode')->nullable();
-            $table->integer('price')->nullable();
+            $table->bigInteger('price')->nullable();
+            $table->text('physical_delivery')->nullable();
             $table->integer('weight')->nullable();
             $table->integer('width')->nullable();
             $table->integer('height')->nullable();

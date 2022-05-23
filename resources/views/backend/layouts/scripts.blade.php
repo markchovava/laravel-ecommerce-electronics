@@ -12,15 +12,12 @@ $route = url()->current();
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Vendors Javascript(used by this page)-->
 		<script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-		<script src="{{ asset('backend/assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+		
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/catalog/save-product.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/widgets.bundle.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/widgets.js') }}"></script>
-		<script src="{{ asset('backend/assets/js/custom/apps/chat/chat.js') }}"></script>
-		<script src="{{ asset('backend/assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-		<script src="{{ asset('backend/assets/js/custom/utilities/modals/create-app.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/utilities/modals/users-search.js') }}"></script>
 		<!--end::Page Custom Javascript-->
 

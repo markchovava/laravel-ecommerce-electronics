@@ -197,7 +197,7 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
-                        <a href="../../demo1/dist/apps/ecommerce/catalog/add-product.html" class="btn btn-primary">Add Product</a>
+                        <a href="{{ route('admin.products.add') }}" class="btn btn-primary">Add Product</a>
                         <!--end::Add product-->
                     </div>
                     <!--end::Card toolbar-->
@@ -244,7 +244,8 @@
                                     <div class="d-flex align-items-center">
                                         <!--begin::Thumbnail-->
                                         <a href="#" class="symbol symbol-50px">
-                                            <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media//stock/ecommerce/1.gif') }});"></span>
+                                            <span class="symbol-label" 
+                                            style="background-image:url({{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }});"></span>
                                         </a>
                                         <!--end::Thumbnail-->
                                         <div class="ms-5">
@@ -264,12 +265,12 @@
                                 <!--end::SKU=-->
                                 <!--begin::Qty=-->
                                 <td class="text-end pe-0" data-order="{{ $product->quantity }}">
-                                    <span class="fw-bolder ms-3">{{ $product->inventories->quantity }}</span>
+                                    <span class="fw-bolder">{{ ($product->inventories->in_store_quantity) + ($product->inventories->in_warehouse_quantity)  }}</span>
                                 </td>
                                 <!--end::Qty=-->
                                 <!--begin::Price=-->
                                 <td class="text-end pe-0">
-                                    <span class="fw-bolder text-dark">{{ $product->price }}</span>
+                                    <span class="fw-bolder">${{ $product->price }}.00</span>
                                 </td>
                                 <!--end::Price=-->
                                 <!--begin::Rating-->
@@ -284,7 +285,7 @@
                                 <!--begin::Status=-->
                                 <td class="text-end pe-0" data-order="{{ $product->status }}">
                                     <!--begin::Badges-->
-                                    <div class="badge badge-light-danger">Status{{ $product->status }}</div>
+                                    <div class="badge badge-light-danger">{{ $product->status }}</div>
                                     <!--end::Badges-->
                                 </td>
                                 <!--end::Status=-->
@@ -302,7 +303,7 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                          <!--begin::Menu item-->

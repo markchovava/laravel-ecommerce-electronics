@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\BrandController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,21 @@ Route::prefix('admin')->group(function(){
     /* :::::: Products ::::: */
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/products/add', [ProductController::class, 'add'])->name('admin.products.add');
+    Route::post('/products/store', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
+    
+     /* :::::: Category ::::: */
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+    Route::get('/category/add', [CategoryController::class, 'add'])->name('admin.category.add');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
+
+     /* :::::: Brands ::::: */
+    Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand');
+    Route::get('/brands/add', [BrandController::class, 'add'])->name('admin.brand.add');
+    Route::post('/brands/store', [BrandController::class, 'store'])->name('admin.brand.store');
+    Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
+    Route::get('/brands/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
+    Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
 });
 
 

@@ -3,7 +3,6 @@
 @section('backend')
 
 
-
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
@@ -13,7 +12,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Edit Product</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Product Edit Form</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -22,7 +21,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                        <a href="#" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -39,9 +38,6 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Catalog</li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-300 w-5px h-2px"></span>
                     </li>
@@ -53,105 +49,7 @@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
-            <!--begin::Actions-->
-            <div class="d-flex align-items-center gap-2 gap-lg-3">
-                <!--begin::Filter menu-->
-                <div class="m-0">
-                    <!--begin::Menu toggle-->
-                    <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                    <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->Filter</a>
-                    <!--end::Menu toggle-->
-                    <!--begin::Menu 1-->
-                    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_620792fd901bf">
-                        <!--begin::Header-->
-                        <div class="px-7 py-5">
-                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Menu separator-->
-                        <div class="separator border-gray-200"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Form-->
-                        <div class="px-7 py-5">
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Status:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <div>
-                                    <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_620792fd901bf" data-allow-clear="true">
-                                        <option></option>
-                                        <option value="1">Approved</option>
-                                        <option value="2">Pending</option>
-                                        <option value="2">In Process</option>
-                                        <option value="2">Rejected</option>
-                                    </select>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Member Type:</label>
-                                <!--end::Label-->
-                                <!--begin::Options-->
-                                <div class="d-flex">
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                        <span class="form-check-label">Author</span>
-                                    </label>
-                                    <!--end::Options-->
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                        <span class="form-check-label">Customer</span>
-                                    </label>
-                                    <!--end::Options-->
-                                </div>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Notifications:</label>
-                                <!--end::Label-->
-                                <!--begin::Switch-->
-                                <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                    <label class="form-check-label">Enabled</label>
-                                </div>
-                                <!--end::Switch-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                                <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                            </div>
-                            <!--end::Actions-->
-                        </div>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Menu 1-->
-                </div>
-                <!--end::Filter menu-->
-                <!--begin::Secondary button-->
-                <!--end::Secondary button-->
-                <!--begin::Primary button-->
-                <a href="../../demo1/dist/.html" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-                <!--end::Primary button-->
-            </div>
-            <!--end::Actions-->
+           
         </div>
         <!--end::Container-->
     </div>
@@ -161,246 +59,283 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
-            <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
+            <form method="post" action="{{ route('admin.products.store') }}" enctype="multipart/form-data" class="form d-flex flex-column flex-lg-row">
+                @csrf
+
                 <!--begin::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
-                    <!--begin::Thumbnail settings-->
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-450px mb-7 me-lg-10">
+                        <!--begin::Thumbnail settings-->
+                        <div class="card card-flush py-4">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Product Thumbnail</h2>
+                                </div>
+                                <!--end::Card title-->
+                            </div>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body text-center pt-0">
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" 
+                                style="background-image:url({{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }});">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper w-150px h-150px"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input type="file" name="product_thumbnail" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+                                <!--begin::Description-->
+                                <div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                                <!--end::Description-->
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Thumbnail settings-->
+                        <!--begin::Status-->
+                        <div class="card card-flush py-4">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Status</h2>
+                                </div>
+                                <!--end::Card title-->
+                                <!--begin::Card toolbar-->
+                                <div class="card-toolbar">
+                                    <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status">
+                                    </div>
+                                </div>
+                                <!--begin::Card toolbar-->
+                            </div>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Select2-->
+                                <select name="product_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+                                    <option></option>
+                                    <option value="Published">Published</option>
+                                    <option value="Draft">Draft</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                                <!--end::Select2-->
+                                <!--begin::Description-->
+                                <div class="text-muted fs-7">Set the product status.</div>
+                                <!--end::Description-->
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Status-->
+                    <!--begin::Category-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2>Thumbnail</h2>
+                                <h2>Product Categories</h2>
                             </div>
                             <!--end::Card title-->
                         </div>
                         <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body text-center pt-0">
-                            <!--begin::Image input-->
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="">
-                                <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-150px h-150px" style="background-image: url({{ asset('backend/assets/media//stock/ecommerce/78.gif') }})"></div>
-                                <!--end::Preview existing avatar-->
-                                <!--begin::Label-->
-                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                    <!--begin::Inputs-->
-                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                    <input type="hidden" name="avatar_remove" />
-                                    <!--end::Inputs-->
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Cancel-->
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                    <i class="bi bi-x fs-2"></i>
-                                </span>
-                                <!--end::Cancel-->
-                                <!--begin::Remove-->
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                    <i class="bi bi-x fs-2"></i>
-                                </span>
-                                <!--end::Remove-->
+                        @if(!empty($categories))
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Repeater-->
+                                <div id="category__repeaterBasic">
+                                    <!--begin::Form group-->
+                                    <div class="form-group">
+                                        <div data-repeater-list="category__repeaterBasic">
+                                            <div data-repeater-item>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9">
+                                                        <label class="form-label">Category Name:</label>
+                                                        <!--begin::Select2-->
+                                                        <select name="" class="form-control mb-2 p-2">
+                                                        <option selected="" disabled="">Select Option Below.</option>
+                                                        @foreach($categories as $category) 
+                                                            <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                                        @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                        <!--begin::Description-->
+                                                        <div class="text-muted fs-7 mb-7">Add product to a category.</div>
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Form group-->
+                                    <!--begin::Form group-->
+                                    <div class="form-group mt-3">
+                                        <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                            <i class="la la-plus"></i>Add
+                                        </a>
+                                    </div>
+                                    <!--end::Form group-->
+                                </div>
+                                <!--end::Repeater-->
                             </div>
-                            <!--end::Image input-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
-                            <!--end::Description-->
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Thumbnail settings-->
-                    <!--begin::Status-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Status</h2>
-                            </div>
-                            <!--end::Card title-->
-                            <!--begin::Card toolbar-->
-                            <div class="card-toolbar">
-                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
-                            </div>
-                            <!--begin::Card toolbar-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Select2-->
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
-                                <option></option>
-                                <option value="published" selected="selected">Published</option>
-                                <option value="draft">Draft</option>
-                                <option value="scheduled">Scheduled</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the product status.</div>
-                            <!--end::Description-->
-                            <!--begin::Datepicker-->
-                            <div class="d-none mt-10">
-                                <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Select publishing date and time</label>
-                                <input class="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date &amp; time" />
-                            </div>
-                            <!--end::Datepicker-->
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Status-->
-                    <!--begin::Category & tags-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Product Details</h2>
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Input group-->
-                            <!--begin::Label-->
-                            <label class="form-label">Categories</label>
-                            <!--end::Label-->
-                            <!--begin::Select2-->
-                            <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
-                                <option></option>
-                                <option value="Computers">Computers</option>
-                                <option value="Watches">Watches</option>
-                                <option value="Headphones">Headphones</option>
-                                <option value="Footwear">Footwear</option>
-                                <option value="Cameras">Cameras</option>
-                                <option value="Shirts">Shirts</option>
-                                <option value="Household">Household</option>
-                                <option value="Handbags">Handbags</option>
-                                <option value="Wines">Wines</option>
-                                <option value="Sandals">Sandals</option>
-                            </select>
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7 mb-7">Add product to a category.</div>
-                            <!--end::Description-->
-                            <!--end::Input group-->
-                            <!--begin::Button-->
-                            <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
-                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                            <span class="svg-icon svg-icon-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
-                                    <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->Create new category</a>
-                            <!--end::Button-->
-                            <!--begin::Input group-->
-                            <!--begin::Label-->
-                            <label class="form-label d-block">Tags</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" class="form-control mb-2" value="new, trending, sale" />
-                            <!--end::Input-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Add tags to a product.</div>
-                            <!--end::Description-->
-                            <!--end::Input group-->
-                        </div>
-                        <!--end::Card body-->
+                            <!--end::Card body-->
+                        @endif
                     </div>
                     <!--end::Category & tags-->
-                    <!--begin::Card widget 6-->
-                    <div class="card card-flush">
-                        <!--begin::Header-->
-                        <div class="card-header pt-5">
-                            <!--begin::Title-->
-                            <div class="card-title d-flex flex-column">
-                                <!--begin::Info-->
-                                <div class="d-flex align-items-center">
-                                    <!--begin::Currency-->
-                                    <span class="fs-4 fw-bold text-gray-400 me-1 align-self-start">$</span>
-                                    <!--end::Currency-->
-                                    <!--begin::Amount-->
-                                    <span class="fs-2hx fw-bolder text-dark me-2 lh-1">2,420</span>
-                                    <!--end::Amount-->
-                                    <!--begin::Badge-->
-                                    <span class="badge badge-success fs-6 lh-1 py-1 px-2 d-flex flex-center" style="height: 22px">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr067.svg-->
-                                    <span class="svg-icon svg-icon-7 svg-icon-white ms-n1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path opacity="0.5" d="M13 9.59998V21C13 21.6 12.6 22 12 22C11.4 22 11 21.6 11 21V9.59998H13Z" fill="black" />
-                                            <path d="M5.7071 7.89291C5.07714 8.52288 5.52331 9.60002 6.41421 9.60002H17.5858C18.4767 9.60002 18.9229 8.52288 18.2929 7.89291L12.7 2.3C12.3 1.9 11.7 1.9 11.3 2.3L5.7071 7.89291Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->2.6%</span>
-                                    <!--end::Badge-->
-                                </div>
-                                <!--end::Info-->
-                                <!--begin::Subtitle-->
-                                <span class="text-gray-400 pt-1 fw-bold fs-6">Average Daily Sales</span>
-                                <!--end::Subtitle-->
-                            </div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex align-items-end px-0 pb-0">
-                            <!--begin::Chart-->
-                            <div id="kt_card_widget_6_chart" class="w-100" style="height: 80px"></div>
-                            <!--end::Chart-->
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card widget 6-->
-                    <!--begin::Template settings-->
+                    <!--begin::Brands-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2>Product Template</h2>
+                                <h2>Product Brands</h2>
                             </div>
                             <!--end::Card title-->
                         </div>
                         <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Select store template-->
-                            <label for="kt_ecommerce_add_product_store_template" class="form-label">Select a product template</label>
-                            <!--end::Select store template-->
-                            <!--begin::Select2-->
-                            <select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_store_template">
-                                <option></option>
-                                <option value="default" selected="selected">Default template</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="office">Office stationary</option>
-                                <option value="fashion">Fashion</option>
-                            </select>
-                            <!--end::Select2-->
-                            <!--begin::Description-->
-                            <div class="text-muted fs-7">Assign a template from your current theme to define how a single product is displayed.</div>
-                            <!--end::Description-->
-                        </div>
-                        <!--end::Card body-->
+                        @if(!empty($brands))
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Repeater-->
+                                <div id="brand__repeaterBasic">
+                                    <!--begin::Form group-->
+                                    <div class="form-group">
+                                        <div data-repeater-list="brand__repeaterBasic">
+                                            <div data-repeater-item>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9">
+                                                        <label class="form-label">Brand Name:</label>
+                                                        <!--begin::Select2-->
+                                                        <select name="" class="form-control mb-2 p-2">
+                                                            <option selected="" disabled="">Select Option Below.</option>
+                                                            @foreach($brands as $brand)   
+                                                                <option value="{{ $brand->id }}"> {{ $brand->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                        <!--begin::Description-->
+                                                        <div class="text-muted fs-7 mb-7">Add product Brand.</div>
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Form group-->
+                                    <!--begin::Form group-->
+                                    <div class="form-group mt-3">
+                                        <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                            <i class="la la-plus"></i>Add
+                                        </a>
+                                    </div>
+                                    <!--end::Form group-->
+                                </div>
+                                <!--end::Repeater-->
+                            </div>
+                            <!--end::Card body-->
+                        @endif
                     </div>
-                    <!--end::Template settings-->
+                    <!--end::Brands-->
+
+                    <!--begin::Tags-->
+                    <div class="card card-flush py-4">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <h2>Product Tags</h2>
+                            </div>
+                            <!--end::Card title-->
+                        </div>
+                        <!--end::Card header-->
+                        @if(!empty($tags))
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Repeater-->
+                                <div id="tag__repeaterBasic">
+                                    <!--begin::Form group-->
+                                    <div class="form-group">
+                                        <div data-repeater-list="tag__repeaterBasic">
+                                            <div data-repeater-item>
+                                                <div class="form-group row">
+                                                    <div class="col-md-9">
+                                                        <label class="form-label">Tag Name:</label>
+                                                        <!--begin::Select2-->
+                                                        <select name="" class="form-control mb-2 p-2">
+                                                        <option selected="" disabled="">Select Option Below.</option>
+                                                            @foreach($tags as $tag)   
+                                                                <option value="{{ $tag->id }}"> {{ $tag->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                        <!--begin::Description-->
+                                                        <div class="text-muted fs-7 mb-7">Add product Brand.</div>
+                                                        <!--end::Description-->
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Form group-->
+                                    <!--begin::Form group-->
+                                    <div class="form-group mt-3">
+                                        <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                            <i class="la la-plus"></i>Add
+                                        </a>
+                                    </div>
+                                    <!--end::Form group-->
+                                </div>
+                                <!--end::Repeater-->
+                            </div>
+                            <!--end::Card body-->
+                        @endif
+                    </div>
+                    <!--end::Tags-->
+                    
                 </div>
                 <!--end::Aside column-->
+
+
                 <!--begin::Main column-->
                 <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                     <!--begin:::Tabs-->
                     <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
+                        
                         <!--begin:::Tab item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Advanced</a>
-                        </li>
-                        <!--end:::Tab item-->
-                        <!--begin:::Tab item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Reviews</a>
+                            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Product Information</a>
                         </li>
                         <!--end:::Tab item-->
                     </ul>
@@ -410,6 +345,195 @@
                         <!--begin::Tab pane-->
                         <div class="tab-pane fade show active" id="kt_ecommerce_add_product_advanced" role="tab-panel">
                             <div class="d-flex flex-column gap-7 gap-lg-10">
+                                <!--begin::General options-->
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>General</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Product Name</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Product name" value="{{ $product->name}}" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">Description</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <textarea name="product_description" id="" cols="30" rows="10" class="form-control">{{ $product->description }}</textarea>
+                                            <!--end::Editor-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set a description to the product for better visibility.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::General options-->
+                                 <!--begin::Pricing-->
+                                 <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Pricing</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Base Price</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="number" name="product_price" class="form-control mb-2" placeholder="Product price" value="{{ $product->price }}" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set the product price.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-10">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold mb-2">Discount Type
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Select a discount type that will be applied to this product"></i></label>
+                                            <!--End::Label-->
+                                            <!--begin::Row-->
+                                            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-1 row-cols-xl-3 g-9" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
+                                                <!--begin::Col-->
+                                                <div class="col">
+                                                    <!--begin::Option-->
+                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default active d-flex text-start p-6" data-kt-button="true">
+                                                        <!--begin::Radio-->
+                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                            <input type="radio" class="form-check-input" name="discount_option" value="No Discount" checked="checked" />
+                                                        </span>
+                                                        <!--end::Radio-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-5">
+                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">No Discount</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+                                                <!--end::Col-->
+                                                <!--begin::Col-->
+                                                <div class="col">
+                                                    <!--begin::Option-->
+                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                        <!--begin::Radio-->
+                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                            <input name="discount_option" class="form-check-input" type="radio" value="Discount Percentage" />
+                                                        </span>
+                                                        <!--end::Radio-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-5">
+                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">Percentage %</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Row-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row" id="kt_ecommerce_add_product_discount_percentage">
+                                            <!--begin::Label-->
+                                            <label class="form-label">Set Discount Percentage (%)</label>
+                                            <!--end::Label-->
+                                            <!--begin::Slider-->
+                                            <div class="d-flex flex-column text-center mb-5">
+                                                <input type="text" name="discount_percent" class="form-control mb-2" placeholder="Discount Percentage..." value="" />
+                                            </div>
+                                            <!--end::Slider-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set a percentage discount to be applied on this product.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                       
+                                        <!--begin::Tax-->
+                                        <div class="d-flex flex-wrap gap-5">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">Tax Class</label>
+                                                <!--end::Label-->
+                                                <!--begin::Select2-->
+                                                <select name="tax_name" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
+                                                    <option></option>
+                                                    <option value="Tax Free">Tax Free</option>
+                                                    <option value="Taxable Goods">Taxable Goods</option>
+                                                    <option value="Downloadable Product">Downloadable Product</option>
+                                                </select>
+                                                <!--end::Select2-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7">Set the product tax class.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <!--begin::Label-->
+                                                <label class="form-label">VAT Amount (%)</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" number name="tax_percent" class="form-control mb-2" value="" />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                                <div class="text-muted fs-7">Set the product VAT about.</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--end:Tax-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::Pricing-->
+                                <!--begin::Media-->
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Media</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <!--begin::Info-->
+                                        <div class="ms-4">
+                                            <input type="file" multiple="" name="product_images[]" class="form-control mb-2" id="">
+                                            <span class="fs-7 fw-bold text-gray-400">Upload up to 10 files</span>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                    <!--end::Card header-->
+                                </div>
+                                <!--end::Media-->
                                 <!--begin::Inventory-->
                                 <div class="card card-flush py-4">
                                     <!--begin::Card header-->
@@ -427,7 +551,7 @@
                                             <label class="required form-label">SKU</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="sku" class="form-control mb-2" placeholder="SKU Number" value="011985001" />
+                                            <input type="text" name="sku" value="{{ $product->sku }}" class="form-control mb-2" placeholder="SKU Number" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product SKU.</div>
@@ -440,10 +564,36 @@
                                             <label class="required form-label">Barcode</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="sku" class="form-control mb-2" placeholder="Barcode Number" value="45874521458" />
+                                            <input type="text" name="barcode" value="{{ $product->barcode }}" class="form-control mb-2" placeholder="Barcode Number" value="" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product barcode number.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Serial Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="serialnumber" value="{{ $product->serialnumber }}" class="form-control mb-2" placeholder="Serial Number" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Enter the product Serial Number.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">QR Code</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="qrcode" value="{{ $product->qrcode }}" class="form-control mb-2" placeholder="QR Code" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Enter the product QR Code.</div>
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
@@ -454,28 +604,12 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div class="d-flex gap-3">
-                                                <input type="number" name="shelf" class="form-control mb-2" placeholder="On shelf" value="24" />
-                                                <input type="number" name="warehouse" class="form-control mb-2" placeholder="In warehouse" />
+                                                <input type="number" name="in_store_quantity" value="{{ $product->inventories->in_store_quantity }}" class="form-control mb-2" placeholder="On shelf" value="" />
+                                                <input type="number" name="in_warehouse_quantity" value="{{ $product->inventories->in_warehouse_quantity }}" class="form-control mb-2" placeholder="In warehouse" />
                                             </div>
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product quantity.</div>
-                                            <!--end::Description-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row">
-                                            <!--begin::Label-->
-                                            <label class="form-label">Allow Backorders</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <div class="form-check form-check-custom form-check-solid mb-2">
-                                                <input class="form-check-input" type="checkbox" value="" />
-                                                <label class="form-check-label">Yes</label>
-                                            </div>
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Allow customers to purchase products that are out of stock.</div>
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
@@ -494,62 +628,42 @@
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
-                                        <!--begin::Input group-->
-                                        <div class="" data-kt-ecommerce-catalog-add-product="auto-options">
-                                            <!--begin::Label-->
-                                            <label class="form-label">Add Product Variations</label>
-                                            <!--end::Label-->
-                                            <!--begin::Repeater-->
-                                            <div id="kt_ecommerce_add_product_options">
-                                                <!--begin::Form group-->
-                                                <div class="form-group">
-                                                    <div data-repeater-list="kt_ecommerce_add_product_options" class="d-flex flex-column gap-3">
-                                                        <div data-repeater-item="" class="form-group d-flex flex-wrap gap-5">
-                                                            <!--begin::Select2-->
-                                                            <div class="w-100 w-md-200px">
-                                                                <select class="form-select" name="product_option" data-placeholder="Select a variation" data-kt-ecommerce-catalog-add-product="product_option">
-                                                                    <option></option>
-                                                                    <option value="color">Color</option>
-                                                                    <option value="size">Size</option>
-                                                                    <option value="material">Material</option>
-                                                                    <option value="style">Style</option>
-                                                                </select>
+                                        <!--begin::Repeater-->
+                                        <div id="variation__addOptions">
+                                            <!--begin::Form group-->
+                                            <div class="form-group">
+                                                <div data-repeater-list="variation__addOptions">
+                                                    <div data-repeater-item>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-5">
+                                                                <label class="form-label">Name:</label>
+                                                                <input type="text" name="0" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
                                                             </div>
-                                                            <!--end::Select2-->
-                                                            <!--begin::Input-->
-                                                            <input type="text" class="form-control mw-100 w-200px" name="product_option_value" placeholder="Variation" />
-                                                            <!--end::Input-->
-                                                            <button type="button" data-repeater-delete="" class="btn btn-sm btn-icon btn-light-danger">
-                                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr088.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black" />
-                                                                        <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </button>
+                                                            <div class="col-md-5">
+                                                                <label class="form-label">Value:</label>
+                                                                <input type="text" name="1" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
+                                                            </div>
+                                                          
+                                                            <div class="col-md-2">
+                                                                <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                    <i class="la la-trash-o"></i>Delete
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--end::Form group-->
-                                                <!--begin::Form group-->
-                                                <div class="form-group mt-5">
-                                                    <button type="button" data-repeater-create="" class="btn btn-sm btn-light-primary">
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr087.svg-->
-                                                    <span class="svg-icon svg-icon-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
-                                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->Add another variation</button>
-                                                </div>
-                                                <!--end::Form group-->
                                             </div>
-                                            <!--end::Repeater-->
+                                            <!--end::Form group-->
+
+                                            <!--begin::Form group-->
+                                            <div class="form-group mt-5">
+                                                <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                                    <i class="la la-plus"></i>Add
+                                                </a>
+                                            </div>
+                                            <!--end::Form group-->
                                         </div>
-                                        <!--end::Input group-->
+                                        <!--end::Repeater-->
                                     </div>
                                     <!--end::Card header-->
                                 </div>
@@ -559,34 +673,29 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>Shipping</h2>
+                                            <h2>Physical Delivery</h2>
                                         </div>
                                     </div>
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
-                                        <!--begin::Input group-->
-                                        <div class="fv-row">
-                                            <!--begin::Input-->
-                                            <div class="form-check form-check-custom form-check-solid mb-2">
-                                                <input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" checked="checked" />
-                                                <label class="form-check-label">This is a physical product</label>
-                                            </div>
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-                                            <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping.</div>
-                                            <!--end::Description-->
-                                        </div>
-                                        <!--end::Input group-->
+                                       <!--begin::Select2-->
+                                        <select name="phtysical_delivery" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+                                            <option></option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <!--end::Select2-->
+                                        <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping..</div>
                                         <!--begin::Shipping form-->
-                                        <div id="kt_ecommerce_add_product_shipping" class="mt-10">
+                                        <div id="kt_ecommerce_add_product_shipping" class=" mt-10">
                                             <!--begin::Input group-->
                                             <div class="mb-10 fv-row">
                                                 <!--begin::Label-->
                                                 <label class="form-label">Weight</label>
                                                 <!--end::Label-->
                                                 <!--begin::Editor-->
-                                                <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="4.3" />
+                                                <input type="text" name="product_weight" value="{{ $product->weight }}" class="form-control mb-2" placeholder="Product weight" value="" />
                                                 <!--end::Editor-->
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Set a product weight in kilograms (kg).</div>
@@ -600,9 +709,9 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
-                                                    <input type="number" name="width" class="form-control mb-2" placeholder="Width (w)" value="12" />
-                                                    <input type="number" name="height" class="form-control mb-2" placeholder="Height (h)" value="4" />
-                                                    <input type="number" name="length" class="form-control mb-2" placeholder="Lengtn (l)" value="8.5" />
+                                                    <input type="number" name="product_width" value="{{ $product->width }}" class="form-control mb-2" placeholder="Width (w)" value="" />
+                                                    <input type="number" name="product_height" value="{{ $product->height }}" class="form-control mb-2" placeholder="Height (h)" value="" />
+                                                    <input type="number" name="product_length" value="{{ $product->length }}" class="form-control mb-2" placeholder="Lengtn (l)" value="" />
                                                 </div>
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
@@ -633,7 +742,7 @@
                                             <label class="form-label">Meta Tag Title</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" class="form-control mb-2" name="meta_title" placeholder="Meta tag name" />
+                                            <input type="text" class="form-control mb-2" name="meta_title" value="{{ $product->product_metas->title }}" placeholder="Meta tag name" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a meta tag title. Recommended to be simple and precise keywords.</div>
@@ -646,7 +755,7 @@
                                             <label class="form-label">Meta Tag Description</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <div id="kt_ecommerce_add_product_meta_description" name="kt_ecommerce_add_product_meta_description" class="min-h-100px mb-2"></div>
+                                            <textarea name="meta_description" value="{{ $product->product_metas->description }}" id="" cols="30" rows="10" class="form-control"></textarea>
                                             <!--end::Editor-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
@@ -659,7 +768,7 @@
                                             <label class="form-label">Meta Tag Keywords</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <input id="kt_ecommerce_add_product_meta_keywords" name="kt_ecommerce_add_product_meta_keywords" class="form-control mb-2" />
+                                            <input id="kt_ecommerce_add_product_meta_keywords" name="meta_keywords" value="{{ $product->product_metas->keywords }}" class="form-control mb-2" />
                                             <!--end::Editor-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a list of keywords that the product is related to. Separate the keywords by adding a comma
@@ -674,1113 +783,11 @@
                             </div>
                         </div>
                         <!--end::Tab pane-->
-                        <!--begin::Tab pane-->
-                        <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
-                            <div class="d-flex flex-column gap-7 gap-lg-10">
-                                <!--begin::Reviews-->
-                                <div class="card card-flush py-4">
-                                    <!--begin::Card header-->
-                                    <div class="card-header">
-                                        <!--begin::Card title-->
-                                        <div class="card-title">
-                                            <h2>Customer Reviews</h2>
-                                        </div>
-                                        <!--end::Card title-->
-                                        <!--begin::Card toolbar-->
-                                        <div class="card-toolbar">
-                                            <!--begin::Rating label-->
-                                            <span class="fw-bolder me-5">Overall Rating:</span>
-                                            <!--end::Rating label-->
-                                            <!--begin::Overall rating-->
-                                            <div class="rating">
-                                                <div class="rating-label checked">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                    <span class="svg-icon svg-icon-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <div class="rating-label checked">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                    <span class="svg-icon svg-icon-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <div class="rating-label checked">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                    <span class="svg-icon svg-icon-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <div class="rating-label checked">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                    <span class="svg-icon svg-icon-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <div class="rating-label">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                    <span class="svg-icon svg-icon-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                            </div>
-                                            <!--end::Overall rating-->
-                                        </div>
-                                        <!--end::Card toolbar-->
-                                    </div>
-                                    <!--end::Card header-->
-                                    <!--begin::Card body-->
-                                    <div class="card-body pt-0">
-                                        <!--begin::Table-->
-                                        <table class="table table-row-dashed fs-6 gy-5 my-0" id="kt_ecommerce_add_product_reviews">
-                                            <!--begin::Table head-->
-                                            <thead>
-                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                    <th class="w-10px pe-2">
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_add_product_reviews .form-check-input" value="1" />
-                                                        </div>
-                                                    </th>
-                                                    <th class="min-w-125px">Rating</th>
-                                                    <th class="min-w-175px">Customer</th>
-                                                    <th class="min-w-175px">Comment</th>
-                                                    <th class="min-w-100px text-end fs-7">Date</th>
-                                                </tr>
-                                            </thead>
-                                            <!--end::Table head-->
-                                            <!--begin::Table body-->
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <div class="symbol-label bg-light-danger">
-                                                                    <span class="text-danger">M</span>
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Melody Macy</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">I like this design</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">Today</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/avatars/300-1.jpg') }})"></span>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Max Smith</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Good product for outdoors or indoors</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">day ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-4">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/avatars/300-5.jpg') }})"></span>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Sean Bean</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Awesome quality with great materials used, but could be more comfortable</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">11:20 PM</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/avatars/300-25.jpg') }})"></span>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Brian Cox</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">This is the best product I've ever used.</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">2 days ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-3">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <div class="symbol-label bg-light-warning">
-                                                                    <span class="text-warning">C</span>
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Mikaela Collins</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">I thought it was just average, I prefer other brands</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">July 25</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/avatars/300-9.jpg') }})"></span>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Francis Mitcham</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Beautifully crafted. Worth every penny.</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">July 24</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-4">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <div class="symbol-label bg-light-danger">
-                                                                    <span class="text-danger">O</span>
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Olivia Wild</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Awesome value for money. Shipping could be faster tho.</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">July 13</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <div class="symbol-label bg-light-primary">
-                                                                    <span class="text-primary">N</span>
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Neil Owen</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Excellent quality, I got it for my son's birthday and he loved it!</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">May 25</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/avatars/300-23.jpg') }})"></span>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Dan Wilson</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">I got this for Christmas last year, and it's still the best product I've ever used!</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">April 15</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <div class="symbol-label bg-light-danger">
-                                                                    <span class="text-danger">E</span>
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Emma Bold</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Was skeptical at first, but after using it for 3 months, I'm hooked! Will definately buy another!</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">April 3</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-4">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/avatars/300-12.jpg') }})"></span>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Ana Crown</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Great product, too bad I missed out on the sale.</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">March 17</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <div class="symbol-label bg-light-info">
-                                                                    <span class="text-info">A</span>
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">Robert Doe</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Got this on sale! Best decision ever!</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">March 12</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <div class="form-check form-check-sm form-check-custom form-check-solid mt-1">
-                                                            <input class="form-check-input" type="checkbox" value="1" />
-                                                        </div>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                    <td data-order="rating-5">
-                                                        <!--begin::Rating-->
-                                                        <div class="rating">
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <div class="rating-label checked">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen029.svg-->
-                                                                <span class="svg-icon svg-icon-2">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <path d="M11.1359 4.48359C11.5216 3.82132 12.4784 3.82132 12.8641 4.48359L15.011 8.16962C15.1523 8.41222 15.3891 8.58425 15.6635 8.64367L19.8326 9.54646C20.5816 9.70867 20.8773 10.6186 20.3666 11.1901L17.5244 14.371C17.3374 14.5803 17.2469 14.8587 17.2752 15.138L17.7049 19.382C17.7821 20.1445 17.0081 20.7069 16.3067 20.3978L12.4032 18.6777C12.1463 18.5645 11.8537 18.5645 11.5968 18.6777L7.69326 20.3978C6.99192 20.7069 6.21789 20.1445 6.2951 19.382L6.7248 15.138C6.75308 14.8587 6.66264 14.5803 6.47558 14.371L3.63339 11.1901C3.12273 10.6186 3.41838 9.70867 4.16744 9.54646L8.3365 8.64367C8.61089 8.58425 8.84767 8.41222 8.98897 8.16962L11.1359 4.48359Z" fill="black" />
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Rating-->
-                                                    </td>
-                                                    <td>
-                                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                                            <!--begin::Avatar-->
-                                                            <div class="symbol symbol-circle symbol-25px me-3">
-                                                                <span class="symbol-label" style="background-image:url({{ asset('backend/assets/media/avatars/300-13.jpg') }})"></span>
-                                                            </div>
-                                                            <!--end::Avatar-->
-                                                            <!--begin::Name-->
-                                                            <span class="fw-bolder">John Miller</span>
-                                                            <!--end::Name-->
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-gray-600 fw-bolder">Firesale is on! Buy now! Totally worth it!</td>
-                                                    <td class="text-end">
-                                                        <span class="fw-bold text-muted">March 11</span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <!--end::Table body-->
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                    <!--end::Card body-->
-                                </div>
-                                <!--end::Reviews-->
-                            </div>
-                        </div>
-                        <!--end::Tab pane-->
                     </div>
                     <!--end::Tab content-->
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
+                        <a href="" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
                         <!--end::Button-->
                         <!--begin::Button-->
                         <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
@@ -1801,5 +808,71 @@
 </div>
 <!--end::Content-->
 
+
+<script>
+   
+    $('#category__repeaterBasic').repeater({
+        initEmpty: false,
+        defaultValues: {
+            'text-input': 'foo'
+        },
+        show: function () {
+            $(this).slideDown();
+        },
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+
+    $('#tag__repeaterBasic').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+    $('#brand__repeaterBasic').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+    $('#variation__addOptions').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+</script>
 
 @endsection
