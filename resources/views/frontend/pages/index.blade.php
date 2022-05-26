@@ -5,7 +5,7 @@
 <main id="content" role="main">
     <!-- Slider Section -->
     <div class="mb-5">
-        <div class="bg-img-hero" style="background-image: url({{ asset('frontend/assets/images/1920X714/bg-2.png') }});">
+        <div class="bg-img-hero" style="background-image: url({{ asset('frontend/assets/images/1920x714/bg-2.png') }});">
             <div class="container">
                 <div class="mb-6 pt-3">
                     <div class="row align-items-end">
@@ -36,7 +36,7 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724X360/bag.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/bag.png') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724X360/motherboard.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/motherboard.png') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724X360/memory_card.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/memory_card.png') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724X360/tablet.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/tablet.png') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724X360/bag-1.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/bag-1.png') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/img/724X360/img2.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/img/724x360/img2.png') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +277,7 @@
                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                             <div class="mb-2">
-                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
@@ -393,7 +393,7 @@
                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                             <div class="mb-2">
-                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description"></a>
+                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
@@ -744,7 +744,7 @@
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/img/320X300/img1.jpg') }}" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/img/320x300/img1.jpg') }}" alt="Image Description"></a>
                             </div>
                             <h5 class="mb-2 font-size-14 text-center mx-auto text-lh-18"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Game Console Controller + USB 3.0 Cable</a></h5>
                             <div class="d-flex align-items-center justify-content-center mb-2">
@@ -807,7 +807,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -834,7 +834,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Camera</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Video Camera 4k Waterproof</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -861,7 +861,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Ultra Wireless S50 Headphones S50 with Bluetooth</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -888,7 +888,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Tablet White EliteBook Revolve 810 G2</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price d-flex align-items-center flex-wrap position-relative">
@@ -916,7 +916,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Purple Solo 2 Wireless</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -943,7 +943,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Smartphone 6S 32GB LTE</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -970,7 +970,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Widescreen NX Mini F1 SMART NX</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -997,7 +997,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Full Color LaserJet Pro M452dn</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1024,7 +1024,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">GameConsole Destiny  Special Edition</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1051,7 +1051,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Camera C430W 4k Waterproof</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1082,7 +1082,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1109,7 +1109,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Camera</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Video Camera 4k Waterproof</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1136,7 +1136,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Ultra Wireless S50 Headphones S50 with Bluetooth</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1163,7 +1163,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Tablet White EliteBook Revolve 810 G2</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price d-flex align-items-center flex-wrap position-relative">
@@ -1191,7 +1191,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Purple Solo 2 Wireless</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1218,7 +1218,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Smartphone 6S 32GB LTE</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1245,7 +1245,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Widescreen NX Mini F1 SMART NX</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1272,7 +1272,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Full Color LaserJet Pro M452dn</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1299,7 +1299,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">GameConsole Destiny  Special Edition</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1326,7 +1326,7 @@
                                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Camera C430W 4k Waterproof</a></h5>
                                                             <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
+                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
                                                             </div>
                                                             <div class="flex-center-between mb-1">
                                                                 <div class="prodcut-price">
@@ -1403,7 +1403,7 @@
                                     <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
-                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1433,7 +1433,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
+                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1463,7 +1463,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" 
-                                        src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description"></a>
+                                        src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1493,7 +1493,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" 
-                                            src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                            src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1523,7 +1523,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1553,7 +1553,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1583,7 +1583,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1613,7 +1613,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
+                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1643,7 +1643,7 @@
                                     <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                     <div class="mb-2">
                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                     </div>
                                     <div class="flex-center-between mb-1">
                                         <div class="prodcut-price">
@@ -1706,7 +1706,7 @@
             <!-- End Nav Pills -->
             <div class="row">
                 <div class="col-md-6 col-lg">
-                    <a href="../shop/shop.html" class="d-block"><img class="img-fluid" src="{{ asset('frontend/assets/img/390X370/img1.jpg') }}" alt="Image Description"></a>
+                    <a href="../shop/shop.html" class="d-block"><img class="img-fluid" src="{{ asset('frontend/assets/img/39x370/img1.jpg') }}" alt="Image Description"></a>
                 </div>
                 <div class="col-md-6 pl-md-0 col-lg-8gdot46">
                     <!-- Tab Content -->
@@ -1751,7 +1751,7 @@
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
                                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description">
+                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description">
                                                         </a>
                                                     </div>
                                                     <div class="mb-3">
@@ -1797,7 +1797,7 @@
                                                     <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
-                                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -1842,7 +1842,7 @@
                                                     <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
-                                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -1888,7 +1888,7 @@
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
                                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -1934,7 +1934,7 @@
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
                                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
+                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -1980,7 +1980,7 @@
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
                                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description"></a>
+                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -2026,7 +2026,7 @@
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
                                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
+                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -2072,7 +2072,7 @@
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
                                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -2118,7 +2118,7 @@
                                                     <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                                     <div class="mb-2">
                                                         <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
+                                                            <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                                     </div>
                                                     <div class="mb-3">
                                                         <a class="d-inline-flex align-items-center small font-size-14" href="#">
@@ -2268,32 +2268,32 @@
                     }]'>
                     <div class="js-slide">
                         <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200X60/img1.png') }}" alt="Image Description">
+                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200x60/img1.png') }}" alt="Image Description">
                         </a>
                     </div>
                     <div class="js-slide">
                         <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200X60/img2.png') }}" alt="Image Description">
+                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200x60/img2.png') }}" alt="Image Description">
                         </a>
                     </div>
                     <div class="js-slide">
                         <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200X60/img3.png') }}" alt="Image Description">
+                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200x60/img3.png') }}" alt="Image Description">
                         </a>
                     </div>
                     <div class="js-slide">
                         <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200X60/img4.png') }}" alt="Image Description">
+                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200x60/img4.png') }}" alt="Image Description">
                         </a>
                     </div>
                     <div class="js-slide">
                         <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200X60/img5.png') }}" alt="Image Description">
+                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200x60/img5.png') }}" alt="Image Description">
                         </a>
                     </div>
                     <div class="js-slide">
                         <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200X60/img6.png') }}" alt="Image Description">
+                            <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/img/200x60/img6.png') }}" alt="Image Description">
                         </a>
                     </div>
                 </div>

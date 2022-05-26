@@ -502,7 +502,7 @@
                                                 <label class="form-label">VAT Amount (%)</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" number name="tax_percent" class="form-control mb-2" value="" />
+                                                <input type="number" number name="tax_amount_percent" class="form-control mb-2" value="" />
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Set the product VAT about.</div>
@@ -682,10 +682,10 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                        <!--begin::Select2-->
-                                        <select name="phtysical_delivery" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+                                        <select name="physical_delivery" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
                                             <option></option>
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
                                         </select>
                                         <!--end::Select2-->
                                         <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping..</div>

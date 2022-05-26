@@ -59,7 +59,7 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
-            <form method="post" action="{{ route('admin.products.store') }}" enctype="multipart/form-data" class="form d-flex flex-column flex-lg-row">
+            <form method="post" action="{{ route('admin.products.update', $product->id) }}" enctype="multipart/form-data" class="form d-flex flex-column flex-lg-row">
                 @csrf
 
                 <!--begin::Aside column-->
@@ -131,11 +131,11 @@
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
                                 <!--begin::Select2-->
-                                <select name="product_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+                                <select name="product_status" class="form-select mb-2" >
                                     <option></option>
-                                    <option value="Published">Published</option>
-                                    <option value="Draft">Draft</option>
-                                    <option value="Inactive">Inactive</option>
+                                    <option value="Published" {{ ($product->status == "Published") ? "selected='selected'" : "" }}>Published</option>
+                                    <option value="Draft" {{ ($product->status == "Draft") ? "selected='selected'" : "" }}>Draft</option>
+                                    <option value="Inactive" {{ ($product->status == "Inactive") ? "selected='selected'" : "" }}>Inactive</option>
                                 </select>
                                 <!--end::Select2-->
                                 <!--begin::Description-->
@@ -156,9 +156,34 @@
                             <!--end::Card title-->
                         </div>
                         <!--end::Card header-->
-                        @if(!empty($categories))
+                       
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
+                            @php
+                                $categories_from_db = $product->categories()->where('product_id', $product->id)->get();
+                            @endphp
+                            @if($categories_from_db)   
+                            <!--begin::Repeater Display-->
+                            <section id="category_repeaterDisplay">   
+                                @foreach($categories_from_db as $category) 
+                                <div class="category__Row form-group row my-3">
+                                    <div class="col-md-9">
+                                        <select name="category__repeaterBasic[0][]" id="" class="form-select">
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-center">
+                                        <a href="javascript:;" id="btn__removeCategory" class="btn btn-sm btn-light-danger">
+                                            <i class="la la-trash-o"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                @endforeach  
+                            </section>
+                            <!--end::Repeater Display-->
+                            @endif
+
+                            @if($categories)
                                 <!--begin::Repeater-->
                                 <div id="category__repeaterBasic">
                                     <!--begin::Form group-->
@@ -215,9 +240,34 @@
                             <!--end::Card title-->
                         </div>
                         <!--end::Card header-->
-                        @if(!empty($brands))
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
+                            
+                            @php
+                                $brands_from_db = $product->brands()->where('product_id', $product->id)->get();
+                            @endphp
+                            @if($brands_from_db)   
+                            <!--begin::Repeater Display-->
+                            <section id="brand_repeaterDisplay">   
+                                @foreach($brands_from_db as $brand) 
+                                <div class="brand__Row form-group row my-3">
+                                    <div class="col-md-9">
+                                        <select name="brand__repeaterBasic[0][]" id="" class="form-select">
+                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-center">
+                                        <a href="javascript:;" id="btn__removeBrand" class="btn btn-sm btn-light-danger">
+                                            <i class="la la-trash-o"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                @endforeach  
+                            </section>
+                            <!--end::Repeater Display-->
+                            @endif
+
+                            @if(!empty($brands))
                                 <!--begin::Repeater-->
                                 <div id="brand__repeaterBasic">
                                     <!--begin::Form group-->
@@ -258,9 +308,10 @@
                                     <!--end::Form group-->
                                 </div>
                                 <!--end::Repeater-->
+                            @endif
                             </div>
                             <!--end::Card body-->
-                        @endif
+                        
                     </div>
                     <!--end::Brands-->
 
@@ -275,6 +326,30 @@
                             <!--end::Card title-->
                         </div>
                         <!--end::Card header-->
+
+                        @php
+                            $tags_from_db = $product->tags()->where('product_id', $product->id)->get();
+                        @endphp
+                        @if($tags_from_db)   
+                        <!--begin::Repeater Display-->
+                        <section id="tag_repeaterDisplay">   
+                            @foreach($tags_from_db as $tag) 
+                            <div class="tag__Row form-group row my-3">
+                                <div class="col-md-9">
+                                    <select name="tag__repeaterBasic[0][]" id="" class="form-select">
+                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-center">
+                                    <a href="javascript:;" id="btn__removeTag" class="btn btn-sm btn-light-danger">
+                                        <i class="la la-trash-o"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach  
+                        </section>
+                        <!--end::Repeater Display-->
+                        @endif
                         @if(!empty($tags))
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
@@ -362,7 +437,7 @@
                                             <label class="required form-label">Product Name</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Product name" value="{{ $product->name}}" />
+                                            <input type="text" name="product_name" value="{{ $product->name }}" class="form-control mb-2" placeholder="Product name"  />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>
@@ -420,29 +495,50 @@
                                             <div class="row row-cols-1 row-cols-md-3 row-cols-lg-1 row-cols-xl-3 g-9" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
                                                 <!--begin::Col-->
                                                 <div class="col">
-                                                    <!--begin::Option-->
-                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default active d-flex text-start p-6" data-kt-button="true">
-                                                        <!--begin::Radio-->
-                                                        <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                                            <input type="radio" class="form-check-input" name="discount_option" value="No Discount" checked="checked" />
-                                                        </span>
-                                                        <!--end::Radio-->
-                                                        <!--begin::Info-->
-                                                        <span class="ms-5">
-                                                            <span class="fs-4 fw-bolder text-gray-800 d-block">No Discount</span>
-                                                        </span>
-                                                        <!--end::Info-->
-                                                    </label>
-                                                    <!--end::Option-->
+                                                    @if($product->discounts->name != NULL)
+                                                        <!--begin::Option-->
+                                                        <label class="{{($product->discounts->name == 'No Discount') ? 'active' : ''}} btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                            <!--begin::Radio-->
+                                                            <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                                <input type="radio" class="form-check-input" name="discount_option" value="No Discount" 
+                                                                    {{ ($product->discounts->name == "No Discount") ? "checked='checked'" : "checked=''" }} />
+                                                            </span>
+                                                            <!--end::Radio-->
+                                                            <!--begin::Info-->
+                                                            <span class="ms-5">
+                                                                <span class="fs-4 fw-bolder text-gray-800 d-block">No Discount</span>
+                                                            </span>
+                                                            <!--end::Info-->
+                                                        </label>
+                                                        <!--end::Option-->
+                                                    @else
+                                                        <!--begin::Option-->
+                                                        <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                            <!--begin::Radio-->
+                                                            <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                                <input type="radio" class="form-check-input" name="discount_option" value="No Discount" />
+                                                            </span>
+                                                            <!--end::Radio-->
+                                                            <!--begin::Info-->
+                                                            <span class="ms-5">
+                                                                <span class="fs-4 fw-bolder text-gray-800 d-block">No Discount</span>
+                                                            </span>
+                                                            <!--end::Info-->
+                                                        </label>
+                                                        <!--end::Option-->
+                                                    @endif
                                                 </div>
                                                 <!--end::Col-->
                                                 <!--begin::Col-->
                                                 <div class="col">
+                                                @if($product->discounts->name != NULL)
                                                     <!--begin::Option-->
-                                                    <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                    <label 
+                                                        class="{{ ($product->discounts->name == 'Discount Percentage') ? 'active'  : '' }} btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
                                                         <!--begin::Radio-->
                                                         <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                                            <input name="discount_option" class="form-check-input" type="radio" value="Discount Percentage" />
+                                                            <input type="radio" name="discount_option" class="form-check-input" value="Discount Percentage" 
+                                                                {{ ($product->discounts->name == "Discount Percentage") ? "checked='checked'" : "checked=''" }} />
                                                         </span>
                                                         <!--end::Radio-->
                                                         <!--begin::Info-->
@@ -452,6 +548,22 @@
                                                         <!--end::Info-->
                                                     </label>
                                                     <!--end::Option-->
+                                                    @else
+                                                        <!--begin::Option-->
+                                                        <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
+                                                            <!--begin::Radio-->
+                                                            <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                                                <input type="radio" name="discount_option" class="form-check-input" value="Discount Percentage" />
+                                                            </span>
+                                                            <!--end::Radio-->
+                                                            <!--begin::Info-->
+                                                            <span class="ms-5">
+                                                                <span class="fs-4 fw-bolder text-gray-800 d-block">Percentage %</span>
+                                                            </span>
+                                                            <!--end::Info-->
+                                                        </label>
+                                                        <!--end::Option-->
+                                                    @endif
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -465,7 +577,8 @@
                                             <!--end::Label-->
                                             <!--begin::Slider-->
                                             <div class="d-flex flex-column text-center mb-5">
-                                                <input type="text" name="discount_percent" class="form-control mb-2" placeholder="Discount Percentage..." value="" />
+                                                <input type="number" name="discount_percent" class="form-control mb-2" placeholder="Discount Percentage..." 
+                                                    value="{{ $product->discounts->discount_percent }}" />
                                             </div>
                                             <!--end::Slider-->
                                             <!--begin::Description-->
@@ -482,11 +595,11 @@
                                                 <label class="required form-label">Tax Class</label>
                                                 <!--end::Label-->
                                                 <!--begin::Select2-->
-                                                <select name="tax_name" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
-                                                    <option></option>
-                                                    <option value="Tax Free">Tax Free</option>
-                                                    <option value="Taxable Goods">Taxable Goods</option>
-                                                    <option value="Downloadable Product">Downloadable Product</option>
+                                                <select name="tax_name" class="form-select mb-2">
+                                                    <option>Select option below</option>
+                                                    <option value="Taxable Goods" {{ ($product->taxes->name == "Taxable Goods") ? 'selected="selected"' : '' }}> Taxable Goods </option>
+                                                    <option value="Downloadable Product" {{ ($product->taxes->name == "Downloadable Product") ? 'selected="selected"' : '' }}> Downloadable Product </option>
+                                                    <option value="Tax Free" {{ ($product->taxes->name == "Tax Free") ? 'selected="selected"' : '' }}> Tax Free </option>
                                                 </select>
                                                 <!--end::Select2-->
                                                 <!--begin::Description-->
@@ -500,7 +613,7 @@
                                                 <label class="form-label">VAT Amount (%)</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" number name="tax_percent" class="form-control mb-2" value="" />
+                                                <input type="number" number name="tax_percent" class="form-control mb-2" value="{{ $product->taxes->amount_percent }}" />
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Set the product VAT about.</div>
@@ -590,7 +703,7 @@
                                             <label class="required form-label">QR Code</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="qrcode" value="{{ $product->qrcode }}" class="form-control mb-2" placeholder="QR Code" value="" />
+                                            <input type="text" name="qrcode" value="{{ $product->qrcode }}" class="form-control mb-2" placeholder="QR Code"/>
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Enter the product QR Code.</div>
@@ -628,6 +741,28 @@
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
+                                        <!--begin::Repeater Display-->
+                                        <section id="variation_repeaterDisplay">
+                                            @foreach($variations as $variation)
+                                            <div class="variation__Row form-group row">
+                                                <div class="col-md-5">
+                                                    <label class="form-label">Name:</label>
+                                                    <input type="text" name="variation_from_db_name" value="{{ $variation->name }}" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <label class="form-label">Value:</label>
+                                                    <input type="text" name="variation_from_db_value" value="{{ $variation->value }}" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <a href="javascript:;" id="btn__removeVariation" class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                        <i class="la la-trash-o"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            @endforeach  
+                                        </section>
+                                        <!--end::Repeater Display-->
                                         <!--begin::Repeater-->
                                         <div id="variation__addOptions">
                                             <!--begin::Form group-->
@@ -680,10 +815,11 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                        <!--begin::Select2-->
-                                        <select name="phtysical_delivery" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+                                        <select name="physical_delivery" class="form-select mb-2" data-control="select2" data-hide-search="true" 
+                                            data-placeholder="{{ ($product->physical_delivery != NULL) ? $product->physical_delivery : 'Select An Option..'  }}" id="kt_ecommerce_add_product_status_select">
                                             <option></option>
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option value="Yes" {{ ($product->physical_delivery == "Yes") ? 'selected="selected"' : "" }} >Yes</option>
+                                            <option value="No" {{ ($product->physical_delivery == "No") ? 'selected="selected"' : "" }} >No</option>
                                         </select>
                                         <!--end::Select2-->
                                         <div class="text-muted fs-7">Set if the product is a physical or digital item. Physical products may require shipping..</div>
@@ -755,7 +891,7 @@
                                             <label class="form-label">Meta Tag Description</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <textarea name="meta_description" value="{{ $product->product_metas->description }}" id="" cols="30" rows="10" class="form-control"></textarea>
+                                            <textarea name="meta_description" id="" cols="30" rows="10" class="form-control">{{ $product->product_metas->description }}</textarea>
                                             <!--end::Editor-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a meta tag description to the product for increased SEO ranking.</div>
@@ -810,6 +946,35 @@
 
 
 <script>
+
+/* ::::::: Remove previous Categories:::::: */
+$(document).ready(function(){
+    $(document).on('click', '#btn__removeCategory', function(){
+        $(this).closest('.category__Row').remove();
+    })
+});
+
+/* ::::::: Remove previous Brands:::::: */
+$(document).ready(function(){
+    $(document).on('click', '#btn__removeBrand', function(){
+        $(this).closest('.brand__Row').remove();
+    })
+});
+
+/* ::::::: Remove previous Tags:::::: */
+$(document).ready(function(){
+    $(document).on('click', '#btn__removeTag', function(){
+        $(this).closest('.brand__Row').remove();
+    })
+});
+
+$(document).ready(function(){
+    $(document).on('click', '#btn__removeVariation', function(){
+        $(this).closest('.variation__Row').remove();
+    })
+});
+
+
    
     $('#category__repeaterBasic').repeater({
         initEmpty: false,

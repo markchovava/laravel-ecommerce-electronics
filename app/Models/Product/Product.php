@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Product extends Model
 {
@@ -22,17 +23,33 @@ class Product extends Model
         'length'
     ];
 
+    /* Many to Many */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_products', 'product_id', 'user_id')
+            ->withTimestamps();
+    }
+
+    /* Many to Many */
     public function brands()
     {
         return $this->belongsToMany(Brand::class, 'product_brands', 'product_id', 'brand_id')
             ->withTimestamps();
     }
 
+    /* Many to Many */
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_categories', 'product_id', 'category_id')
             ->withTimestamps();
     }
+
+     /* Many to Many */
+     public function tags()
+     {
+         return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id')
+             ->withTimestamps();
+     }
 
     public function discounts()
     {
@@ -42,12 +59,7 @@ class Product extends Model
             ]);
     }
 
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id')
-            ->withTimestamps();
-    }
+   
 
     public function product_metas()
     {

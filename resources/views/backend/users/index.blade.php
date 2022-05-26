@@ -380,7 +380,8 @@
                                     <!--begin::Modal body-->
                                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                         <!--begin::Form-->
-                                        <form id="kt_modal_add_user_form" class="form" action="#">
+                                        <form class="form" method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
+                                            @csrf
                                             <!--begin::Scroll-->
                                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                                                 <!--begin::Input group-->
@@ -389,7 +390,8 @@
                                                     <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
                                                     <!--end::Label-->
                                                     <!--begin::Image input-->
-                                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                                    <div class="image-input image-input-outline" data-kt-image-input="true" 
+                                                    style="background-image: url('assets/media/svg/avatars/blank.svg')">
                                                         <!--begin::Preview existing avatar-->
                                                         <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-6.jpg);"></div>
                                                         <!--end::Preview existing avatar-->
@@ -397,7 +399,7 @@
                                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                                             <i class="bi bi-pencil-fill fs-7"></i>
                                                             <!--begin::Inputs-->
-                                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                                            <input type="file" name="user_image" accept=".png, .jpg, .jpeg" />
                                                             <input type="hidden" name="avatar_remove" />
                                                             <!--end::Inputs-->
                                                         </label>
@@ -422,10 +424,12 @@
                                                 <!--begin::Input group-->
                                                 <div class="fv-row mb-7">
                                                     <!--begin::Label-->
-                                                    <label class="required fw-bold fs-6 mb-2">Full Name</label>
+                                                    <label class="required fw-bold fs-6 mb-2">User name</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input type="text" name="user_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" value="Emma Smith" />
+                                                    <input type="text" name="user_name" 
+                                                        class="form-control form-control-solid mb-3 mb-lg-0" 
+                                                    placeholder="Full name"  />
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Input group-->
@@ -435,7 +439,7 @@
                                                     <label class="required fw-bold fs-6 mb-2">Email</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input type="email" name="user_email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="smith@kpmg.com" />
+                                                    <input type="email" name="user_email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com"  />
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Input group-->
@@ -450,12 +454,11 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="0" id="kt_modal_update_role_option_0" checked='checked' />
+                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Administrator" id="kt_modal_update_role_option_0" />
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_0">
                                                                 <div class="fw-bolder text-gray-800">Administrator</div>
-                                                                <div class="text-gray-600">Best for business owners and company administrators</div>
                                                             </label>
                                                             <!--end::Label-->
                                                         </div>
@@ -468,12 +471,11 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="1" id="kt_modal_update_role_option_1" />
+                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Manager" id="kt_modal_update_role_option_1" />
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                                <div class="fw-bolder text-gray-800">Developer</div>
-                                                                <div class="text-gray-600">Best for developers or people primarily using the API</div>
+                                                                <div class="fw-bolder text-gray-800">Manager</div>
                                                             </label>
                                                             <!--end::Label-->
                                                         </div>
@@ -486,12 +488,11 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="2" id="kt_modal_update_role_option_2" />
+                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Customer" id="kt_modal_update_role_option_2" checked='checked'/>
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_2">
-                                                                <div class="fw-bolder text-gray-800">Analyst</div>
-                                                                <div class="text-gray-600">Best for people who need full access to analytics data, but don't need to update business settings</div>
+                                                                <div class="fw-bolder text-gray-800">Customer</div>
                                                             </label>
                                                             <!--end::Label-->
                                                         </div>
@@ -504,12 +505,11 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="3" id="kt_modal_update_role_option_3" />
+                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Delivery" id="kt_modal_update_role_option_3" />
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_3">
-                                                                <div class="fw-bolder text-gray-800">Support</div>
-                                                                <div class="text-gray-600">Best for employees who regularly refund payments and respond to disputes</div>
+                                                                <div class="fw-bolder text-gray-800">Delivery</div>
                                                             </label>
                                                             <!--end::Label-->
                                                         </div>
@@ -517,23 +517,7 @@
                                                     </div>
                                                     <!--end::Input row-->
                                                     <div class='separator separator-dashed my-5'></div>
-                                                    <!--begin::Input row-->
-                                                    <div class="d-flex fv-row">
-                                                        <!--begin::Radio-->
-                                                        <div class="form-check form-check-custom form-check-solid">
-                                                            <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="4" id="kt_modal_update_role_option_4" />
-                                                            <!--end::Input-->
-                                                            <!--begin::Label-->
-                                                            <label class="form-check-label" for="kt_modal_update_role_option_4">
-                                                                <div class="fw-bolder text-gray-800">Trial</div>
-                                                                <div class="text-gray-600">Best for people who need to preview content data, but don't need to make any updates</div>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                        </div>
-                                                        <!--end::Radio-->
-                                                    </div>
-                                                    <!--end::Input row-->
+                                                    
                                                     <!--end::Roles-->
                                                 </div>
                                                 <!--end::Input group-->
@@ -541,7 +525,6 @@
                                             <!--end::Scroll-->
                                             <!--begin::Actions-->
                                             <div class="text-center pt-15">
-                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
                                                 <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                                                     <span class="indicator-label">Submit</span>
                                                     <span class="indicator-progress">Please wait...
@@ -588,6 +571,7 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="text-gray-600 fw-bold">
+                            @foreach( $users as $user)
                             <!--begin::Table row-->
                             <tr>
                                 <!--begin::Checkbox-->
@@ -603,34 +587,35 @@
                                     <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                         <a href="../../demo1/dist/apps/user-management/users/view.html">
                                             <div class="symbol-label">
-                                                <img src="{{ asset('backend/assets/media/avatars/300-6.jpg') }}" alt="Emma Smith" class="w-100" />
+                                                <img src="{{ (!empty($user->image)) ? url('storage/users/images/' . $user->image) : url('storage/users/no_image.jpg') }}" alt="{{ $user->name }}" class="w-100" />
                                             </div>
                                         </a>
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::User details-->
                                     <div class="d-flex flex-column">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-                                        <span>smith@kpmg.com</span>
+                                        <a href="#" class="text-gray-800 text-hover-primary mb-1">
+                                            {{ $user->name }}</a>
+                                        <span> {{ $user->email }} </span>
                                     </div>
                                     <!--begin::User details-->
                                 </td>
                                 <!--end::User=-->
                                 <!--begin::Role=-->
-                                <td>Administrator</td>
+                                <td>{{ $user->role }}</td>
                                 <!--end::Role=-->
                                 <!--begin::Last login=-->
                                 <td>
-                                    <div class="badge badge-light fw-bolder">Yesterday</div>
+                                    {{ $user->phone_number}}
                                 </td>
                                 <!--end::Last login=-->
                                 <!--begin::Two step=-->
                                 <td>
-                                <div class="badge badge-light-success fw-bolder">Active</div>
+                                <div class="badge badge-light-success fw-bolder">{{ $user->code }}</div>
                                 </td>
                                 <!--end::Two step=-->
                                 <!--begin::Joined-->
-                                <td>05 May 2022, 11:05 am</td>
+                                <td>{{ \Carbon\Carbon::parse($user->create_at)->diffForHumans(); }}</td>
                                 <!--begin::Joined-->
                                 <!--begin::Action=-->
                                 <td class="text-end">
@@ -646,12 +631,12 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
+                                            <a href="{{ route('admin.users.delete', $user->id) }}" class="menu-link px-3">Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -660,290 +645,7 @@
                                 <!--end::Action=-->
                             </tr>
                             <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::User=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                            <div class="symbol-label fs-3 bg-light-danger text-danger">M</div>
-                                        </a>
-                                    </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::User details-->
-                                    <div class="d-flex flex-column">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Melody Macy</a>
-                                        <span>melody@altbox.com</span>
-                                    </div>
-                                    <!--begin::User details-->
-                                </td>
-                                <!--end::User=-->
-                                <!--begin::Role=-->
-                                <td>Analyst</td>
-                                <!--end::Role=-->
-                                <!--begin::Last login=-->
-                                <td>
-                                    <div class="badge badge-light fw-bolder">20 mins ago</div>
-                                </td>
-                                <!--end::Last login=-->
-                                <!--begin::Two step=-->
-                                <td>
-                                    <div class="badge badge-light-success fw-bolder">Active</div>
-                                </td>
-                                <!--end::Two step=-->
-                                <!--begin::Joined-->
-                                <td>24 Jun 2022, 8:43 pm</td>
-                                <!--begin::Joined-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::User=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                            <div class="symbol-label">
-                                                <img src="{{ asset('backend/assets/media/avatars/300-1.jpg') }}" alt="Max Smith" class="w-100" />
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::User details-->
-                                    <div class="d-flex flex-column">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Max Smith</a>
-                                        <span>max@kt.com</span>
-                                    </div>
-                                    <!--begin::User details-->
-                                </td>
-                                <!--end::User=-->
-                                <!--begin::Role=-->
-                                <td>Developer</td>
-                                <!--end::Role=-->
-                                <!--begin::Last login=-->
-                                <td>
-                                    <div class="badge badge-light fw-bolder">3 days ago</div>
-                                </td>
-                                <!--end::Last login=-->
-                                <!--begin::Two step=-->
-                                <td></td>
-                                <!--end::Two step=-->
-                                <!--begin::Joined-->
-                                <td>05 May 2022, 11:30 am</td>
-                                <!--begin::Joined-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::User=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                            <div class="symbol-label">
-                                                <img src="{{ asset('backend/assets/media/avatars/300-5.jpg') }}" alt="Sean Bean" class="w-100" />
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::User details-->
-                                    <div class="d-flex flex-column">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Sean Bean</a>
-                                        <span>sean@dellito.com</span>
-                                    </div>
-                                    <!--begin::User details-->
-                                </td>
-                                <!--end::User=-->
-                                <!--begin::Role=-->
-                                <td>Support</td>
-                                <!--end::Role=-->
-                                <!--begin::Last login=-->
-                                <td>
-                                    <div class="badge badge-light fw-bolder">5 hours ago</div>
-                                </td>
-                                <!--end::Last login=-->
-                                <!--begin::Two step=-->
-                                <td>
-                                    <div class="badge badge-light-success fw-bolder">Active</div>
-                                </td>
-                                <!--end::Two step=-->
-                                <!--begin::Joined-->
-                                <td>21 Feb 2022, 11:30 am</td>
-                                <!--begin::Joined-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::User=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                            <div class="symbol-label">
-                                                <img src="{{ asset('backend/assets/media/avatars/300-25.jpg') }}" alt="Brian Cox" class="w-100" />
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::User details-->
-                                    <div class="d-flex flex-column">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Brian Cox</a>
-                                        <span>brian@exchange.com</span>
-                                    </div>
-                                    <!--begin::User details-->
-                                </td>
-                                <!--end::User=-->
-                                <!--begin::Role=-->
-                                <td>Developer</td>
-                                <!--end::Role=-->
-                                <!--begin::Last login=-->
-                                <td>
-                                    <div class="badge badge-light fw-bolder">2 days ago</div>
-                                </td>
-                                <!--end::Last login=-->
-                                <!--begin::Two step=-->
-                                <td>
-                                    <div class="badge badge-light-success fw-bolder">Active</div>
-                                </td>
-                                <!--end::Two step=-->
-                                <!--begin::Joined-->
-                                <td>15 Apr 2022, 11:05 am</td>
-                                <!--begin::Joined-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
+                            @endforeach
                         </tbody>
                         <!--end::Table body-->
                     </table>

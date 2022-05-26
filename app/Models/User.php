@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Product\Product;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -27,7 +29,26 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'first_name',
+        'last_name',
+        'address',
+        'phone_number',
+        'date_of_birth',
+        'code',
+        'status',
+        'gender',
+        'image',
+        'role',
+        'id_number'
     ];
+
+
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'user_products', 'user_id', 'product_id')
+            ->withTimestamps();
+    }
 
     /**
      * The attributes that should be hidden for serialization.

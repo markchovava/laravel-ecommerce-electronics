@@ -164,7 +164,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-brand-filter="delete_row">Delete</a>
+                                            <a href="{{ route('admin.brand.delete', $brand->id) }}" class="menu-link px-3" data-kt-ecommerce-brand-filter="delete_row">Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>

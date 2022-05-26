@@ -46,8 +46,43 @@ class CategoryController extends Controller
         return redirect()->route('admin.category')->with($notification);
     }
     
-    public function edit(){}
-    public function update(){}
-    public function delet(){}
+    public function edit($id){
+        $data['category'] = Category::find($id);
+        return view('backend.category.edit', $data);
+    }
+
+    public function update(Request $request, $id){
+        $category = Category::find($id);
+        $category->name = $request->category_name;
+        $category->description = $request->category_description;
+        if( $request->file('category_thumbnail') ){
+            $category_image = $request->file('category_thumbnail');
+            $image_extension = strtolower($category_image->getClientOriginalExtension());
+            $image_name = date('YmdHi'). '.' . $image_extension;
+            $upload_location = 'storage/products/category/';
+            $category_image->move($upload_location, $image_name);
+            if($category->image){
+                unlink( $upload_location . $category->image );
+            }  
+            $category->image = $image_name;     
+        }
+        $category->save();
+
+        $notification = [
+            'message' => 'Category Updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.category')->with($notification);
+    }
+    
+    public function delete($id){
+        $category = Category::find($id);
+        $category->delete();
+        $notification = [
+            'message' => 'Category Deleted Successfully!!...',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.category')->with($notification);
+    }
     public function search(){}
 }

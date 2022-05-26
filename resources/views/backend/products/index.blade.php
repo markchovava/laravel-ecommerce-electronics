@@ -221,7 +221,7 @@
                                 <th class="text-end min-w-70px">Qty</th>
                                 <th class="text-end min-w-100px">Price</th>
                                 <th class="text-end min-w-100px">Category</th>
-                                <th class="text-end min-w-100px">Status</th>
+                                <th class="text-end min-w-100px">Author</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -276,18 +276,18 @@
                                 <!--begin::Rating-->
                                     <td class="text-end pe-0" data-order="categories">
                                         @foreach($product->categories as $_data)
-                                        <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
-                                            {{ $_data->name }}
+                                        <a href="" class="text-gray-800 text-hover-primary fs-5">
+                                            {{ $_data->name }},&nbsp;
                                         </a>
                                         @endforeach
                                     </td>  
                                 <!--end::Rating-->
                                 <!--begin::Status=-->
-                                <td class="text-end pe-0" data-order="{{ $product->status }}">
-                                    <!--begin::Badges-->
-                                    <div class="badge badge-light-danger">{{ $product->status }}</div>
-                                    <!--end::Badges-->
-                                </td>
+                                    <td class="text-end pe-0" data-order="users">
+                                        @foreach($product->users as $user)
+                                            {{ $user->name }},&nbsp;
+                                        @endforeach
+                                    </td>
                                 <!--end::Status=-->
                                 <!--begin::Action=-->
                                 <td class="text-end">
@@ -313,7 +313,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
+                                            <a href="{{ route('admin.products.delete', $product->id) }}" class="menu-link px-3">Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>

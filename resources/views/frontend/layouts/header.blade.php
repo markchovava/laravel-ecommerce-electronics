@@ -5,12 +5,12 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="topbar-left">
-                        <a href="#" class="text-gray-110 font-size-13 u-header-topbar__nav-link">Welcome to Worldwide Electronics Store</a>
+                        <a href="#" class="text-gray-110 font-size-13 u-header-topbar__nav-link">Welcome to Lunartech Store</a>
                     </div>
                     <div class="topbar-right ml-auto">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a href="#" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Store Locator</a>
+                                <a href="https://www.google.com/maps/@-17.8085772,31.0679065,15z" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Store Locator</a>
                             </li>
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <a href="../shop/track-your-order.html" class="u-header-topbar__nav-link"><i class="ec ec-transport mr-1"></i> Track Your Order</a>
@@ -36,9 +36,8 @@
                                         </a>
 
                                         <div id="languageDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="languageDropdownInvoker">
-                                            <a class="dropdown-item active" href="#">English</a>
-                                            <a class="dropdown-item" href="#">Deutsch</a>
-                                            <a class="dropdown-item" href="#">Español‎</a>
+                                            <a class="dropdown-item active" href="#">USDollar</a>
+                                            <a class="dropdown-item" href="#">ZIMDollar</a>
                                         </div>
                                     </div>
                                     <!-- End Language -->
@@ -46,7 +45,7 @@
                             </li>
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <!-- Account Sidebar Toggle Button -->
-                                <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
+                                <a id="sidebarNavToggler" href="{{ route('login') }}" role="button" class="u-header-topbar__nav-link"
                                     aria-controls="sidebarContent"
                                     aria-haspopup="true"
                                     aria-expanded="false"
@@ -366,19 +365,13 @@
                                     </li>
                                     <!-- End Home -->
                                     <li class="nav-item u-header__nav-item">
+                                        <a class="nav-link u-header__nav-link" href="{{ url('/') }}">About Us</a>
+                                    </li>
+                                    <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="{{ url('/shop') }}">Shop</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{ url('/list') }}">Category</a>
-                                    </li>
-                                    <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="{{ url('/single') }}">Product Details</a>
-                                    </li>
-                                    <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{ url('/search') }}">Search</a>
-                                    </li>
-                                    <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{ url('/cart') }}">Cart</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="{{ url('/contact') }}">Contact Us</a>
@@ -396,10 +389,10 @@
                             <i class="ec ec-support font-size-50 text-primary"></i>
                             <div class="ml-2">
                                 <div class="phone">
-                                    <strong>Support</strong> <a href="tel:800856800604" class="text-gray-90">(+800) 856 800 604</a>
+                                    <strong>Support</strong> <a href="+263719719971" class="text-gray-90">+263 719719971</a>
                                 </div>
                                 <div class="email">
-                                    E-mail: <a href="mailto:info@electro.com?subject=Help Need" class="text-gray-90">info@electro.com</a>
+                                    E-mail: <a href="mailto:info@lunartechstore.co.zw?subject=Help Need" class="text-gray-90">info@lunartechstore.co.zw</a>
                                 </div>
                             </div>
                         </div>
@@ -446,8 +439,7 @@
                                 <li class="col pr-xl-0 px-2 px-sm-3">
                                     <a href="../shop/cart.html" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
-                                        <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white">2</span>
-                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
+                                        <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white">0</span>
                                     </a>
                                 </li>
                             </ul>
