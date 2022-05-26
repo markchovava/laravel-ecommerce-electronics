@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
+            $table->decimal('total', 10, 2)->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
