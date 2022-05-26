@@ -24,6 +24,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
 
     /* :::::: Users :::::: */
     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+    Route::get('/users/add', [UserController::class, 'add'])->name('admin.users.add');
     Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::post('/users/update/{id}', [UserController::class, 'update'])->name('admin.users.update');

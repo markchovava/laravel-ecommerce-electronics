@@ -15,9 +15,9 @@ class UserController extends Controller
         return view('backend.users.index', $data); 
     }
 
-    public function add()
-    {
-        
+    public function add(){
+        $data['users'] = User::all();
+        return view('backend.users.index', $data); 
     }
 
     public function store(Request $request)
