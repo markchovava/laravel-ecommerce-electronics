@@ -19,19 +19,16 @@ class ProfileController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
-
     public function view(){
         $id = Auth::user()->id;
         $data['profile'] = User::find($id);
         return view('backend.profile.view', $data);
     }
-
-   public function edit(){
-       $id = Auth::user()->id;
-       $data['profile'] = User::find($id);
-       return view('backend.profile.edit', $data);
-   }
-
+    public function edit(){
+        $id = Auth::user()->id;
+        $data['profile'] = User::find($id);
+        return view('backend.profile.edit', $data);
+    }
     public function update(Request $request){
         $id = Auth::user()->id;
         $profile = User::find($id);
@@ -71,33 +68,31 @@ class ProfileController extends Controller
         ];
         return redirect()->route('profile.view')->with($notification);
     }
-
-
-   public function passwordEdit(){
+    public function passwordEdit(){
         $id = Auth::user()->id;
-        $password = User::find($id);
-        return view('backend.profile.password_edit', compact('password'));
-   }
-
-   public function passwordUpdate(Request $request){
+        $data['password'] = User::find($id);
+        return view('backend.profile.password', $data);
+    }
+    public function passwordUpdate(Request $request){
         $validatedData = $request->validate([
             'current_password' => 'required',
             'password' => 'required|confirmed',
         ]); 
 
         $id = Auth::user()->id;
-        $user = User::find($id);
-        $hashedPassword = $user->password;
+        $profile = User::find($id);
+        $hashedPassword = $profile->password;
         if( Hash::check($request->current_password, $hashedPassword) )
         {
-            $user->password = Hash::make($request->password);
-            $user->save();
+            $profile->password = Hash::make($request->password);
+            $profile->save();
             Auth::logout();
             return redirect()->route('login')->with('success', "Password Updated Successfully!!...");
         } else
         {
             return back();
         }
-       
+        
     }
+
 }
