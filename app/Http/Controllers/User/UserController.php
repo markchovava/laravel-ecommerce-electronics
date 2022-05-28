@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['users'] = User::all();
+        $data['users'] = User::where('role', '!=', 'Administrator')->get();
         return view('backend.users.index', $data); 
     }
 
@@ -55,8 +55,7 @@ class UserController extends Controller
         return view('backend.users.edit', $data);
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $user = User::find($id);
         $user->name = $request->user_name;
         $user->first_name = $request->first_name;
@@ -67,7 +66,10 @@ class UserController extends Controller
         $user->date_of_birth = $request->date_of_birth;
         $user->gender = $request->user_gender;
         $user->id_number = $request->user_id_number;
-        $user->role = $request->user_role;
+        $user->role = $request->user_role;       
+        $code = rand(100000, 1000000);
+        $user->code = $code;        
+        $user->password = Hash::make($code);  
         $code = rand(100000, 1000000);
         $user->code = $code;        
         $user->password = Hash::make($code);      
@@ -107,4 +109,5 @@ class UserController extends Controller
     {
         
     }
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\BrandController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\ProfileController;
 
 
 
@@ -19,8 +20,19 @@ use App\Http\Controllers\User\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login', [ProfileController::class, 'login'])->name('login');
+Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
+
+    Route::prefix('profile')->group(function() {
+        Route::get('/view', [ProfileController::class, 'view'])->name('profile.view');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/password/edit', [ProfileController::class, 'passwordEdit'])->name('password.edit');
+        Route::post('/password/update', [ProfileController::class, 'passwordUpdate'])->name('password.update');
+    });
 
     /* :::::: Users :::::: */
     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
