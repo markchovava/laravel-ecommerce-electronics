@@ -613,7 +613,7 @@
                                                 <label class="form-label">VAT Amount (%)</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" number name="tax_percent" class="form-control mb-2" value="{{ $product->taxes->amount_percent }}" />
+                                                <input type="number" number name="tax_amount_percent" class="form-control mb-2" value="{{ $product->taxes->amount_percent }}" />
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Set the product VAT about.</div>
@@ -752,7 +752,7 @@
                                                 <div class="col-md-5">
                                                     <label class="form-label">Value:</label>
                                                     <input type="text" name="variation_from_db_value" value="{{ $variation->value }}" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
-                                                </div>
+                                                </div> 
                                                 
                                                 <div class="col-md-2">
                                                     <a href="javascript:;" id="btn__removeVariation" class="btn btn-sm btn-light-danger mt-3 mt-md-8">

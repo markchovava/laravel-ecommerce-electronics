@@ -5,6 +5,7 @@ namespace App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Product\ProductImage;
 
 class Product extends Model
 {
@@ -99,6 +100,10 @@ class Product extends Model
 
     public function variations(){
         return $this->hasMany(Variation::class, 'product_id', 'id');
+    }
+
+    public function product_images(){
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
 
 }

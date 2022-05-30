@@ -2,3 +2,14 @@
 .category__Row{
     transition: all .5s ease;
 }
+
+.aspect__Ratio5x4{
+    width:100%;
+    aspect-ratio:5/4;
+}
+
+.img__fullCover{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

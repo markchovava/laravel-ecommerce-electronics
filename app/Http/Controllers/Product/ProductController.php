@@ -43,8 +43,7 @@ class ProductController extends Controller
         return view('backend.products.add', $data);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         DB::transaction(function() use($request){
 
             /* Product */
@@ -55,12 +54,14 @@ class ProductController extends Controller
                 $image_extension = strtolower($product_thumbnail->getClientOriginalExtension());
                 $image_name = date('YmdHi'). '.' . $image_extension;
                 $upload_location = 'storage/products/thumbnail/';
-                $product_thumbnail->move($upload_location, $image_name);
-                if($product->image)
-                {
-                    unlink( $upload_location . $product->image );
-                }  
-                $product->product_thumbnail = $image_name;      
+                if($product->image){
+                    unlink($upload_location . $product->image);
+                    $product_thumbnail->move($upload_location, $image_name);
+                    $product->image = $image_name;                    
+                }else{
+                    $product_thumbnail->move($upload_location, $image_name);
+                    $product->image = $image_name;
+                }              
             }
             $product->name = $request->product_name;
             $product->description = $request->product_description;
@@ -79,7 +80,7 @@ class ProductController extends Controller
 
             /* User Product */
             $user_product = new UserProduct();
-            $user_product->user_id = Auth::id();
+            $user_product->user_id = Auth::user()->id;
             $user_product->product_id = $product->id;
             $user_product->save();
             
@@ -130,12 +131,14 @@ class ProductController extends Controller
                     $image_extension = strtolower($image->getClientOriginalExtension());
                     $image_name = hexdec(uniqid()) . '.' . $image_extension;
                     $upload_location = 'storage/products/images/';
-                    $image->move($upload_location, $image_name);
-                    if($product_images->image)
-                    {
-                        unlink( $upload_location . $product_images->image );
-                    }  
-                    $product_images->image = $image_name;   
+                    if($product_images->image){
+                        unlink($upload_location . $product_images->image);
+                        $image->move($upload_location, $image_name);
+                        $product_images->image = $image_name;                      
+                    }else{
+                        $image->move($upload_location, $image_name);
+                        $product_images->image = $image_name;
+                    }                
                     $product_images->save();
                 }         
             }
@@ -211,23 +214,47 @@ class ProductController extends Controller
         return view('backend.products.edit', $data);
     }
 
+    public function view($id){
+        $data['categories'] = Category::all();
+        $data['tags'] = Tag::all();
+        $data['brands'] = Brand::all();
+        $data['product_metas'] = ProductMeta::where('product_id', $id)->get();
+        $data['discounts'] = Discount::where('product_id', $id)->get();
+        $data['inventories'] = Inventory::where('product_id', $id)->get();
+        $data['taxes'] = Tax::where('product_id', $id)->get();
+        $data['variations'] = Variation::where('product_id', $id)->get();
+        // Matches with our request id
+        $data['product'] = Product::with([
+            'categories',
+            'brands',
+            'product_metas',
+            'discounts',
+            'inventories',
+            'taxes',
+            'tags',
+            'variations',
+            ])->where('id', $id)->first();
+        //dd($data['editProduct']->toArray());
+        return view('backend.products.view', $data);
+    }
+
     public function update(Request $request, $id){
         DB::transaction(function() use($request, $id){
-
             /* Product */
             $product = Product::find($id);
-            if( $request->file('product_thumbnail') )
-            {
+            if( $request->file('product_thumbnail') ){
                 $product_thumbnail = $request->file('product_thumbnail');
                 $image_extension = strtolower($product_thumbnail->getClientOriginalExtension());
                 $image_name = date('YmdHi'). '.' . $image_extension;
                 $upload_location = 'storage/products/thumbnail/';
-                $product_thumbnail->move($upload_location, $image_name);
-                if($product->image)
-                {
-                    unlink( $upload_location . $product->image );
-                }  
-                $product->product_thumbnail = $image_name;      
+                if($product->image){
+                    unlink($upload_location . $product->image);
+                    $product_thumbnail->move($upload_location, $image_name);
+                    $product->product_thumbnail = $image_name;                      
+                }else{
+                    $product_thumbnail->move($upload_location, $image_name);
+                    $product->product_thumbnail = $image_name;
+                }          
             }
             $product->name = $request->product_name;
             $product->description = $request->product_description;
@@ -245,10 +272,16 @@ class ProductController extends Controller
             $product->save();
 
             /* User Product Link */
-            $user_product = UserProduct::where('product_id', $product->id)->first();
-            $user_product->user_id = Auth::id();
-            $user_product->save();
-            
+            if(UserProduct::where('product_id', '=', $product->id)->exists()){
+                $user_product = UserProduct::where('product_id', $product->id)->first();
+                $user_product->user_id = Auth::user()->id;
+                $user_product->save();
+            } else{
+                $user_product = new UserProduct();
+                $user_product->user_id = Auth::user()->id;
+                $user_product->product_id = $product->id;
+                $user_product->save();
+            }     
             /* Category Products */
             $categories = $request->category__repeaterBasic;  // Is generated by formrepeater
             $product_category = ProductCategory::where('product_id', $product->id)->delete();  // Is generated by formrepeater
@@ -263,7 +296,6 @@ class ProductController extends Controller
                     }            
                 }
             }
-
             /* Brands */ 
             $brands = $request->brand__repeaterBasic;
             $product_brand = ProductBrand::where('product_id', $product->id)->delete();
@@ -302,12 +334,13 @@ class ProductController extends Controller
                     $upload_location = 'storage/products/images/';
                     $image->move($upload_location, $image_name);
                     if($product_images->image){
-                        $image = public_path() . $upload_location . $product->product_thumbnail;
-                        if(File::exists($image)){ 
-                            Storage::delete($image);
-                        }     
-                    }  
-                    $product_images->image = $image_name;   
+                        unlink($upload_location . $product->image);
+                        $image->move($upload_location, $image_name);
+                        $product_images->image = $image_name;                      
+                    }else{
+                        $image->move($upload_location, $image_name);
+                        $product_images->image = $image_name;  
+                    }         
                     $product_images->save();
                 }         
             }
@@ -333,8 +366,9 @@ class ProductController extends Controller
             $product_inventory->in_warehouse_quantity = $request->in_warehouse_quantity;
             $product_inventory->save();
              /* Variations */ 
-             $product_var = Variation::where('product_id', $product->id)->delete();
+             
              if(isset($request->variation_from_db_name)){
+                $product_var = Variation::where('product_id', $product->id)->delete();
                 // $product_var = Variation::where('product_id', $product->id)->delete();
                 //dd($request->variation_from_db_name);
                 while(!empty($variation_from_db_name)){

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,12 +36,15 @@ class UserController extends Controller
             $user_image = $request->file('user_image');
             $image_extension = strtolower($user_image->getClientOriginalExtension());
             $image_name = hexdec(uniqid()) . '.' . $image_extension;
-            $upload_location = 'storage/users/images/';
-            $user_image->move($upload_location, $image_name);
+            $upload_location = 'storage/users/images/'; 
             if($user->image){
-                unlink( $upload_location . $user->image );
-            }  
-            $user->image = $image_name;     
+                unlink($upload_location . $user->image);
+                $user_image->move($upload_location, $image_name);
+                $user->image = $image_name;                    
+            }else{
+                $user_image->move($upload_location, $image_name);
+                $user->image = $image_name;
+            }        
         }
         $user->save();
 
@@ -55,6 +60,11 @@ class UserController extends Controller
         return view('backend.users.edit', $data);
     }
 
+    public function view($id){
+        $data['user'] = User::find($id);
+        return view('backend.users.view', $data);
+    }
+
     public function update(Request $request, $id){
         $user = User::find($id);
         $user->name = $request->user_name;
@@ -67,23 +77,26 @@ class UserController extends Controller
         $user->gender = $request->user_gender;
         $user->id_number = $request->user_id_number;
         $user->role = $request->user_role;       
-        $code = rand(100000, 1000000);
+        /* $code = rand(100000, 1000000);
         $user->code = $code;        
         $user->password = Hash::make($code);  
         $code = rand(100000, 1000000);
         $user->code = $code;        
-        $user->password = Hash::make($code);      
-        $user->created_at = now();      
+        $user->password = Hash::make($code);  */     
+        $user->updated_at = now();      
         if( $request->file('user_image') ){
             $user_image = $request->file('user_image');
             $image_extension = strtolower($user_image->getClientOriginalExtension());
             $image_name = hexdec(uniqid()) . '.' . $image_extension;
             $upload_location = 'storage/users/images/';
-            $user_image->move($upload_location, $image_name);
             if($user->image){
-                unlink( $upload_location . $user->image );
-            }  
-            $user->image = $image_name;     
+                unlink($upload_location . $user->image);
+                $user_image->move($upload_location, $image_name);
+                $user->image = $image_name;                    
+            }else{
+                $user_image->move($upload_location, $image_name);
+                $user->image = $image_name;
+            }        
         }
         $user->save();
 

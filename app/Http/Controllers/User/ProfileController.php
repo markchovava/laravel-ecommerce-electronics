@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -54,11 +56,14 @@ class ProfileController extends Controller
             $image_extension = strtolower($profile_image->getClientOriginalExtension());
             $image_name = hexdec(uniqid()) . '.' . $image_extension;
             $upload_location = 'storage/users/images/';
-            $profile_image->move($upload_location, $image_name);
-            if($profile->image){
-                unlink( $upload_location . $profile->image );
-            }  
-            $profile->image = $image_name;     
+            if(!empty($profile->image)){
+                unlink($upload_location . $profile->image);
+                $profile_image->move($upload_location, $image_name);
+                $profile->image = $image_name;                    
+            }else{
+                $profile_image->move($upload_location, $image_name);
+                $profile->image = $image_name;
+            }    
         }
         $profile->save();
 

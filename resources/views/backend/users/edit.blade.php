@@ -68,7 +68,7 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form method="POST" action="{{ route('admin.users.update', $user->id) }}" id="kt_account_profile_details_form" class="form">
+                    <form method="POST" action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data" class="form">
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
@@ -82,7 +82,7 @@
                                     <!--begin::Image input-->
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                                         <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-125px h-125px" 
+                                        <div class="image-input-wrapper w-125px h-125px"
                                         style="background-image: url({{ (!empty($user->image)) ? url('storage/users/images/' . $user->image) : url('storage/users/no_image.jpg') }}" alt="{{ $user->name }})"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->

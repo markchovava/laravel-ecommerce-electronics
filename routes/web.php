@@ -39,6 +39,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/users/add', [UserController::class, 'add'])->name('admin.users.add');
     Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::get('/users/view/{id}', [UserController::class, 'view'])->name('admin.users.view');
     Route::post('/users/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
     Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
 
@@ -47,6 +48,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/products/add', [ProductController::class, 'add'])->name('admin.products.add');
     Route::post('/products/store', [ProductController::class, 'store'])->name('admin.products.store');
     Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
+    Route::get('/products/view/{id}', [ProductController::class, 'view'])->name('admin.products.view');
     Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('admin.products.delete');
     
@@ -93,8 +95,9 @@ Route::get('/add', function(){
 
 Route::get('/show', function(){
     //$data['products']= \App\Models\Product\Product::with('users')->get();
-    $users = \App\Models\User::with('products')->get();
-    return $users;
+    //$users = \App\Models\User::with('products')->get();
+    $data = \App\Models\Product\Variation::where('product_id', 1)->get();
+    return $data;
     //return $data['products'];
     //return view('frontend.test', $data);
 });
