@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index(){
-        $data['categories'] = Category::with('products')->get();
+        $data['categories'] = Category::with('products')->orderBy('updated_at','desc')->get();
         return view('backend.category.index', $data);
     }
 
@@ -21,8 +21,9 @@ class CategoryController extends Controller
         $category= new Category();
         $category->name = $request->category_name;
         $category->description = $request->category_description;
+        $category->slug = $request->category_slug;
         $category->status = $request->category_status;
-
+        $category->created_at = now();
         if( $request->file('category_thumbnail') )
         {
             $category_thumbnail = $request->file('category_thumbnail');
@@ -55,6 +56,9 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->name = $request->category_name;
         $category->description = $request->category_description;
+        $category->status = $request->category_status;
+        $category->slug = $request->category_slug;
+        $category->updated_at = now();
         if( $request->file('category_thumbnail') ){
             $category_image = $request->file('category_thumbnail');
             $image_extension = strtolower($category_image->getClientOriginalExtension());

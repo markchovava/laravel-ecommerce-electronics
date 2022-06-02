@@ -142,12 +142,6 @@
                             <!--begin::Description-->
                             <div class="text-muted fs-7">Set the category status.</div>
                             <!--end::Description-->
-                            <!--begin::Datepicker-->
-                            <div class="d-none mt-10">
-                                <label for="kt_ecommerce_add_category_status_datepicker" class="form-label">Select publishing date and time</label>
-                                <input class="form-control" id="kt_ecommerce_add_category_status_datepicker" placeholder="Pick date &amp; time" />
-                            </div>
-                            <!--end::Datepicker-->
                         </div>
                         <!--end::Card body-->
                     </div>
@@ -174,7 +168,7 @@
                                 <label class="required form-label">Category Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="category_name" class="form-control mb-2" placeholder="Product name" value="" />
+                                <input type="text" name="category_name" class="form-control mb-2" placeholder="Category Name" value="" />
                                 <!--end::Input-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">A category name is required and recommended to be unique.</div>
@@ -182,15 +176,28 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div>
+                            <div class="mb-10">
                                 <!--begin::Label-->
-                                <label class="form-label">Description</label>
+                                <label class="form-label">Short Description</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <textarea name="category_description" id="" cols="30" rows="10" class="form-control"></textarea>
+                                <input type="text" name="category_description" class="form-control mb-2" placeholder="Add Description..." value="" />
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Set a description to the category for better visibility.</div>
+                                <!--end::Description-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10 fv-row">
+                                <!--begin::Label-->
+                                <label class="required form-label">Category Slug</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="category_slug" class="form-control mb-2" placeholder="category-one" value="" />
+                                <!--end::Input-->
+                                <!--begin::Description-->
+                                <div class="text-muted fs-7">A category name is required and recommended to be unique.</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Input group-->

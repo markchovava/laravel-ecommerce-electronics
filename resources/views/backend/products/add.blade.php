@@ -372,15 +372,41 @@
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
-                                        <div>
+                                        <div class="mb-10">
                                             <!--begin::Label-->
-                                            <label class="form-label">Description</label>
+                                            <label class="required form-label">Description</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
                                             <textarea name="product_description" id="" cols="30" rows="10" class="form-control"></textarea>
                                             <!--end::Editor-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a description to the product for better visibility.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Short Description</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="product_short_description" value="" class="form-control mb-2" placeholder="Product Short Description"  />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Add product short description.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label">Product Type</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="product_type" value="" class="form-control mb-2" placeholder="Product Type"  />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Add product type.</div>
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
@@ -402,10 +428,23 @@
                                         <!--begin::Input group-->
                                         <div class="mb-10 fv-row">
                                             <!--begin::Label-->
-                                            <label class="required form-label">Base Price</label>
+                                            <label class="required form-label">Price</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input type="number" name="product_price" class="form-control mb-2" placeholder="Product price" value="" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set the product price.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">ZWL Price</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="number" name="zwl_product_price" class="form-control mb-2" placeholder="Product ZWL Price" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set the product price.</div>

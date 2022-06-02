@@ -160,7 +160,10 @@
                                 <!--end::Qty=-->
                                 <!--begin::Price=-->
                                 <td class="text-end pe-0">
-                                    <span class="fw-bolder">${{ $product->price }}.00</span>
+                                    <span class="fw-bolder">
+                                        ${{ number_format((float)$product->price, 2, '.', '') }},&nbsp; <br>
+                                        ZWL${{ number_format((float)$product->zwl_price, 2, '.', '') }}
+                                    </span>
                                 </td>
                                 <!--end::Price=-->
                                 <!--begin::Rating-->

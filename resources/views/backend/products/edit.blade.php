@@ -87,7 +87,8 @@
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="product_thumbnail" accept=".png, .jpg, .jpeg" />
+                                        <input type="file" name="product_thumbnail" value="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : '' }}" 
+                                        accept=".png, .jpg, .jpeg" />
                                         <input type="hidden" name="avatar_remove" />
                                         <!--end::Inputs-->
                                     </label>
@@ -245,7 +246,7 @@
                             
                             @php
                                 $brands_from_db = $product->brands()->where('product_id', $product->id)->get();
-                            @endphp
+                            @endphp 
                             @if($brands_from_db)   
                             <!--begin::Repeater Display-->
                             <section id="brand_repeaterDisplay">   
@@ -445,15 +446,41 @@
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
-                                        <div>
+                                        <div class="mb-10">
                                             <!--begin::Label-->
-                                            <label class="form-label">Description</label>
+                                            <label class="required form-label">Description</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
                                             <textarea name="product_description" id="" cols="30" rows="10" class="form-control">{{ $product->description }}</textarea>
                                             <!--end::Editor-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set a description to the product for better visibility.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Short Description</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="product_short_description" value="{{ $product->short_description }}" class="form-control mb-2" placeholder="Product Short Description"/>
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Add product short description.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                         <!--begin::Input group-->
+                                         <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label">Product Type</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="product_type" value="{{ $product->type }}" class="form-control mb-2" placeholder="Product Type"  />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>
                                             <!--end::Description-->
                                         </div>
                                         <!--end::Input group-->
@@ -475,10 +502,23 @@
                                         <!--begin::Input group-->
                                         <div class="mb-10 fv-row">
                                             <!--begin::Label-->
-                                            <label class="required form-label">Base Price</label>
+                                            <label class="required form-label">Price</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <input type="number" name="product_price" class="form-control mb-2" placeholder="Product price" value="{{ $product->price }}" />
+                                            <!--end::Input-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7">Set the product price.</div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">ZWL Price</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="number" name="zwl_product_price" class="form-control mb-2" placeholder="Product ZWL Price" value="{{ $product->zwl_price }}" />
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7">Set the product price.</div>
@@ -743,15 +783,16 @@
                                     <div class="card-body pt-0">
                                         <!--begin::Repeater Display-->
                                         <section id="variation_repeaterDisplay">
+                                            @php($i = 0)
                                             @foreach($variations as $variation)
                                             <div class="variation__Row form-group row">
                                                 <div class="col-md-5">
                                                     <label class="form-label">Name:</label>
-                                                    <input type="text" name="variation_from_db_name" value="{{ $variation->name }}" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
+                                                    <input type="text" name="variation_from_db[{{ $i }}][0]" value="{{ $variation->name }}" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
                                                 </div>
                                                 <div class="col-md-5">
                                                     <label class="form-label">Value:</label>
-                                                    <input type="text" name="variation_from_db_value" value="{{ $variation->value }}" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
+                                                    <input type="text" name="variation_from_db[{{ $i }}][1]" value="{{ $variation->value }}" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
                                                 </div> 
                                                 
                                                 <div class="col-md-2">
@@ -760,6 +801,7 @@
                                                     </a>
                                                 </div>
                                             </div>
+                                            @php($i++)
                                             @endforeach  
                                         </section>
                                         <!--end::Repeater Display-->

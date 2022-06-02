@@ -13,8 +13,8 @@
                             <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../home/index.html">Home</a></li>
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../shop/shop.html">Accessories</a></li>
-                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../shop/shop.html">Headphones</a></li>
-                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">Ultra Wireless S50 Headphones S50 with Bluetooth</li>
+                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../shop/shop.html">{{ $product->type }}</a></li>
+                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ $product->name}}</li>
                             </ol>
                         </nav>
                     </div>
@@ -33,21 +33,12 @@
                                 data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
                                 data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
                                 data-nav-for="#sliderSyncingThumb">
+                                @foreach($product_images as $_data)
                                 <div class="js-slide">
-                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description">
+                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" 
+                                    src="{{ (!empty($_data->image)) ? url('storage/products/images/' . $_data->image) : '' }}" alt="Image Description">
                                 </div>
-                                <div class="js-slide">
-                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description">
-                                </div>
-                                <div class="js-slide">
-                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description">
-                                </div>
-                                <div class="js-slide">
-                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description">
-                                </div>
-                                <div class="js-slide">
-                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description">
-                                </div>
+                                @endforeach
                             </div>
 
                             <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
@@ -55,28 +46,19 @@
                                 data-slides-show="5"
                                 data-is-thumbs="true"
                                 data-nav-for="#sliderSyncingNav">
+                                @foreach($product_images as $_data)
                                 <div class="js-slide" style="cursor: pointer;">
-                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description">
+                                    <img class="img-fluid" 
+                                    src="{{ (!empty($_data->image)) ? url('storage/products/images/' . $_data->image) : '' }}" alt="Image Description">
                                 </div>
-                                <div class="js-slide" style="cursor: pointer;">
-                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description">
-                                </div>
-                                <div class="js-slide" style="cursor: pointer;">
-                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description">
-                                </div>
-                                <div class="js-slide" style="cursor: pointer;">
-                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description">
-                                </div>
-                                <div class="js-slide" style="cursor: pointer;">
-                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description">
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-md-7 mb-md-6 mb-lg-0">
                             <div class="mb-2">
                                 <div class="border-bottom mb-3 pb-md-1 pb-3">
-                                    <a href="#" class="font-size-12 text-gray-5 mb-2 d-inline-block">Headphones</a>
-                                    <h2 class="font-size-25 text-lh-1dot2">Ultra Wireless S50 Headphones S50 with Bluetooth</h2>
+                                    <a href="#" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{ $product->type}}</a>
+                                    <h2 class="font-size-25 text-lh-1dot2">{{ $product->name }}</h2>
                                     <div class="mb-2">
                                         <a class="d-inline-flex align-items-center small font-size-15 text-lh-1" href="#">
                                             <div class="text-warning mr-2">
@@ -91,44 +73,47 @@
                                     </div>
                                     <div class="d-md-flex align-items-center">
                                         <a href="#" class="max-width-150 ml-n2 mb-2 mb-md-0 d-block"><img class="img-fluid" src="{{ asset('frontend/assets/img/200X60/img1.png') }}" alt="Image Description"></a>
-                                        <div class="ml-md-3 text-gray-9 font-size-14">Availability: <span class="text-green font-weight-bold">26 in stock</span></div>
+                                        <div class="ml-md-3 text-gray-9 font-size-14">Availability: 
+                                            <span class="text-green font-weight-bold">{{ $product->inventories->in_store_quantity }} in stock</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex-horizontal-center flex-wrap mb-4">
                                     <a href="#" class="text-gray-6 font-size-13 mr-2"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                    <a href="#" class="text-gray-6 font-size-13 ml-2"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                    <a href="#" class="text-gray-6 font-size-13 ml-2"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Quote</a>
                                 </div>
                                 <div class="mb-2">
-                                    <ul class="font-size-14 pl-3 ml-1 text-gray-110">
-                                        <li>4.5 inch HD Touch Screen (1280 x 720)</li>
-                                        <li>Android 4.4 KitKat OS</li>
-                                        <li>1.4 GHz Quad Core™ Processor</li>
-                                        <li>20 MP Electro and 28 megapixel CMOS rear camera</li>
+                                    {{ $product->short_description}}
                                     </ul>
                                 </div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                                <p><strong>SKU</strong>: FW511948218</p>
-                                <div class="mb-4">
+                                <p><strong>SKU</strong>: {{ $product->sku }}</p>
+                                <div class="mb-4 pricing">
                                     <div class="d-flex align-items-baseline">
-                                        <ins class="font-size-36 text-decoration-none">$1,999.00</ins>
-                                        <del class="font-size-20 ml-2 text-gray-6">$2,299.00</del>
+                                        <ins class="font-size-36 text-decoration-none">
+                                            $<span class="price__number">{{ number_format((float)$product->price, 2, '.', '') }}</span>
+                                        </ins>
+                                        <ins class="font-size-20 ml-2 text-gray-6">
+                                            ZWL$<span class="zwl__priceNumber">{{ number_format((float)$product->zwl_price, 2, '.', '') }}</span>
+                                        </ins>
                                     </div>
                                 </div>
                                 <div class="border-top border-bottom py-3 mb-4">
                                     <div class="d-flex align-items-center">
-                                        <h6 class="font-size-14 mb-0">Color</h6>
+                                        <h6 class="font-size-14 mb-0">Options</h6>
                                         <!-- Select -->
-                                        <select class="js-select selectpicker dropdown-select ml-3"
+                                        <select name="product_variations" class="js-select selectpicker dropdown-select ml-3"
                                             data-style="btn-sm bg-white font-weight-normal py-2 border">
-                                            <option value="one" selected>White with Gold</option>
-                                            <option value="two">Red</option>
-                                            <option value="three">Green</option>
-                                            <option value="four">Blue</option>
+                                            @foreach($variations as $variation)
+                                                <option value="{{ $variation->name }}: {{ $variation->value }}" >
+                                                    {{ $variation->name }}: {{ $variation->value }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <!-- End Select -->
                                     </div>
                                 </div>
-                                <div class="d-md-flex align-items-end mb-3">
+                                <div id="lower__bodyArea" class="d-md-flex align-items-end mb-3">
                                     <div class="max-width-150 mb-4 mb-md-0">
                                         <h6 class="font-size-14">Quantity</h6>
                                         <!-- Quantity -->
@@ -150,9 +135,16 @@
                                         <!-- End Quantity -->
                                     </div>
                                     <div class="ml-md-3">
-                                        <a href="#" class="btn px-5 btn-primary-dark transition-3d-hover"><i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</a>
+                                        <a href="#" class="add__toCartBtn btn px-5 btn-primary-dark transition-3d-hover">
+                                            <i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</a>
                                     </div>
                                 </div>
+<script>
+$(document).ready(function(){
+
+})
+
+</script>
                             </div>
                         </div>
                     </div>
@@ -273,40 +265,35 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
-                                <h3 class="font-size-24 mb-3">Perfectly Done</h3>
-                                <p>Praesent ornare, ex a interdum consectetur, lectus diam sodales elit, vitae egestas est enim ornare nisl. Nullam in lectus nec sem semper viverra. In lobortis egestas massa. Nam nec massa nisi. Suspendisse potenti. Quisque suscipit vulputate dui quis volutpat. Ut id elit facilisis, feugiat est in, tempus lacus. Ut ultrices dictum metus, a ultricies ex vulputate ac. Ut id cursus tellus, non tempor quam. Morbi porta diam nisi, id finibus nunc tincidunt eu.</p>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="pt-lg-8 pt-xl-10">
-                                            <h3 class="font-size-24 mb-3">Wireless</h3>
-                                            <p class="mb-6">Fusce vitae nibh mi. Integer posuere, libero et ullamcorper facilisis, enim eros tincidunt orci, eget vestibulum sapien nisi ut leo. Cras finibus vel est ut mollis. Donec luctus condimentum ante et euismod.</p>
-                                            <h3 class="font-size-24 mb-3">Fresh Design</h3>
-                                            <p class="mb-6">Integer bibendum aliquet ipsum, in ultrices enim sodales sed. Quisque ut urna vitae lacus laoreet malesuada eu at massa. Pellentesque nibh augue, pellentesque nec dictum vel, pretium a arcu. Duis eu urna suscipit, lobortis elit quis, ullamcorper massa.</p>
-                                            <h3 class="font-size-24 mb-3">Fabolous Sound</h3>
-                                            <p class="mb-6">Cras rutrum, nibh a sodales accumsan, elit sapien ultrices sapien, eget semper lectus ex congue elit. Nullam dui elit, fermentum a varius at, iaculis non dolor. In hac habitasse platea dictumst.</p>
+                                            <h3 class="font-size-24 mb-3">{{ $product->type }}</h3>
+                                            <p>{{ $product->description }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <img class="img-fluid mr-n4 mr-lg-n10" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description">
+                                        <img class="img-fluid mr-n4 mr-lg-n10" style="object-fit:cover; width:100%; height:100%;" 
+                                        src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Image Description">
                                     </div>
-                                    <div class="col-md-6 text-left">
-                                        <img class="img-fluid ml-n4 ml-lg-n10" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description">
-                                    </div>
-                                    <div class="col-md-6 align-self-center">
-                                        <div class="pt-lg-8 pt-xl-10 text-right">
-                                            <h3 class="font-size-24 mb-3">Inteligent Bass</h3>
-                                            <p class="mb-6">Fusce vitae nibh mi. Integer posuere, libero et ullamcorper facilisis, enim eros tincidunt orci, eget vestibulum sapien nisi ut leo. Cras finibus vel est ut mollis. Donec luctus condimentum ante et euismod.</p>
-                                            <h3 class="font-size-24 mb-3">Battery Life</h3>
-                                            <p class="mb-6">Integer bibendum aliquet ipsum, in ultrices enim sodales sed. Quisque ut urna vitae lacus laoreet malesuada eu at massa. Pellentesque nibh augue, pellentesque nec dictum vel, pretium a arcu. Duis eu urna suscipit, lobortis elit quis, ullamcorper massa.</p>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <ul class="nav flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1"><strong>SKU:</strong> <span class="sku">FW511948218</span></li>
+                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1"><strong>SKU:</strong> <span class="sku">{{ $product->sku }}</span></li>
                                     <li class="nav-item text-gray-111 mx-3 flex-shrink-0 flex-xl-shrink-1">/</li>
-                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1"><strong>Category:</strong> <a href="#" class="text-blue">Headphones</a></li>
+                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1">
+                                        <strong>Category:</strong> 
+                                        @foreach( $product->categories as $category)
+                                        <a href="#" class="text-blue">{{ $category->name }}</a>,
+                                        @endforeach
+                                    </li>
                                     <li class="nav-item text-gray-111 mx-3 flex-shrink-0 flex-xl-shrink-1">/</li>
-                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1"><strong>Tags:</strong> <a href="#" class="text-blue">Fast</a>, <a href="#" class="text-blue">Gaming</a>, <a href="#" class="text-blue">Strong</a></li>
+                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1">
+                                        <strong>Tags:</strong> 
+                                        @foreach( $product->tags as $tag)
+                                        <a href="#" class="text-blue">{{ $tag->name }}</a>,
+                                        @endforeach
+                                    </li>
                                 </ul>
                             </div>
                             <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-three-example1-tab">
@@ -704,7 +691,7 @@
                                     </div>
                                     <div class="product-item__footer">
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Qoute</a>
                                             <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>
@@ -733,7 +720,7 @@
                                     </div>
                                     <div class="product-item__footer">
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
                                             <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>
@@ -761,7 +748,7 @@
                                     </div>
                                     <div class="product-item__footer">
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
                                             <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>
@@ -789,7 +776,7 @@
                                     </div>
                                     <div class="product-item__footer">
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
                                             <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>
@@ -817,7 +804,7 @@
                                     </div>
                                     <div class="product-item__footer">
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
                                             <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>
@@ -846,7 +833,7 @@
                                     </div>
                                     <div class="product-item__footer">
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
                                             <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                         </div>
                                     </div>

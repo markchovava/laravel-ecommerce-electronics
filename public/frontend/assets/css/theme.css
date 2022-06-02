@@ -6234,6 +6234,7 @@ input[type="button"].btn-block {
 
 .tab-content > .tab-pane {
   display: none;
+  /* display: block !important; */
 }
 
 .tab-content > .active {
@@ -33916,6 +33917,7 @@ blockquote:not(.blockquote) p {
 
 .product-item__footer {
   display: none;
+  /* display: block; */
 }
 
 @media (min-width: 1200px) {
@@ -33926,7 +33928,7 @@ blockquote:not(.blockquote) p {
     min-height: 100%;
     box-shadow: 0px 0px 6px 0px rgba(1, 1, 1, 0.3);
     background-color: #fff;
-    z-index: 1;
+    /* z-index: 1; */
   }
   .product-item:hover .product-item__footer {
     display: block;

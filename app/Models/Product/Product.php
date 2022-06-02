@@ -14,6 +14,9 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
+        'short_description',
+        'status',
+        'type',
         'SKU',
         'barcode',
         'qrcode',
@@ -60,8 +63,6 @@ class Product extends Model
             ]);
     }
 
-   
-
     public function product_metas()
     {
         return $this->hasOne(ProductMeta::class, 'product_id', 'id')
@@ -104,6 +105,10 @@ class Product extends Model
 
     public function product_images(){
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+
+    public function sales(){
+        return $this->belongsTo(Sales::class, 'product_id', 'id');
     }
 
 }

@@ -1,5 +1,4 @@
         <!-- JS Global Compulsory -->
-        <script src="{{ asset('frontend/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('frontend/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js') }}"></script>
         <script src="{{ asset('frontend/assets/vendor/popper.js/dist/umd/popper.min.js') }}"></script>
         <script src="{{ asset('frontend/assets/vendor/bootstrap/bootstrap.min.js') }}"></script> 
@@ -35,4 +34,8 @@
         <script src="{{ asset('frontend/assets/js/components/hs.go-to.js') }}"></script>
         <script src="{{ asset('frontend/assets/js/components/hs.selectpicker.js') }}"></script>
         <script src="{{ asset('frontend/assets/js/components/hs.scroll-nav.js') }}"></script>
+
+       <!--  owlcarousel -->
+        <script src="{{ asset('frontend/assets/vendor/owlcarousel/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('frontend/assets/custom/cart.custom.js') }}"></script>
 

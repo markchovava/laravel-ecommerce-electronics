@@ -7,6 +7,8 @@ use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\BrandController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductPageController;
 
 
 
@@ -23,6 +25,11 @@ use App\Http\Controllers\User\ProfileController;
 Route::get('/login', [ProfileController::class, 'login'])->name('login');
 Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
+
+
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
 
@@ -35,13 +42,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     });
 
     /* :::::: Users :::::: */
-    Route::get('/users', [UserController::class, 'index'])->name('admin.users');
-    Route::get('/users/add', [UserController::class, 'add'])->name('admin.users.add');
-    Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
-    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
-    Route::get('/users/view/{id}', [UserController::class, 'view'])->name('admin.users.view');
-    Route::post('/users/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
-    Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
+    Route::prefix('users')->group(function() {
+        Route::get('/', [UserController::class, 'index'])->name('admin.users');
+        Route::get('/add', [UserController::class, 'add'])->name('admin.users.add');
+        Route::post('/store', [UserController::class, 'store'])->name('admin.users.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::get('/view/{id}', [UserController::class, 'view'])->name('admin.users.view');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
+    });
 
     /* :::::: Products ::::: */
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
@@ -96,22 +105,17 @@ Route::get('/add', function(){
 Route::get('/show', function(){
     //$data['products']= \App\Models\Product\Product::with('users')->get();
     //$users = \App\Models\User::with('products')->get();
-    $data = \App\Models\Product\Variation::where('product_id', 1)->get();
-    return $data;
+   /*  $data = \App\Models\Product\Variation::where('product_id', 1)->get();
+    return $data; */
     //return $data['products'];
     //return view('frontend.test', $data);
-});
-
-
-
-
-
-Route::get('/signin', function () {
-    return view('auth.login1');
-});
-
-Route::get('/signup', function () {
-    return view('auth.register1');
+   /*  $category_products = \App\Models\Product\Product::whereHas('categories', function($query){
+        $query->where('name', 'latest'); //this refers id field from categories table
+    })
+    ->orderBy('id','desc')
+    ->get(); */
+    $data['trending_products'] = \App\Models\Product\Category::with('products')->where('slug', 'latest')->get();
+    return $data['trending_products'];
 });
 
 
@@ -120,9 +124,9 @@ Route::get('/signup', function () {
         START OF FRONTEND
 ::::::::::::::::::::::::::::::::::::::
 */
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('frontend.pages.index');
-});
+}); */
 
 Route::get('/single', function () {
     return view('frontend.pages.single');

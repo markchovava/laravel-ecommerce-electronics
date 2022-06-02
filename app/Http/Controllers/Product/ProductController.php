@@ -30,7 +30,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data['products'] = Product::with(['categories','brands','tags', 'users'])->get();
+        $data['products'] = Product::with(['categories','brands','tags', 'users'])->orderBy('updated_at','desc')->get();
         //return $data['products'];
         return view('backend.products.index', $data);
     }
@@ -60,17 +60,20 @@ class ProductController extends Controller
                     $product->image = $image_name;                    
                 }else{
                     $product_thumbnail->move($upload_location, $image_name);
-                    $product->image = $image_name;
+                    $product->product_thumbnail = $image_name;
                 }              
             }
             $product->name = $request->product_name;
             $product->description = $request->product_description;
+            $product->short_description = $request->product_short_description;
+            $product->type = $request->product_type;
             $product->status = $request->product_status;
             $product->sku = $request->sku;
             $product->barcode = $request->barcode;
             $product->serialnumber = $request->serialnumber;
             $product->qrcode = $request->qrcode;
             $product->price = $request->product_price;
+            $product->zwl_price = $request->zwl_product_price;
             $product->physical_delivery = $request->physical_delivery;
             $product->weight = $request->product_weight;
             $product->width = $request->product_width;
@@ -258,12 +261,15 @@ class ProductController extends Controller
             }
             $product->name = $request->product_name;
             $product->description = $request->product_description;
+            $product->short_description = $request->product_short_description;
+            $product->type = $request->product_type;
             $product->status = $request->product_status;
             $product->sku = $request->sku;
             $product->barcode = $request->barcode;
             $product->serialnumber = $request->serialnumber;
             $product->qrcode = $request->qrcode;
             $product->price = $request->product_price;
+            $product->zwl_price = $request->zwl_product_price;
             $product->physical_delivery = $request->physical_delivery;
             $product->weight = $request->product_weight;
             $product->width = $request->product_width;
@@ -329,18 +335,17 @@ class ProductController extends Controller
                 foreach($images as $image){
                     $product_images = new ProductImage();
                     $product_images->product_id = $product->id;
+
                     $image_extension = strtolower($image->getClientOriginalExtension());
                     $image_name = hexdec(uniqid()) . '.' . $image_extension;
-                    $upload_location = 'storage/products/images/';
-                    $image->move($upload_location, $image_name);
+                    $upload_location = 'storage/products/images/';    
                     if($product_images->image){
-                        unlink($upload_location . $product->image);
+                        unlink($upload_location . $product_images->image);
+                        $image->move($upload_location, $image_name);                     
+                    } else{
                         $image->move($upload_location, $image_name);
-                        $product_images->image = $image_name;                      
-                    }else{
-                        $image->move($upload_location, $image_name);
-                        $product_images->image = $image_name;  
-                    }         
+                        $product_images->image = $image_name;
+                    }          
                     $product_images->save();
                 }         
             }
@@ -365,22 +370,21 @@ class ProductController extends Controller
             $product_inventory->in_store_quantity = $request->in_store_quantity;
             $product_inventory->in_warehouse_quantity = $request->in_warehouse_quantity;
             $product_inventory->save();
-             /* Variations */ 
              
-             if(isset($request->variation_from_db_name)){
+            /* ::::: Variations ::::: */            
+             $variation_from_db = $request->variation_from_db;
+             if($variation_from_db){
                 $product_var = Variation::where('product_id', $product->id)->delete();
-                // $product_var = Variation::where('product_id', $product->id)->delete();
-                //dd($request->variation_from_db_name);
-                while(!empty($variation_from_db_name)){
+                foreach($variation_from_db as $_data){
                     $product_var = new Variation();
                     $product_var->product_id = $product->id;
-                    $product_var->name = $request->variation_from_db_name;
-                    $product_var->value = $request->variation_from_db_value;
+                    $product_var->name = $_data[0];
+                    $product_var->value = $_data[1];
                     $product_var->save();
-                }
+                }  
              }
              $variations = $request->variation__addOptions; // Is generated by formrepeater
-             if($variations[0][0] != NULL && $variations[0][1]){
+             if($variations[0][0] != NULL && $variations[0][1] != NULL){
                 // dd($variations);
                 foreach($variations as $variation => $_data){    
                     $product_variation = new Variation();

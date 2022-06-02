@@ -21,9 +21,14 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/vendor/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('frontend/assets/vendor/owlcarousel/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/vendor/owlcarousel/css/owl.theme.default.min.css') }}">
     <!-- CSS Electro Template -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/theme.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/custom/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/custom/custom.css') }}"> 
+
+    <!-- JS -->
+    <script src="{{ asset('frontend/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
 </head>
 
         

@@ -45,6 +45,21 @@
                             </li>
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <!-- Account Sidebar Toggle Button -->
+                                @if(Auth::check())
+                                <a id="sidebarNavToggler" href="{{ route('admin.products') }}" role="button" class="u-header-topbar__nav-link"
+                                    aria-controls="sidebarContent"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    data-unfold-event="click"
+                                    data-unfold-hide-on-scroll="false"
+                                    data-unfold-target="#sidebarContent"
+                                    data-unfold-type="css-animation"
+                                    data-unfold-animation-in="fadeInRight"
+                                    data-unfold-animation-out="fadeOutRight"
+                                    data-unfold-duration="500">
+                                    <i class="ec ec-user mr-1"></i>Go to Dashboard
+                                </a>
+                                @else
                                 <a id="sidebarNavToggler" href="{{ route('login') }}" role="button" class="u-header-topbar__nav-link"
                                     aria-controls="sidebarContent"
                                     aria-haspopup="true"
@@ -58,6 +73,7 @@
                                     data-unfold-duration="500">
                                     <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in
                                 </a>
+                                @endif
                                 <!-- End Account Sidebar Toggle Button -->
                             </li>
                         </ul>
@@ -858,8 +874,11 @@
                                 <li class="col pr-0">
                                     <a href="../shop/cart.html" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
-                                        <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">2</span>
-                                        <span class="font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
+                                        <span id="cart__quantity" 
+                                        class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">
+                                            0
+                                        </span>
+                                        <!-- <span class="font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span> -->
                                     </a>
                                 </li>
                             </ul>

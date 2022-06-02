@@ -103,6 +103,43 @@
 
         // initialization of select picker
         $.HSCore.components.HSSelectPicker.init('.js-select');
+
+
+        /* OWL CAROUSEL */
+        $(".trending__productsCarousel").owlCarousel({
+            loop:true,
+            margin:10,
+            /* nav:true, */
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+
+        $(".latest__productsCarousel").owlCarousel({
+            loop:true,
+            margin:10,
+            nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+
     });
 
 

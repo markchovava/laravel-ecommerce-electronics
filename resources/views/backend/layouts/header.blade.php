@@ -36,10 +36,12 @@
                             </span>
                         </div>
                         <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-                            <span class="menu-link py-3">
-                                <span class="menu-title">Our Site</span>
-                                <span class="menu-arrow d-lg-none"></span>
-                            </span>
+                            <a href="{{ url('/') }}">
+                                <span class="menu-link py-3">
+                                    <span class="menu-title">Our Site</span>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                </span>
+                            </a>
                         </div>
                         <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
                             <span class="menu-link py-3">

@@ -73,7 +73,7 @@
                                     <!--begin::Video-->
                                     <div class="mb-3">
                                         <img class="embed-responsive-item card-rounded h-275px w-100" 
-                                        src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" />
+                                        src="{{ ( !empty($product->product_thumbnail) ) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" />
                                     </div>
                                     <!--end::Video-->
                                     <!--begin::Body-->
@@ -82,7 +82,8 @@
                                             @foreach($product->product_images as $_data)
                                             <div class="col-md-6 my-3">
                                                 <div class="aspect__Ratio5x4">
-                                                    <img src="{{ (!empty($_data->image)) ? url('storage/products/images/' . $_data->image) : '' }}" alt="{{ $product->name }}" class="img__fullCover">
+                                                    <img 
+                                                    src="{{ (!empty($_data->image)) ? url('storage/products/images/' . $_data->image) : '' }}" alt="{{ $product->name }}" class="img__fullCover">
                                                 </div>
                                             </div>
                                             @endforeach
@@ -195,12 +196,34 @@
                                         <!--end::Text-->
                                     </div>
                                     <!--end::Body-->
+                                     <!--begin::Body-->
+                                     <div class="mb-6">
+                                        <!--begin::Text-->
+                                        <div class="fs-5 mt-4 text-gray-600 text-dark">
+                                            Type:&nbsp; 
+                                            <span class="fw-bold text-dark">{{ $product->type}}</span>
+                                        </div>
+                                        <!--end::Text-->
+                                    </div>
+                                    <!--end::Body-->
+                                     <!--begin::Body-->
+                                     <div class="mb-6">
+                                        <!--begin::Text-->
+                                        <div class="fs-5 mt-4 text-gray-600 text-dark">
+                                            Short Description:&nbsp; 
+                                            <span class="fw-bold text-dark">{{ $product->short_description}}</span>
+                                        </div>
+                                        <!--end::Text-->
+                                    </div>
+                                    <!--end::Body-->
                                     <!--begin::Body-->
                                     <div class="mb-6">
                                         <!--begin::Text-->
                                         <div class="fs-5 mt-4 text-gray-600 text-dark">
                                             Price:&nbsp; 
-                                            <span class="fw-bold text-dark">${{ number_format((float)$product->price, 2, '.', '') }}</span>
+                                            <span class="fw-bold text-dark">
+                                                ${{ number_format((float)$product->price, 2, '.', '') }}
+                                            </span>
                                         </div>
                                         <!--end::Text-->
                                     </div>

@@ -133,22 +133,16 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
-                            <select name="category_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_category_status_select">
+                            <select name="category_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="{{ $category->status }}" id="kt_ecommerce_add_category_status_select">
                                 <option></option>
-                                <option value="published" selected="selected">Published</option>
-                                <option value="scheduled">Scheduled</option>
-                                <option value="unpublished">Unpublished</option>
+                                <option value="Published" {{ ($category->status == "Published") ? "selected='selected'" : "" }}>Published</option>
+                                <option value="Scheduled" {{ ($category->status == "Scheduled") ? "selected='selected'" : "" }}>Scheduled</option>
+                                <option value="Draft" {{ ($category->status == "Draft") ? "selected='selected'" : "" }}>Draft</option>
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
                             <div class="text-muted fs-7">Set the category status.</div>
                             <!--end::Description-->
-                            <!--begin::Datepicker-->
-                            <div class="d-none mt-10">
-                                <label for="kt_ecommerce_add_category_status_datepicker" class="form-label">Select publishing date and time</label>
-                                <input class="form-control" id="kt_ecommerce_add_category_status_datepicker" placeholder="Pick date &amp; time" />
-                            </div>
-                            <!--end::Datepicker-->
                         </div>
                         <!--end::Card body-->
                     </div>
@@ -183,15 +177,28 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div>
+                            <div class="mb-10 fv-row">
                                 <!--begin::Label-->
                                 <label class="form-label">Description</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <textarea name="category_description" id="" cols="30" rows="10" class="form-control">{{ $category->description }}</textarea>
+                                <input type="text" name="category_description" class="form-control mb-2" placeholder="Add Description..." value="{{ $category->description }}" />
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Set a description to the category for better visibility.</div>
+                                <!--end::Description-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10 fv-row">
+                                <!--begin::Label-->
+                                <label class="required form-label">Category Slug</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <input type="text" name="category_slug" class="form-control mb-2" placeholder="category-one" value="{{ $category->slug }}" />
+                                <!--end::Input-->
+                                <!--begin::Description-->
+                                <div class="text-muted fs-7">A category name is required and recommended to be unique.</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Input group-->
