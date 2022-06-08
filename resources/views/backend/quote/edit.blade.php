@@ -256,18 +256,19 @@
                                                 @foreach($quote_items as $quote_item)
                                                 <tr id="product__item" class="product__item border-bottom border-bottom-dashed">
                                                     <td class="pe-7">
-                                                        <input name="product_name[]" type="text" value="{{ $quote_item->description }}" class="product__name form-control form-control-solid mb-2" placeholder="Item name">
+                                                        <input type="text" name="product_name[]" value="{{ $quote_item->product_name }}" class="product__name form-control form-control-solid mb-2" placeholder="Item name">
                                                         <textarea class="product__descriptionInsert form-control form-control-solid" placeholder="Description" cols="30" rows="2" name="description[]">{{ $quote_item->description }}</textarea>
                                                     </td>
                                                     <td class="ps-0">
-                                                        <input type="number" name="quantity[]" value="{{ $quote_item->quantity }}" number="" class="product__quantityInsert form-control form-control-solid" min="0" placeholder="0" >
+                                                        <input type="number" name="quantity[]" value="{{ $quote_item->quantity }}"  number="" class="product__quantityInsert form-control form-control-solid" min="0" placeholder="0">
                                                     </td>
                                                     <td>
-                                                        <input type="number" value="{{ $quote_item->price_cents / 100 }}" number="" class="product__priceInsert form-control form-control-solid" min="0" placeholder="0" name="price_cents[]">
+                                                        <input type="number" number="" value="{{ $quote_item->price_cents / 100 }}" class="product__priceInsert form-control form-control-solid" min="0" placeholder="0">
+                                                        <input type="hidden" number="" value="{{ $quote_item->price_cents }}" class="product__priceInsert_cents form-control form-control-solid" min="0" placeholder="0" name="price_cents[]">
                                                     </td>
                                                     <td class="pt-8 text-end text-nowrap">
-                                                        $<span class="product__insertSum">{{ $quote_item->product_total_cents / 100 }}</span>
-                                                        <input type="hidden" value="{{ $quote_item->product_total_cents }}" name="product_total_cents[]" class="product__sum">        
+                                                        $<span class="product__insertSum">{{ $quote_item->total_cents / 100 }}</span>
+                                                        <input type="hidden" value="{{ $quote_item->total_cents }}" name="product_total_cents[]" class="product__sum">        
                                                     </td>
                                                     <td class="pt-5 text-end">
                                                         <button type="button" class="remove__productItem btn btn-sm btn-icon btn-active-color-primary">
@@ -296,15 +297,15 @@
                                                         <div class="d-flex flex-column align-items-start">
                                                             <div class="fs-5">Subtotal</div>
                                                             <div class="btn btn-link py-1" data-bs-toggle="tooltip">Tax (%)</div>
-                                                            <input type="text" name="quote_tax" value="{{ $quote->quote_tax }}" class="quote__tax form-control form-control-solid" id="">
+                                                            <input type="text" name="quote_tax" value="{{ $quote->tax }}" class="quote__tax form-control form-control-solid" id="">
                                                             <div class="btn btn-link py-1" data-bs-toggle="tooltip">Discount</div>
-                                                            <input type="text" name="quote_discount" value="{{ $quote->quote_discount }}" class="quote__discount form-control form-control-solid" id="">
+                                                            <input type="text" name="quote_discount" value="{{ $quote->discount }}" class="quote__discount form-control form-control-solid" id="">
                                                         </div>
                                                     </th>
                                                     <th colspan="2" class="border-bottom border-bottom-dashed text-end">
                                                         <span>
-                                                            $&nbsp;<input name="quote_subtotal" type="text" value="{{ $quote->quote_subtotal_cents / 100 }}" class="sub__total form-controll">
-                                                            <input name="quote_subtotal_cents" type="hidden" value="{{ $quote->quote_subtotal_cents }}" class="sub__totalCents form-controll">
+                                                            $&nbsp;<input name="quote_subtotal" type="text" value="{{ $quote->subtotal_cents / 100 }}" class="sub__total form-controll">
+                                                            <input name="quote_subtotal_cents" type="hidden" value="{{ $quote->subtotal_cents }}" class="sub__totalCents form-controll">
                                                         </span>
                                                     </th>
                                                 </tr>
@@ -326,7 +327,7 @@
                                     <!--begin::Notes-->
                                     <div class="mb-4">
                                         <label class="form-label fs-6 fw-bolder text-gray-700">Notes</label>
-                                        <textarea name="quote_notes" class="form-control form-control-solid" rows="3" placeholder="Thanks for your business"></textarea>
+                                        <textarea name="quote_notes" class="form-control form-control-solid" rows="3" placeholder="Thanks for your business">{{ $quote->notes }}</textarea>
                                     </div>
                                     <!--end::Notes-->
                                     <div class="d-flex justify-content-end">

@@ -7,22 +7,7 @@
   <script type="text/javascript" src="{{ asset('backend/assets/custom/jspdf/jspdf.umd.min.js') }}"></script>
   <script type="text/javascript" src="{{ asset('backend/assets/custom/jspdf/basic.js') }}"></script>
 <script>
-    var doc = new jsPDF();
-    var specialElementHandlers = {
-        '#editor': function (element, renderer) {
-            return true;
-        }
-    };
-
-    $('#generate__pdf').click(function () {   
-        doc.fromHTML($('#quotation__area').html(), 15, 15, {
-            'width': 170,
-                'elementHandlers': specialElementHandlers
-        });
-        doc.save('sample-file.pdf');
-    });
-
-
+   
 
 </script>
 
@@ -89,6 +74,8 @@
                 <div class="card-body py-20">
                     <!-- begin::Wrapper-->
                     <div class="mw-lg-950px mx-auto w-100">
+
+
                         <section id="quotation__area">
                             <!-- begin::Header-->
                             <div class="d-flex justify-content-between flex-column flex-sm-row mb-19">
@@ -197,23 +184,23 @@
                                                     <!--begin::Subtotal-->
                                                     <tr>
                                                         <td colspan="3" class="text-end">Subtotal</td>
-                                                        <td class="text-end">{{ $quote->subtotal_cents / 100 }}</td>
+                                                        <td class="text-end">${{ $quote->subtotal_cents / 100 }}</td>
                                                     </tr>
                                                     <!--end::Subtotal-->
                                                     <!--begin::VAT-->
                                                     <tr>
                                                         <td colspan="3" class="text-end">VAT (0%)</td>
-                                                        <td class="text-end">{{ $quote->tax }}</td>
+                                                        <td class="text-end">{{ $quote->tax }}%</td>
                                                     </tr>
                                                     <!--end::VAT-->
                                                     <tr>
                                                         <td colspan="3" class="text-end">Discount (0%)</td>
-                                                        <td class="text-end">{{ $quote->discount }}</td>
+                                                        <td class="text-end">{{ $quote->discount }}%</td>
                                                     </tr>
                                                     <!--begin::Grand total-->
                                                     <tr>
                                                         <td colspan="3" class="fs-3 text-dark fw-bolder text-end">Grand Total</td>
-                                                        <td class="text-dark fs-3 fw-boldest text-end">{{ $quote->grandtotal_cents / 100}}</td>
+                                                        <td class="text-dark fs-3 fw-boldest text-end">${{ $quote->grandtotal_cents / 100}}</td>
                                                     </tr>
                                                     <!--end::Grand total-->
                                                 </tbody>
@@ -236,7 +223,7 @@
                                 <button type="button" class="btn btn-success my-1 me-12" onclick="window.print();">Print Quotation</button>
                                 <!-- end::Pint-->
                                 <!-- begin::Download-->
-                                <button type="button" id="generate__pdf" class="btn btn-light-success my-1">Generate PDF</button>
+                                <a href="#" id="generate__pdf" class="btn btn-light-success my-1">Generate PDF</a>
                                 <!-- end::Download-->
                             </div>
                             <!-- end::Actions-->

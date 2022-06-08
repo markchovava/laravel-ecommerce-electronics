@@ -143,7 +143,7 @@ $(document).on('click', '.remove__productItem', function(e){
                         for(var i = 0; i< res.product.length; i++){
                             $.each(res, function () {
                                 product__results
-                                .append('<li price="' + res.product[i].price + '" id="' + res.product[i].id + '">' + res.product[i].name + '</li>');
+                                .append('<li price="' + (res.product[i].price / 100) + '" id="' + res.product[i].id + '">' + res.product[i].name + '</li>');
                             });
                         }
                     } else{
