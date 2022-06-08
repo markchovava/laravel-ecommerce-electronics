@@ -200,11 +200,11 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ url('/admin/category/add') }}">
+                            <a class="menu-link" href="{{ route('admin.category') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Add Add Category</span>
+                                <span class="menu-title">Add Category</span>
                             </a>
                         </div>
                     </div>
@@ -288,7 +288,7 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ url('/admin/qoute/view')}}">
+                            <a class="menu-link" href="{{ route('admin.quote') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -296,19 +296,11 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ url('/admin/qoute/add')}}">
+                            <a class="menu-link" href="{{ route('admin.quote.add') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Add Qoutations</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="../../demo1/dist/widgets/charts.html">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Edit Qoutation</span>
                             </a>
                         </div>
                     </div>

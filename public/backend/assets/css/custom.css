@@ -13,3 +13,51 @@
     height: 100%;
     object-fit: cover;
 }
+
+
+/* ::::::::::::::::: Search ::::::::::::::::::: */
+.product__search{
+    position: relative;
+}
+
+.product__search .product__results{
+    position: absolute;
+    display: none;
+    top: 45px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0;
+    margin: 0; 
+    border-radius: 5px; 
+    background-color: rgb(247, 247, 247);
+    padding: 0.5rem 1rem;
+    transition: all .3s ease;
+}
+
+.product__search .input-group input:focus + .product__search .product__results{
+    display: block;
+}
+
+.product__results li { 
+    display: block;  
+    margin-bottom: 0.3rem;
+}
+
+.display__block{
+    display: block !important;
+}
+
+.display__none{
+    display: none !important;
+}
+
+
+.grand__total{
+    padding:0.5rem 0.5rem;
+    font-weight: bold;
+}
+
+.grand__totalText{
+    cursor: pointer;
+}

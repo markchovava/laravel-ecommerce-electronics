@@ -9,6 +9,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductPageController;
+use App\Http\Controllers\Quote\QuoteController;
 
 
 
@@ -33,6 +34,7 @@ Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('produ
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
 
+    /* :::::: Account Profile :::::: */
     Route::prefix('profile')->group(function() {
         Route::get('/view', [ProfileController::class, 'view'])->name('profile.view');
         Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -76,6 +78,17 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
     Route::post('/brands/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
     Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
+
+    Route::prefix('quote')->group(function() {
+        Route::get('/', [QuoteController::class, 'index'])->name('admin.quote');
+        Route::get('/add', [QuoteController::class, 'add'])->name('admin.quote.add');
+        Route::get('/view/{id}', [QuoteController::class, 'view'])->name('admin.quote.view');
+        Route::post('/store', [QuoteController::class, 'store'])->name('admin.quote.store');
+        Route::get('/edit/{id}', [QuoteController::class, 'edit'])->name('admin.quote.edit');
+        Route::post('/update/{id}', [QuoteController::class, 'update'])->name('admin.quote.update');
+        Route::get('/search', [QuoteController::class, 'search'])->name('admin.quote.search');
+        Route::get('/delete/{id}', [QuoteController::class, 'delete'])->name('admin.quote.delete');
+    });
 });
 
 

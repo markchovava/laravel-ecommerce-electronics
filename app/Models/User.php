@@ -50,6 +50,10 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function quotes(){
+        return $this->hasMany(Quote::class, 'user_id', 'id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

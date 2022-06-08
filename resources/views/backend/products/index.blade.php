@@ -169,7 +169,7 @@
                                 <!--begin::Rating-->
                                     <td class="text-end pe-0" data-order="categories">
                                         @foreach($product->categories as $_data)
-                                        <a href="" class="text-gray-800 text-hover-primary fs-5">
+                                        <a href="{{ route('admin.products.view', $product->id) }}" class="text-gray-800 text-hover-primary fs-5">
                                             {{ $_data->name }},&nbsp;
                                         </a>
                                         @endforeach

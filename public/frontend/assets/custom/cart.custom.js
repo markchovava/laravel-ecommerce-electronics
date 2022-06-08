@@ -29,8 +29,8 @@ $(document).ready(function(){
                 product_name: product_name,
                 _token: '{{ csrf_token() }}'
             },
-            success: function(res){
-                console.log(res.product.name)
+            success: function(result){
+                console.log(result.product.name)
                 let name = res.product.name;
                 let price = res.product.price;
                 let div = $('#alert');
@@ -51,4 +51,6 @@ $(document).ready(function(){
         var cart = cart_value + i;
         $('#cart__quantity').text(cart);
     })
+
+   
 });
