@@ -229,8 +229,8 @@
                                                         <input type="number" number class="product__quantityInsert form-control form-control-solid" min="0" placeholder="0" />
                                                     </td>
                                                     <td>
-                                                        <input type="number" number="" class="product__priceInsert form-control form-control-solid" min="0" placeholder="0">
-                                                        <input type="hidden" number="" class="product__priceInsert_cents form-control form-control-solid" min="0" placeholder="0" >
+                                                        <input type="number" number class="product__priceInsert form-control form-control-solid" min="0" placeholder="0">
+                                                        <input type="hidden" number class="product__priceInsert_cents form-control form-control-solid" min="0" placeholder="0" >
                                                     </td>
                                                     <td class="pt-8 text-end text-nowrap">
                                                         $<span class="product__insertSum">0.00</span>

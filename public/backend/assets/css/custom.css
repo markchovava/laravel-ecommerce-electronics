@@ -61,3 +61,8 @@
 .grand__totalText{
     cursor: pointer;
 }
+
+#quotation__area{
+    width: 1200px; 
+    height: auto;
+}

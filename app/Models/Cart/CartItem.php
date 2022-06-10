@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Cart;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +12,9 @@ class CartItem extends Model
     public $fillable = [
         'product_id',
         'cart_id',
-        'quantity'
+        'quantity',
+        'variation_name',
+        'variation_value'
     ];
 
     public function carts(){

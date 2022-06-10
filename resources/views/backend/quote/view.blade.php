@@ -2,15 +2,6 @@
 
 @section('backend')
 
-<script type="text/javascript" src="{{ asset('backend/assets/custom/jquery-1.7.1.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('backend/assets/custom/jquery-ui-1.8.17.custom.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('backend/assets/custom/jspdf/jspdf.umd.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('backend/assets/custom/jspdf/basic.js') }}"></script>
-<script>
-   
-
-</script>
-
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
@@ -73,10 +64,8 @@
                 <!-- begin::Body-->
                 <div class="card-body py-20">
                     <!-- begin::Wrapper-->
-                    <div class="mw-lg-950px mx-auto w-100">
-
-
-                        <section id="quotation__area">
+                    <div id="quotation__area" class="mw-lg-950px mx-auto w-100">
+                        <section>
                             <!-- begin::Header-->
                             <div class="d-flex justify-content-between flex-column flex-sm-row mb-19">
                                 <h4 class="fw-boldest text-gray-800 fs-2qx pe-5 pb-7">Quotation</h4>
@@ -214,7 +203,8 @@
                             </div>
                             <!--end::Body-->
                         </section>
-                        
+                    </div>
+                    <!-- end::Wrapper-->
                         <!-- begin::Footer-->
                         <div class="d-flex flex-stack flex-wrap mt-lg-20 pt-13">
                             <!-- begin::Actions-->
@@ -223,17 +213,15 @@
                                 <button type="button" class="btn btn-success my-1 me-12" onclick="window.print();">Print Quotation</button>
                                 <!-- end::Pint-->
                                 <!-- begin::Download-->
-                                <a href="#" id="generate__pdf" class="btn btn-light-success my-1">Generate PDF</a>
+                                <a href="{{ route('admin.quote.pdf', $quote->id) }}" class="btn btn-light-success my-1">Generate PDF</a>
                                 <!-- end::Download-->
                             </div>
                             <!-- end::Actions-->
                             <!-- begin::Action-->
-                            <a href="{{ route('admin.quote') }}" class="btn btn-primary my-1">Create Quotation</a>
+                            <a href="{{ route('admin.quote') }}" class="btn btn-primary my-1">View Quotations</a>
                             <!-- end::Action-->
                         </div>
                         <!-- end::Footer-->
-                    </div>
-                    <!-- end::Wrapper-->
                 </div>
                 <!-- end::Body-->
             </div>
@@ -244,6 +232,7 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
+
 
 
 

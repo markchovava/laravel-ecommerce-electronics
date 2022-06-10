@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id');
-            $table->bigInteger('cart_id');
-            $table->bigInteger('quantity');
+            $table->bigInteger('product_id')->nullable();
+            $table->bigInteger('cart_id')->nullable();
+            $table->bigInteger('quantity')->nullable();
+            $table->string('variation_name')->nullable();
+            $table->string('variation_value')->nullable();
             $table->timestamps();
         });
     }

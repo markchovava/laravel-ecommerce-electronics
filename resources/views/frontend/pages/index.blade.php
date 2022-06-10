@@ -820,11 +820,14 @@
                                                 <div class="flex-center-between my-3">
                                                     <div class="prodcut-price">
                                                         <div class="text-gray-100">
-                                                        $<span class="price__number">{{ number_format((float)$product->price, 2, '.', '') }}</span>
+                                                        @php
+                                                            $price = $product->price / 100;
+                                                        @endphp
+                                                        $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="d-none d-xl-block prodcut-add-cart">
-                                                        <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                        <a href="{{ route('cart.add') }}" id="{{ $product->id }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="border-top pt-2 flex-center-between flex-wrap">

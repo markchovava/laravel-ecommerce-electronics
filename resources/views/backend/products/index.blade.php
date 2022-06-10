@@ -140,7 +140,7 @@
                                         <!--end::Thumbnail-->
                                         <div class="ms-5">
                                             <!--begin::Title-->
-                                            <a href="" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="{{ $product->name }}">
+                                            <a href="{{ route('admin.products.view', $product->id) }}" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="{{ $product->name }}">
                                                 {{ $product->name }}
                                             </a>
                                             <!--end::Title-->
@@ -169,9 +169,9 @@
                                 <!--begin::Rating-->
                                     <td class="text-end pe-0" data-order="categories">
                                         @foreach($product->categories as $_data)
-                                        <a href="{{ route('admin.products.view', $product->id) }}" class="text-gray-800 text-hover-primary fs-5">
+                                       
                                             {{ $_data->name }},&nbsp;
-                                        </a>
+                                        
                                         @endforeach
                                     </td>  
                                 <!--end::Rating-->

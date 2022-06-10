@@ -1,5 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Cookie;
+use Symfony\Component\HttpFoundation\Cookie;
+use Illuminate\Http\Response;
+
 use App\Models\Product\Product;
 
 use App\Http\Controllers\Product\ProductController;
@@ -10,6 +14,8 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductPageController;
 use App\Http\Controllers\Quote\QuoteController;
+use App\Http\Controllers\Frontend\Cart\CartController;
+use App\Http\Controllers\PDF\PDFController;
 
 
 
@@ -28,6 +34,8 @@ Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
+
+Route::get('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
 
 
@@ -88,51 +96,78 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::post('/update/{id}', [QuoteController::class, 'update'])->name('admin.quote.update');
         Route::get('/search', [QuoteController::class, 'search'])->name('admin.quote.search');
         Route::get('/delete/{id}', [QuoteController::class, 'delete'])->name('admin.quote.delete');
+        Route::get('pdf/{id}', [PDFController::class, 'pdf'])->name('admin.quote.pdf');
     });
 });
 
 
+function RandomString($length) {
+    $keys = array_merge(range(0,9), range('a', 'z'));
+
+    $key = "";
+    for($i=0; $i < $length; $i++) {
+        $key .= $keys[mt_rand(0, count($keys) - 1)];
+    }
+    return $key;
+}
 
 
 
 
 Route::get('/add', function(){
+    $shopping_session = RandomString(30);
+    // $add = new \App\Models\Cart\Cart ();
+    /* $add->create([
+        'shopping_session'=> $shopping_session,
+        'total' => 1200
+    ]); */
+    // setcookie('session_id', $shopping_session, time() + (86400 * 7), "/");
+    // $session_id = session()->getId(); // Create Session
+    // $session_id = session()->flush(); // Delete Dession
+    // setcookie('session_id', $shopping_session, time() + (86400 * 7), "/");
+    // dd($shopping_session);
+    $product_id = 4;
+    $cart_item = \App\Models\Cart\CartItem::where('product_id', $product_id)->first();
+    if(!empty($cart_item)){
+        $cart_item->quantity++;
+        $cart_item->save();
+    }
+    else{
+        $cart_item = new \App\Models\Cart\CartItem();
+        $cart_item->product_id = $product_id;
+        $cart_item->quantity = 1;	
+       /*  $cart_item->variation_name = "Color";	
+        $cart_item->variation_value = "Red"; */
+        $cart_item->save();
 
-    $product = \App\Models\Product\Product::find(1);
-    $product->discounts()->create([
-        'discount_percent' => 10,
-    ]);
-
-    $product = \App\Models\Product\Product::find(2);
-    $product->discounts()->create([
-        'discount_percent' => 25,
-    ]);
-    $product = \App\Models\Product\Product::find(3);
-    $product->discounts()->create([
-        'discount_percent' => 33,
-    ]);
+    }
+    
       
 });
 
 
 Route::get('/show', function(){
-    //$data['products']= \App\Models\Product\Product::with('users')->get();
-    //$users = \App\Models\User::with('products')->get();
-   /*  $data = \App\Models\Product\Variation::where('product_id', 1)->get();
-    return $data; */
-    //return $data['products'];
-    //return view('frontend.test', $data);
-   /*  $category_products = \App\Models\Product\Product::whereHas('categories', function($query){
-        $query->where('name', 'latest'); //this refers id field from categories table
-    })
-    ->orderBy('id','desc')
-    ->get(); */
-    $data['trending_products'] = \App\Models\Product\Category::with('products')->where('slug', 'latest')->get();
-    return $data['trending_products'];
+    if(isset($_COOKIE['session_id'])){
+        /* unset($_COOKIE['session_id']);
+        setcookie('session_id', '', time() - 3600, '/'); */
+        $cookie = htmlspecialchars($_COOKIE['session_id']); 
+        $shop_check = \App\Models\Cart\Cart::where('shopping_session', 'LIKE', '%' . $cookie . '%')->first();
+       if(!empty($shop_check)){
+            return $cookie . " === " . $shop_check->shopping_session . ", Total is: " . ($shop_check->total / 100);
+       }
+       
+    } else{
+        dd('Cookie not set');
+    }
+    /* unset($_COOKIE['session_id']);
+    setcookie('session_id', '', time() - 3600, '/'); */
+    //$cookie = htmlspecialchars($_COOKIE['session_id']); 
+    // return $cookie;
+    //dd($cookie);
 });
 
 
-/* 
+/*
 ::::::::::::::::::::::::::::::::::::::
         START OF FRONTEND
 ::::::::::::::::::::::::::::::::::::::
