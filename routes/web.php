@@ -35,7 +35,7 @@ Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
 
-Route::get('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
 
 
@@ -101,21 +101,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
 });
 
 
-function RandomString($length) {
-    $keys = array_merge(range(0,9), range('a', 'z'));
-
-    $key = "";
-    for($i=0; $i < $length; $i++) {
-        $key .= $keys[mt_rand(0, count($keys) - 1)];
-    }
-    return $key;
-}
-
-
 
 
 Route::get('/add', function(){
-    $shopping_session = RandomString(30);
+    //$shopping_session = RandomString(30);
     // $add = new \App\Models\Cart\Cart ();
     /* $add->create([
         'shopping_session'=> $shopping_session,
@@ -147,18 +136,25 @@ Route::get('/add', function(){
 
 
 Route::get('/show', function(){
-    if(isset($_COOKIE['session_id'])){
+    //$cookie = $_COOKIE['shopping_session'];
+    /* foreach($_COOKIE as $ck){
+        $a[] = $ck . ' ======= ';
+    }
+
+    dd($a); */
+    /* unset($cookie);
+    setcookie('shopping_session', '', time() - 3600, '/'); */
+    //if(isset($_COOKIE['session_id'])){
         /* unset($_COOKIE['session_id']);
         setcookie('session_id', '', time() - 3600, '/'); */
-        $cookie = htmlspecialchars($_COOKIE['session_id']); 
+        /* $cookie = htmlspecialchars($_COOKIE['session_id']); 
         $shop_check = \App\Models\Cart\Cart::where('shopping_session', 'LIKE', '%' . $cookie . '%')->first();
        if(!empty($shop_check)){
             return $cookie . " === " . $shop_check->shopping_session . ", Total is: " . ($shop_check->total / 100);
-       }
-       
+       }    
     } else{
         dd('Cookie not set');
-    }
+    } */
     /* unset($_COOKIE['session_id']);
     setcookie('session_id', '', time() - 3600, '/'); */
     //$cookie = htmlspecialchars($_COOKIE['session_id']); 

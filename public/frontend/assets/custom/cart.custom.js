@@ -1,42 +1,35 @@
 $(document).ready(function(){
     /* INDEX PAGE */
-    var i = 1;
-    $(document).on('click', '.btn-add-cart', function(e){  
+    $(document).on('click', '.add__toCartBtn', function(e){  
         e.preventDefault();
-        var product_price = $(this).parent().siblings('.prodcut-price').find('.price__number').text();
-        var price_number = parseFloat(product_price);
-        //alert(price_number);
-        //$('#cart__quantity').text(i);
-        //var a = $('#cart__quantity').text();
-        var cart_value = parseFloat($('#cart__quantity').text());
-        var cart = cart_value + i;
-        $('#cart__quantity').text(cart);
+        let csrf_token = $('#csrf__token').val();
+        let product_price = $(this).parent().siblings('.prodcut-price').find('.price__number').text();
+        let price_cents = $(this).parent().siblings('.prodcut-price').find('.price__cents').val();
+        let cart_add = $(this).attr('href');
+        let product_id = $(this).attr('id');
+        let price_centsNumber = Number(price_cents);
+        let product_idNumber = Number(product_id);
+     
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        });
-
+        }); 
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('cart/add') }}",
+            url: cart_add,
             method: "POST",
-            dataType: 'json',
+            dataType: "json",
             data: {
-                price_number: product_price,
-                product_name: product_name,
-                _token: '{{ csrf_token() }}'
+                price_cents: price_centsNumber,
+                product_id: product_idNumber,
+                _token: csrf_token
             },
             success: function(result){
-                console.log(result.product.name)
-                let name = res.product.name;
-                let price = res.product.price;
-                let div = $('#alert');
-                let y = "<div>" + name + " :::: " + price + "</div";
-                //let a = $('#alert').html(name + " :::: " + price)
-                 div.append(y);
+                console.log(result)
+                
             }
         });
     });
