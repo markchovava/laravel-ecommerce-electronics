@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('shopping_session')->nullable();
             $table->bigInteger('customer_id')->nullable();
+            $table->integer('shipping_fee')->nullable();
+            $table->integer('cart_subtotal')->nullable();
             $table->integer('total')->nullable();
             $table->timestamps();
         });

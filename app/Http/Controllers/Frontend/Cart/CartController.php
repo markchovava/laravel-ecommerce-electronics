@@ -13,6 +13,7 @@ use App\Models\Product\Product;
 
 class CartController extends Controller
 {
+
     public function randomString($length) {
         $keys = array_merge(range(0,9), range('a', 'z'));
         $key = "";
@@ -42,7 +43,6 @@ class CartController extends Controller
                 $cart_item->variation_value = $request->variation_value;
             }
             $cart_item->save();
-            $a = 'Not set';
         }
         elseif( isset($_COOKIE['shopping_session']) ){
             $shopping_session = $_COOKIE['shopping_session'];
@@ -56,6 +56,21 @@ class CartController extends Controller
                     $cart->total = $db_total + $request->price_cents;
                 }
                 if(empty($cart->total)){
+                    $cart->total = $request->price_cents;
+                }
+                $cart->save();
+            } 
+            elseif( empty($cart) ){
+                $cart = new Cart();
+                $cart->shopping_session = $_COOKIE['shopping_session'];
+                if(auth()->check()){
+                    $cart->customer_id = Auth::id();
+                }
+                if( !empty($cart->total) ){ 
+                    $db_total = $cart->total;
+                    $cart->total = $db_total + $request->price_cents;
+                }
+                if( empty($cart->total) ){
                     $cart->total = $request->price_cents;
                 }
                 $cart->save();
@@ -86,16 +101,86 @@ class CartController extends Controller
         
         } else{
             return false;
-        } 
-
-        $notification = [
-            'message' => $request->price_cents,
-            'alert-type' => 'success'
-        ];
-
-        return response()->json($a . " : " .$request->price_cents  . ' : ' . $request->product_id);
-        //return redirect()->route('admin.products')->with($notification);
+        }
+        return redirect()->route('cart.view');      
     }
 
-    
+    public function store(Request $request){
+        if( !(Auth::check()) ){
+            return redirect()->route('login');
+        }
+        else{
+            if( isset($_COOKIE['shopping_session']) ){
+                $shopping_session = $_COOKIE['shopping_session'];
+                $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+                $data['cart']->customer_id = Auth::id();
+                $data['cart']->shipping_fee = $request->shipping_feeCents;
+                $data['cart']->cart_subtotal = $request->cart_subtotalCents;
+                $data['cart']->total = $request->cart_totalCents;
+                $data['cart']->save();
+                $cart_id = $data['cart']->id;
+                $old_cart_items = CartItem::where('cart_id', $cart_id)->delete();
+                $product_id = $request->product_id;
+                if($product_id){
+                    $count_id = count($request->product_id);
+                    for($i = 0; $i < $count_id; $i++){
+                        $cart_items = new CartItem();
+                        $cart_items->cart_id = $cart_id;
+                        $cart_items->quantity = $request->product_quantity[$i];
+                        //dd($cart_items->quantity);
+                        $cart_items->product_id = $request->product_id[$i];
+                        if($request->variation_name != '' && $request->variation_value != ''){
+                            $cart_items->variation_name = $request->variation_name[$i];
+                            $cart_items->variation_value = $request->variation_value[$i];
+                        }
+                        $cart_items->save();
+                    }
+                    return redirect()->route('checkout'); 
+                }
+            }
+            elseif( !(isset($_COOKIE['shopping_session'])) ){
+                $notification = [
+                    'message' => 'You need Products in the Cart to Proceed to Checkout.',
+                    'alert-type' => 'danger'
+                ];
+                return redirect()->route('index')->with($notification);
+            }
+        }
+    }
+
+    public function view(){
+        if( isset($_COOKIE['shopping_session']) ){
+            $shopping_session = $_COOKIE['shopping_session'];
+            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+            if(!empty($data['cart'])){
+                $data['quantity'] = $data['cart']->cart_items->sum('quantity');
+            }      
+        }
+        elseif( !(isset($_COOKIE['shopping_session'])) ){
+            $data['cart'] = NULL;
+            $data['quantity'] = 0;
+        }
+        return response()->json($data);
+    }
+
+    public function index(){
+        if( isset($_COOKIE['shopping_session']) ){
+            $shopping_session = $_COOKIE['shopping_session'];
+            $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+            if( !empty($data['carts']) ){
+                $data['quantity'] = $data['carts']->cart_items->sum('quantity');
+            } 
+            $cart_id =  $data['carts']->id;
+            $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
+            // dd($data['cart_items']);
+            return view('frontend.pages.cart', $data);
+        } 
+            return redirect()->back();     
+    }
+
+    public function delete($id){
+        $data['cart_item'] = CartItem::find($id);
+        $data['cart_item']->delete();
+        return response()->json('Deleted Successfully!...');
+    }
 }

@@ -20,10 +20,24 @@ use App\Models\Product\CategoryProduct;
 use App\Models\Product\Discount;
 use App\Models\Product\Inventory;
 use App\Models\Product\Variation;
+use App\Models\Cart\Cart;
+use App\Models\Cart\CartItem;
 
 class ProductPageController extends Controller
 {
     public function view($id){
+        if( isset($_COOKIE['shopping_session']) ){
+            $shopping_session = $_COOKIE['shopping_session'];
+            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+            if( !empty($data['cart']) ){
+                $data['quantity'] = $data['cart']->cart_items->sum('quantity');
+            } 
+        }
+        elseif( !(isset($_COOKIE['shopping_session'])) ){
+            $data['cart'] = NULL;
+            $data['quantity'] = 10;
+        }
+
         $data['categories'] = Category::all();
         $data['tags'] = Tag::all();
         $data['brands'] = Brand::all();

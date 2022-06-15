@@ -20,11 +20,26 @@ use App\Models\Product\CategoryProduct;
 use App\Models\Product\Discount;
 use App\Models\Product\Inventory;
 use App\Models\Product\Variation;
+use App\Models\Cart\Cart;
+use App\Models\Cart\CartItem;
 
 class HomeController extends Controller
 {
+
     public function index()
     {
+        if( isset($_COOKIE['shopping_session']) ){
+            $shopping_session = $_COOKIE['shopping_session'];
+            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+            if( !empty($data['cart']) ){
+                $data['quantity'] = $data['cart']->cart_items->sum('quantity');
+            } 
+        }
+        elseif( !(isset($_COOKIE['shopping_session'])) ){
+            $data['cart'] = NULL;
+            $data['quantity'] = 10;
+        }
+
         $data['latest_products'] = Product::whereHas('categories', function($query){
             $query->where('slug', 'latest'); //this refers id field from categories table
         })

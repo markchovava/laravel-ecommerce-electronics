@@ -49,14 +49,20 @@
                                 <!--begin::Col-->
 								<div class="col-xl-12">
 									<label class="form-label fw-bolder text-dark fs-6">User Name</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="name" autocomplete="off" />
+									<input name="name" type="text" class="form-control form-control-lg form-control-solid" placeholder="" autocomplete="off" />
+									@error('name')
+										<span class="text-danger">{{ $message }}</span>
+									@enderror
 								</div>
 								<!--end::Col-->
 							</div>
 							<!--begin::Input group-->
 							<div class="fv-row mb-7">
 								<label class="form-label fw-bolder text-dark fs-6">Email</label>
-								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+								<input name="email" type="email" class="form-control form-control-lg form-control-solid" required placeholder="" autocomplete="off" />
+								@error('email')
+									<span class="text-danger">{{ $message }}</span>
+								@enderror
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
@@ -68,10 +74,13 @@
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="position-relative mb-3">
-										<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off" />
+										<input name="password" class="form-control form-control-lg form-control-solid" type="password" placeholder="" required autocomplete="off" />
+										@error('password')
+											<span class="text-danger">{{ $message }}</span>
+										@enderror
 									</div>
 									<!--end::Input wrapper-->
-		
+
 								</div>
 								<!--end::Wrapper-->
 								<!--begin::Hint-->
@@ -82,7 +91,10 @@
 							<!--begin::Input group-->
 							<div class="fv-row mb-5">
 								<label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
-								<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password_confirmation" autocomplete="off" />
+								<input name="password_confirmation" required class="form-control form-control-lg form-control-solid" type="password" placeholder="" autocomplete="off" />
+								@error('password_confirmation')
+									<span class="text-danger">{{ $message }}</span>
+								@enderror
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->

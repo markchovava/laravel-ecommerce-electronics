@@ -1,8 +1,9 @@
 $(document).ready(function(){
-    /* INDEX PAGE */
+    /* INDEX PAGE Add o Cart */
     $(document).on('click', '.add__toCartBtn', function(e){  
         e.preventDefault();
         let csrf_token = $('#csrf__token').val();
+        let cart_quantity = $('#cart__quantity');
         let product_price = $(this).parent().siblings('.prodcut-price').find('.price__number').text();
         let price_cents = $(this).parent().siblings('.prodcut-price').find('.price__cents').val();
         let cart_add = $(this).attr('href');
@@ -28,22 +29,12 @@ $(document).ready(function(){
                 _token: csrf_token
             },
             success: function(result){
-                console.log(result)
-                
+                console.log(result.quantity);
+                cart_quantity.text(result.quantity);     
             }
         });
     });
 
-/* SINGLE PRODUCT PAGE */
-    var i = 1;
-    $(document).on('click', '.add__toCartBtn', function(e){ 
-        e.preventDefault();
-        var single_price = $(this).closest('#lower__bodyArea').siblings('.pricing').find('.price__number').text();
-        var price_number = parseFloat(single_price);
-        var cart_value = parseFloat($('#cart__quantity').text());
-        var cart = cart_value + i;
-        $('#cart__quantity').text(cart);
-    })
 
-   
+ 
 });

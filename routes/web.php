@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductPageController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Frontend\Cart\CartController;
+use App\Http\Controllers\Frontend\Checkout\CheckoutController;
 use App\Http\Controllers\PDF\PDFController;
 
 
@@ -32,10 +33,24 @@ use App\Http\Controllers\PDF\PDFController;
 Route::get('/login', [ProfileController::class, 'login'])->name('login');
 Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
 
+/* :::::: Cart :::::: */
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
+Route::get('/cart/view', [CartController::class, 'view'])->name('cart.view');
+Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+
+
+Route::get('/checkout/register', [CheckoutController::class, 'register'])->name('checkout.register');
+Route::post('/checkout/register', [CheckoutController::class, 'register_process'])->name('checkout.register.process');
+Route::get('/checkout/login', [CheckoutController::class, 'login'])->name('checkout.login');
+Route::post('/checkout/login', [CheckoutController::class, 'login_process'])->name('checkout.login.process');
+Route::middleware(['auth'])->group(function (){
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+});
 
 
 
@@ -136,30 +151,17 @@ Route::get('/add', function(){
 
 
 Route::get('/show', function(){
-    //$cookie = $_COOKIE['shopping_session'];
-    /* foreach($_COOKIE as $ck){
-        $a[] = $ck . ' ======= ';
-    }
-
-    dd($a); */
-    /* unset($cookie);
-    setcookie('shopping_session', '', time() - 3600, '/'); */
-    //if(isset($_COOKIE['session_id'])){
-        /* unset($_COOKIE['session_id']);
-        setcookie('session_id', '', time() - 3600, '/'); */
-        /* $cookie = htmlspecialchars($_COOKIE['session_id']); 
-        $shop_check = \App\Models\Cart\Cart::where('shopping_session', 'LIKE', '%' . $cookie . '%')->first();
-       if(!empty($shop_check)){
-            return $cookie . " === " . $shop_check->shopping_session . ", Total is: " . ($shop_check->total / 100);
-       }    
+   /*  if( isset($_COOKIE['shopping_session']) ){
+        $shopping_session = $_COOKIE['shopping_session'];
+        $data['carts'] = \App\Models\Cart\Cart::where('shopping_session', $shopping_session)->first();
+        $cart_id =  $data['carts']->id;
+        $data['cart_items'] = \App\Models\Cart\CartItem::with('product')->where('cart_id', $cart_id)->get();
+        dd($data['cart_items']);
     } else{
-        dd('Cookie not set');
-    } */
-    /* unset($_COOKIE['session_id']);
-    setcookie('session_id', '', time() - 3600, '/'); */
-    //$cookie = htmlspecialchars($_COOKIE['session_id']); 
-    // return $cookie;
-    //dd($cookie);
+        return 'nIL';
+    }   */
+
+    
 });
 
 
@@ -172,9 +174,7 @@ Route::get('/show', function(){
     return view('frontend.pages.index');
 }); */
 
-Route::get('/single', function () {
-    return view('frontend.pages.single');
-});
+
 
 Route::get('/shop', function () {
     return view('frontend.pages.shop');
@@ -188,13 +188,6 @@ Route::get('/search', function () {
     return view('frontend.pages.search_results');
 });
 
-Route::get('/cart', function () {
-    return view('frontend.pages.cart');
-});
-
-Route::get('/checkout', function () {
-    return view('frontend.pages.checkout');
-});
 
 Route::get('/contact', function () {
     return view('frontend.pages.contact');

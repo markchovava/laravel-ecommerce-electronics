@@ -29,6 +29,7 @@
         <script src="{{ asset('frontend/assets/js/components/hs.onscroll-animation.js') }}"></script>
         <script src="{{ asset('frontend/assets/js/components/hs.slick-carousel.js') }}"></script>
         <script src="{{ asset('frontend/assets/js/components/hs.quantity-counter.js') }}"></script>
+        <script src="{{ asset('frontend/assets/js/components/hs.range-slider.js') }}"></script>
         <script src="{{ asset('frontend/assets/js/components/hs.show-animation.js') }}"></script>
         <script src="{{ asset('frontend/assets/js/components/hs.svg-injector.js') }}"></script>
         <script src="{{ asset('frontend/assets/js/components/hs.go-to.js') }}"></script>

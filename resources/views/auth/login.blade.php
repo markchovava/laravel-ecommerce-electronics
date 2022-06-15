@@ -42,8 +42,11 @@
 								<label class="form-label fs-6 fw-bolder text-dark">Email</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
+								<input type="text" name="email" class="form-control form-control-lg form-control-solid" autocomplete="off" />
 								<!--end::Input-->
+								@error('email')
+									<span class="text-danger">{{ $message }}</span>
+								@enderror
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
@@ -61,6 +64,9 @@
 								<!--begin::Input-->
 								<input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
 								<!--end::Input-->
+								@error('password')
+									<span class="text-danger">{{ $message }}</span>
+								@enderror
 							</div>
 							<!--end::Input group-->
 							<div class="fv-row mb-10">

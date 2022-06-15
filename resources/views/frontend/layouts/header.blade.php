@@ -92,7 +92,7 @@
                         <!-- Nav -->
                         <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between max-width-270 min-width-270">
                             <!-- Logo -->
-                            <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="../home/index.html" aria-label="Electro">
+                            <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="{{ url('/')}}" aria-label="Electro">
                                 <img src="{{ asset('backend/assets/images/logos/lunar-logo.png') }}" 
                                     style="width:175.748px;" alt="">
                             </a>
@@ -146,7 +146,7 @@
                                             <div id="headerSidebarContent" class="u-sidebar__content u-header-sidebar__content">
                                                 <!-- Logo -->
                                                 <a class="d-flex ml-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-vertical" 
-                                                    href="../home/index.html" aria-label="Electro">
+                                                    href="{{ url('/') }}" aria-label="Electro">
                                                         <img src="{{ asset('backend/assets/images/logos/lunar-logo.png') }}" 
                                                         style="width:175.748px;" alt="">
                                                 <!-- End Logo -->
@@ -266,27 +266,27 @@
                                                                 <!-- End Shop -->
 
                                                                 <!-- Cart -->
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="../shop/cart.html">Cart</a></li>
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Cart</a></li>
                                                                 <!-- End Cart -->
 
                                                                 <!-- Checkout -->
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="../shop/checkout.html">Checkout</a></li>
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="">Checkout</a></li>
                                                                 <!-- End Checkout -->
 
                                                                 <!-- My Account -->
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="../shop/my-account.html">My Account</a></li>
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="">My Account</a></li>
                                                                 <!-- End My Account -->
 
                                                                 <!-- Track your Order -->
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="../shop/track-your-order.html">Track your Order</a></li>
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="">Track your Order</a></li>
                                                                 <!-- End Track your Order -->
 
                                                                 <!-- Compare -->
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="../shop/compare.html">Compare</a></li>
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">Compare</a></li>
                                                                 <!-- End Compare -->
 
                                                                 <!-- wishlist -->
-                                                                <li><a class="u-header-collapse__submenu-nav-link" href="../shop/wishlist.html">wishlist</a></li>
+                                                                <li><a class="u-header-collapse__submenu-nav-link" href="#">wishlist</a></li>
                                                                 <!-- End wishlist -->
                                                             </ul>
                                                         </div>
@@ -453,7 +453,7 @@
                                 <li class="col d-none d-xl-block"><a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a></li>
                                 <li class="col d-xl-none px-2 px-sm-3"><a href="../shop/my-account.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></a></li>
                                 <li class="col pr-xl-0 px-2 px-sm-3">
-                                    <a href="../shop/cart.html" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
+                                    <a href="{{ route('cart.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white">0</span>
                                     </a>
@@ -802,7 +802,7 @@
                                                             <ul id="homeSubMenu" class="hs-sub-menu u-header__sub-menu animated hs-position-left fadeOut" aria-labelledby="homeMegaMenu" style="min-width: 230px; display: none;">
                                                                 <!-- Home-v1 -->
                                                                 <li class="hs-has-sub-menu">
-                                                                    <a class="nav-link u-header__sub-menu-nav-link " href="index.html">Home-v1</a>
+                                                                    <a class="nav-link u-header__sub-menu-nav-link " href="{{ url('/') }}">Home-v1</a>
                                                                 </li>
                                                                 <!-- End Home-v1 -->
 
@@ -869,17 +869,22 @@
                     <div class="col-md-auto align-self-center">
                         <div class="d-flex">
                             <ul class="d-flex list-unstyled mb-0">
-                                <li class="col"><a href="../shop/compare.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Compare"><i class="font-size-22 ec ec-compare"></i></a></li>
-                                <li class="col"><a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a></li>
                                 <li class="col pr-0">
-                                    <a href="../shop/cart.html" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
+                                    <a href="{{ route('cart.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span id="cart__quantity" 
                                         class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">
-                                            0
+                                            {{ ( !empty($quantity) ) ? $quantity : 0 }}
+                                        </span>
+                                        <span class="text-gray-90 ml-3">
+                                            <span class="ec ec-arrow-down-search"></span>
                                         </span>
                                         <!-- <span class="font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span> -->
                                     </a>
+                                    <ul>
+
+                                    </ul>
+                                    
                                 </li>
                             </ul>
                         </div>
