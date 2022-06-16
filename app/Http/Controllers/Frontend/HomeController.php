@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
+/* Custom Function call */
+use App\Actions\RoleManagement\CheckRoles;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\UserProduct;
 use App\Models\Product\Product;
@@ -21,6 +25,7 @@ use App\Models\Product\Discount;
 use App\Models\Product\Inventory;
 use App\Models\Product\Variation;
 use App\Models\Cart\Cart;
+use App\Models\User;
 use App\Models\Cart\CartItem;
 
 class HomeController extends Controller
@@ -28,16 +33,26 @@ class HomeController extends Controller
 
     public function index()
     {
+        /* Role Management */
+        /* if(Auth::check()){
+            $id = Auth::id();
+            $user = User::where('id', $id)->first();
+            $data['role_id'] = $user->role_id;
+        } */
+        $data['role_id'] = CheckRoles::check_role();
+        
         if( isset($_COOKIE['shopping_session']) ){
             $shopping_session = $_COOKIE['shopping_session'];
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
             if( !empty($data['cart']) ){
-                $data['quantity'] = $data['cart']->cart_items->sum('quantity');
-            } 
+                $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
+            } else{
+                $data['cart_quantity'] = 0; 
+            }
         }
         elseif( !(isset($_COOKIE['shopping_session'])) ){
             $data['cart'] = NULL;
-            $data['quantity'] = 10;
+            $data['cart_quantity'] = 0;
         }
 
         $data['latest_products'] = Product::whereHas('categories', function($query){

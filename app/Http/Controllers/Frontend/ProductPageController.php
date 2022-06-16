@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/* Custom Function call */
+use App\Actions\RoleManagement\CheckRoles;
+
 use App\Models\UserProduct;
 use App\Models\Product\Product;
 use App\Models\Product\Category;
@@ -26,16 +29,18 @@ use App\Models\Cart\CartItem;
 class ProductPageController extends Controller
 {
     public function view($id){
+        $data['role_id'] = CheckRoles::check_role();
+        
         if( isset($_COOKIE['shopping_session']) ){
             $shopping_session = $_COOKIE['shopping_session'];
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
             if( !empty($data['cart']) ){
-                $data['quantity'] = $data['cart']->cart_items->sum('quantity');
+                $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
             } 
         }
         elseif( !(isset($_COOKIE['shopping_session'])) ){
             $data['cart'] = NULL;
-            $data['quantity'] = 10;
+            $data['cart_quantity'] = 0;
         }
 
         $data['categories'] = Category::all();

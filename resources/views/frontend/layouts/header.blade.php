@@ -1,4 +1,4 @@
-<header id="header" class="u-header u-header-left-aligned-nav">
+<header id="header" class="u-header u-header-left-aligned-nav">'
     <div class="u-header__section">
         <!-- Topbar -->
         <div class="u-header-topbar py-2 d-none d-xl-block">
@@ -45,7 +45,22 @@
                             </li>
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <!-- Account Sidebar Toggle Button -->
-                                @if(Auth::check())
+                                @if(Auth::check() && $role_id > 1)
+                                <a id="sidebarNavToggler" href="{{ route('customer.logout') }}" role="button" class="u-header-topbar__nav-link"
+                                    aria-controls="sidebarContent"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    data-unfold-event="click"
+                                    data-unfold-hide-on-scroll="false"
+                                    data-unfold-target="#sidebarContent"
+                                    data-unfold-type="css-animation"
+                                    data-unfold-animation-in="fadeInRight"
+                                    data-unfold-animation-out="fadeOutRight"
+                                    data-unfold-duration="500">
+                                    <i class="ec ec-user mr-1"></i> Signout
+                                </a>
+                                
+                                @elseif(Auth::check() && $role_id == 1)
                                 <a id="sidebarNavToggler" href="{{ route('admin.products') }}" role="button" class="u-header-topbar__nav-link"
                                     aria-controls="sidebarContent"
                                     aria-haspopup="true"
@@ -60,7 +75,7 @@
                                     <i class="ec ec-user mr-1"></i>Go to Dashboard
                                 </a>
                                 @else
-                                <a id="sidebarNavToggler" href="{{ route('login') }}" role="button" class="u-header-topbar__nav-link"
+                                <a id="sidebarNavToggler" href="{{ route('customer.login') }}" role="button" class="u-header-topbar__nav-link"
                                     aria-controls="sidebarContent"
                                     aria-haspopup="true"
                                     aria-expanded="false"
@@ -873,8 +888,8 @@
                                     <a href="{{ route('cart.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span id="cart__quantity" 
-                                        class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">
-                                            {{ ( !empty($quantity) ) ? $quantity : 0 }}
+                                        class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">      
+                                            {{ ( $cart_quantity != false ) ? $cart_quantity : 0 }}
                                         </span>
                                         <span class="text-gray-90 ml-3">
                                             <span class="ec ec-arrow-down-search"></span>

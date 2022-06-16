@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/* Custom Function call */
+use App\Actions\RoleManagement\CheckRoles;
+
 use App\Models\Cart\Cart;
 use App\Models\Cart\CartItem;
 use App\Models\Product\Product;
@@ -37,8 +40,9 @@ class CartController extends Controller
             // Cart Item
             $cart_item = new CartItem();
             $cart_item->cart_id = $cart->id;
-            $cart_item->quantity = 0;
-            if($request->variation_name == '' && $request->variation_value == ''){
+            $cart_item->product_id = $request->product_id;
+            $cart_item->quantity = 1;
+            if($request->variation_name != false && $request->variation_value != false){
                 $cart_item->variation_name = $request->variation_name;
                 $cart_item->variation_value = $request->variation_value;
             }
@@ -51,12 +55,12 @@ class CartController extends Controller
                 if(auth()->check()){
                     $cart->customer_id = Auth::id();
                 }
-                if(!empty($cart->total)){ 
+                if($cart->total != false){ 
                     $db_total = $cart->total;
-                    $cart->total = $db_total + $request->price_cents;
+                    $cart->total = intval($db_total) + intval($request->price_cents);
                 }
-                if(empty($cart->total)){
-                    $cart->total = $request->price_cents;
+                if($cart->total == false){
+                    $cart->total = intval($request->price_cents);
                 }
                 $cart->save();
             } 
@@ -66,12 +70,12 @@ class CartController extends Controller
                 if(auth()->check()){
                     $cart->customer_id = Auth::id();
                 }
-                if( !empty($cart->total) ){ 
+                if( $cart->total != false ){ 
                     $db_total = $cart->total;
-                    $cart->total = $db_total + $request->price_cents;
+                    $cart->total = intval($db_total) + intval($request->price_cents);
                 }
-                if( empty($cart->total) ){
-                    $cart->total = $request->price_cents;
+                if( $cart->total == false ){
+                    $cart->total = intval($request->price_cents);
                 }
                 $cart->save();
             }
@@ -97,7 +101,6 @@ class CartController extends Controller
                 }
                 $cart_item->save();
             }
-            $a = "Is set";
         
         } else{
             return false;
@@ -107,7 +110,7 @@ class CartController extends Controller
 
     public function store(Request $request){
         if( !(Auth::check()) ){
-            return redirect()->route('login');
+            return redirect()->route('checkout.login');
         }
         else{
             if( isset($_COOKIE['shopping_session']) ){
@@ -154,7 +157,9 @@ class CartController extends Controller
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
             if(!empty($data['cart'])){
                 $data['quantity'] = $data['cart']->cart_items->sum('quantity');
-            }      
+            } else{
+                $data['quantity'] = 0;
+            }     
         }
         elseif( !(isset($_COOKIE['shopping_session'])) ){
             $data['cart'] = NULL;
@@ -164,18 +169,29 @@ class CartController extends Controller
     }
 
     public function index(){
+        $data['role_id'] = CheckRoles::check_role();
+        
         if( isset($_COOKIE['shopping_session']) ){
+            //dd($_COOKIE['shopping_session']);
             $shopping_session = $_COOKIE['shopping_session'];
             $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
             if( !empty($data['carts']) ){
-                $data['quantity'] = $data['carts']->cart_items->sum('quantity');
-            } 
-            $cart_id =  $data['carts']->id;
-            $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
-            // dd($data['cart_items']);
-            return view('frontend.pages.cart', $data);
+                //dd($data['carts']);
+                $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
+                $cart_id =  $data['carts']->id;
+                $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
+                return view('frontend.pages.cart', $data);
+            } else{
+                //dd('Cart Empty');
+                $data['cart_quantity'] = 0;
+                $data['message'] = "The Shopping Cart is empty at the moment.";
+                return view('frontend.pages.cart', $data);
+            }           
         } 
-            return redirect()->back();     
+        //dd('Here');
+        $data['cart_quantity'] = 0;
+        $data['message'] = "The Shopping Cart is empty at the moment.";
+        return view('frontend.pages.cart', $data);     
     }
 
     public function delete($id){

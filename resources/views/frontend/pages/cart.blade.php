@@ -29,6 +29,7 @@
         <form class="mb-4" action="{{ route('cart.store') }}" method="post">
             @csrf
             <div class="mb-10 cart-table">
+                @if(!empty($cart_items) && $cart_items != false)
                 <table class="table" cellspacing="0">
                     <thead>
                         <tr>
@@ -53,7 +54,9 @@
                             </td>
 
                             <td data-title="Product">
-                                <a href="{{ route('product.view', $product->product_id) }}" class="text-gray-90">{{ $product->product->name }}</a>
+                                <a href="{{ route('product.view', $product->product_id) }}" class="text-gray-90">
+                                    {{ $product->product->name }}
+                                </a>
                                 <input type="hidden" value="{{ $product->product_id }}" name="product_id[]">
                             </td>
 
@@ -117,7 +120,8 @@
                                         </div>
                                         
                                         <div class="d-md-flex">
-                                            <button type="submit" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</button>
+                                            <button type="submit" 
+                                            class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</button>
                                         </div>
                                     </div>
                                 </div>
@@ -125,6 +129,11 @@
                         </tr>
                     </tbody>
                 </table>
+                @else
+                <h4 class="text-secondary" style="text-align:center;">
+                    {{ $message }}
+                </h4>
+                @endif
             </div>
             <div class="mb-8 cart-total">
                 <div class="row">

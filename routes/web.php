@@ -1,11 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Route;
-// use Illuminate\Support\Facades\Cookie;
-use Symfony\Component\HttpFoundation\Cookie;
-use Illuminate\Http\Response;
+
+/* Custom Function call */
+use App\Actions\RoleManagement\CheckRoles;
+
 
 use App\Models\Product\Product;
-
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\BrandController;
@@ -16,6 +16,8 @@ use App\Http\Controllers\Frontend\ProductPageController;
 use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Frontend\Cart\CartController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutController;
+use App\Http\Controllers\Frontend\Checkout\CheckoutAuthController;
+use App\Http\Controllers\Frontend\Customer\CustomerController;
 use App\Http\Controllers\PDF\PDFController;
 
 
@@ -30,8 +32,15 @@ use App\Http\Controllers\PDF\PDFController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/login', [ProfileController::class, 'login'])->name('login');
-Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
+/* Admin Login & Logout */
+Route::get('/admin/login', [ProfileController::class, 'login'])->name('login');
+Route::get('/admin/logout', [ProfileController::class, 'logout'])->name('logout');
+/* Customer Login and Logout */
+Route::get('/customer/login', [CustomerController::class, 'login'])->name('customer.login');
+Route::post('/customer/login', [CustomerController::class, 'login_process'])->name('customer.login.process');
+Route::get('/customer/register', [CustomerController::class, 'register'])->name('customer.register');
+Route::post('/customer/register', [CustomerController::class, 'register_process'])->name('customer.register.process');
+Route::get('/customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
@@ -44,12 +53,13 @@ Route::get('/cart/view', [CartController::class, 'view'])->name('cart.view');
 Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
 
-Route::get('/checkout/register', [CheckoutController::class, 'register'])->name('checkout.register');
-Route::post('/checkout/register', [CheckoutController::class, 'register_process'])->name('checkout.register.process');
-Route::get('/checkout/login', [CheckoutController::class, 'login'])->name('checkout.login');
-Route::post('/checkout/login', [CheckoutController::class, 'login_process'])->name('checkout.login.process');
+Route::get('/checkout/register', [CheckoutAuthController::class, 'register'])->name('checkout.register');
+Route::post('/checkout/register', [CheckoutAuthController::class, 'register_process'])->name('checkout.register.process');
+Route::get('/checkout/login', [CheckoutAuthController::class, 'login'])->name('checkout.login');
+Route::post('/checkout/login', [CheckoutAuthController::class, 'login_process'])->name('checkout.login.process');
 Route::middleware(['auth'])->group(function (){
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'checkout_process'])->name('checkout.process');
 });
 
 
@@ -161,6 +171,10 @@ Route::get('/show', function(){
         return 'nIL';
     }   */
 
+    unset($_COOKIE['shopping_session']);
+    setcookie('shopping_session','', time() - 3600);
+    // return $_COOKIE['shopping_session'];
+
     
 });
 
@@ -173,8 +187,6 @@ Route::get('/show', function(){
 /* Route::get('/', function () {
     return view('frontend.pages.index');
 }); */
-
-
 
 Route::get('/shop', function () {
     return view('frontend.pages.shop');
@@ -218,34 +230,6 @@ Route::prefix('/backend')->group(function(){
         return view('backend.index');
     });
 
-    Route::get('/users', function () {
-        return view('backend.users.index');
-    });
-    Route::get('/users/view', function () {
-        return view('backend.users.view');
-    });
-    Route::get('/users/edit', function () {
-        return view('backend.users.edit');
-    });
-
-    Route::get('/products', function () {
-        return view('backend.products.index');
-    });
-    Route::get('/products/add', function () {
-        return view('backend.products.add');
-    });
-    Route::get('/products/edit', function () {
-        return view('backend.products.edit');
-    });
-    Route::get('/category', function () {
-        return view('backend.category.index');
-    });
-    Route::get('/category/add', function () {
-        return view('backend.category.add');
-    });
-    Route::get('/category/edit', function () {
-        return view('backend.category.add');
-    });
     Route::get('/customers', function () {
         return view('backend.customers.index');
     });
@@ -257,12 +241,6 @@ Route::prefix('/backend')->group(function(){
     });
     Route::get('/delivery', function () {
         return view('backend.reports.delivery');
-    });
-    Route::get('/qoute/view', function () {
-        return view('backend.qoute.view');
-    });
-    Route::get('/qoute/add', function () {
-        return view('backend.qoute.add');
     });
     Route::get('/message', function () {
         return view('backend.message.index');

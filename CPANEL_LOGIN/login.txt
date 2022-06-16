@@ -12,19 +12,19 @@ RSA
 Generating public/private rsa key pair.
 Enter passphrase (empty for no passphrase): 
 Enter same passphrase again: 
-Your identification has been saved in /home/lunarte1/.ssh/id_rsa.
-Your public key has been saved in /home/lunarte1/.ssh/id_rsa.pub.
+Your identification has been saved in /home/lunarte1/.ssh/lunarte1.
+Your public key has been saved in /home/lunarte1/.ssh/lunarte1.pub.
 The key fingerprint is:
-SHA256:LriAAMxliYoEhhb/WNHtpqRqDR2zoQp6szcuHQ+2Dx8 
+SHA256:3vwil9/N715uLwrtz1/KH+sJpn2ew128k6rM9xqgHQ0 
 The key's randomart image is:
 +---[RSA 2048]----+
-|+ooo... .        |
-|=++.  .. .       |
-|*o . .  .        |
-|+   ++ . o       |
-|.  .o.B S        |
-|o. o+= o         |
-|+ oo*=E .        |
-|..++==.o         |
-| .o*ooo          |
+|                 |
+|                 |
+|           E     |
+|            o    |
+|        S  o . . |
+|       . oo.o   o|
+|        ..+o.+..B|
+|        . *++=+%X|
+|         o BB*&#/|
 +----[SHA256]-----+

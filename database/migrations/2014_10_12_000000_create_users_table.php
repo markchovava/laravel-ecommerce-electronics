@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('address')->nullable();
+            $table->longText('address')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('id_number')->nullable();
@@ -28,6 +28,12 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('gender')->nullable();
             $table->string('image')->nullable();
+            $table->string('city')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('company_email')->nullable();
+            $table->string('company_phone_number')->nullable();
+            $table->longText('company_address')->nullable();
+            $table->string('company_city')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
