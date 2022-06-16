@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\Cart\CartController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutAuthController;
 use App\Http\Controllers\Frontend\Customer\CustomerController;
+use App\Http\Controllers\Frontend\Orders\OrdersController;
 use App\Http\Controllers\PDF\PDFController;
 
 
@@ -32,6 +33,9 @@ use App\Http\Controllers\PDF\PDFController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
 /* Admin Login & Logout */
 Route::get('/admin/login', [ProfileController::class, 'login'])->name('login');
 Route::get('/admin/logout', [ProfileController::class, 'logout'])->name('logout');
@@ -42,7 +46,7 @@ Route::get('/customer/register', [CustomerController::class, 'register'])->name(
 Route::post('/customer/register', [CustomerController::class, 'register_process'])->name('customer.register.process');
 Route::get('/customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+/* Products */
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
 
 /* :::::: Cart :::::: */
@@ -52,7 +56,7 @@ Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store')
 Route::get('/cart/view', [CartController::class, 'view'])->name('cart.view');
 Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
-
+/* Checkout */
 Route::get('/checkout/register', [CheckoutAuthController::class, 'register'])->name('checkout.register');
 Route::post('/checkout/register', [CheckoutAuthController::class, 'register_process'])->name('checkout.register.process');
 Route::get('/checkout/login', [CheckoutAuthController::class, 'login'])->name('checkout.login');
@@ -62,8 +66,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('/checkout', [CheckoutController::class, 'checkout_process'])->name('checkout.process');
 });
 
-
-
+/* Orders Frontend */
+Route::get('/track/order', [OrdersController::class, 'track'])->name('order.track');
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
 
