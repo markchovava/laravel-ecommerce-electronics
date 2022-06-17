@@ -19,6 +19,7 @@ use App\Http\Controllers\Frontend\Checkout\CheckoutController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutAuthController;
 use App\Http\Controllers\Frontend\Customer\CustomerController;
 use App\Http\Controllers\Frontend\Orders\OrdersController;
+use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\PDF\PDFController;
 
 
@@ -37,8 +38,8 @@ use App\Http\Controllers\PDF\PDFController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 /* Admin Login & Logout */
-Route::get('/admin/login', [ProfileController::class, 'login'])->name('login');
-Route::get('/admin/logout', [ProfileController::class, 'logout'])->name('logout');
+Route::get('/admin/login', [ProfileController::class, 'login'])->name('admin.login');
+Route::get('/admin/logout', [ProfileController::class, 'logout'])->name('admin.logout');
 /* Customer Login and Logout */
 Route::get('/customer/login', [CustomerController::class, 'login'])->name('customer.login');
 Route::post('/customer/login', [CustomerController::class, 'login_process'])->name('customer.login.process');
@@ -126,6 +127,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/search', [QuoteController::class, 'search'])->name('admin.quote.search');
         Route::get('/delete/{id}', [QuoteController::class, 'delete'])->name('admin.quote.delete');
         Route::get('pdf/{id}', [PDFController::class, 'pdf'])->name('admin.quote.pdf');
+    });
+
+    Route::prefix('info')->group(function() {
+        Route::get('/', [BasicInfoController::class, 'view'])->name('admin.info');
+        Route::get('/edit', [BasicInfoController::class, 'edit'])->name('admin.info.edit');
+        Route::post('/update', [BasicInfoController::class, 'update'])->name('admin.info.update');
     });
 });
 

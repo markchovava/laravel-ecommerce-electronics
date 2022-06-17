@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Quote;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BasicInfo;
 use Illuminate\Http\Request;
 
 use App\Models\Product\Product;
@@ -20,6 +21,7 @@ class QuoteController extends Controller
     }
 
     public function view($id){
+        $data['info'] = BasicInfo::first();
         $data['quote'] = Quote::with('quote_items')->where('id', $id)->first();
         $data['quote_items'] = QuoteItem::where('quote_id', $id)->get();
         return view('backend.quote.view', $data);
@@ -40,19 +42,20 @@ class QuoteController extends Controller
         DB::transaction(function() use($request){
             $quote = new Quote();
             $quote->user_id = Auth::id();
-            $quote->address = $request->address;
-            $quote->full_name = $request->full_name;
-            $quote->email = $request->email;
-            $quote->phone = $request->phone;
-            $quote->client_name = $request->client_name;
-            $quote->client_email = $request->client_email;
-            $quote->client_phone = $request->client_phone;
-            $quote->client_address = $request->client_address;
+            $quote->billing_name = $request->billing_name;
+            $quote->billing_email = $request->billing_email;
+            $quote->billing_phone = $request->billing_phone;
+            $quote->billing_address = $request->billing_address;
+            $quote->shipping_name = $request->shipping_name;
+            $quote->shipping_email = $request->shipping_email;
+            $quote->shipping_phone = $request->shipping_phone;
+            $quote->shipping_address = $request->shipping_address;
             $quote->quote_date = $request->quote_date;
             $quote->quote_due_date = $request->quote_due_date;
             $quote->notes = $request->quote_notes;
-            $quote_number = rand(100000000, 10000000000);
-            $quote->quote_number = $quote_number;
+            $quote_number = date('Ydhs');
+            $quote->quote_number = '#QUOTE-' . $quote_number;
+            //dd($quote->quote_number);
             $quote->tax = $request->quote_tax;
             $quote->discount = $request->quote_discount;
             $quote->subtotal_cents = $request->quote_subtotal_cents;
@@ -83,7 +86,6 @@ class QuoteController extends Controller
             }
 
         });
-        
         $notification = [
             'message' => 'Quote Added Successfully!!...',
             'alert-type' => 'success'
@@ -93,6 +95,7 @@ class QuoteController extends Controller
 
     public function edit($id){
         $data['quote'] = Quote::with('quote_items')->where('id', $id)->first();
+        // dd($data['quote']);
         $data['quote_items'] = QuoteItem::where('quote_id', $id)->get();
         return view('backend.quote.edit', $data);
     }
@@ -102,19 +105,17 @@ class QuoteController extends Controller
         DB::transaction(function() use($request, $id){
             $quote = Quote::find($id);
             $quote->user_id = Auth::id();
-            $quote->address = $request->address;
-            $quote->full_name = $request->full_name;
-            $quote->email = $request->email;
-            $quote->phone = $request->phone;
-            $quote->client_name = $request->client_name;
-            $quote->client_email = $request->client_email;
-            $quote->client_phone = $request->client_phone;
-            $quote->client_address = $request->client_address;
+            $quote->billing_name = $request->billing_name;
+            $quote->billing_email = $request->billing_email;
+            $quote->billing_phone = $request->billing_phone;
+            $quote->billing_address = $request->billing_address;
+            $quote->shipping_name = $request->shipping_name;
+            $quote->shipping_email = $request->shipping_email;
+            $quote->shipping_phone = $request->shipping_phone;
+            $quote->shipping_address = $request->shipping_address;
             $quote->quote_date = $request->quote_date;
             $quote->quote_due_date = $request->quote_due_date;
             $quote->notes = $request->quote_notes;
-            /* $quote_number = rand(100000000, 10000000000);
-            $quote->quote_number = $quote_number; */
             $quote->tax = $request->quote_tax;
             $quote->discount = $request->quote_discount;
             $quote->subtotal_cents = $request->quote_subtotal_cents;

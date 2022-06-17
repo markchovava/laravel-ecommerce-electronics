@@ -55,6 +55,8 @@
         <!--end::Container-->
     </div>
     <!--end::Toolbar-->
+
+
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -77,8 +79,13 @@
                                     </a>
                                     <!--end::Logo-->
                                     <!--begin::Text-->
-                                    <div class="text-sm-end fw-bold fs-4 text-muted mt-7">
-                                        <div>{{ $quote->address }}</div>
+                                    <div class="text-sm-end fw-bold fs-4 mt-7">
+                                        <div style="width:220px;">
+                                            {{ ( !empty($info->company_name) ) ? $info->company_name : '' }} <br>
+                                            {{ ( !empty($info->company_address) ) ? $info->company_address : '' }} <br>
+                                            {{ ( !empty($info->company_phone_number) ) ? $info->company_phone_number : '' }} <br>
+                                            {{ ( !empty($info->company_email) ) ? $info->company_email : '' }}
+                                        </div>
                                     </div>
                                     <!--end::Text-->
                                 </div>
@@ -89,25 +96,16 @@
                                 <!--begin::Wrapper-->
                                 <div class="d-flex flex-column gap-7 gap-md-10">
                                     <!--begin::Message-->
-                                    <div class="fw-bolder fs-2">Dear {{ $quote->email }}
-                                    <span class="fs-6">({{ $quote->email }})</span>,
+                                    <div class="fw-bolder fs-2">Dear {{ $quote->billing_name }}
+                                    <span class="fs-6">({{ $quote->billing_email }})</span>,
                                     <br />
                                     <span class="text-muted fs-5">Here are your quotation details. We look forward to your purchase.</span></div>
                                     <!--begin::Message-->
                                     <!--begin::Separator-->
                                     <div class="separator"></div>
-                                    <!--begin::Separator-->
-                                    <!--begin::Billing & shipping-->
-                                    <div class="d-flex flex-column flex-sm-row gap-7 gap-md-10 fw-bolder">
-                                        <div class="flex-root d-flex flex-column">
-                                            <span class="text-muted">Customer Address</span>
-                                            <span class="fs-6">
-                                            {{ $quote->client_address }}</span>
-                                        </div>
-                                    </div>
-                                    <!--end::Billing & shipping-->
-                                    <!--begin::Order details-->
-                                    <div class="d-flex flex-column flex-sm-row gap-7 gap-md-10 fw-bolder">
+                                    <!--end::Separator-->
+                                     <!--begin::Order details-->
+                                     <div class="d-flex flex-column flex-sm-row gap-7 gap-md-10 fw-bolder">
                                         <div class="flex-root d-flex flex-column">
                                             <span class="text-muted">Quatation Date</span>
                                             <span class="fs-5">{{ $quote->quote_date }}</span>
@@ -126,6 +124,28 @@
                                         </div>
                                     </div>
                                     <!--end::Order details-->
+                                    <!--begin::Billing & shipping-->
+                                    <div class="d-flex flex-column flex-sm-row gap-7 gap-md-10 fw-bolder">
+                                        <div class="flex-root d-flex flex-column">
+                                            <span class="text-muted">Customer Details</span>
+                                            <span class="fs-6" style="width:200px">
+                                                {{ $quote->billing_name }} <br>
+                                                {{ $quote->billing_address }} <br>
+                                                {{ $quote->billing_phone }} <br>
+                                                {{ $quote->billing_email }}
+                                            </span>
+                                        </div>
+                                        <div class="flex-root d-flex flex-column">
+                                            <span class="text-muted">Shipping Details</span>
+                                            <span class="fs-6" style="width:200px">
+                                                {{ $quote->shipping_name }} <br>
+                                                {{ $quote->shipping_address }} <br>
+                                                {{ $quote->shipping_phone }} <br>
+                                                {{ $quote->shipping_email }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!--end::Billing & shipping-->
                                     <!--begin:Order summary-->
                                     <div class="d-flex justify-content-between flex-column">
                                         <!--begin::Table-->
@@ -157,13 +177,23 @@
                                                         </td>
                                                         <!--end::Product-->
                                                         <!--begin::SKU-->
-                                                        <td class="text-end">${{ $quote_item->price_cents }}</td>
+                                                        <td class="text-end">
+                                                        @php 
+                                                        $price = $quote_item->price_cents / 100;
+                                                        @endphp
+                                                        ${{ number_format((float)$price, 2, '.', '') }}
+                                                        </td>
                                                         <!--end::SKU-->
                                                         <!--begin::Quantity-->
                                                         <td class="text-end">{{ $quote_item->quantity }}</td>
                                                         <!--end::Quantity-->
                                                         <!--begin::Total-->
-                                                        <td class="text-end">${{ $quote_item->total_cents / 100 }}</td>
+                                                        <td class="text-end">
+                                                        @php 
+                                                        $total = $quote_item->total_cents / 100;
+                                                        @endphp
+                                                        ${{ number_format((float)$total, 2, '.', '') }}
+                                                        </td>
                                                         <!--end::Total-->
                                                     </tr>
                                                     @endforeach
@@ -173,23 +203,33 @@
                                                     <!--begin::Subtotal-->
                                                     <tr>
                                                         <td colspan="3" class="text-end">Subtotal</td>
-                                                        <td class="text-end">${{ $quote->subtotal_cents / 100 }}</td>
+                                                        <td class="text-end">
+                                                        @php 
+                                                        $subtotal = $quote->subtotal_cents / 100;
+                                                        @endphp
+                                                            ${{ number_format((float)$subtotal, 2, '.', '') }}
+                                                        </td>
                                                     </tr>
                                                     <!--end::Subtotal-->
                                                     <!--begin::VAT-->
                                                     <tr>
-                                                        <td colspan="3" class="text-end">VAT (0%)</td>
+                                                        <td colspan="3" class="text-end">VAT (%)</td>
                                                         <td class="text-end">{{ $quote->tax }}%</td>
                                                     </tr>
                                                     <!--end::VAT-->
                                                     <tr>
-                                                        <td colspan="3" class="text-end">Discount (0%)</td>
+                                                        <td colspan="3" class="text-end">Discount (%)</td>
                                                         <td class="text-end">{{ $quote->discount }}%</td>
                                                     </tr>
                                                     <!--begin::Grand total-->
                                                     <tr>
                                                         <td colspan="3" class="fs-3 text-dark fw-bolder text-end">Grand Total</td>
-                                                        <td class="text-dark fs-3 fw-boldest text-end">${{ $quote->grandtotal_cents / 100}}</td>
+                                                        <td class="text-dark fs-3 fw-boldest text-end">
+                                                        @php 
+                                                        $grandtotal = $quote->grandtotal_cents / 100;
+                                                        @endphp
+                                                            ${{ number_format((float)$grandtotal, 2, '.', '') }}
+                                                        </td>
                                                     </tr>
                                                     <!--end::Grand total-->
                                                 </tbody>
@@ -212,9 +252,6 @@
                                 <!-- begin::Pint-->
                                 <button type="button" class="btn btn-success my-1 me-12" onclick="window.print();">Print Quotation</button>
                                 <!-- end::Pint-->
-                                <!-- begin::Download-->
-                                <a href="{{ route('admin.quote.pdf', $quote->id) }}" class="btn btn-light-success my-1">Generate PDF</a>
-                                <!-- end::Download-->
                             </div>
                             <!-- end::Actions-->
                             <!-- begin::Action-->
@@ -230,6 +267,8 @@
         <!--end::Container-->
     </div>
     <!--end::Post-->
+
+
 </div>
 <!--end::Content-->
 

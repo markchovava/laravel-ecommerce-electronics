@@ -59,7 +59,7 @@ class CheckoutController extends Controller
     }
 
     public function checkout_process(Request $request){
-        if( (Auth::check()) ){
+        if( Auth::check() ){
             /* Insert User */
             $id = Auth::id();
             $user = User::find($id);
@@ -119,10 +119,12 @@ class CheckoutController extends Controller
                 unset($_COOKIE['shopping_session']);
                 setcookie('shopping_session','', time() - 3600);
             }
-            
-           
 
-            
+            $notification = [
+                'message' => 'The Order has been processed.',
+                'alert-type' => 'success'
+            ];
+            return redirect()->route('order.track')->with($notification);    
         }
        
     }

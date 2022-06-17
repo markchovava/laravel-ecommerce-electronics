@@ -94,6 +94,7 @@ $('.calculate__grandtotal').click(function(e){
      var product__first = $(".product__item:first");
      var product__firstInput = product__first.find('.product__name');
      var product__firstPrice = product__first.find('.product__priceInsert');
+     let product__searchPriceCents = Number(product__searchPrice) * 100;
      product__firstInput.val(product_searchInput);
      product__firstPrice.val(product__searchPrice);
      //Cloning the first tr
@@ -103,9 +104,11 @@ $('.calculate__grandtotal').click(function(e){
      item__clone.find('.product__name').attr('name','product_name[]');
      item__clone.find('.product__descriptionInsert').attr('name','description[]');
      item__clone.find('.product__quantityInsert').attr('name','quantity[]');
-     item__clone.find('.product__priceInsert_cents').attr('name','price_cents[]');
+     let price__centsName = item__clone.find('.product__priceInsert_cents').attr('name','price_cents[]');
+     let price__centsValue = item__clone.find('.product__priceInsert_cents').val(product__searchPriceCents);
      item__clone.find('.product__insertSum + input[type="hidden"]').attr('name','product_total_cents[]').addClass('product__sum');
-     $(".product__insertArea").append(item__clone);     
+     $(".product__insertArea").append(item__clone);  
+     //alert(price__centsValue.val())   
  });
 
 $(document).on('click', '.remove__productItem', function(e){
@@ -182,6 +185,7 @@ $(document).on('change', '.product__quantityInsert', function(e){
     let product__priceInsert_cents = $(this).closest('.product__item').find('.product__priceInsert_cents').val();
     let product__priceInsert = $(this).closest('.product__item').find('.product__priceInsert');
     let product__price_centsNumber = Number(product__priceInsert_cents);
+    //alert(product__priceInsert_cents)
     let product__priceNumber_calculate = product__price_centsNumber / 100;  
     product__priceInsert.val(product__priceNumber_calculate);
     let product__sum = $(this).closest('.product__item').find('.product__sum');

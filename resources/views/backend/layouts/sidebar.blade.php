@@ -2,7 +2,7 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="../../demo1/dist/index.html">
+        <a href="{{ route('index') }}">
             <img alt="Logo" src="{{ asset('backend/assets/images/logos/lunar-white.png') }}" class="h-50px logo" />
         </a>
         <!--end::Logo-->
@@ -132,7 +132,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="../../demo1/dist/account/settings.html">
+                            <a class="menu-link" href="#">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -283,7 +283,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Qoutation</span>
+                        <span class="menu-title">Quotation</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
@@ -292,7 +292,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Qoutations List</span>
+                                <span class="menu-title">Quotations List</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -300,7 +300,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Add Qoutations</span>
+                                <span class="menu-title">Add Quotations</span>
                             </a>
                         </div>
                     </div>
@@ -406,27 +406,19 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ url('/admin/delivery') }}">
+                            <a class="menu-link" href="{{ route('admin.info') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Orders List</span>
+                                <span class="menu-title">Basic Info</span>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{ route('admin.info.edit') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Add Orders</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="#">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Edit Orders</span>
+                                <span class="menu-title">Edit Basic Info</span>
                             </a>
                         </div>
                     </div>

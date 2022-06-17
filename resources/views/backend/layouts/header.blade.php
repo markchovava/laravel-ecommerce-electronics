@@ -18,7 +18,7 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="../../demo1/dist/index.html" class="d-lg-none">
-                <img alt="Logo" src="{{ asset('backend/assets/media/logos/logo-2.svg') }}" class="h-30px" />
+                <img alt="Logo" src="{{ asset('backend/assets/images/logos/lunar-logo.png') }}" class="h-30px" />
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -233,7 +233,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/media/svg/brand-logos/volicity-9.svg') }}" alt="" />
+                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/images/logos/lunar-logo.png') }}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -250,7 +250,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/media/svg/brand-logos/tvit.svg') }}" alt="" />
+                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/images/logos/lunar-logo.png') }}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -284,7 +284,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/media/svg/brand-logos/leaf.svg') }}" alt="" />
+                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/images/logos/lunar-logo.png') }}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -301,7 +301,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/media/svg/brand-logos/tower.svg') }}" alt="" />
+                                                    <img class="w-20px h-20px" src="{{ asset('backend/assets/images/logos/lunar-logo.png') }}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -762,7 +762,7 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{ route('logout') }}" class="menu-link px-5">Sign Out</a>
+                            <a href="{{ route('admin.logout') }}" class="menu-link px-5">Sign Out</a>
                         </div>
                         <!--end::Menu item-->
                     </div>

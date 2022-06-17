@@ -11,7 +11,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Create</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Edit</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -20,7 +20,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                        <a href="#" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -127,50 +127,50 @@
                                     <div class="row gx-10 mb-5">
                                         <!--begin::Col-->
                                         <div class="col-lg-6">
-                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Quote From</label>
+                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Billing Details</label>
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="text" name="full_name" value="{{ $quote->full_name }}" class="form-control form-control-solid" placeholder="Name" />
+                                                <input type="text" name="billing_name" value="{{ $quote->billing_name }}" class="form-control form-control-solid" placeholder="Name" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="email" name="email" value="{{ $quote->email }}" class="form-control form-control-solid" placeholder="abc@example.com" />
+                                                <input type="email" name="billing_email" value="{{ $quote->billing_email }}" class="form-control form-control-solid" placeholder="abc@example.com" />
                                             </div>
                                             <!--end::Input group-->
                                              <!--begin::Input group-->
                                              <div class="mb-5">
-                                                <input type="text" name="phone" value="{{ $quote->phone }}" class="form-control form-control-solid" placeholder="Phone Number" />
+                                                <input type="text" name="billing_phone" value="{{ $quote->billing_phone }}" class="form-control form-control-solid" placeholder="Phone Number" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <textarea name="address" class="form-control form-control-solid" rows="3" placeholder="Write the address.">{{ $quote->address }}</textarea>
+                                                <textarea name="billing_address" class="form-control form-control-solid" rows="3" placeholder="Write the address.">{{ $quote->billing_address }}</textarea>
                                             </div>
                                             <!--end::Input group-->
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6">
-                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Quote To</label>
+                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shipping Details</label>
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="text" name="client_name" value="{{ $quote->client_name }}" class="form-control form-control-solid" placeholder="Customer Name" />
+                                                <input type="text" name="shipping_name" value="{{ $quote->shipping_name }}" class="form-control form-control-solid" placeholder="Customer Name" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="email" name="client_email" value="{{ $quote->client_email }}" class="form-control form-control-solid" placeholder="abc@example.com" />
+                                                <input type="email" name="shipping_email" value="{{ $quote->shipping_email }}" class="form-control form-control-solid" placeholder="abc@example.com" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="text" name="client_phone" value="{{ $quote->client_phone }}" class="form-control form-control-solid" placeholder="Phone Number" />
+                                                <input type="text" name="shipping_phone" value="{{ $quote->shipping_phone }}" class="form-control form-control-solid" placeholder="Phone Number" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <textarea name="client_address" class="form-control form-control-solid" rows="3" placeholder="Write the customer address.">{{ $quote->client_address }}</textarea>
+                                                <textarea name="shipping_address" class="form-control form-control-solid" rows="3" placeholder="Write the Shipping address.">{{ $quote->shipping_address }}</textarea>
                                             </div>
                                             <!--end::Input group-->
                                         </div>

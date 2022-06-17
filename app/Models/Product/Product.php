@@ -6,24 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Product\ProductImage;
+use App\Models\Product\ProductSerialNumber;
 
 class Product extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
-        'short_description',
-        'status',
-        'type',
-        'SKU',
-        'barcode',
-        'qrcode',
-        'price', 
-        'weight',
-        'height',
-        'width',
+        'name', 'description',
+        'short_description', 'status',
+        'type', 'SKU', 'barcode', 'qrcode',
+        'price', 'weight', 'height','width',
         'length'
     ];
 
@@ -32,6 +25,11 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'user_products', 'product_id', 'user_id')
             ->withTimestamps();
+    }
+
+    /* One to many */
+    public function serial_numbers(){
+        return $this->hasMany(ProductSerialNumber::class, 'product_id', 'id');
     }
 
     /* Many to Many */

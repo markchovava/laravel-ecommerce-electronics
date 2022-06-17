@@ -17,6 +17,7 @@ class ProfileController extends Controller
     public function login(){
         return view('auth.login');
     }
+
     public function logout(){
         Auth::logout();
         return redirect()->route('login');

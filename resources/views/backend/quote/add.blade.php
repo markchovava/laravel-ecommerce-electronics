@@ -127,50 +127,50 @@
                                     <div class="row gx-10 mb-5">
                                         <!--begin::Col-->
                                         <div class="col-lg-6">
-                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Quote From</label>
+                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Billing Details</label>
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="text" name="full_name" class="form-control form-control-solid" placeholder="Name" />
+                                                <input type="text" name="billing_name" class="form-control form-control-solid" placeholder="Name" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="email" name="email" class="form-control form-control-solid" placeholder="abc@example.com" />
+                                                <input type="email" name="billing_email" class="form-control form-control-solid" placeholder="abc@example.com" />
                                             </div>
                                             <!--end::Input group-->
                                              <!--begin::Input group-->
                                              <div class="mb-5">
-                                                <input type="text" name="phone" class="form-control form-control-solid" placeholder="Phone Number" />
+                                                <input type="text" name="billing_phone" class="form-control form-control-solid" placeholder="Phone Number" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <textarea name="address" class="form-control form-control-solid" rows="3" placeholder="Write the address."></textarea>
+                                                <textarea name="billing_address" class="form-control form-control-solid" rows="3" placeholder="Write the address."></textarea>
                                             </div>
                                             <!--end::Input group-->
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6">
-                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Quote To</label>
+                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shipping Details</label>
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="text" name="client_name" class="form-control form-control-solid" placeholder="Customer Name" />
+                                                <input type="text" name="shipping_name" class="form-control form-control-solid" placeholder="Customer Name" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="email" name="client_email" class="form-control form-control-solid" placeholder="abc@example.com" />
+                                                <input type="email" name="shipping_email" class="form-control form-control-solid" placeholder="abc@example.com" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <input type="text" name="client_phone" class="form-control form-control-solid" placeholder="Phone Number" />
+                                                <input type="text" name="shipping_phone" class="form-control form-control-solid" placeholder="Phone Number" />
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-5">
-                                                <textarea name="client_address" class="form-control form-control-solid" rows="3" placeholder="Write the customer address."></textarea>
+                                                <textarea name="shipping_address" class="form-control form-control-solid" rows="3" placeholder="Write the customer address."></textarea>
                                             </div>
                                             <!--end::Input group-->
                                         </div>
@@ -297,10 +297,8 @@
                                     <!--end::Notes-->
                                     <div class="d-flex justify-content-end">
                                         <!--begin::Button-->
-                                        <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
-                                            <span class="indicator-label">Get Quote</span>
-                                            <span class="indicator-progress">Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        <button type="submit" id="" class="btn btn-primary">
+                                           Get Quote          
                                         </button>
                                         <!--end::Button-->
                                     </div>
