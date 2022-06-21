@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Product\ProductImage;
 use App\Models\Product\ProductSerialNumber;
+use App\Models\Inventory\Stock;
+
 
 class Product extends Model
 {
@@ -107,6 +109,10 @@ class Product extends Model
 
     public function sales(){
         return $this->belongsTo(Sales::class, 'product_id', 'id');
+    }
+
+    public function stock(){
+        return $this->hasOne(Stock::class, 'product_id', 'id');
     }
 
 }

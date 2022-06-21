@@ -373,6 +373,14 @@
                                         <!--end::Text-->
                                     </div>
                                     <!--end::Body-->
+                                    <div class="mb-6">
+                                        <!--begin::Text-->
+                                        <div class="fs-5 mt-4 ">
+                                            <a href="{{ route('admin.products.serial', $product->id) }}" class="btn btn-primary">View Serial Numbers</a>
+                                        </div>
+                                        <!--end::Text-->
+                                    </div>
+                                    <!--end::Body-->
                                 </div>
                                 <!--end::Post-->
                             </div>

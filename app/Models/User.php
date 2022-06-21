@@ -50,6 +50,11 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function purchases(){
+        return $this->hasMany(Quote::class, 'supplier_id', 'id');
+    }
+
+    /* One to many */
     public function quotes(){
         return $this->hasMany(Quote::class, 'user_id', 'id');
     }

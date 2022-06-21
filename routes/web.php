@@ -100,6 +100,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/products/view/{id}', [ProductController::class, 'view'])->name('admin.products.view');
     Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('admin.products.delete');
+    Route::get('/products/serial/{id}', [ProductController::class, 'serial'])->name('admin.products.serial');
     
      /* :::::: Category ::::: */
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
