@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('product_id')->nullable();
             $table->integer('supplier_id')->nullable();
+            $table->string('supplier_name')->nullable();
             $table->integer('quantity')->nullable();
             $table->integer('cost')->nullable();
             $table->string('status')->nullable();
