@@ -27,5 +27,7 @@
 		<script src="{{ asset('backend/assets/plugins/global/jquery.min.js') }}"></script>
 		<script src="{{ asset('backend/assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
 
+		<script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+
 
 </head>

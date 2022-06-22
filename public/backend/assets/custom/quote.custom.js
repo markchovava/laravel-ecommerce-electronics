@@ -173,9 +173,9 @@ $(document).on('click', '.product__results li', function(e){
         product__value.val(product__item);
         product__priceInsert.val(product__price);
     }else{
-        product__list.empty();
+        product__list.empty().removeClass('display__block');;
     }
-    product__list.empty();
+    product__list.empty().removeClass('display__block');;
 });
 
  // Calculate on change of quantity Product Item

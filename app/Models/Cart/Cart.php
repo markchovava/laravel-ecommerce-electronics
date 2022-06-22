@@ -13,6 +13,7 @@ class Cart extends Model
 
     public $fillable = [
         'shopping_session',
+        'ip_address',
         'customer_id',
         'total'
     ];

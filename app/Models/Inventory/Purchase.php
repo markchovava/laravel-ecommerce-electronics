@@ -12,7 +12,7 @@ class Purchase extends Model
     use HasFactory;
 
     public $fillable = [
-        'product_id', 'quantity', 'status', 'supplier_id'
+        'product_id', 'quantity', 'cost','status', 'supplier_id'
     ];
 
      /*Belong to one */

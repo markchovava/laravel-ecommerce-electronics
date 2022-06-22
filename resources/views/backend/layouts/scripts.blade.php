@@ -11,7 +11,7 @@ $route = url()->current();
 		<script src="{{ asset('backend/assets/js/scripts.bundle.js') }}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Vendors Javascript(used by this page)-->
-		<script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+		
 		
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->

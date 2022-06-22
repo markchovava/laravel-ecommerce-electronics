@@ -14,8 +14,16 @@
     object-fit: cover;
 }
 
+.display__block{
+    display: block !important;
+}
 
-/* ::::::::::::::::: Search ::::::::::::::::::: */
+.display__none{
+    display: none !important;
+}
+
+
+/* ::::::::::::::::: Product Search in Quotation Add and Edit ::::::::::::::::::: */
 .product__search{
     position: relative;
 }
@@ -33,6 +41,13 @@
     background-color: rgb(247, 247, 247);
     padding: 0.5rem 1rem;
     transition: all .3s ease;
+    cursor: pointer;
+}
+.product__search .product__results li{
+    padding:2px;
+}
+.product__search .product__results li:hover{
+    background-color: rgb(226, 221, 221);
 }
 
 .product__search .input-group input:focus + .product__search .product__results{
@@ -41,16 +56,50 @@
 
 .product__results li { 
     display: block;  
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.3rem; 
+}
+/* ::::::::::::::::::::::: End of Product Search :::::::::::::::::::::::::: */
+
+/* ::::::::::::::::: Supplier Search ::::::::::::::::::: */
+.supplier__search{
+    position: relative;
 }
 
-.display__block{
-    display: block !important;
+.supplier__search .supplier__results{
+    position: absolute;
+    display: none;
+    top: 45px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0;
+    margin: 0; 
+    border-radius: 5px; 
+    background-color: rgb(247, 247, 247);
+    padding: 0.5rem 1rem;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.supplier__search .supplier__results li{
+    padding:2px;
+}
+.supplier__search .supplier__results li:hover{
+    background-color: rgb(226, 221, 221);
 }
 
-.display__none{
-    display: none !important;
+.supplier__search .input-group input:focus + .supplier__search .supplier__results{
+    display: block;
 }
+
+.supplier__results li { 
+    display: block;  
+    margin-bottom: 0.3rem; 
+}
+
+/* ::::::::::::::::::::::: End of Supplier Search :::::::::::::::::::::::::: */
+
+
+
 
 
 .grand__total{

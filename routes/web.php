@@ -20,7 +20,8 @@ use App\Http\Controllers\Frontend\Checkout\CheckoutAuthController;
 use App\Http\Controllers\Frontend\Customer\CustomerController;
 use App\Http\Controllers\Frontend\Orders\OrdersController;
 use App\Http\Controllers\BasicInfo\BasicInfoController;
-use App\Http\Controllers\PDF\PDFController;
+use App\Http\Controllers\Inventory\PurchaseController;
+//use App\Http\Controllers\PDF\PDFController;
 
 
 
@@ -71,7 +72,6 @@ Route::middleware(['auth'])->group(function (){
 Route::get('/track/order', [OrdersController::class, 'track'])->name('order.track');
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
-
     /* :::::: Account Profile :::::: */
     Route::prefix('profile')->group(function() {
         Route::get('/view', [ProfileController::class, 'view'])->name('profile.view');
@@ -118,6 +118,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::post('/brands/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
     Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
 
+     /* :::::: Quote ::::: */
     Route::prefix('quote')->group(function() {
         Route::get('/', [QuoteController::class, 'index'])->name('admin.quote');
         Route::get('/add', [QuoteController::class, 'add'])->name('admin.quote.add');
@@ -128,6 +129,19 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/search', [QuoteController::class, 'search'])->name('admin.quote.search');
         Route::get('/delete/{id}', [QuoteController::class, 'delete'])->name('admin.quote.delete');
         Route::get('pdf/{id}', [PDFController::class, 'pdf'])->name('admin.quote.pdf');
+    });
+
+    /* Inventory */
+    Route::prefix('inventory')->group(function() {
+        Route::get('/purchase', [PurchaseController::class, 'index'])->name('inventory.purchase');
+        Route::get('/purchase/add', [PurchaseController::class, 'add'])->name('inventory.purchase.add');
+        Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('inventory.purchase.store');
+        Route::get('/purchase/edit/{id}', [PurchaseController::class, 'edit'])->name('inventory.purchase.edit');
+        Route::post('/purchase/update/{id}', [PurchaseController::class, 'update'])->name('inventory.purchase.update');
+        Route::get('/purchase/view/{id}', [PurchaseController::class, 'view'])->name('inventory.purchase.view');
+        Route::get('/purchase/delete/{id}', [PurchaseController::class, 'delete'])->name('inventory.purchase.delete');
+        Route::get('/purchase/search/product', [PurchaseController::class, 'search_product'])->name('inventory.purchase.search.product');
+        Route::get('/purchase/search/supplier', [PurchaseController::class, 'search_supplier'])->name('inventory.purchase.search.supplier');
     });
 
     Route::prefix('info')->group(function() {

@@ -206,9 +206,7 @@
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <ul class="product__results">
-                                                                
-                                                            </ul>
+                                                            <ul class="product__results"></ul>
                                                         </div> 
                                                     </td>
                                                     <td class="ps-0"> </td>
