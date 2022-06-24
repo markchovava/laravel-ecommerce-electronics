@@ -56,10 +56,18 @@
                             <td data-title="Product">
                                 <a href="{{ route('product.view', $product->product_id) }}" class="text-gray-90">
                                     {{ $product->product->name }}
-                                </a>
+                                </a> <br>
+                                    <span style="font-size:0.8rem;">
+                                        <b>Quantity in Stock:</b>
+                                        @php
+                                        $quantity = $product->product->inventories->in_store_quantity;
+                                        @endphp
+                                        <span class="quantity__instore text-danger">{{ $quantity }}</span>
+                                        <input type="hidden" value="{{ $quantity }}" class="db__quantity">
+                                        <input type="hidden" name="in_store_quantity[]" value="{{ $quantity }}" class="quantity__submit">
+                                    </span>
                                 <input type="hidden" value="{{ $product->product_id }}" name="product_id[]">
                             </td>
-
                             <td data-title="Price">
                                 @php
                                     $price = $product->product->price / 100;
@@ -67,7 +75,6 @@
                                 $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
                                 <input type="hidden" name="price__cents[]" value="{{ $product->product->price }}" class="price__cents">
                             </td>
-
                             <td data-title="Quantity">
                                 <span class="sr-only">Quantity</span>
                                 <!-- Quantity -->
@@ -88,7 +95,6 @@
                                 </div>
                                 <!-- End Quantity -->
                             </td>
-
                             <td data-title="Total">
                                 @php
                                 $product_totalCents = $product->product->price * $product->quantity;
@@ -202,24 +208,53 @@
     cart_totalCentsInsert.val(cart_totalCentsCalculate);
     cart_totalInsert.text(cart_totalDecimal);
 
+    /* Restrict user form typing  */
+    $('.product__quantity').keydown(() => {
+        return false;
+    });
+
     $('.quantity-add').click(function(e){  
         e.preventDefault();
         let product_quantity = $(this).closest('.js__quantity').find('.product__quantity');
-        //let quantity = $(this).closest('.js-quantity').find('.product__quantity');
-        let quantity = product_quantity.val();
-        let quantity_add = Number(quantity) + 1;
-        product_quantity.val(quantity_add);
+        let quantity_instoreInsert = $(this).closest('.product__item').find('.quantity__instore');
+        let quantity_submit = $(this).closest('.product__item').find('.quantity__submit');
+        let quantity_instore = Number(quantity_instoreInsert.text());
+        let db_quantity = $(this).closest('.product__item').find('.db__quantity');
+        let db_quantityNumber = Number(db_quantity.val());
+        let quantityNumber = Number(product_quantity.val());
+        if(quantity_instore != 10){
+            let deduct_instore = db_quantityNumber - quantityNumber;
+            let quantity_add = quantityNumber + 1;
+            product_quantity.val(quantity_add);
+            quantity_instoreInsert.text(deduct_instore);
+            quantity_submit.val(deduct_instore);
+        }
+        
     });
     $('.quantity-minus').click(function(e){  
         e.preventDefault();
-        let product_quantity = $(this).closest('.js__quantity').find('.product__quantity');
-        //let quantity = $(this).closest('.js-quantity').find('.product__quantity');
-        let quantity = product_quantity.val();
+        let product_quantityInsert = $(this).closest('.js__quantity').find('.product__quantity');
+        let quantity_instoreInsert = $(this).closest('.product__item').find('.quantity__instore');
+        let quantity_submit = $(this).closest('.product__item').find('.quantity__submit');
+        let product_quantity = product_quantityInsert.val();
+        let product_quantityNumber = Number(product_quantity);
+        let quantity_instoreNumber = Number(quantity_instoreInsert.text());
+        let db_quantity = $(this).closest('.product__item').find('.db__quantity');
+        let db_quantityNumber = Number(db_quantity.val());
+        if(product_quantityNumber > 0){
+            //alert(product_quantityNumber)
+            let quantity_minus = product_quantityNumber - 1;  
+            let add_quantityInStore = quantity_instoreNumber + 1;
+            product_quantityInsert.val(quantity_minus);
+            quantity_instoreInsert.text(add_quantityInStore);
+            quantity_submit.val(add_quantityInStore);
+        }
+        /* let quantity = product_quantity.val();
         let quantity_minus = Number(quantity) - 1;
         if(quantity_minus >= 0){
             product_quantity.val(quantity_minus);
             //console.log(product_quantity.val())
-        }
+        } */
     });
     $(document).on('click', '.quantity-minus, .quantity-add', function(e){  
         e.preventDefault();

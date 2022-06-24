@@ -78,7 +78,7 @@ class CheckoutController extends Controller
             if( $user->user_type == false ){
                 $user->user_type = 'Customer';
             }
-            if( $user->role_id ==false){
+            if( $user->role_id == false){
                 $user->role_id = 4;
             }
             $user->save();      

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inventory\Purchase;
+use App\Models\Inventory\Supplier;
 use Illuminate\Http\Request;
 
 use App\Models\Product\Product;
@@ -12,7 +14,8 @@ use App\Models\User;
 class PurchaseController extends Controller
 {
     public function index(){
-        return view('backend.inventory.purchase.index');
+        $data['purchases'] = Purchase::with(['product', 'supplier'])->paginate(25);
+        return view('backend.inventory.purchase.index', $data);
     }
 
     public function add(){
@@ -20,19 +23,67 @@ class PurchaseController extends Controller
     }
 
     public function store(Request $request){
-        return view('backend.inventory.purchase.add');
+        $supplier = new Supplier();
+        $supplier->name = $request->supplier_name;
+        $supplier->email = $request->supplier_email;
+        $supplier->phone_number = $request->supplier_phone_number;
+        $supplier->address = $request->supplier_address;
+        $supplier->save();
+
+        $purchase = new Purchase();
+        $purchase->supplier_id = $supplier->id;
+        $purchase->product_name = $request->product_name;
+        $purchase->quantity = $request->product_quantity;
+        $purchase->cost = $request->product_cost;
+        $purchase->notes = $request->product_notes;
+        $purchase->status = $request->product_status;
+        $purchase->created_at = now();
+        $purchase->save();
+
+        $notification = [
+            'message' => 'Purchase saved Successfully!!...',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('inventory.purchase')->with($notification);
+
+    }
+    
+    public function view($id){
+        $data['purchase'] = Purchase::with(['product', 'supplier'])->find($id);
+        $supplier_id = $data['purchase']->supplier_id;
+        $data['supplier'] = Supplier::where('id', $supplier_id)->first();
+        return view('backend.inventory.purchase.view', $data);
     }
 
     public function edit($id){
-        return view('backend.inventory.purchase.edit');
+        $data['purchase'] = Purchase::with(['product', 'supplier'])->find($id);
+        $supplier_id = $data['purchase']->supplier_id;
+        $data['supplier'] = Supplier::where('id', $supplier_id)->first();
+        return view('backend.inventory.purchase.edit', $data);
     }
 
     public function update(Request $request, $id){
-        return view('backend.inventory.purchase.add');
-    }
+        $purchase = Purchase::find($id);
+        $purchase->product_name = $request->product_name;
+        $purchase->quantity = $request->product_quantity;
+        $purchase->cost = $request->product_cost;
+        $purchase->notes = $request->product_notes;
+        $purchase->status = $request->product_status;
+        //$purchase->created_at = now();
+        $purchase->save();
 
-    public function view(){
-        return view('backend.inventory.purchase.view');
+        $supplier = Supplier::find($purchase->supplier_id);
+        $supplier->name = $request->supplier_name;
+        $supplier->email = $request->supplier_email;
+        $supplier->phone_number = $request->supplier_phone_number;
+        $supplier->address = $request->supplier_address;
+        $supplier->save();
+
+        $notification = [
+            'message' => 'Purchase updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('inventory.purchase')->with($notification);
     }
 
     public function search_product(Request $request){
@@ -43,8 +94,17 @@ class PurchaseController extends Controller
 
     public function search_supplier(Request $request){
         $supplier_name = $request->supplier_name;
-        $data['supplier'] = User::where('name', 'LIKE', '%' . $supplier_name . '%')
-                                    ->where('role', 'Supplier')->get();
+        $data['supplier'] = Supplier::where('name', 'LIKE', '%' . $supplier_name . '%')->get();
         return response()->json($data);
+    }
+
+    public function delete($id){
+        $purchase = Purchase::find($id);
+        $purchase->delete();
+        $notification = [
+            'message' => 'Purchase Deleted Successfully!!...',
+            'alert-type' => 'danger'
+        ];
+        return redirect()->route('inventory.purchase')->with($notification);
     }
 }

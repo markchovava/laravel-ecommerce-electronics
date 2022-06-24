@@ -21,6 +21,9 @@ use App\Http\Controllers\Frontend\Customer\CustomerController;
 use App\Http\Controllers\Frontend\Orders\OrdersController;
 use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\Inventory\PurchaseController;
+use App\Http\Controllers\Pages\Home\StickerController;
+
+
 //use App\Http\Controllers\PDF\PDFController;
 
 
@@ -118,6 +121,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::post('/brands/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
     Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
 
+    /* Homepage top Sticker */
+    Route::get('pages/home/sticker', [StickerController::class, 'index'])->name('admin.pages.home.sticker');
+    Route::get('pages/home/sticker/add', [StickerController::class, 'add'])->name('admin.pages.home.sticker.add');
+
      /* :::::: Quote ::::: */
     Route::prefix('quote')->group(function() {
         Route::get('/', [QuoteController::class, 'index'])->name('admin.quote');
@@ -187,21 +194,12 @@ Route::get('/add', function(){
 
 
 Route::get('/show', function(){
-   /*  if( isset($_COOKIE['shopping_session']) ){
-        $shopping_session = $_COOKIE['shopping_session'];
-        $data['carts'] = \App\Models\Cart\Cart::where('shopping_session', $shopping_session)->first();
-        $cart_id =  $data['carts']->id;
-        $data['cart_items'] = \App\Models\Cart\CartItem::with('product')->where('cart_id', $cart_id)->get();
-        dd($data['cart_items']);
-    } else{
-        return 'nIL';
-    }   */
-
-    unset($_COOKIE['shopping_session']);
-    setcookie('shopping_session','', time() - 3600);
-    // return $_COOKIE['shopping_session'];
-
-    
+    $id = 60;
+    $cart_item = \App\Models\Cart\CartItem::with(['product'])->find($id);
+     $a = $cart_item->product->inventories->in_store_quantity;
+    //$a = $cart_item->instore_quantity;
+    dd($a);
+    //return $a;
 });
 
 

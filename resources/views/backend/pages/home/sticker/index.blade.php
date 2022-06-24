@@ -3,6 +3,7 @@
 @section('backend')
 
 
+
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
@@ -12,7 +13,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Products</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Stickers</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -21,7 +22,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="#" class="text-muted text-hover-primary">Home</a>
+                        <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -46,12 +47,13 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Products</li>
+                    <li class="breadcrumb-item text-dark">Stickers</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
+           
         </div>
         <!--end::Container-->
     </div>
@@ -60,7 +62,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <!--begin::Products-->
+            <!--begin::Category-->
             <div class="card card-flush">
                 <!--begin::Card header-->
                 <div class="card-header align-items-center py-5 gap-2 gap-md-5">
@@ -77,18 +79,18 @@
                             </span>
                             <!--end::Svg Icon-->
                             <form>
-                                <input type="text" data-kt-ecommerce-product-filter="search" 
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Product" />
+                            <input type="text" name="search" data-kt-ecommerce-category-filter="search" 
+                            class="form-control form-control-solid w-250px ps-14" placeholder="Search Stickers" />
                             </form>
                         </div>
                         <!--end::Search-->
                     </div>
                     <!--end::Card title-->
                     <!--begin::Card toolbar-->
-                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                        <!--begin::Add product-->
-                        <a href="{{ route('admin.products.add') }}" class="btn btn-primary">Add Product</a>
-                        <!--end::Add product-->
+                    <div class="card-toolbar">
+                        <!--begin::Add customer-->
+                        <a href="" class="btn btn-primary">Add Sticker</a>
+                        <!--end::Add customer-->
                     </div>
                     <!--end::Card toolbar-->
                 </div>
@@ -96,22 +98,18 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
                         <!--begin::Table head-->
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="w-10px pe-2">
                                     <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-200px">Product</th>
-                                <th class="text-end min-w-100px">SKU</th>
-                                <th class="text-end min-w-70px">Qty</th>
-                                <th class="text-end min-w-100px">Price</th>
-                                <th class="text-end min-w-100px">Category</th>
-                                <th class="text-end min-w-100px">Author</th>
+                                <th class="min-w-250px">Sticker</th>
+                                <th class="min-w-150px">Status</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -119,7 +117,7 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @foreach($products as $product)
+                            
                             <!--begin::Table row-->
                             <tr>
                                 <!--begin::Checkbox-->
@@ -131,66 +129,32 @@
                                 <!--end::Checkbox-->
                                 <!--begin::Category=-->
                                 <td>
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex">
                                         <!--begin::Thumbnail-->
-                                        <a href="#" class="symbol symbol-50px">
+                                        <a href="" class="symbol symbol-50px">
                                             <span class="symbol-label" 
-                                            style="background-image:url({{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }});"></span>
+                                            style="background-image:url();"></span>
                                         </a>
                                         <!--end::Thumbnail-->
                                         <div class="ms-5">
                                             <!--begin::Title-->
-                                            <a href="{{ route('admin.products.view', $product->id) }}" class="text-gray-800 text-hover-primary fs-5 fw-bolder" data-kt-ecommerce-product-filter="{{ $product->name }}">
-                                                {{ $product->name }}
-                                            </a>
+                                            <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-category-filter="category_name">
+                                                Sticker Name</a>
                                             <!--end::Title-->
+                                            <!--begin::Description-->
+                                            <div class="text-muted fs-7 fw-bolder">Sticker Description</div>
+                                            <!--end::Description-->
                                         </div>
                                     </div>
                                 </td>
                                 <!--end::Category=-->
-                                <!--begin::SKU=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder">{{ $product->sku }}</span>
+                                <!--begin::Type=-->
+                                <td>
+                                    <!--begin::Badges-->
+                                    <div class="badge badge-light-success">Sticker Status</div>
+                                    <!--end::Badges-->
                                 </td>
-                                <!--end::SKU=-->
-                                <!--begin::Qty=-->
-                                <td class="text-end pe-0" data-order="{{ $product->quantity }}">
-                                    <span class="fw-bolder">
-                                        @php
-                                        $quantity = intval($product->inventories->in_warehouse_quantity) + intval($product->inventories->in_store_quantity);
-                                        @endphp
-                                        {{ $quantity }}
-                                    </span>
-                                </td>
-                                <!--end::Qty=-->
-                                <!--begin::Price=-->
-                                <td class="text-end pe-0">
-                                    <span class="fw-bolder">
-                                        @php 
-                                        $price = $product->price / 100;
-                                        $zwl_price = $product->zwl_price / 100;
-                                        @endphp
-                                        ${{ number_format((float)$price, 2, '.', '') }},&nbsp; <br>
-                                        ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
-                                    </span>
-                                </td>
-                                <!--end::Price=-->
-                                <!--begin::Rating-->
-                                    <td class="text-end pe-0" data-order="categories">
-                                        @foreach($product->categories as $_data)
-                                       
-                                            {{ $_data->name }},&nbsp;
-                                        
-                                        @endforeach
-                                    </td>  
-                                <!--end::Rating-->
-                                <!--begin::Status=-->
-                                    <td class="text-end pe-0" data-order="users">
-                                        @foreach($product->users as $user)
-                                            {{ $user->name }},&nbsp;
-                                        @endforeach
-                                    </td>
-                                <!--end::Status=-->
+                                <!--end::Type=-->
                                 <!--begin::Action=-->
                                 <td class="text-end">
                                     <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -205,17 +169,12 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                         <!--begin::Menu item-->
-                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.products.view', $product->id) }}" class="menu-link px-3">View</a>
+                                            <a href="" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.products.delete', $product->id) }}" class="menu-link px-3">Delete</a>
+                                            <a href="" class="menu-link px-3" >Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -224,7 +183,7 @@
                                 <!--end::Action=-->
                             </tr>
                             <!--end::Table row-->
-                           @endforeach
+                           
                         </tbody>
                         <!--end::Table body-->
                     </table>
@@ -232,7 +191,7 @@
                 </div>
                 <!--end::Card body-->
             </div>
-            <!--end::Products-->
+            <!--end::Category-->
         </div>
         <!--end::Container-->
     </div>

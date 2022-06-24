@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Product\ProductImage;
 use App\Models\Product\ProductSerialNumber;
 use App\Models\Inventory\Stock;
-
+use App\Models\Sticker\Sticker;
 
 class Product extends Model
 {
@@ -45,6 +45,12 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_categories', 'product_id', 'category_id')
+            ->withTimestamps();
+    }
+
+    /* Many to Many for Product and Stickers */
+    public function stickers(){
+        return $this->belongsToMany(Sticker::class, 'product_stickers', 'product_id', 'sticker_id')
             ->withTimestamps();
     }
 

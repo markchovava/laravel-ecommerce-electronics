@@ -63,27 +63,6 @@
                         <!--begin::Orders-->
                         <div class="d-flex flex-column gap-7 gap-lg-10">
                             <div class="d-flex flex-column flex-xl-row gap-7 gap-lg-10">
-                                <!--begin::Payment address-->
-                                <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
-                                    <!--begin::Background-->
-                                    <div class="position-absolute top-0 end-0 opacity-10 pe-none text-end">
-                                        <img src="{{ asset('backend/assets/media/icons/duotune/ecommerce/ecm001.svg') }}" class="w-175px" />
-                                    </div>
-                                    <!--end::Background-->
-                                    <!--begin::Card header-->
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            <h2>Product Details</h2>
-                                        </div>
-                                    </div>
-                                    <!--end::Card header-->
-                                    <!--begin::Card body-->
-                                    <div class="card-body pt-0" style="width:200px; height:150px; overflow:scroll;">
-                                        Unit 1/23 Hastings Road, Melbourne 3000, Victoria,Australia.
-                                    </div>
-                                    <!--end::Card body-->
-                                </div>
-                                <!--end::Payment address-->
                                 <!--begin::Shipping address-->
                                 <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
                                     <!--begin::Background-->
@@ -99,15 +78,16 @@
                                     </div>
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
-                                    <div class="card-body pt-0" style="width:200px; height:150px; overflow:scroll;">
-                                        Unit 1/23 Hastings Road, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, repellat.
-                                        Unit 1/23 Hastings Road, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, repellat.
+                                    <div class="card-body pt-0" style="width:220px; height:150px; overflow:scroll;">
+                                       {{ $supplier->name }} <br>
+                                       {{ $supplier->address }} <br>
+                                       {{ $supplier->phone_number }} <br>
+                                       {{ $supplier->email }} <br>
                                     </div>
                                     <!--end::Card body-->
                                 </div>
                                 <!--end::Shipping address-->
-                            </div>
-                            <!--begin::Product List-->
+                                <!--begin::Product List-->
                             <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
                                 <!--begin::Card header-->
                                 <div class="card-header">
@@ -125,7 +105,7 @@
                                             <thead>
                                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                                     <th class="min-w-175px">Product</th>
-                                                    <th class="min-w-100px text-end">SKU</th>
+                                                    <th class="min-w-100px text-end">Status</th>
                                                     <th class="min-w-70px text-end">Qty</th>
                                                     <th class="min-w-100px text-end">Cost</th>
                                                 </tr>
@@ -140,23 +120,26 @@
                                                         <div class="d-flex align-items-center">
                                                             <!--begin::Title-->
                                                             <div class="ms-5">
-                                                                <a href="../../demo1/dist/apps/ecommerce/catalog/edit-product.html" class="fw-bolder text-gray-600 text-hover-primary">
-                                                                    Product 1
-                                                                </a>
-                                                                <div class="fs-7 text-muted">Bought Date: 12/02/2022</div>
+                                                                {{ $purchase->product_name }}
+                                                                <div class="fs-7 text-muted">Bought Date: {{ $purchase->created_at }}</div>
                                                             </div>
                                                             <!--end::Title-->
                                                         </div>
                                                     </td>
                                                     <!--end::Product-->
                                                     <!--begin::SKU-->
-                                                    <td class="text-end">02659002</td>
+                                                    <td class="text-end">{{ $purchase->status }}</td>
                                                     <!--end::SKU-->
                                                     <!--begin::Quantity-->
-                                                    <td class="text-end">2</td>
+                                                    <td class="text-end">{{ $purchase->quantity }}</td>
                                                     <!--end::Quantity-->
                                                     <!--begin::Total-->
-                                                    <td class="text-end">$240.00</td>
+                                                    <td class="text-end">
+                                                        @php
+                                                            $cost = $purchase->cost / 100;
+                                                        @endphp
+                                                        ${{ number_format((float)$cost, 2, '.', '') }}
+                                                    </td>
                                                     <!--end::Total-->
                                                 </tr>
                                             </tbody>
@@ -168,6 +151,7 @@
                                 <!--end::Card body-->
                             </div>
                             <!--end::Product List-->
+                            </div>
                         </div>
                         <!--end::Orders-->
                     </div>

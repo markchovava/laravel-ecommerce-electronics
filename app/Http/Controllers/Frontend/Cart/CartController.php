@@ -12,6 +12,7 @@ use App\Actions\RoleManagement\CheckRoles;
 
 use App\Models\Cart\Cart;
 use App\Models\Cart\CartItem;
+use App\Models\Product\Inventory;
 use App\Models\Product\Product;
 
 class CartController extends Controller
@@ -41,7 +42,18 @@ class CartController extends Controller
             $cart_item = new CartItem();
             $cart_item->cart_id = $cart->id;
             $cart_item->product_id = $request->product_id;
-            $cart_item->quantity = 1;
+            $product = Product::find($request->product_id);
+            $quantity = $product->inventories->in_store_quantity; 
+            /* Add Quantity in Cart Items and Deduct quantity in Inventory */
+            if(intval($quantity) > 10){
+                $inventory = Inventory::where('product_id', $request->product_id)->first();
+                $inventory = Inventory::find($inventory->id);
+                $deduct_instore = intval($inventory->in_store_quantity) - 1;
+                $inventory->in_store_quantity = $deduct_instore;
+                $inventory->save();
+                $quantity = $product->inventories->in_store_quantity;
+                $cart_item->quantity++; 
+            }  
             if($request->variation_name != false && $request->variation_value != false){
                 $cart_item->variation_name = $request->variation_name;
                 $cart_item->variation_value = $request->variation_value;
@@ -83,7 +95,19 @@ class CartController extends Controller
             $cart_item = CartItem::where('product_id', $product_id)->first();
             if(!empty($cart_item)){
                 $cart_item->cart_id = $cart->id;
-                $cart_item->quantity++;
+                $cart_item->product_id = $request->product_id;
+                $product = Product::find($request->product_id);
+                $quantity = $product->inventories->in_store_quantity; 
+                 /* Add Quantity in Cart Items and Deduct quantity in Inventory */
+                if(intval($quantity) > 10){
+                    $inventory = Inventory::where('product_id', $request->product_id)->first();
+                    $inventory = Inventory::find($inventory->id);
+                    $deduct_instore = intval($inventory->in_store_quantity) - 1;
+                    $inventory->in_store_quantity = $deduct_instore; 
+                    $inventory->save();
+                    $quantity = $product->inventories->in_store_quantity;
+                    $cart_item->quantity++; 
+                }     
                 if($request->variation_name == '' && $request->variation_value == ''){
                     $cart_item->variation_name = $request->variation_name;
                     $cart_item->variation_value = $request->variation_value;
@@ -94,7 +118,18 @@ class CartController extends Controller
                 $cart_item = new CartItem();
                 $cart_item->product_id = $request->product_id;
                 $cart_item->cart_id = $cart->id;
-                $cart_item->quantity = 1;
+                $product = Product::find($request->product_id);
+                $quantity = $product->inventories->in_store_quantity; 
+                 /* Add Quantity in Cart Items and Deduct quantity in Inventory */
+                if(intval($quantity) > 10){
+                    $inventory = Inventory::where('product_id', $request->product_id)->first();
+                    $inventory = Inventory::find($inventory->id);
+                    $deduct_instore = intval($inventory->in_store_quantity) - 1;
+                    $inventory->in_store_quantity = $deduct_instore;  
+                    $inventory->save();
+                    $quantity = $product->inventories->in_store_quantity;
+                    $cart_item->quantity++; 
+                }  
                 if($request->variation_name == '' && $request->variation_value == ''){
                     $cart_item->variation_name = $request->variation_name;
                     $cart_item->variation_value = $request->variation_value;
@@ -137,6 +172,16 @@ class CartController extends Controller
                             $cart_items->variation_value = $request->variation_value[$i];
                         }
                         $cart_items->save();
+                    }
+                    /* Saves new quantity in store */
+                    $in_store_quantity =  $request->in_store_quantity;
+                    for($i = 0; $i < $count_id; $i++){
+                        $product = Product::find($request->product_id[$i]);
+                        $inventory_id = $product->inventories->id;
+                        $inventory = Inventory::find($inventory_id);
+                        $inventory->in_store_quantity = $in_store_quantity[$i];
+                        $inventory->save();
+                        //dd($inventory->in_store_quantity);
                     }
                     return redirect()->route('checkout'); 
                 }

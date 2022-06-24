@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Product\Product;
+use App\Models\User;
 
 class Purchase extends Model
 {
@@ -17,11 +18,11 @@ class Purchase extends Model
 
      /*Belong to one */
      public function supplier(){
-        return $this->belongsTo(User::class, 'supplier_id', 'id');
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
 
-     /* One to many */
+      /*Belong to one */
      public function product(){
-        return $this->belongsTo(Product::class, 'supplier_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }
