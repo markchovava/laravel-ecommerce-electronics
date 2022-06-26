@@ -124,6 +124,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     /* Homepage top Sticker */
     Route::get('pages/home/sticker', [StickerController::class, 'index'])->name('admin.pages.home.sticker');
     Route::get('pages/home/sticker/add', [StickerController::class, 'add'])->name('admin.pages.home.sticker.add');
+    Route::post('pages/home/sticker/store', [StickerController::class, 'store'])->name('admin.pages.home.sticker.store');
+    Route::get('pages/home/sticker/edit/{id}', [StickerController::class, 'edit'])->name('admin.pages.home.sticker.edit');
 
      /* :::::: Quote ::::: */
     Route::prefix('quote')->group(function() {
@@ -194,11 +196,13 @@ Route::get('/add', function(){
 
 
 Route::get('/show', function(){
-    $id = 60;
+    $c = \App\Models\Product\Category::with('products')->find(1);
+    return $c->products[0]->name;
+    /* $id = 60;
     $cart_item = \App\Models\Cart\CartItem::with(['product'])->find($id);
-     $a = $cart_item->product->inventories->in_store_quantity;
+     $a = $cart_item->product->inventories->in_store_quantity; */
     //$a = $cart_item->instore_quantity;
-    dd($a);
+    // dd($a);
     //return $a;
 });
 

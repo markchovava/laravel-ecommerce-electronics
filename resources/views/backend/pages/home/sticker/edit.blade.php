@@ -79,7 +79,8 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url({{ asset('assets/media/svg/files/blank-image.svg') }})">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" 
+                            style="background-image:url({{ (!empty($sticker->image)) ? url('storage/pages/sticker/' . $sticker->image) : url('storage/pages/no_image.jpg') }});">
                                 <!--begin::Preview existing avatar-->
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <!--end::Preview existing avatar-->
@@ -89,7 +90,7 @@
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--end::Icon-->
                                     <!--begin::Inputs-->
-                                    <input type="file" name="sticker_thumbnail" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="sticker_image" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
@@ -132,12 +133,12 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
-                            <select name="sticker_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_
-                            _status_select">
+                            <select name="sticker_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="{{ $sticker->status }}" 
+                            id="kt_ecommerce_add_status_select">
                                 <option></option>
-                                <option value="Published" selected="selected">Published</option>
-                                <option value="Scheduled">Scheduled</option>
-                                <option value="Unpublished">Unpublished</option>
+                                <option value="Published" {{ ($sticker->status == 'Published') ? 'selected="selected"' : '' }}>Published</option>
+                                <option value="Scheduled" {{ ($sticker->status == 'Scheduled') ? 'selected="selected"' : '' }}>Scheduled</option>
+                                <option value="Unpublished" {{ ($sticker->status == 'Unpublished') ? 'selected="selected"' : '' }}>Unpublished</option>
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
@@ -169,7 +170,7 @@
                                 <label class="required form-label">Sticker Title</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="sticker_title" class="form-control mb-2" placeholder="Sticker Name" value="" />
+                                <input type="text" name="sticker_title" value="{{ $sticker->title }}" class="form-control mb-2" placeholder="Sticker Name"/>
                                 <!--end::Input-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">A sticker title is required and recommended to be unique.</div>
@@ -182,46 +183,49 @@
                                 <label class="form-label">Sticker Subtitle</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <input type="text" name="sticker_subtitle" class="form-control mb-2" placeholder="Add Description..." value="" />
+                                <input type="text" name="sticker_subtitle" value="{{ $sticker->subtitle }}" class="form-control mb-2" placeholder="Add Description..."/>
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Set a subtitle to the sticker for better visibility.</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Input group-->
+                            @if( !empty($sticker->amount) &&  empty($sticker->percent) )
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label">Amount</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <input type="number" name="sticker_amount" class="form-control mb-2" placeholder="Add Amount"/>
+                                <input type="number" name="sticker_amount" value="{{ $sticker->amount}}" class="form-control mb-2" placeholder="Add Amount"/>
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Set an amount to the sticker.</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Input group-->
+                            @elseif( empty($sticker->amount) && !empty($sticker->percent) )
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label">Percent</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <input type="number" name="sticker_percent" class="form-control mb-2" placeholder="Add Amount"/>
+                                <input type="number" name="sticker_percent" value="{{ $sticker->percent }}" class="form-control mb-2" placeholder="Add Amount"/>
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Set a percent to the sticker.</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Input group-->
+                            @endif
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label">Click Name</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <input type="text" name="sticker_click_name" class="form-control mb-2" placeholder="Add Description..." value="" />
+                                <input type="text" name="sticker_click_name" value="{{ $sticker->click_name }}" class="form-control mb-2" placeholder="Add Description..."/>
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Set a click name to the sticker.</div>
@@ -234,7 +238,7 @@
                                 <label class="required form-label">Sticker Slug</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="sticker_slug" class="form-control mb-2" placeholder="sticker-one" value="" />
+                                <input type="text" name="sticker_slug" value="{{ $sticker->slug }}" class="form-control mb-2" placeholder="sticker-one"/>
                                 <!--end::Input-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">A sticker name is required and recommended to be unique.</div>

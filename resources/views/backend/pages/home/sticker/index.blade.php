@@ -117,7 +117,7 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            
+                            @foreach($stickers as $sticker)
                             <!--begin::Table row-->
                             <tr>
                                 <!--begin::Checkbox-->
@@ -133,16 +133,16 @@
                                         <!--begin::Thumbnail-->
                                         <a href="" class="symbol symbol-50px">
                                             <span class="symbol-label" 
-                                            style="background-image:url();"></span>
+                                            style="background-image:url({{ (!empty($sticker->image)) ? url('storage/pages/sticker/' . $sticker->image) : url('storage/pages/no_image.jpg') }});"></span>
                                         </a>
                                         <!--end::Thumbnail-->
                                         <div class="ms-5">
                                             <!--begin::Title-->
                                             <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-category-filter="category_name">
-                                                Sticker Name</a>
+                                                {{ $sticker->title }}</a>
                                             <!--end::Title-->
                                             <!--begin::Description-->
-                                            <div class="text-muted fs-7 fw-bolder">Sticker Description</div>
+                                            <div class="text-muted fs-7 fw-bolder">{{ $sticker->subtitle }}</div>
                                             <!--end::Description-->
                                         </div>
                                     </div>
@@ -151,7 +151,7 @@
                                 <!--begin::Type=-->
                                 <td>
                                     <!--begin::Badges-->
-                                    <div class="badge badge-light-success">Sticker Status</div>
+                                    <div class="badge badge-light-success">{{ $sticker->status }}</div>
                                     <!--end::Badges-->
                                 </td>
                                 <!--end::Type=-->
@@ -169,7 +169,7 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.pages.home.sticker.edit', $sticker->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
@@ -183,7 +183,7 @@
                                 <!--end::Action=-->
                             </tr>
                             <!--end::Table row-->
-                           
+                            @endforeach
                         </tbody>
                         <!--end::Table body-->
                     </table>

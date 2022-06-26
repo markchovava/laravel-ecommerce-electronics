@@ -10,10 +10,13 @@ class Sticker extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
+        'title',
+        'click_name',
+        'subtitle',
+        'amount',
         'slug',
-        'image' 
+        'status',
+        'image'
     ];
 
     public function products()

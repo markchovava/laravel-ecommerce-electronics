@@ -27,6 +27,7 @@ use App\Models\Product\Variation;
 use App\Models\Cart\Cart;
 use App\Models\User;
 use App\Models\Cart\CartItem;
+use App\Models\Sticker\Sticker;
 
 class HomeController extends Controller
 {
@@ -54,6 +55,8 @@ class HomeController extends Controller
             $data['cart'] = NULL;
             $data['cart_quantity'] = 0;
         }
+
+        $data['top_sticker'] = Sticker::where('slug', 'test')->first();
 
         $data['latest_products'] = Product::whereHas('categories', function($query){
             $query->where('slug', 'latest'); //this refers id field from categories table

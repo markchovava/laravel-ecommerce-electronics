@@ -15,9 +15,12 @@ return new class extends Migration
     { 
         Schema::create('stickers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('title')->nullable();
+            $table->string('click_name')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->string('amount')->nullable();
             $table->string('slug')->nullable();
+            $table->string('status')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

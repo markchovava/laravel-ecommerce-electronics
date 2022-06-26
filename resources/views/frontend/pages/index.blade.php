@@ -20,14 +20,25 @@
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                END SEASON <span class="d-block font-size-50">SMARTPHONES</span>
+                                                 <span class="d-block font-size-50">{{ $top_sticker->title }}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">LAST CALL FOR UP TO</span>
+                                                <span class="font-size-15 font-weight-bold">{{ $top_sticker->subtitle }}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    <sup class="font-size-36">$</sup>250<sub class="font-size-16">OFF!</sub>
+                                                    @if( !empty($top_sticker->amount) )
+                                                    <sup class="font-size-36">$</sup>
+                                                    @php
+                                                    $sticker_amount = $top_sticker->amount / 100
+                                                    @endphp
+                                                    {{ number_format((float)$sticker_amount, 2, '.', '') }}
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @else
+                                                    <sup class="font-size-36"></sup>
+                                                    {{ $sticker->percent }}%
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @endif
                                                 </span>
                                             </div>
                                             <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
@@ -198,7 +209,7 @@
                                 <ul class="nav nav-box-custom bg-white rounded-sm py-2" role="tablist">
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4 active" id="pills-one-code-features-tab" data-toggle="pill" href="#pills-one-code-features" role="tab" aria-controls="pills-one-code-features" aria-selected="true">
-                                            <span class="font-size-14">Gaming Monitors 65</span>
+                                            <span class="font-size-14">{{ $top_sticker->click_name }}</span>
                                         </a>
                                     </li>
 
