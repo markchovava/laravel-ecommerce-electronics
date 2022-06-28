@@ -16,9 +16,9 @@ use App\Models\Product\Category;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductImage;
 use App\Models\Product\ProductMeta;
-use App\Models\Product\ProductTag;
+use App\Models\Product\Tag\ProductTag;
 use App\Models\Product\ProductBrand;
-use App\Models\Product\Tag;
+use App\Models\Product\Tag\Tag;
 use App\Models\Product\Tax;
 use App\Models\Product\Brand;
 use App\Models\Product\CategoryProduct;
@@ -56,7 +56,9 @@ class ProductController extends Controller
                 $image_name = date('YmdHi'). '.' . $image_extension;
                 $upload_location = 'storage/products/thumbnail/';
                 if($product->image){
-                    unlink($upload_location . $product->image);
+                    if(file_exists(public_path($upload_location . $product->image))){
+                        unlink($upload_location . $product->image);
+                    }
                     $product_thumbnail->move($upload_location, $image_name);
                     $product->image = $image_name;                    
                 }else{
@@ -144,7 +146,9 @@ class ProductController extends Controller
                     $image_name = hexdec(uniqid()) . '.' . $image_extension;
                     $upload_location = 'storage/products/images/';
                     if($product_images->image){
-                        unlink($upload_location . $product_images->image);
+                        if(file_exists(public_path($upload_location . $product_images->image))){
+                            unlink($upload_location . $product_images->image);
+                        }
                         $image->move($upload_location, $image_name);
                         $product_images->image = $image_name;                      
                     }else{
@@ -203,8 +207,8 @@ class ProductController extends Controller
     }
 
     public function edit($id){
-        $data['categories'] = Category::all();
-        $data['tags'] = Tag::all();
+        $data['categories'] = Category::orderBy('id','desc')->get();
+        $data['tags'] = Tag::orderBy('id','desc')->get();
         $data['brands'] = Brand::all();
         $data['product_metas'] = ProductMeta::where('product_id', $id)->get();
         $data['discounts'] = Discount::where('product_id', $id)->get();
@@ -261,7 +265,9 @@ class ProductController extends Controller
                 $image_name = date('YmdHi'). '.' . $image_extension;
                 $upload_location = 'storage/products/thumbnail/';
                 if($product->image){
-                    unlink($upload_location . $product->image);
+                    if(file_exists(public_path($upload_location . $product->image))){
+                        unlink($upload_location . $product->image);
+                    }
                     $product_thumbnail->move($upload_location, $image_name);
                     $product->product_thumbnail = $image_name;                      
                 }else{
@@ -285,9 +291,9 @@ class ProductController extends Controller
             $product->width = $request->product_width;
             $product->height = $request->product_height;
             $product->length = $request->product_length;
+            $product->updated_at = now();
             $product->save();
-
-            
+    
             if(!empty($request->edit__serialNumber)){
                 /* Deletes previous saved records before saving new records  */
                 $product_serial = ProductSerialNumber::where('product_id', $product->id)->delete();
@@ -310,7 +316,6 @@ class ProductController extends Controller
                 $product_serial = ProductSerialNumber::where('serial_number', NULL)->delete();
             }
             
-
             /* User Product Link */
             if(UserProduct::where('product_id', '=', $product->id)->exists()){
                 $user_product = UserProduct::where('product_id', $product->id)->first();
@@ -374,7 +379,9 @@ class ProductController extends Controller
                     $image_name = hexdec(uniqid()) . '.' . $image_extension;
                     $upload_location = 'storage/products/images/';    
                     if($product_images->image){
-                        unlink($upload_location . $product_images->image);
+                        if(file_exists(public_path($upload_location . $product_images->image))){
+                            unlink($upload_location . $product_images->image);
+                        }
                         $image->move($upload_location, $image_name);                     
                     } else{
                         $image->move($upload_location, $image_name);

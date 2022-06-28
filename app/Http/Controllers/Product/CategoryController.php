@@ -22,18 +22,22 @@ class CategoryController extends Controller
         $category->name = $request->category_name;
         $category->description = $request->category_description;
         $category->slug = $request->category_slug;
+        $category->position = $request->category_position;
         $category->status = $request->category_status;
         $category->created_at = now();
-        if( $request->file('category_thumbnail') )
+        if( $request->file('category_image') )
         {
-            $category_thumbnail = $request->file('category_thumbnail');
-            $image_extension = strtolower($category_thumbnail->getClientOriginalExtension());
+            $category_image = $request->file('category_image');
+            $image_extension = strtolower($category_image->getClientOriginalExtension());
             $image_name = date('YmdHi'). '.' . $image_extension;
             $upload_location = 'storage/products/category/';
-            $category_thumbnail->move($upload_location, $image_name);
+            $category_image->move($upload_location, $image_name);
             if($category->image)
             {
-                unlink( $upload_location . $category->image );
+                if(file_exists(public_path($upload_location . $category->image))){
+                    dd('file exists');
+                    //unlink( $upload_location . $category->image );
+                }
             }  
             $category->image = $image_name;     
         }
@@ -57,16 +61,19 @@ class CategoryController extends Controller
         $category->name = $request->category_name;
         $category->description = $request->category_description;
         $category->status = $request->category_status;
+        $category->position = $request->category_position;
         $category->slug = $request->category_slug;
         $category->updated_at = now();
-        if( $request->file('category_thumbnail') ){
-            $category_image = $request->file('category_thumbnail');
+        if( $request->file('category_image') ){
+            $category_image = $request->file('category_image');
             $image_extension = strtolower($category_image->getClientOriginalExtension());
             $image_name = date('YmdHi'). '.' . $image_extension;
             $upload_location = 'storage/products/category/';
             $category_image->move($upload_location, $image_name);
             if($category->image){
-                unlink( $upload_location . $category->image );
+                if(file_exists(public_path($upload_location . $category->image))){
+                    unlink( $upload_location . $category->image );
+                }
             }  
             $category->image = $image_name;     
         }

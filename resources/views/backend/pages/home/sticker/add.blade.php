@@ -89,7 +89,7 @@
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--end::Icon-->
                                     <!--begin::Inputs-->
-                                    <input type="file" name="sticker_thumbnail" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="sticker_image" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>

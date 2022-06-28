@@ -15,28 +15,29 @@
                         <div class="col">
                             <!-- Tab Content -->
                             <div class="tab-content">
+                                @if($tag_first)
                                 <div class="tab-pane fade show active" id="pills-one-code-features" role="tabpanel" aria-labelledby="pills-one-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                 <span class="d-block font-size-50">{{ $top_sticker->title }}</span>
+                                                 <span class="d-block font-size-46">{{ $tag_first->title }}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">{{ $top_sticker->subtitle }}</span>
+                                                <span class="font-size-15 font-weight-bold">{{ $tag_first->subtitle }}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    @if( !empty($top_sticker->amount) )
+                                                    @if( !empty($tag_first->amount) )
                                                     <sup class="font-size-36">$</sup>
                                                     @php
-                                                    $sticker_amount = $top_sticker->amount / 100
+                                                    $first_amount = $tag_first->amount / 100
                                                     @endphp
-                                                    {{ number_format((float)$sticker_amount, 2, '.', '') }}
+                                                    {{ number_format((float)$first_amount, 2, '.', '') }}
                                                     <sub class="font-size-16">OFF!</sub>
                                                     @else
                                                     <sup class="font-size-36"></sup>
-                                                    {{ $sticker->percent }}%
+                                                    {{ $tag_first->percent }}%
                                                     <sub class="font-size-16">OFF!</sub>
                                                     @endif
                                                 </span>
@@ -50,24 +51,50 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/bag.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" 
+                                            src="{{ (!empty($tag_first->image)) ? url('storage/tags/' . $tag_first->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
-
+                                @else
                                 <div class="tab-pane fade" id="pills-two-code-features" role="tabpanel" aria-labelledby="pills-two-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                END SEASON <span class="d-block font-size-50">SMARTPHONES</span>
+                                                 <span class="d-block font-size-46">
+                                                    No Info
+                                                </span>
+                                            </h1>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                @if($tag_second)
+                                <div class="tab-pane fade" id="pills-two-code-features" role="tabpanel" aria-labelledby="pills-two-code-features-tab">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-5">
+                                            <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
+                                                data-scs-animation-in="fadeInUp">
+                                                 <span class="d-block font-size-46">{{ $tag_second->title }}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">LAST CALL FOR UP TO</span>
+                                                <span class="font-size-15 font-weight-bold">{{ $tag_second->subtitle }}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    <sup class="font-size-36">$</sup>250<sub class="font-size-16">OFF!</sub>
+                                                    @if( !empty($tag_second->amount) )
+                                                    <sup class="font-size-36">$</sup>
+                                                    @php
+                                                    $amount = $tag_second->amount / 100
+                                                    @endphp
+                                                    {{ number_format((float)$amount, 2, '.', '') }}
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @else
+                                                    <sup class="font-size-36"></sup>
+                                                    {{ $tag_second->percent }}%
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @endif
                                                 </span>
                                             </div>
                                             <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
@@ -79,24 +106,43 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/motherboard.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" 
+                                            src="{{ (!empty($tag_second->image)) ? url('storage/tags/' . $tag_second->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
-
+                                @else
+                                <div class="tab-pane fade" id="pills-two-code-features" role="tabpanel" aria-labelledby="pills-two-code-features-tab">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-5">
+                                            <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
+                                                data-scs-animation-in="fadeInUp">
+                                                 <span class="d-block font-size-46">
+                                                    No Info
+                                                </span>
+                                            </h1>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                @if($tag_third)
                                 <div class="tab-pane fade" id="pills-three-code-features" role="tabpanel" aria-labelledby="pills-three-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                END SEASON <span class="d-block font-size-50">SMARTPHONES</span>
+                                                <span class="d-block font-size-46">{{ $tag_third->title }}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">LAST CALL FOR UP TO</span>
+                                                <span class="font-size-15 font-weight-bold">{{ $tag_third->subtitle }}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    <sup class="font-size-36">$</sup>250<sub class="font-size-16">OFF!</sub>
+                                                    <sup class="font-size-36"></sup>
+                                                    @php
+                                                    $percent = $tag_third->percent / 100
+                                                    @endphp
+                                                    {{ number_format((float)$percent, 2, '.', '') }}%<sub class="font-size-16">OFF!</sub>
                                                 </span>
                                             </div>
                                             <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
@@ -108,24 +154,50 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/memory_card.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" 
+                                            src="{{ (!empty($tag_third->image)) ? url('storage/tags/' . $tag_third->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
-
+                                @else
+                                <div class="tab-pane fade" id="pills-three-code-features" role="tabpanel" aria-labelledby="pills-three-code-features-tab">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-5">
+                                            <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
+                                                data-scs-animation-in="fadeInUp">
+                                                 <span class="d-block font-size-46">
+                                                    No Info
+                                                </span>
+                                            </h1>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                @if($tag_forth)
                                 <div class="tab-pane fade" id="pills-four-code-features" role="tabpanel" aria-labelledby="pills-four-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                END SEASON <span class="d-block font-size-50">SMARTPHONES</span>
+                                                 <span class="d-block font-size-46">{{ $tag_forth->title }}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">LAST CALL FOR UP TO</span>
+                                                <span class="font-size-15 font-weight-bold">{{ $tag_forth->subtitle }}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    <sup class="font-size-36">$</sup>250<sub class="font-size-16">OFF!</sub>
+                                                    @if( !empty($tag_forth->amount) )
+                                                    <sup class="font-size-36">$</sup>
+                                                    @php
+                                                    $amount = $tag_forth->amount / 100
+                                                    @endphp
+                                                    {{ number_format((float)$amount, 2, '.', '') }}
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @else
+                                                    <sup class="font-size-36"></sup>
+                                                    {{ $tag_forth->percent }}%
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @endif
                                                 </span>
                                             </div>
                                             <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
@@ -137,24 +209,52 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/tablet.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" 
+                                            src="{{ (!empty($tag_forth->image)) ? url('storage/tags/' . $tag_forth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
-
+                                @else
+                                <div class="tab-pane fade" id="pills-four-code-features" role="tabpanel" aria-labelledby="pills-four-code-features-tab">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-5">
+                                            <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
+                                                data-scs-animation-in="fadeInUp">
+                                                 <span class="d-block font-size-46">
+                                                    No Info
+                                                </span>
+                                            </h1>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                @if($tag_fifth)
                                 <div class="tab-pane fade" id="pills-five-code-features" role="tabpanel" aria-labelledby="pills-five-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                END SEASON <span class="d-block font-size-50">SMARTPHONES</span>
+                                                 <span class="d-block font-size-46">
+                                                    {{ ($tag_fifth->title) ? $tag_fifth->title : 'No title' }}
+                                                </span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">LAST CALL FOR UP TO</span>
+                                                <span class="font-size-15 font-weight-bold">{{ $tag_fifth->subtitle }}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    <sup class="font-size-36">$</sup>250<sub class="font-size-16">OFF!</sub>
+                                                    @if( !empty($tag_fifth->amount) )
+                                                    <sup class="font-size-36">$</sup>
+                                                    @php
+                                                    $amount = $tag_fifth->amount / 100
+                                                    @endphp
+                                                    {{ number_format((float)$amount, 2, '.', '') }}
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @else
+                                                    <sup class="font-size-36"></sup>
+                                                    {{ $tag_fifth->percent }}%
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @endif
                                                 </span>
                                             </div>
                                             <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
@@ -166,24 +266,50 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/images/724x360/bag-1.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" 
+                                            src="{{ (!empty($tag_fifth->image)) ? url('storage/tags/' . $tag_fifth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
-
+                                @else
+                                <div class="tab-pane fade" id="pills-five-code-features" role="tabpanel" aria-labelledby="pills-five-code-features-tab">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-5">
+                                            <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
+                                                data-scs-animation-in="fadeInUp">
+                                                 <span class="d-block font-size-46">
+                                                    No Info
+                                                </span>
+                                            </h1>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                @if($tag_sixth)
                                 <div class="tab-pane fade" id="pills-six-code-features" role="tabpanel" aria-labelledby="pills-six-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                END SEASON <span class="d-block font-size-50">SMARTPHONES</span>
+                                                 <span class="d-block font-size-46">{{ $tag_sixth->title }}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">LAST CALL FOR UP TO</span>
+                                                <span class="font-size-15 font-weight-bold">{{ $tag_sixth->subtitle }}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    <sup class="font-size-36">$</sup>250<sub class="font-size-16">OFF!</sub>
+                                                    @if( !empty($tag_sixth->amount) )
+                                                    <sup class="font-size-36">$</sup>
+                                                    @php
+                                                    $amount = $tag_sixth->amount / 100
+                                                    @endphp
+                                                    {{ number_format((float)$amount, 2, '.', '') }}
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @else
+                                                    <sup class="font-size-36"></sup>
+                                                    {{ $tag_sixth->percent }}%
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @endif
                                                 </span>
                                             </div>
                                             <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
@@ -195,10 +321,25 @@
                                         <div class="col-lg-7"
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
-                                            <img class="img-fluid rounded-lg" src="{{ asset('frontend/assets/img/724x360/img2.png') }}" alt="Image Description">
+                                            <img class="img-fluid rounded-lg" 
+                                            src="{{ (!empty($tag_sixth->image)) ? url('storage/tags/' . $tag_sixth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                <div class="tab-pane fade" id="pills-six-code-features" role="tabpanel" aria-labelledby="pills-six-code-features-tab">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-5">
+                                            <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
+                                                data-scs-animation-in="fadeInUp">
+                                                 <span class="d-block font-size-46">
+                                                    No Info
+                                                </span>
+                                            </h1>                                                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                             <!-- End Tab Content -->
                         </div>
@@ -209,37 +350,73 @@
                                 <ul class="nav nav-box-custom bg-white rounded-sm py-2" role="tablist">
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4 active" id="pills-one-code-features-tab" data-toggle="pill" href="#pills-one-code-features" role="tab" aria-controls="pills-one-code-features" aria-selected="true">
-                                            <span class="font-size-14">{{ $top_sticker->click_name }}</span>
+                                            <span class="font-size-14">
+                                                @if($tag_first)
+                                                    {{ ($tag_first->click_name) ? $tag_first->click_name : 'No info' }}
+                                                @else
+                                                    No Info
+                                                @endif
+                                            </span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-two-code-features-tab" data-toggle="pill" href="#pills-two-code-features" role="tab" aria-controls="pills-two-code-features" aria-selected="false">
-                                            <span class="font-size-14">Smartphones Sale</span>
+                                            <span class="font-size-14">
+                                                @if($tag_second)
+                                                    {{ ($tag_second->click_name) ? $tag_second->click_name : 'No info' }}
+                                                @else
+                                                    No Info
+                                                @endif
+                                            </span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-three-code-features-tab" data-toggle="pill" href="#pills-three-code-features" role="tab" aria-controls="pills-three-code-features" aria-selected="false">
-                                            <span class="font-size-14">End Season Sale</h4>
+                                            <span class="font-size-14">
+                                                @if($tag_third)
+                                                {{ ($tag_third->click_name) ? $tag_third->click_name : 'No info' }}
+                                                @else
+                                                    No Info
+                                                @endif
+                                            </h4>
                                         </a>
                                     </li>
 
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-four-code-features-tab" data-toggle="pill" href="#pills-four-code-features" role="tab" aria-controls="pills-four-code-features" aria-selected="false">
-                                            <span class="font-size-14">Laptops Arrivals</h4>
+                                            <span class="font-size-14">
+                                                @if($tag_forth)
+                                                {{ ($tag_forth->click_name) ? $tag_forth->click_name : 'No info' }}
+                                                @else
+                                                    No Info
+                                                @endif
+                                            </h4>
                                         </a>
                                     </li>
 
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-five-code-features-tab" data-toggle="pill" href="#pills-five-code-features" role="tab" aria-controls="pills-five-code-features" aria-selected="false">
-                                            <span class="font-size-14">Earphones - 25%</h4>
+                                            <span class="font-size-14">
+                                                @if($tag_fifth)
+                                                    {{ ($tag_fifth->click_name) ? $tag_fifth->click_name : 'No info' }}
+                                                @else
+                                                    No Info
+                                                @endif
+                                            </h4>
                                         </a>
                                     </li>
 
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-six-code-features-tab" data-toggle="pill" href="#pills-six-code-features" role="tab" aria-controls="pills-six-code-features" aria-selected="false">
-                                            <span class="font-size-14">Tablets 10 inch Sale</h4>
+                                            <span class="font-size-14">
+                                                @if($tag_sixth)
+                                                    {{ ($tag_sixth->click_name) ? $tag_sixth->click_name : 'No info' }}
+                                                @else
+                                                    No Info
+                                                @endif
+                                            </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -324,11 +501,13 @@
                                             <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                             <div class="mb-2">
                                                 <a href="#" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
+                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
+                                                    <div class="text-gray-100">
+                                                        $685,00
+                                                    </div>
                                                 </div>
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
@@ -337,7 +516,7 @@
                                         </div>
                                         <div class="product-item__footer">
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
                                                 <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
@@ -353,11 +532,14 @@
                                             <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
                                             <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                             <div class="mb-2">
-                                                <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
+                                                <a href="#" class="d-block text-center">
+                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
+                                                    <div class="text-gray-100">
+                                                        $685,00
+                                                    </div>
                                                 </div>
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
@@ -366,7 +548,7 @@
                                         </div>
                                         <div class="product-item__footer">
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Qoute</a>
+                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
                                                 <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
@@ -382,11 +564,14 @@
                                             <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
                                             <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                             <div class="mb-2">
-                                                <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/4.png') }}" alt="Image Description"></a>
+                                                <a href="#" class="d-block text-center">
+                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
+                                                    <div class="text-gray-100">
+                                                        $685,00
+                                                    </div>
                                                 </div>
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
@@ -395,7 +580,7 @@
                                         </div>
                                         <div class="product-item__footer">
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
+                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
                                                 <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
@@ -411,11 +596,14 @@
                                             <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
                                             <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                             <div class="mb-2">
-                                                <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/3.png') }}" alt="Image Description"></a>
+                                                <a href="#" class="d-block text-center">
+                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
+                                                    <div class="text-gray-100">
+                                                        $685,00
+                                                    </div>
                                                 </div>
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
@@ -424,7 +612,7 @@
                                         </div>
                                         <div class="product-item__footer">
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
                                                 <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
@@ -440,11 +628,14 @@
                                             <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
                                             <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                                             <div class="mb-2">
-                                                <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
+                                                <a href="#" class="d-block text-center">
+                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
                                             </div>
                                             <div class="flex-center-between mb-1">
                                                 <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
+                                                    <div class="text-gray-100">
+                                                        $685,00
+                                                    </div>
                                                 </div>
                                                 <div class="d-none d-xl-block prodcut-add-cart">
                                                     <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
@@ -453,7 +644,7 @@
                                         </div>
                                         <div class="product-item__footer">
                                             <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
                                                 <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                             </div>
                                         </div>
@@ -461,93 +652,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center"><img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/2.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">$685,00</div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--  -->
                     </div>
                 </div>
             </div>

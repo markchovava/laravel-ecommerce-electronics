@@ -26,9 +26,9 @@ class StickerController extends Controller
         $sticker->slug = $request->sticker_slug;
         $sticker->status = $request->sticker_status;
         $sticker->created_at = now();
-        if( $request->file('sticker_thumbnail') )
+        if( $request->file('sticker_image') )
         {
-            $sticker_thumbnail = $request->file('sticker_thumbnail');
+            $sticker_thumbnail = $request->file('sticker_image');
             $image_extension = strtolower($sticker_thumbnail->getClientOriginalExtension());
             $image_name = date('YmdHi'). '.' . $image_extension;
             $upload_location = 'storage/pages/sticker/';
@@ -60,12 +60,13 @@ class StickerController extends Controller
         $sticker->subtitle = $request->sticker_subtitle;
         $sticker->click_name = $request->sticker_click_name;
         $sticker->amount = $request->sticker_amount;
+        $sticker->percent = $request->sticker_percent;
         $sticker->slug = $request->sticker_slug;
         $sticker->status = $request->sticker_status;
-        $sticker->created_at = now();
-        if( $request->file('sticker_thumbnail') )
+        $sticker->updated_at = now();
+        if( $request->file('sticker_image') )
         {
-            $sticker_thumbnail = $request->file('sticker_thumbnail');
+            $sticker_thumbnail = $request->file('sticker_image');
             $image_extension = strtolower($sticker_thumbnail->getClientOriginalExtension());
             $image_name = date('YmdHi'). '.' . $image_extension;
             $upload_location = 'storage/pages/sticker/';
@@ -79,7 +80,7 @@ class StickerController extends Controller
         $sticker->save();
 
         $notification = [
-            'message' => 'Sticker Added Successfully!!...',
+            'message' => 'Sticker Updated Successfully!!...',
             'alert-type' => 'success'
         ];
 

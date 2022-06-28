@@ -90,7 +90,7 @@
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--end::Icon-->
                                     <!--begin::Inputs-->
-                                    <input type="file" name="category_thumbnail" value="{{ $category->image }}" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="category_image" value="{{ $category->image }}" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
@@ -108,12 +108,50 @@
                             </div>
                             <!--end::Image input-->
                             <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the category thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                            <div class="text-muted fs-7">Only *.png, *.jpg and *.jpeg image files are accepted. 300 * 300 dimensions</div>
                             <!--end::Description-->
                         </div>
                         <!--end::Card body-->
                     </div>
                     <!--end::Thumbnail settings-->
+                    <!--begin::Position-->
+                    <div class="card card-flush py-4">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <h2>Position</h2>
+                            </div>
+                            <!--end::Card title-->
+                            <!--begin::Card toolbar-->
+                            <div class="card-toolbar">
+                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_category_status"></div>
+                            </div>
+                            <!--begin::Card toolbar-->
+                        </div>
+                        <!--end::Card header-->
+                        <!--begin::Card body-->
+                        <div class="card-body pt-0">
+                            <!--begin::Select2-->
+                            <select name="category_position" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="{{ $category->position }}" id="kt_ecommerce_add_
+                            _status_select">
+                                <option value="First" {{ ($category->position == 'First') ? 'selected="selected"' : '' }}>First</option>
+                                <option value="Second" {{ ($category->position == 'Second') ? 'selected="selected"' : '' }}>Second</option>
+                                <option value="Third" {{ ($category->position == 'Third') ? 'selected="selected"' : '' }}>Third</option>
+                                <option value="Forth" {{ ($category->position == 'Forth') ? 'selected="selected"' : '' }}>Forth</option>
+                                <option value="Fifth" {{ ($category->position == 'Fifth') ? 'selected="selected"' : '' }}>Fifth</option>
+                                <option value="Sixth" {{ ($category->position == 'Sixth') ? 'selected="selected"' : '' }} >Sixth</option>
+                                <option value="Seventh" {{ ($category->position == 'Seventh') ? 'selected="selected"' : '' }}>Seventh</option>
+                                <option value="Eighth" {{ ($category->position == 'Eighth') ? 'selected="selected"' : '' }}>Eighth</option>
+                            </select>
+                            <!--end::Select2-->
+                            <!--begin::Description-->
+                            <div class="text-muted fs-7">Set the tag position.</div>
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Position-->
                     <!--begin::Status-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -212,8 +250,6 @@
                         <!--begin::Button-->
                         <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
                             <span class="indicator-label">Save Changes</span>
-                            <span class="indicator-progress">Please wait...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
                         <!--end::Button-->
                     </div>

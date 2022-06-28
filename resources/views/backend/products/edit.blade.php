@@ -170,7 +170,12 @@
                                     <div class="category__Row form-group row my-3">
                                         <div class="col-md-9">
                                             <select name="category__repeaterBasic[0][]" id="" class="form-select">
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}">
+                                                    @if( $category->position ) 
+                                                        ({{$category->position }})  
+                                                    @endif
+                                                    {{ $category->name }} 
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-md-3 d-flex align-items-center">
@@ -198,7 +203,12 @@
                                                         <select name="" class="form-control mb-2 p-2">
                                                         <option selected="" disabled="">Select Option Below.</option>
                                                         @foreach($categories as $category) 
-                                                            <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                                            <option value="{{ $category->id }}"> 
+                                                                @if( $category->position ) 
+                                                                    ({{ $category->position }})  
+                                                                @endif
+                                                                {{ $category->name }} 
+                                                            </option>
                                                         @endforeach
                                                         </select>
                                                         <!--end::Select2-->
@@ -229,7 +239,7 @@
                             <!--end::Card body-->
                         @endif
                     </div>
-                    <!--end::Category & tags-->
+                    <!--end::Category -->
                     <!--begin::Brands-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -328,17 +338,24 @@
                         </div>
                         <!--end::Card header-->
 
+
                         @php
                             $tags_from_db = $product->tags()->where('product_id', $product->id)->get();
                         @endphp
-                        @if($tags_from_db)   
+                        @if( !empty($tags_from_db) )  
+                        <div class="card-body pt-0"> 
                         <!--begin::Repeater Display-->
                         <section id="tag_repeaterDisplay">   
                             @foreach($tags_from_db as $tag) 
                             <div class="tag__Row form-group row my-3">
                                 <div class="col-md-9">
                                     <select name="tag__repeaterBasic[0][]" id="" class="form-select">
-                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                        <option value="{{ $tag->id }}"> 
+                                            @if( $tag->position ) 
+                                                ({{$tag->position }})  
+                                            @endif
+                                            {{ $tag->click_name }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 d-flex align-items-center">
@@ -350,6 +367,7 @@
                             @endforeach  
                         </section>
                         <!--end::Repeater Display-->
+                        </div>
                         @endif
                         @if(!empty($tags))
                             <!--begin::Card body-->
@@ -367,12 +385,17 @@
                                                         <select name="" class="form-control mb-2 p-2">
                                                         <option selected="" disabled="">Select Option Below.</option>
                                                             @foreach($tags as $tag)   
-                                                                <option value="{{ $tag->id }}"> {{ $tag->name }}</option>
+                                                                <option value="{{ $tag->id }}">
+                                                                    {{ $tag->click_name }}
+                                                                    @if( $tag->position ) 
+                                                                        ({{$tag->position }})  
+                                                                    @endif
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                         <!--end::Select2-->
                                                         <!--begin::Description-->
-                                                        <div class="text-muted fs-7 mb-7">Add product Brand.</div>
+                                                        <div class="text-muted fs-7 mb-7">Add product tag.</div>
                                                         <!--end::Description-->
                                                     </div>
                                                     <div class="col-md-3">
@@ -1080,7 +1103,7 @@ $(document).ready(function(){
 /* ::::::: Remove previous Tags:::::: */
 $(document).ready(function(){
     $(document).on('click', '#btn__removeTag', function(){
-        $(this).closest('.brand__Row').remove();
+        $(this).closest('.tag__Row').remove();
     })
 });
 

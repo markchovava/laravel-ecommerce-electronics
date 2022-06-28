@@ -61,7 +61,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form method="post" action="{{ route('admin.pages.home.sticker.store') }}" enctype="multipart/form-data" class="form d-flex flex-column flex-lg-row">
+            <form method="post" action="{{ route('admin.pages.home.sticker.update', $sticker->id) }}" enctype="multipart/form-data" class="form d-flex flex-column flex-lg-row">
                 @csrf
                 <!--begin::Aside column-->
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
@@ -90,7 +90,7 @@
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--end::Icon-->
                                     <!--begin::Inputs-->
-                                    <input type="file" name="sticker_image" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="sticker_image" value="{{ $sticker->image }}" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
@@ -135,7 +135,6 @@
                             <!--begin::Select2-->
                             <select name="sticker_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="{{ $sticker->status }}" 
                             id="kt_ecommerce_add_status_select">
-                                <option></option>
                                 <option value="Published" {{ ($sticker->status == 'Published') ? 'selected="selected"' : '' }}>Published</option>
                                 <option value="Scheduled" {{ ($sticker->status == 'Scheduled') ? 'selected="selected"' : '' }}>Scheduled</option>
                                 <option value="Unpublished" {{ ($sticker->status == 'Unpublished') ? 'selected="selected"' : '' }}>Unpublished</option>
@@ -190,21 +189,19 @@
                                 <!--end::Description-->
                             </div>
                             <!--end::Input group-->
-                            @if( !empty($sticker->amount) &&  empty($sticker->percent) )
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <!--begin::Label-->
                                 <label class="form-label">Amount</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <input type="number" name="sticker_amount" value="{{ $sticker->amount}}" class="form-control mb-2" placeholder="Add Amount"/>
+                                <input type="number" name="sticker_amount" value="{{ $sticker->amount }}" class="form-control mb-2" placeholder="Add Amount"/>
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Set an amount to the sticker.</div>
                                 <!--end::Description-->
                             </div>
-                            <!--end::Input group-->
-                            @elseif( empty($sticker->amount) && !empty($sticker->percent) )
+                            <!--end::Input group-->   
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <!--begin::Label-->
@@ -218,7 +215,6 @@
                                 <!--end::Description-->
                             </div>
                             <!--end::Input group-->
-                            @endif
                             <!--begin::Input group-->
                             <div class="mb-10">
                                 <!--begin::Label-->

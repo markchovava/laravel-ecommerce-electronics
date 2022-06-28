@@ -89,7 +89,7 @@
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--end::Icon-->
                                     <!--begin::Inputs-->
-                                    <input type="file" name="category_thumbnail" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="category_image" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
@@ -107,12 +107,50 @@
                             </div>
                             <!--end::Image input-->
                             <!--begin::Description-->
-                            <div class="text-muted fs-7">Set the category thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                            <div class="text-muted fs-7">Only *.png, *.jpg and *.jpeg image files are accepted. 300 * 300 dimensions</div>
                             <!--end::Description-->
                         </div>
                         <!--end::Card body-->
                     </div>
                     <!--end::Thumbnail settings-->
+                    <!--begin::Position-->
+                    <div class="card card-flush py-4">
+                        <!--begin::Card header-->
+                        <div class="card-header">
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <h2>Position</h2>
+                            </div>
+                            <!--end::Card title-->
+                            <!--begin::Card toolbar-->
+                            <div class="card-toolbar">
+                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_category_status"></div>
+                            </div>
+                            <!--begin::Card toolbar-->
+                        </div>
+                        <!--end::Card header-->
+                        <!--begin::Card body-->
+                        <div class="card-body pt-0">
+                            <!--begin::Select2-->
+                            <select name="category_position" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add__status_select">
+                                <option></option>
+                                <option value="First" >First</option>
+                                <option value="Second">Second</option>
+                                <option value="Third">Third</option>
+                                <option value="Forth">Forth</option>
+                                <option value="Fifth">Fifth</option>
+                                <option value="Sixth">Sixth</option>
+                                <option value="Seventh">Seventh</option>
+                                <option value="Eighth">Eighth</option>
+                            </select>
+                            <!--end::Select2-->
+                            <!--begin::Description-->
+                            <div class="text-muted fs-7">Set the category status.</div>
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Position-->
                     <!--begin::Status-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -134,9 +172,9 @@
                             <!--begin::Select2-->
                             <select name="category_status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_category_status_select">
                                 <option></option>
-                                <option value="published" selected="selected">Published</option>
-                                <option value="scheduled">Scheduled</option>
-                                <option value="unpublished">Unpublished</option>
+                                <option value="Published" selected="selected">Published</option>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="Unpublished">Unpublished</option>
                             </select>
                             <!--end::Select2-->
                             <!--begin::Description-->
@@ -210,9 +248,7 @@
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
                         <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                            <span class="indicator-label">Save Changes</span>
-                            <span class="indicator-progress">Please wait...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <span class="indicator-label">Save</span>
                         </button>
                         <!--end::Button-->
                     </div>

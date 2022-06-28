@@ -138,11 +138,14 @@
                                         <!--end::Thumbnail-->
                                         <div class="ms-5">
                                             <!--begin::Title-->
-                                            <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-category-filter="category_name">
-                                                {{ $category->name }}</a>
+                                            <a href="{{ route('admin.category.edit', $category->id) }}" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-category-filter="category_name">
+                                                {{ $category->name }}
+                                            </a>
                                             <!--end::Title-->
                                             <!--begin::Description-->
-                                            <div class="text-muted fs-7 fw-bolder">{{ $category->description }}</div>
+                                            <div class="text-muted fs-7 fw-bolder">
+                                                Position: <span class="badge badge-light-success">{{ ($category->position) ? $category->position : 'Not selected.' }}</span>
+                                            </div>
                                             <!--end::Description-->
                                         </div>
                                     </div>
@@ -151,7 +154,7 @@
                                 <!--begin::Type=-->
                                 <td>
                                     <!--begin::Badges-->
-                                    <div class="badge badge-light-success">{{ $category->status }}</div>
+                                    <div class="badge badge-light-info">{{ $category->status }}</div>
                                     <!--end::Badges-->
                                 </td>
                                 <!--end::Type=-->

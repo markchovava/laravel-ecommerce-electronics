@@ -9,17 +9,16 @@ use App\Models\Product\ProductImage;
 use App\Models\Product\ProductSerialNumber;
 use App\Models\Inventory\Stock;
 use App\Models\Sticker\Sticker;
+use App\Models\Product\Tag\Tag;
 
 class Product extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description',
-        'short_description', 'status',
-        'type', 'SKU', 'barcode', 'qrcode',
-        'price', 'weight', 'height','width',
-        'length'
+        'name', 'description','short_description', 'status',
+        'type', 'SKU', 'barcode', 'qrcode', 'price', 'weight', 
+        'height','width', 'length'
     ];
 
     /* Many to Many */
@@ -30,7 +29,8 @@ class Product extends Model
     }
 
     /* One to many */
-    public function serial_numbers(){
+    public function serial_numbers()
+    {
         return $this->hasMany(ProductSerialNumber::class, 'product_id', 'id');
     }
 

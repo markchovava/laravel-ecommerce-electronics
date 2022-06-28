@@ -144,6 +144,15 @@
                                                 {{ $product->name }}
                                             </a>
                                             <!--end::Title-->
+                                            <div class="text-muted fs-7 fw-bolder">
+                                                @if($product->tags)
+                                                    @foreach($product->tags as $_data)
+                                                        @if($_data->position)
+                                                        <small>Tag: <span class="badge badge-light-success">{{ $_data->position }}</span></small>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -157,7 +166,7 @@
                                 <td class="text-end pe-0" data-order="{{ $product->quantity }}">
                                     <span class="fw-bolder">
                                         @php
-                                        $quantity = intval($product->inventories->in_warehouse_quantity) + intval($product->inventories->in_store_quantity);
+                                        $quantity = intval($product->inventories->in_store_quantity);
                                         @endphp
                                         {{ $quantity }}
                                     </span>
@@ -178,9 +187,14 @@
                                 <!--begin::Rating-->
                                     <td class="text-end pe-0" data-order="categories">
                                         @foreach($product->categories as $_data)
-                                       
-                                            {{ $_data->name }},&nbsp;
-                                        
+                                            {{ $_data->name }}
+                                            @if($_data->position)
+                                            <small class="badge badge-light-success">
+                                                {{ $_data->position }}
+                                            </small>
+                                            @else
+                                                {{ $_data->name }}
+                                            @endif,&nbsp;      
                                         @endforeach
                                     </td>  
                                 <!--end::Rating-->

@@ -17,7 +17,7 @@ use App\Models\Product\ProductImage;
 use App\Models\Product\ProductMeta;
 use App\Models\Product\ProductTag;
 use App\Models\Product\ProductBrand;
-use App\Models\Product\Tag;
+use App\Models\Product\Tag\Tag;
 use App\Models\Product\Tax;
 use App\Models\Product\Brand;
 use App\Models\Product\CategoryProduct;
@@ -27,6 +27,7 @@ use App\Models\Product\Variation;
 use App\Models\Cart\Cart;
 use App\Models\User;
 use App\Models\Cart\CartItem;
+use App\Models\Product\Tag\Tag as TagTag;
 use App\Models\Sticker\Sticker;
 
 class HomeController extends Controller
@@ -56,7 +57,21 @@ class HomeController extends Controller
             $data['cart_quantity'] = 0;
         }
 
-        $data['top_sticker'] = Sticker::where('slug', 'test')->first();
+        /* Single Tags */
+        $data['tag_first'] = Tag::where('position', 'First')->first();
+        $data['tag_second'] = Tag::where('position', 'Second')->first();
+        $data['tag_third'] = Tag::where('position', 'Third')->first();
+        $data['tag_forth'] = Tag::where('position', 'Forth')->first();
+        $data['tag_fifth'] = Tag::where('position', 'Fifth')->first();
+        $data['tag_sixth'] = Tag::where('position', 'Sixth')->first();
+
+        /* Single Category */
+        $data['category_first'] = Category::with('products')->where('position', 'First')->first();
+        $data['category_second'] = Category::with('products')->where('position', 'Second')->first();
+        $data['category_third'] = Category::with('products')->where('position', 'Third')->first();
+        $data['category_forth'] = Category::with('products')->where('position', 'Forth')->first();
+        $data['category_fifth'] = Category::with('products')->where('position', 'Fifth')->first();
+        $data['category_sixth'] = Category::with('products')->where('position', 'Sixth')->first();
 
         $data['latest_products'] = Product::whereHas('categories', function($query){
             $query->where('slug', 'latest'); //this refers id field from categories table

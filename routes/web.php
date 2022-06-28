@@ -8,6 +8,7 @@ use App\Actions\RoleManagement\CheckRoles;
 use App\Models\Product\Product;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\TagController;
 use App\Http\Controllers\Product\BrandController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
@@ -113,6 +114,17 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
     Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
 
+    /* :::::: Tag ::::: */
+    Route::prefix('tags')->group(function() {
+        Route::get('/', [TagController::class, 'index'])->name('admin.tag');
+        Route::get('/add', [TagController::class, 'add'])->name('admin.tag.add');
+        Route::post('/store', [TagController::class, 'store'])->name('admin.tag.store');
+        Route::get('/edit/{id}', [TagController::class, 'edit'])->name('admin.tag.edit');
+        Route::post('/update/{id}', [TagController::class, 'update'])->name('admin.tag.update');
+        Route::get('/delete/{id}', [TagController::class, 'delete'])->name('admin.tag.delete');
+        Route::get('/search', [TagController::class, 'search'])->name('admin.tag.search');
+    });
+
      /* :::::: Brands ::::: */
     Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand');
     Route::get('/brands/add', [BrandController::class, 'add'])->name('admin.brand.add');
@@ -126,6 +138,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('pages/home/sticker/add', [StickerController::class, 'add'])->name('admin.pages.home.sticker.add');
     Route::post('pages/home/sticker/store', [StickerController::class, 'store'])->name('admin.pages.home.sticker.store');
     Route::get('pages/home/sticker/edit/{id}', [StickerController::class, 'edit'])->name('admin.pages.home.sticker.edit');
+    Route::post('pages/home/sticker/update/{id}', [StickerController::class, 'update'])->name('admin.pages.home.sticker.update');
 
      /* :::::: Quote ::::: */
     Route::prefix('quote')->group(function() {
@@ -196,8 +209,10 @@ Route::get('/add', function(){
 
 
 Route::get('/show', function(){
-    $c = \App\Models\Product\Category::with('products')->find(1);
-    return $c->products[0]->name;
+    // $c = \App\Models\Product\Category::with('products')->find(1);
+    // return $c->products[0]->name;
+    $data['category_first'] = \App\Models\Product\Category::with('products')->where('position', 'First')->first();
+    dd($data['category_first']->products);
     /* $id = 60;
     $cart_item = \App\Models\Cart\CartItem::with(['product'])->find($id);
      $a = $cart_item->product->inventories->in_store_quantity; */
