@@ -359,7 +359,6 @@
                                             </span>
                                         </a>
                                     </li>
-
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-two-code-features-tab" data-toggle="pill" href="#pills-two-code-features" role="tab" aria-controls="pills-two-code-features" aria-selected="false">
                                             <span class="font-size-14">
@@ -371,7 +370,6 @@
                                             </span>
                                         </a>
                                     </li>
-
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-three-code-features-tab" data-toggle="pill" href="#pills-three-code-features" role="tab" aria-controls="pills-three-code-features" aria-selected="false">
                                             <span class="font-size-14">
@@ -383,7 +381,6 @@
                                             </h4>
                                         </a>
                                     </li>
-
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-four-code-features-tab" data-toggle="pill" href="#pills-four-code-features" role="tab" aria-controls="pills-four-code-features" aria-selected="false">
                                             <span class="font-size-14">
@@ -395,7 +392,6 @@
                                             </h4>
                                         </a>
                                     </li>
-
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-five-code-features-tab" data-toggle="pill" href="#pills-five-code-features" role="tab" aria-controls="pills-five-code-features" aria-selected="false">
                                             <span class="font-size-14">
@@ -407,7 +403,6 @@
                                             </h4>
                                         </a>
                                     </li>
-
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-six-code-features-tab" data-toggle="pill" href="#pills-six-code-features" role="tab" aria-controls="pills-six-code-features" aria-selected="false">
                                             <span class="font-size-14">
@@ -426,235 +421,317 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-4 position-relative">
-                    <div class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1"
-                        data-arrows-classes="u-slick__arrow u-slick__arrow--flat u-slick__arrow-centered--y rounded-circle"
-                        data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-2 ml-xl-n3"
-                        data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-2 mr-xl-n3"
-                        data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
-                        data-slides-show="7"
-                        data-slides-scroll="1"
-                        data-responsive='[{
-                            "breakpoint": 1400,
-                            "settings": {
-                            "slidesToShow": 5
-                            }
-                        }, {
-                            "breakpoint": 1200,
-                            "settings": {
-                                "slidesToShow": 3
-                            }
-                        }, {
-                            "breakpoint": 992,
-                            "settings": {
-                            "slidesToShow": 2
-                            }
-                        }, {
-                            "breakpoint": 768,
-                            "settings": {
-                            "slidesToShow": 2
-                            }
-                        }, {
-                            "breakpoint": 554,
-                            "settings": {
-                            "slidesToShow": 2
-                            }
-                        }]'>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">
-                                                        $685,00
-                                                    </div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
+
+                <!-- Trending products -->
+                <section class="category__highlight position-relative" style="padding-bottom:3rem; padding-top:1rem;">
+                    <div class="category__highlightCarousel owl-carousel owl-theme">
+                        @if( $category_first->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_first->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="{{ route('product.view', $category_first->products[0]->id) }}" class="text-blue font-weight-bold">
+                                        {{ $category_first->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty($category_first->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_first->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                    alt="{{ $category_first->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_first->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_first->products[0]->price }}" class="price__cents">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">
-                                                        $685,00
-                                                    </div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                        id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">
-                                                        $685,00
-                                                    </div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_first->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">
-                                                        $685,00
-                                                    </div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
+                        @endif   
+                        @if( $category_second->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_second->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="#" class="text-blue font-weight-bold">
+                                        {{ $category_second->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                    alt="{{ $category_second->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_second->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_second->products[0]->price }}" class="price__cents">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">
-                                                        $685,00
-                                                    </div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                        id="{{ $category_second->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="js-slide products-group">
-                            <div class="product-item mx-1 remove-divider">
-                                <div class="product-item__outer h-100">
-                                    <div class="product-item__inner bg-white px-wd-3 p-2 p-md-3">
-                                        <div class="product-item__body pb-xl-2">
-                                            <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">Speakers</a></div>
-                                            <h5 class="mb-1 product-item__title"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="#" class="d-block text-center">
-                                                    <img class="img-fluid" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                            </div>
-                                            <div class="flex-center-between mb-1">
-                                                <div class="prodcut-price">
-                                                    <div class="text-gray-100">
-                                                        $685,00
-                                                    </div>
-                                                </div>
-                                                <div class="d-none d-xl-block prodcut-add-cart">
-                                                    <a href="#" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item__footer">
-                                            <div class="border-top pt-2 flex-center-between flex-wrap">
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Qoute</a>
-                                                <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_second->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                 </div>
                             </div>
-                        </div>
-                        <!--  -->
+                        @endif   
+                        @if( $category_third->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_third->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="{{ route('product.view', $category_third->products[0]->id) }}" class="text-blue font-weight-bold">
+                                        {{ $category_third->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty( $category_third->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_third->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                    alt="{{ $category_third->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_third->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_third->products[0]->price }}" class="price__cents">
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                        id="{{ $category_third->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_third->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                </div>
+                            </div>
+                        @endif   
+                        @if( $category_forth->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_forth->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="{{ route('product.view', $category_forth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                        {{ $category_forth->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty( $category_forth->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_forth->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                    alt="{{ $category_forth->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_forth->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_forth->products[0]->price }}" class="price__cents">
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                        id="{{ $category_forth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_forth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                </div>
+                            </div>
+                        @endif   
+                        @if( $category_fifth->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_fifth->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                        {{ $category_fifth->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty($category_fifth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_fifth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                    alt="{{ $category_fifth->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_fifth->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_fifth->products[0]->price }}" class="price__cents">
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                        id="{{ $category_fifth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_fifth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                </div>
+                            </div>
+                        @endif   
+                        @if( $category_fifth->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_fifth->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="#" class="text-blue font-weight-bold">
+                                        {{ $category_fifth->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty($category_fifth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_fifth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                    alt="{{ $category_fifth->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_fifth->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_fifth->products[0]->price }}" class="price__cents">
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                        id="{{ $category_fifth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_fifth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                </div>
+                            </div>
+                        @endif   
+                        @if( $category_sixth->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_sixth->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="{{ route('product.view', $category_sixth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                        {{ $category_sixth->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty( $category_sixth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_sixth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                    alt="{{ $category_sixth->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_sixth->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_sixth->products[0]->price }}" class="price__cents">
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_sixth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                </div>
+                            </div>
+                        @endif   
+                        @if( $category_seventh->products[0] )
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    <a href="#" class="font-size-12 text-gray-5">
+                                        {{ $category_seventh->name }}
+                                    </a>
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                        {{ $category_seventh->products[0]->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                    alt="{{ $category_second->products[0]->name }}">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                            $price = $category_seventh->products[0]->price / 100;
+                                            @endphp
+                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $category_seventh->products[0]->price }}" class="price__cents">
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                        id="{{ $category_seventh->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $category_seventh->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                </div>
+                            </div>
+                        @endif  
                     </div>
-                </div>
+                </section>
+                <!-- End Trending products -->
+                
             </div>
         </div>
     </div>
@@ -884,10 +961,18 @@
                                             Hurry Up! Offer ends in:
                                         </h6>
                                         <div class="js-countdown d-flex justify-content-center"
-                                            data-end-date="2022/06/05"
+                                            data-end-date="2022/06/30"
+                                            data-days-format="%D"
                                             data-hours-format="%H"
                                             data-minutes-format="%M"
                                             data-seconds-format="%S">
+                                            <div class="text-lh-1">
+                                                <div class="text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2">
+                                                    <span class="js-cd-days"></span>
+                                                </div>
+                                                <div class="text-gray-2 font-size-12 font-weight-semi-bold text-center">DAYS</div>
+                                            </div>
+                                            <div class="mx-1 pt-1 text-gray-2 font-size-24">:</div>
                                             <div class="text-lh-1">
                                                 <div class="text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2">
                                                     <span class="js-cd-hours"></span>

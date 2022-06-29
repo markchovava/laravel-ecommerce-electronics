@@ -23,6 +23,7 @@ use App\Http\Controllers\Frontend\Orders\OrdersController;
 use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\Inventory\PurchaseController;
 use App\Http\Controllers\Pages\Home\StickerController;
+use App\Http\Controllers\Ads\AdsController;
 
 
 //use App\Http\Controllers\PDF\PDFController;
@@ -132,6 +133,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
     Route::post('/brands/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
     Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
+
+    Route::prefix('ads')->group(function(){
+        Route::get('/', [AdsController::class, 'index'])->name('admin.ads');
+        Route::get('/edit', [AdsController::class, 'edit'])->name('admin.ads.edit');
+    });
 
     /* Homepage top Sticker */
     Route::get('pages/home/sticker', [StickerController::class, 'index'])->name('admin.pages.home.sticker');

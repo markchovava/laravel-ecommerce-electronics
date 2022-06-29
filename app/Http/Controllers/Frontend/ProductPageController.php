@@ -16,7 +16,7 @@ use App\Models\Product\ProductImage;
 use App\Models\Product\ProductMeta;
 use App\Models\Product\ProductTag;
 use App\Models\Product\ProductBrand;
-use App\Models\Product\Tag;
+use App\Models\Product\Tag\Tag;
 use App\Models\Product\Tax;
 use App\Models\Product\Brand;
 use App\Models\Product\CategoryProduct;

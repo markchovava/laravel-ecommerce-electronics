@@ -1,7 +1,27 @@
+.display__none{
+    display:none;
+}
 .img__212x200{
     width:212px !important;
     height:200px !important;
     object-fit: cover;
+}
+
+.img__300x300{
+    width: 300px !important;
+    height: 300px !important;
+    overflow: hidden;
+}
+
+.img__fit{
+    width: 100% !important;
+    height:100% !important;
+    object-fit: cover !important;
+    transition: all .5s ease-in-out;
+}
+
+.img__fit:hover{
+    transform: scale(1.1);
 }
 
 .img__5by4{
@@ -20,6 +40,25 @@
     clear: both !important;
     position: relative !important;
 }
+
+/* Owl Carousel Override */
+.category__highlightCarousel .owl-dots{
+    margin-top: 1.3rem !important;
+}
+
+.category__highlightCarousel .owl-dots > .owl-dot span{
+    width: 0.7rem !important;
+    height: 0.5rem !important;
+    background-color:white !important;
+}
+
+.category__highlightCarousel .owl-dots > .owl-dot.active span{
+    width: 1.6rem !important;
+    height: 0.5rem !important;
+    background-color:#fed700 !important;
+}
+/* ::::::::::::: */
+
 #hot-deals .col-lg-4{
  padding: 0.5rem !important;
 }
