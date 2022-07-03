@@ -50,6 +50,11 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function ads(){
+        return $this->belongsToMany(Ads::class, 'ad_users', 'user_id', 'ad_id')
+            ->withTimestamps();
+    }
+
     public function purchases(){
         return $this->hasMany(Quote::class, 'supplier_id', 'id');
     }

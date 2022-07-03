@@ -139,7 +139,7 @@
                                         <div class="ms-5">
                                             <!--begin::Title-->
                                             <a href="{{ route('admin.tag.edit', $tag->id) }}" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-category-filter="category_name">
-                                                {{ $tag->title }}</a>
+                                                {!! $tag->title !!}</a>
                                             <!--end::Title-->
                                             <!--begin::Description-->
                                             <div class="text-muted fs-7 fw-bolder">

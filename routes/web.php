@@ -24,7 +24,8 @@ use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\Inventory\PurchaseController;
 use App\Http\Controllers\Pages\Home\StickerController;
 use App\Http\Controllers\Ads\AdsController;
-
+use App\Http\Controllers\Frontend\Category\CategoryPageController;
+use App\Http\Controllers\Frontend\Tag\TagPageController;
 
 //use App\Http\Controllers\PDF\PDFController;
 
@@ -53,8 +54,16 @@ Route::get('/customer/register', [CustomerController::class, 'register'])->name(
 Route::post('/customer/register', [CustomerController::class, 'register_process'])->name('customer.register.process');
 Route::get('/customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
 
-/* Products */
+/* ::: Single Product Page ::: */
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
+
+/*    Category Pages   */
+Route::get('/category', [CategoryPageController::class, 'index'])->name('category.index');
+Route::get('/category/{id}', [CategoryPageController::class, 'view'])->name('category.view');
+
+/* ::: Tag Pages ::: */
+Route::get('/tag', [TagPageController::class, 'index'])->name('tag.index');
+Route::get('/tag/{id}', [TagPageController::class, 'view'])->name('tag.view');
 
 /* :::::: Cart :::::: */
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -135,8 +144,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
 
     Route::prefix('ads')->group(function(){
-        Route::get('/', [AdsController::class, 'index'])->name('admin.ads');
-        Route::get('/edit', [AdsController::class, 'edit'])->name('admin.ads.edit');
+        Route::get('/', [AdsController::class, 'index'])->name('admin.ad');
+        Route::get('/add', [AdsController::class, 'add'])->name('admin.ad.add');
+        Route::post('/store', [AdsController::class, 'store'])->name('admin.ad.store');
+        Route::get('/edit/{id}', [AdsController::class, 'edit'])->name('admin.ad.edit');
+        Route::post('/update/{id}', [AdsController::class, 'update'])->name('admin.ad.update');
+        Route::get('/delete/{id}', [AdsController::class, 'delete'])->name('admin.ad.delete');
     });
 
     /* Homepage top Sticker */
@@ -215,16 +228,32 @@ Route::get('/add', function(){
 
 
 Route::get('/show', function(){
-    // $c = \App\Models\Product\Category::with('products')->find(1);
-    // return $c->products[0]->name;
-    $data['category_first'] = \App\Models\Product\Category::with('products')->where('position', 'First')->first();
-    dd($data['category_first']->products);
-    /* $id = 60;
-    $cart_item = \App\Models\Cart\CartItem::with(['product'])->find($id);
-     $a = $cart_item->product->inventories->in_store_quantity; */
-    //$a = $cart_item->instore_quantity;
-    // dd($a);
-    //return $a;
+
+    /* $data = Product::with('categories')->whereHas('categories', function($query){
+        $query->where('product_categories.category_id', 3); //this refers id field from categories table
+    })
+    ->orderBy('id','desc')
+    ->paginate(8); */
+    $id = 2;
+    $data['tag'] = Product::with('categories')->whereHas('tags', function($query) use($id){
+        $query->where('product_tags.tag_id', $id); //this refers id field from categories table
+    })
+    ->orderBy('id','desc')
+    ->paginate(12);
+
+    foreach($data['tag'] as $product){
+        foreach($product->categories as $_data){
+            dd($_data->name);
+        }
+    }
+
+/* @foreach($product->categories as $_data)
+<a href="{{ route('category.index', $_data->id) }}" class="font-size-12 text-gray-5">
+    {{ $_data->name }},
+</a>
+@endforeach */
+
+
 });
 
 

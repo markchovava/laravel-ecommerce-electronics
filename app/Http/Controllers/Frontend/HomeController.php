@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Actions\RoleManagement\CheckRoles;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ads\Ads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +28,8 @@ use App\Models\Product\Variation;
 use App\Models\Cart\Cart;
 use App\Models\User;
 use App\Models\Cart\CartItem;
-use App\Models\Product\Tag\Tag as TagTag;
 use App\Models\Sticker\Sticker;
+use App\Models\Backend\BasicInfo;
 
 class HomeController extends Controller
 {
@@ -36,11 +37,7 @@ class HomeController extends Controller
     public function index()
     {
         /* Role Management */
-        /* if(Auth::check()){
-            $id = Auth::id();
-            $user = User::where('id', $id)->first();
-            $data['role_id'] = $user->role_id;
-        } */
+        
         $data['role_id'] = CheckRoles::check_role();
         
         if( isset($_COOKIE['shopping_session']) ){
@@ -73,37 +70,68 @@ class HomeController extends Controller
         $data['category_fifth'] = Category::with('products')->where('position', 'Fifth')->first();
         $data['category_sixth'] = Category::with('products')->where('position', 'Sixth')->first();
         $data['category_seventh'] = Category::with('products')->where('position', 'Seventh')->first();
-        $data['category_eighth'] = Category::with('products')->where('position', 'Eighth')->first();
 
-        //dd( $data['category_second']->products[0] );
+        /* Special Offer */
+        $data['special_offer'] = Product::with(['discounts', 'inventories'])->where('special_offer', 'Yes')->first();
 
-        $data['latest_products'] = Product::whereHas('categories', function($query){
+        /* Advert Area */
+        $data['ad_first'] = Ads::where('page', 'Home')->where('position', 'First')->first();
+        $data['ad_second'] = Ads::where('page', 'Home')->where('position', 'Second')->first();
+
+        /* Brands */
+        $data['brands'] = Brand::latest()->paginate(10);
+
+        /* 
+        *   Footer Products 
+        *   3 First Tag, Trending Products 
+        */
+        $data['tag_first_three'] = Product::whereHas('tags', function($query){
+            $query->where('position', 'First'); //this refers id field from categories table
+        })
+        ->orderBy('updated_at','desc')
+        ->paginate(3);
+
+        /* 
+        *   3 Latest Products 
+        */
+        $data['latest_three'] = Product::latest()->paginate(3);
+
+        /* 
+        *  3 Daily Hot Products 
+        */
+        $data['tag_second_three'] = Product::whereHas('tags', function($query){
+            $query->where('position', 'Second'); //this refers id field from categories table
+        })
+        ->orderBy('updated_at','desc')
+        ->paginate(3);
+
+        /* 
+        *   Website Basic Info
+        */
+        $data['info'] = BasicInfo::first();
+
+
+        $data['latest_products'] = Product::with('categories')->whereHas('categories', function($query){
             $query->where('slug', 'latest'); //this refers id field from categories table
         })
         ->orderBy('id','desc')
-        ->get();
-        $data['promotion_products'] = Product::whereHas('categories', function($query){
+        ->paginate(8);
+        $data['promotion_products'] = Product::with('categories')->whereHas('categories', function($query){
             $query->where('slug', 'promotion'); //this refers id field from categories table
         })
         ->orderBy('id','desc')
-        ->get();
-        $data['hot_products'] = Product::whereHas('categories', function($query){
+        ->paginate(8);
+        $data['hot_products'] = Product::with('categories')->whereHas('categories', function($query){
             $query->where('slug', 'LIKE', '%hot-deals%'); //this refers id field from categories table
         })
         ->orderBy('id','desc')
-        ->get();
-        $data['trending_products'] = Product::whereHas('categories', function($query){
+        ->paginate(8);
+        $data['trending_products'] = Product::with('categories')->whereHas('categories', function($query){
             $query->where('slug', 'LIKE', '%trending%'); //this refers id field from categories table
         })
         ->orderBy('id','desc')
-        ->get();
-       /*  $data['trending_products'] = Product::whereHas('categories', function($query){
-            $query->where('name', 'Latest'); //this refers id field from categories table
-        })
-        Product::where('name', 'LIKE', '%' . $name . '%')->get();
-        ->orderBy('id','desc')
-        ->get(); */
-        // $data['trending_products'] = Category::with('products')->where('slug', 'latest')->get();
+        ->paginate(8);
+       
         $data['products'] = Product::with([
             'categories',
             'brands',

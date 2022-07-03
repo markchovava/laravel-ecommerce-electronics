@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class BrandController extends Controller
 {
     public function index(){
-        $data['brands'] = Brand::all();
+        $data['brands'] = Brand::latest()->get();
         return view('backend.brand.index', $data);
     }
 
@@ -19,17 +19,24 @@ class BrandController extends Controller
 
     public function store(Request $request){
         $brand = new Brand();
+        $brand->create_at = $brand->updated_at = now();
         $brand->name = $request->brand_name;
-        if( $request->file('brand_image') ){
+        if( $request->file('brand_image') )
+        {
             $brand_image = $request->file('brand_image');
             $image_extension = strtolower($brand_image->getClientOriginalExtension());
             $image_name = date('YmdHi'). '.' . $image_extension;
             $upload_location = 'storage/products/brand/';
-            $brand_image->move($upload_location, $image_name);
             if($brand->image){
-                unlink( $upload_location . $brand->image );
-            }  
-            $brand->image = $image_name;     
+                if(file_exists(public_path($upload_location . $brand->image))){
+                    unlink($upload_location . $brand->image);
+                }
+                $brand_image->move($upload_location, $image_name);
+                $brand->image = $image_name;                    
+            }else{
+                $brand_image->move($upload_location, $image_name);
+                $brand->image = $image_name;
+            }              
         }
         $brand->save();
 
@@ -41,23 +48,29 @@ class BrandController extends Controller
     }
 
     public function edit($id){
-        $data['brand'] = Brand::where('id',$id)->first();
+        $data['brand'] = Brand::find($id);
         return view('backend.brand.edit', $data);
     }
 
     public function update(Request $request, $id){
         $brand = Brand::find($id);
+        $brand->create_at = $brand->updated_at = now();
         $brand->name = $request->brand_name;
         if( $request->file('brand_image') ){
             $brand_image = $request->file('brand_image');
             $image_extension = strtolower($brand_image->getClientOriginalExtension());
             $image_name = date('YmdHi'). '.' . $image_extension;
             $upload_location = 'storage/products/brand/';
-            $brand_image->move($upload_location, $image_name);
             if($brand->image){
-                unlink( $upload_location . $brand->image );
-            }  
-            $brand->image = $image_name;     
+                if(file_exists(public_path($upload_location . $brand->image))){
+                    unlink($upload_location . $brand->image);
+                }
+                $brand_image->move($upload_location, $image_name);
+                $brand->image = $image_name;                    
+            }else{
+                $brand_image->move($upload_location, $image_name);
+                $brand->image = $image_name;
+            }              
         }
         $brand->save();
 
@@ -70,6 +83,12 @@ class BrandController extends Controller
 
     public function delete($id){
         $brand = Brand::find($id);
+        $upload_location = 'storage/products/brand/';
+        if($brand->image){
+            if(file_exists(public_path($upload_location . $brand->image))){
+                unlink($upload_location . $brand->image);
+            }
+        }  
         $brand->delete();
         $notification = [
             'message' => 'Brand Deleted Successfully!!...',

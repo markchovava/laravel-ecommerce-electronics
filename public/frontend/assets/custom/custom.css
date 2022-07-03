@@ -13,6 +13,12 @@
     overflow: hidden;
 }
 
+.bg__cover{
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat;
+}
+
 .img__fit{
     width: 100% !important;
     height:100% !important;

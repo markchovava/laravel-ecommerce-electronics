@@ -386,10 +386,10 @@
                                                         <option selected="" disabled="">Select Option Below.</option>
                                                             @foreach($tags as $tag)   
                                                                 <option value="{{ $tag->id }}">
-                                                                    {{ $tag->click_name }}
                                                                     @if( $tag->position ) 
                                                                         ({{$tag->position }})  
                                                                     @endif
+                                                                    {{ $tag->click_name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -505,13 +505,15 @@
                                             <!--begin::Input group-->
                                             <div class="mb-10 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="form-label">Product Type</label>
+                                                <label class="form-label">
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="product_type" value="{{ $product->type }}" class="form-control mb-2" placeholder="Product Type"  />
+                                                <input type="checkbox" name="product_special_offer" {{ ($product->special_offer == 'Yes') ? 'checked="checked"' : '' }} value="Yes" class="mb-2" />
+                                                Special Offer
                                                 <!--end::Input-->
+                                                </label>
                                                 <!--begin::Description-->
-                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>
+                                                <div class="text-muted fs-7">Add product Special Offer.</div>
                                                 <!--end::Description-->
                                             </div>
                                             <!--end::Input group-->

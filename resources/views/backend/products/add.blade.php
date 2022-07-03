@@ -174,7 +174,12 @@
                                                             <select name="" class="form-control mb-2 p-2">
                                                                 <option selected="" disabled="">Select Option Below.</option>
                                                                 @foreach($categories as $category)   
-                                                                    <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                                                    <option value="{{ $category->id }}">  
+                                                                        @if( $category->position ) 
+                                                                            ({{ $category->position }})  
+                                                                        @endif
+                                                                        {{ $category->name }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                             <!--end::Select2-->
@@ -293,7 +298,12 @@
                                                             <select name="" class="form-control mb-2 p-2">
                                                             <option selected="" disabled="">Select Option Below.</option>
                                                                 @foreach($tags as $tag)   
-                                                                    <option value="{{ $tag->id }}"> {{ $tag->name }}</option>
+                                                                    <option value="{{ $tag->id }}"> 
+                                                                        @if( $tag->position ) 
+                                                                            ({{$tag->position }})  
+                                                                        @endif
+                                                                        {!! $tag->click_name !!}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                             <!--end::Select2-->
@@ -408,11 +418,13 @@
                                             <!--begin::Input group-->
                                             <div class="mb-10 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="form-label">Product Type</label>
+                                                <label class="form-label">
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="product_type" value="" class="form-control mb-2" placeholder="Product Type"  />
+                                                <input type="checkbox" name="product_special_offer" value="Yes" class=" mb-2" />
+                                                Special Offer
                                                 <!--end::Input-->
+                                                </label>
                                                 <!--begin::Description-->
                                                 <div class="text-muted fs-7">Add product type.</div>
                                                 <!--end::Description-->

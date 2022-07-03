@@ -25,6 +25,7 @@ use App\Models\Product\Inventory;
 use App\Models\Product\Variation;
 use App\Models\Cart\Cart;
 use App\Models\Cart\CartItem;
+use App\Models\Backend\BasicInfo;
 
 class ProductPageController extends Controller
 {
@@ -63,7 +64,11 @@ class ProductPageController extends Controller
             'tags',
             'variations',
             ])->where('id', $id)->first();
-        //dd($data['editProduct']->toArray());
+        /* 
+        *  Main Web Info 
+        */
+        $data['info'] = BasicInfo::first();
+
         return view('frontend.pages.single', $data);
     }
 }

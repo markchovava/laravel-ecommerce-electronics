@@ -349,7 +349,7 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ url('/admin/sales') }}">
+                            <a class="menu-link" href="{{ route('admin.ad') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -359,11 +359,11 @@
                     </div>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.ads.edit') }}">
+                            <a class="menu-link" href="{{ route('admin.ad.add') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Edit Home Advert</span>
+                                <span class="menu-title">Add Advert</span>
                             </a>
                         </div>
                     </div>

@@ -35,8 +35,8 @@ class CategoryController extends Controller
             if($category->image)
             {
                 if(file_exists(public_path($upload_location . $category->image))){
-                    dd('file exists');
-                    //unlink( $upload_location . $category->image );
+                    //dd('file exists');
+                    unlink( $upload_location . $category->image );
                 }
             }  
             $category->image = $image_name;     

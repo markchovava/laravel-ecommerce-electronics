@@ -145,12 +145,25 @@
                                             </a>
                                             <!--end::Title-->
                                             <div class="text-muted fs-7 fw-bolder">
-                                                @if($product->tags)
-                                                    @foreach($product->tags as $_data)
-                                                        @if($_data->position)
-                                                        <small>Tag: <span class="badge badge-light-success">{{ $_data->position }}</span></small>
-                                                        @endif
-                                                    @endforeach
+                                                @if( !empty($product->tags) )
+                                                    <small>Tag: 
+                                                        @foreach($product->tags as $_data)
+                                                            @if($_data->position)
+                                                                <span class="text-primary">
+                                                                    {{ $_data->position }}
+                                                                </span>,
+                                                            @endif
+                                                        @endforeach
+                                                    </small>                      
+                                                @endif
+                                            </div>
+                                            <div class="text-muted fs-7 fw-bolder">
+                                                @if( !empty($product->special_offer) )
+                                                    <small>Special Offer: 
+                                                        <span class="text-warning">
+                                                            {{ $product->special_offer }}
+                                                        </span>
+                                                    </small>
                                                 @endif
                                             </div>
                                         </div>

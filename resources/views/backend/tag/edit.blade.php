@@ -161,7 +161,9 @@
                             <!--end::Card title-->
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
-                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_category_status"></div>
+                                <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_category_status">
+                                    
+                                </div>
                             </div>
                             <!--begin::Card toolbar-->
                         </div>

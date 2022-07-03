@@ -89,5 +89,6 @@ class TagController extends Controller
 
         return redirect()->route('admin.tag')->with($notification);
     }
+    
     public function search(){}
 }

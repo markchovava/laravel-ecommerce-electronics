@@ -69,7 +69,7 @@ class ProductController extends Controller
             $product->name = $request->product_name;
             $product->description = $request->product_description;
             $product->short_description = $request->product_short_description;
-            $product->type = $request->product_type;
+            $product->special_offer = $request->product_special_offer;
             $product->status = $request->product_status;
             $product->sku = $request->sku;
             $product->barcode = $request->barcode;
@@ -278,7 +278,7 @@ class ProductController extends Controller
             $product->name = $request->product_name;
             $product->description = $request->product_description;
             $product->short_description = $request->product_short_description;
-            $product->type = $request->product_type;
+            $product->special_offer = $request->product_special_offer;
             $product->status = $request->product_status;
             $product->sku = $request->sku;
             $product->barcode = $request->barcode;
