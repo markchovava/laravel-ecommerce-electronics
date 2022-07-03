@@ -13,7 +13,7 @@
                             <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ url('/') }}">Home</a></li>
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">
-                                    <a href="{{ route('category.index') }}">Categories</a>
+                                    <a href="{{ route('brand.index') }}">Brands</a>
                                 </li>
                             </ol>
                         </nav>
@@ -65,7 +65,7 @@
                     <div class="col-xl-9 col-wd-9gdot5">
                         <!-- Shop-control-bar Title -->
                         <div class="flex-center-between mb-3">
-                            <h3 class="font-size-25 mb-0">All Categories</h3>
+                            <h3 class="font-size-25 mb-0">All Brands</h3>
                             <p class="font-size-14 text-gray-90 mb-0">Showing 1–25 of 56 results</p>
                         </div>
                         <!-- End shop-control-bar Title -->
@@ -112,19 +112,19 @@
                         <div class="tab-content pb-4 mb-4" id="pills-tabContent">
                             <div class="tab-pane fade pt-2 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab" data-target-group="groups">
                                 <div class="container">
-                                    @if(!empty($categories))
+                                    @if(!empty($brands))
                                         <div class="row">
-                                            @foreach($categories as $_data)
+                                            @foreach($brands as $_data)
                                                 <div class="col-lg-4 col-md-6 mt-2 mb-2">
                                                     <div class="card product__item">
                                                         <h5 class="mb-1 product-item__title">
-                                                            <a href="{{ route('category.view', $_data->id) }}" class="text-blue font-weight-bold">
+                                                            <a href="{{ route('brand.view', $_data->id) }}" class="text-blue font-weight-bold">
                                                                 {{ $_data->name }}
                                                             </a>
                                                         </h5>
                                                         <div class="img__area">
-                                                            <img class="card-img-top" 
-                                                            src="{{ (!empty($_data->image)) ? url('storage/products/category/' . $_data->image) : url('storage/tags/no_image.jpg') }}" alt="{{ $_data->name }}">
+                                                            <img class="card-img-top" style="height:auto; width:100%; aspect-ratio:5/2;"
+                                                            src="{{ (!empty($_data->image)) ? url('storage/products/brand/' . $_data->image) : url('storage/products/brand/no_image.jpg') }}" alt="{{ $_data->name }}">
                                                         </div>
                                                     </div>
                                                 </div>

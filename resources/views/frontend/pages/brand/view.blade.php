@@ -13,8 +13,9 @@
                             <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ url('/') }}">Home</a></li>
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">
-                                    <a href="{{ route('category.index') }}">Categories</a>
+                                    <a href="{{ route('brand.index') }}">Brands</a>
                                 </li>
+                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ $brand_name->name }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -33,8 +34,7 @@
                                 @foreach($all_categories_names as $cat)
                                 <li>
                                     <a class="dropdown-toggle dropdown-toggle-collapse" href="{{ route('category.view', $cat->id) }}">
-                                        {{ $cat->name }}
-                                        <span class="text-gray-25 font-size-12 font-weight-normal"> ({{ count($cat->products) }}) </span>
+                                        {{ $cat->name }}<span class="text-gray-25 font-size-12 font-weight-normal"> ({{ count($cat->products) }}) </span>
                                     </a>    
                                 </li>
                               @endforeach
@@ -51,7 +51,7 @@
                                     <li><div class="dropdown-title">Browse Tags</div></li>
                                     @foreach($all_tags_names as $tag)
                                     <li>
-                                        <a class="dropdown-toggle dropdown-toggle-collapse" href="{{ route('tag.view', $cat->id) }}">
+                                        <a class="dropdown-toggle dropdown-toggle-collapse" href="{{ route('tag.view', $tag->id) }}">
                                             {{ $tag->click_name }}<span class="text-gray-25 font-size-12 font-weight-normal"> ({{ count($tag->products) }}) </span>
                                         </a>    
                                     </li>
@@ -65,7 +65,7 @@
                     <div class="col-xl-9 col-wd-9gdot5">
                         <!-- Shop-control-bar Title -->
                         <div class="flex-center-between mb-3">
-                            <h3 class="font-size-25 mb-0">All Categories</h3>
+                            <h3 class="font-size-25 mb-0">{{ $brand_name->name }}</h3>
                             <p class="font-size-14 text-gray-90 mb-0">Showing 1–25 of 56 results</p>
                         </div>
                         <!-- End shop-control-bar Title -->
@@ -112,19 +112,48 @@
                         <div class="tab-content pb-4 mb-4" id="pills-tabContent">
                             <div class="tab-pane fade pt-2 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab" data-target-group="groups">
                                 <div class="container">
-                                    @if(!empty($categories))
+                                    @if(!empty($all_brands))
                                         <div class="row">
-                                            @foreach($categories as $_data)
+                                            @foreach($all_brands as $product)
                                                 <div class="col-lg-4 col-md-6 mt-2 mb-2">
                                                     <div class="card product__item">
+                                                        <div class="mb-2">
+                                                            @foreach($product->categories as $_data)
+                                                                <a href="{{ route('category.view', $_data->id) }}" class="font-size-12 text-gray-5">
+                                                                    {{ $_data->name }},
+                                                                </a>
+                                                            @endforeach
+                                                        </div>
                                                         <h5 class="mb-1 product-item__title">
-                                                            <a href="{{ route('category.view', $_data->id) }}" class="text-blue font-weight-bold">
-                                                                {{ $_data->name }}
+                                                            <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                                                {{ $product->name }}
                                                             </a>
                                                         </h5>
                                                         <div class="img__area">
                                                             <img class="card-img-top" 
-                                                            src="{{ (!empty($_data->image)) ? url('storage/products/category/' . $_data->image) : url('storage/tags/no_image.jpg') }}" alt="{{ $_data->name }}">
+                                                            src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
+                                                        </div>
+                                                        <div class="flex-center-between my-3">
+                                                            <div class="prodcut-price">
+                                                                <div class="text-gray-100">
+                                                                    @php
+                                                                        $price_cents = $product->price / 100;
+                                                                    @endphp
+                                                                    $<span class="price__number">{{ number_format((float)$price_cents, 2, '.', '') }}</span>
+                                                                    <input type="hidden" value="{{ $product->price }}" class="price__cents">
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-none d-xl-block prodcut-add-cart">
+                                                                <a href="{{ route('cart.add') }}" 
+                                                                    class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                                                    id="{{ $product->id }}">
+                                                                        <i class="ec ec-add-to-cart"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="border-top pt-2 flex-center-between flex-wrap">
+                                                            <a href="#" id="{{ $product->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                                            <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -399,13 +399,13 @@
                                         <a class="nav-link u-header__nav-link" href="{{ url('/') }}">About Us</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{ url('/shop') }}">Shop</a>
+                                        <a class="nav-link u-header__nav-link" href="{{ route('category.index') }}">Categories</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{ url('/single') }}">Product Details</a>
+                                        <a class="nav-link u-header__nav-link" href="{{ route('tag.index') }}">Tags</a>
                                     </li>
                                     <li class="nav-item u-header__nav-item">
-                                        <a class="nav-link u-header__nav-link" href="{{ url('/contact') }}">Contact Us</a>
+                                        <a class="nav-link u-header__nav-link" href="{{ route('brand.index') }}">Brands</a>
                                     </li>
                                 </ul>
                             </div>
@@ -464,9 +464,9 @@
                                     <!-- End Input -->
                                 </li>
                                 <!-- End Search -->
-                                <li class="col d-none d-xl-block"><a href="../shop/compare.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Compare"><i class="font-size-22 ec ec-compare"></i></a></li>
-                                <li class="col d-none d-xl-block"><a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a></li>
-                                <li class="col d-xl-none px-2 px-sm-3"><a href="../shop/my-account.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></a></li>
+                                <li class="col d-none d-xl-block"><a href="#" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Compare"><i class="font-size-22 ec ec-compare"></i></a></li>
+                                <li class="col d-none d-xl-block"><a href="#" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a></li>
+                                <li class="col d-xl-none px-2 px-sm-3"><a href="#" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></a></li>
                                 <li class="col pr-xl-0 px-2 px-sm-3">
                                     <a href="{{ route('cart.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
@@ -499,7 +499,7 @@
                                             data-target="#basicsCollapseOne"
                                             aria-expanded="true"
                                             aria-controls="basicsCollapseOne">
-                                            <span class="pl-1 text-gray-90">Shop By Department</span>
+                                            <span class="pl-1 text-gray-90">Shop Categories</span>
                                             <span class="text-gray-90 ml-3">
                                                 <span class="ec ec-arrow-down-search"></span>
                                             </span>
@@ -866,9 +866,6 @@
                                     <select class="js-select selectpicker dropdown-select custom-search-categories-select"
                                         data-style="btn height-40 text-gray-60 font-weight-normal border-0 rounded-0 bg-white px-5 py-2">
                                         <option value="one" selected>All Categories</option>
-                                        <option value="two">Two</option>
-                                        <option value="three">Three</option>
-                                        <option value="four">Four</option>
                                     </select>
                                     <!-- End Select -->
                                     <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button" id="searchProduct1">

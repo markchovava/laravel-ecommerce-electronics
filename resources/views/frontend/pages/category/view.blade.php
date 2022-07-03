@@ -43,7 +43,7 @@
                         </div>
                         <div class="mb-6">
                             <div class="border-bottom border-color-1 mb-5">
-                                <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Brands</h3>
+                                <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Tags</h3>
                             </div>
                             <div class="border-bottom pb-4 mb-4">
                                  <!-- List -->
@@ -205,7 +205,7 @@
                             }]'>
                             @foreach($brands as $brand)
                             <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
+                                <a href="{{ route('brand.view', $brand->id) }}" class="link-hover__brand">
                                     <div style="width:200px; height:60px; object-fit:contain;">
                                         <img class="img-fluid m-auto max-height-50" 
                                         src="{{ (!empty($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }}" alt="Image Description">

@@ -206,12 +206,11 @@
                             }]'>
                             @foreach($brands as $brand)
                             <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
+                                <a href="{{ route('brand.view', $brand->id) }}" class="link-hover__brand">
                                     <div style="width:200px; height:60px; object-fit:contain;">
                                         <img class="img-fluid m-auto max-height-50" 
                                         src="{{ (!empty($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }}" alt="Image Description">
-                                    </div>
-                                    
+                                    </div>     
                                 </a>
                             </div>
                             @endforeach

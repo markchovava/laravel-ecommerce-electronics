@@ -26,6 +26,8 @@ use App\Http\Controllers\Pages\Home\StickerController;
 use App\Http\Controllers\Ads\AdsController;
 use App\Http\Controllers\Frontend\Category\CategoryPageController;
 use App\Http\Controllers\Frontend\Tag\TagPageController;
+use App\Http\Controllers\Frontend\Brand\BrandPageController;
+use App\Http\Controllers\Frontend\Search\SearchPageController;
 
 //use App\Http\Controllers\PDF\PDFController;
 
@@ -57,13 +59,16 @@ Route::get('/customer/logout', [CustomerController::class, 'logout'])->name('cus
 /* ::: Single Product Page ::: */
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
 
-/*    Category Pages   */
+Route::get('/search', [SearchPageController::class, 'index'])->name('search.index');
+/* ::: Category Pages ::: */
 Route::get('/category', [CategoryPageController::class, 'index'])->name('category.index');
 Route::get('/category/{id}', [CategoryPageController::class, 'view'])->name('category.view');
-
 /* ::: Tag Pages ::: */
 Route::get('/tag', [TagPageController::class, 'index'])->name('tag.index');
 Route::get('/tag/{id}', [TagPageController::class, 'view'])->name('tag.view');
+/* ::: Tag Pages ::: */
+Route::get('/brand', [BrandPageController::class, 'index'])->name('brand.index');
+Route::get('/brand/{id}', [BrandPageController::class, 'view'])->name('brand.view');
 
 /* :::::: Cart :::::: */
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
