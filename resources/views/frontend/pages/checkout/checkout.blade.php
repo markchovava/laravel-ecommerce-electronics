@@ -59,9 +59,12 @@
                                                         </strong></td>
                                                     <td>
                                                         @php
-                                                        $product_totalCents = $product->product->price * $product->quantity;
+                                                        $discount = ($product->product->discounts->discount_percent / 100) * $product->product->price;
+                                                        $discount_price = $product->product->price - $discount;
+                                                        $product_totalCents = $discount_price * $product->quantity;
                                                         $total_price = $product_totalCents / 100;
                                                         @endphp
+                                                        <input type="hidden" name="product_unit_price[]" value="{{ $discount_price }}">
                                                         ${{ number_format((float)$total_price, 2, '.', '') }}
                                                         <input type="hidden" name="product_total[]" value="{{ $product_totalCents }}">
                                                     </td>

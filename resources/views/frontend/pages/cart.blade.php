@@ -70,10 +70,12 @@
                             </td>
                             <td data-title="Price">
                                 @php
-                                    $price = $product->product->price / 100;
+                                    $discount = ($product->product->discounts->discount_percent / 100) * $product->product->price;
+                                    $discount_price = $product->product->price - $discount;
+                                    $price = $discount_price  / 100;
                                 @endphp
                                 $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
-                                <input type="hidden" name="price__cents[]" value="{{ $product->product->price }}" class="price__cents">
+                                <input type="hidden" name="price__cents[]" value="{{ $discount_price }}" class="price__cents">
                             </td>
                             <td data-title="Quantity">
                                 <span class="sr-only">Quantity</span>
@@ -97,7 +99,7 @@
                             </td>
                             <td data-title="Total">
                                 @php
-                                $product_totalCents = $product->product->price * $product->quantity;
+                                $product_totalCents = $discount_price * $product->quantity;
                                 $total_price = $product_totalCents / 100;
                                 @endphp
                                 $<span class="product__total">{{ number_format((float)$total_price, 2, '.', '') }}</span>
@@ -202,7 +204,7 @@
     let cart_totalInsert = $('.cart__total');
     let shipping_feeCents = $('.shipping__feeCents').val();
     let shipping_feeCentsNumber = Number(shipping_feeCents);
-    let cart_totalCentsCalculate = cart_subtotalCents + shipping_feeCentsNumber;
+    let cart_totalCentsCalculate = Number(cart_subtotalCents) + shipping_feeCentsNumber;
     let cart_totalCalculate = cart_totalCentsCalculate / 100;
     let cart_totalDecimal = cart_totalCalculate.toFixed(2);
     cart_totalCentsInsert.val(cart_totalCentsCalculate);
@@ -279,6 +281,7 @@
         }); 
         // console.log(products_totalInCents)
         let cart_subtotalCents = products_totalInCents.reduce((a, b) => Number(a) + Number(b));
+        //alert(cart_subtotalCents)
         let cart_subtotalCalculate = cart_subtotalCents / 100;
         let cart_subtotalDecimal = cart_subtotalCalculate.toFixed(2);
         // alert(cart_subtotalDecimal)
@@ -290,7 +293,7 @@
         let cart_totalInsert = $('.cart__total');
         let shipping_feeCents = $('.shipping__feeCents').val();
         let shipping_feeCentsNumber = Number(shipping_feeCents);
-        let cart_totalCentsCalculate = cart_subtotalCents + shipping_feeCentsNumber;
+        let cart_totalCentsCalculate = Number(cart_subtotalCents) + shipping_feeCentsNumber;
         let cart_totalCalculate = cart_totalCentsCalculate / 100;
         let cart_totalDecimal = cart_totalCalculate.toFixed(2);
         cart_totalCentsInsert.val(cart_totalCentsCalculate);

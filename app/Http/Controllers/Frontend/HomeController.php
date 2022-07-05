@@ -36,8 +36,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        /* Role Management */
-        
+        /* 
+        *   Role Management
+        */
         $data['role_id'] = CheckRoles::check_role();
         
         if( isset($_COOKIE['shopping_session']) ){
@@ -54,7 +55,9 @@ class HomeController extends Controller
             $data['cart_quantity'] = 0;
         }
 
-        /* Single Tags */
+        /* 
+        *   Single Tags 
+        */
         $data['tag_first'] = Tag::where('position', 'First')->first();
         $data['tag_second'] = Tag::where('position', 'Second')->first();
         $data['tag_third'] = Tag::where('position', 'Third')->first();
@@ -62,7 +65,9 @@ class HomeController extends Controller
         $data['tag_fifth'] = Tag::where('position', 'Fifth')->first();
         $data['tag_sixth'] = Tag::where('position', 'Sixth')->first();
 
-        /* Single Category */
+        /* 
+        *   Single Category 
+        */
         $data['category_first'] = Category::with('products')->where('position', 'First')->first();
         $data['category_second'] = Category::with('products')->where('position', 'Second')->first();
         $data['category_third'] = Category::with('products')->where('position', 'Third')->first();
@@ -71,14 +76,20 @@ class HomeController extends Controller
         $data['category_sixth'] = Category::with('products')->where('position', 'Sixth')->first();
         $data['category_seventh'] = Category::with('products')->where('position', 'Seventh')->first();
 
-        /* Special Offer */
+        /*
+        *   Special Offer 
+        */
         $data['special_offer'] = Product::with(['discounts', 'inventories'])->where('special_offer', 'Yes')->first();
 
-        /* Advert Area */
+        /* 
+        *   Advert Area 
+        */
         $data['ad_first'] = Ads::where('page', 'Home')->where('position', 'First')->first();
         $data['ad_second'] = Ads::where('page', 'Home')->where('position', 'Second')->first();
 
-        /* Brands */
+        /*  
+        *   Brands 
+        */
         $data['brands'] = Brand::latest()->paginate(10);
 
         /* 
@@ -110,27 +121,45 @@ class HomeController extends Controller
         */
         $data['info'] = BasicInfo::first();
 
+        /* 
+        *   Tag Latest
+        */
+        $data['tag_latest'] = Tag::where('slug', 'LIKE', '%latest%')->first();
+        $data['latest_products'] =Product::with('tags')->whereHas('tags', function($query){
+            $query->where('tags.slug', 'LIKE', '%latest%'); //this refers slug field from tags table
+        })
+        ->orderBy('id','desc')
+        ->paginate(12);
 
-        $data['latest_products'] = Product::with('categories')->whereHas('categories', function($query){
-            $query->where('slug', 'latest'); //this refers id field from categories table
+         /* 
+        *   Tag Promotion
+        */
+        $data['tag_promotion'] = Tag::where('slug', 'LIKE', '%promotion%')->first();
+        $data['promotion_products'] = Product::with('tags')->whereHas('tags', function($query){
+            $query->where('tags.slug', 'LIKE', '%promotion%'); //this refers slug field from tags table
         })
         ->orderBy('id','desc')
-        ->paginate(8);
-        $data['promotion_products'] = Product::with('categories')->whereHas('categories', function($query){
-            $query->where('slug', 'promotion'); //this refers id field from categories table
+        ->paginate(12);
+
+        /* 
+        *   Tag Hot Deals
+        */
+        $data['tag_hot_deal'] = Tag::where('slug', 'LIKE', '%%hot-deals%%')->first();
+        $data['hot_deals'] = Product::with('tags')->whereHas('tags', function($query){
+            $query->where('tags.slug', 'LIKE', '%hot-deals%'); //this refers slug field from tags table
         })
         ->orderBy('id','desc')
-        ->paginate(8);
-        $data['hot_products'] = Product::with('categories')->whereHas('categories', function($query){
-            $query->where('slug', 'LIKE', '%hot-deals%'); //this refers id field from categories table
+        ->paginate(12);
+
+        /* 
+        *   Tag Trending Products
+        */
+        $data['tag_trending'] = Tag::where('slug', 'LIKE', '%trending%')->first();
+        $data['trending_products'] = Product::with('tags')->whereHas('tags', function($query){
+            $query->where('tags.slug', 'LIKE', '%trending%'); //this refers slug field from tags table
         })
         ->orderBy('id','desc')
-        ->paginate(8);
-        $data['trending_products'] = Product::with('categories')->whereHas('categories', function($query){
-            $query->where('slug', 'LIKE', '%trending%'); //this refers id field from categories table
-        })
-        ->orderBy('id','desc')
-        ->paginate(8);
+        ->paginate(12);
        
         $data['products'] = Product::with([
             'categories',

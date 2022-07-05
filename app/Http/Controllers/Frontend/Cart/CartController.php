@@ -14,6 +14,7 @@ use App\Models\Cart\Cart;
 use App\Models\Cart\CartItem;
 use App\Models\Product\Inventory;
 use App\Models\Product\Product;
+use App\Models\Backend\BasicInfo;
 
 class CartController extends Controller
 {
@@ -54,9 +55,8 @@ class CartController extends Controller
                 $quantity = $product->inventories->in_store_quantity;
                 $cart_item->quantity++; 
             }  
-            if($request->variation_name != false && $request->variation_value != false){
-                $cart_item->variation_name = $request->variation_name;
-                $cart_item->variation_value = $request->variation_value;
+            if($request->product_variation != false){
+                $cart_item->product_variation = $request->product_variation;
             }
             $cart_item->save();
         }
@@ -108,9 +108,8 @@ class CartController extends Controller
                     $quantity = $product->inventories->in_store_quantity;
                     $cart_item->quantity++; 
                 }     
-                if($request->variation_name == '' && $request->variation_value == ''){
-                    $cart_item->variation_name = $request->variation_name;
-                    $cart_item->variation_value = $request->variation_value;
+                if($request->product_variation == ''){
+                    $cart_item->product_variation = $request->product_variation;
                 }
                 $cart_item->save();
             } 
@@ -130,9 +129,8 @@ class CartController extends Controller
                     $quantity = $product->inventories->in_store_quantity;
                     $cart_item->quantity++; 
                 }  
-                if($request->variation_name == '' && $request->variation_value == ''){
-                    $cart_item->variation_name = $request->variation_name;
-                    $cart_item->variation_value = $request->variation_value;
+                if($request->product_variation == ''){
+                    $cart_item->product_variation = $request->product_variation;
                 }
                 $cart_item->save();
             }
@@ -167,9 +165,8 @@ class CartController extends Controller
                         $cart_items->quantity = $request->product_quantity[$i];
                         //dd($cart_items->quantity);
                         $cart_items->product_id = $request->product_id[$i];
-                        if($request->variation_name != '' && $request->variation_value != ''){
-                            $cart_items->variation_name = $request->variation_name[$i];
-                            $cart_items->variation_value = $request->variation_value[$i];
+                        if($request->product_variation != ''){
+                            $cart_items->product_variation = $request->product_variation;
                         }
                         $cart_items->save();
                     }
@@ -191,7 +188,8 @@ class CartController extends Controller
                     'message' => 'You need Products in the Cart to Proceed to Checkout.',
                     'alert-type' => 'danger'
                 ];
-                return redirect()->route('index')->with($notification);
+                
+                    return redirect()->route('index')->with($notification);
             }
         }
     }
@@ -225,17 +223,29 @@ class CartController extends Controller
                 $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
                 $cart_id =  $data['carts']->id;
                 $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
+                /* 
+                *  Main Web Info 
+                */
+                $data['info'] = BasicInfo::first();
                 return view('frontend.pages.cart', $data);
             } else{
                 //dd('Cart Empty');
                 $data['cart_quantity'] = 0;
                 $data['message'] = "The Shopping Cart is empty at the moment.";
+                /* 
+                *  Main Web Info 
+                */
+                $data['info'] = BasicInfo::first();
                 return view('frontend.pages.cart', $data);
             }           
         } 
         //dd('Here');
         $data['cart_quantity'] = 0;
         $data['message'] = "The Shopping Cart is empty at the moment.";
+        /* 
+        *  Main Web Info 
+        */
+        $data['info'] = BasicInfo::first();
         return view('frontend.pages.cart', $data);     
     }
 

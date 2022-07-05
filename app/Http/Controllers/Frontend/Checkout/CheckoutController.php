@@ -82,7 +82,9 @@ class CheckoutController extends Controller
                 $user->role_id = 4;
             }
             $user->save();      
-            /* Order Insert */
+            /*
+            *   Adds an Order 
+            */
             $order = new Order();
             $order->customer_id = Auth::id();            
             $order->reference_id = $this->reference_id();
@@ -92,7 +94,9 @@ class CheckoutController extends Controller
             $order->status = 'Processing';
             $order->notes = $request->notes;
             $order->save();
-            /* Order Items Insert */
+            /*
+            *   Adds Order Items 
+            */
             if($request->product_id){
                 $product_id = count($request->product_id);
                 for($i = 0; $i < $product_id; $i++){
@@ -101,6 +105,7 @@ class CheckoutController extends Controller
                     $order_items->order_id = $order->id;
                     $order_items->product_id = $request->product_id[$i];
                     $order_items->quantity = $request->product_quantity[$i];
+                    $order_items->unit_price = $request->product_unit_price[$i];
                     if($request->product_variation_name[$i] && $request->product_variation_value[$i]){
                         $order_items->product_variation = $request->product_variation_name[$i] + ' : ' 
                         + $request->product_variation_value[$i];

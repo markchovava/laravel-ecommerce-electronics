@@ -44,6 +44,7 @@
                                 style="width:200px;" alt="">
                         </a>
                     </div>
+                    @if(!empty($info))
                     <div class="mb-4">
                         <div class="row no-gutters">
                             <div class="col-auto">
@@ -51,9 +52,11 @@
                             </div>
                             <div class="col pl-3">
                                 <div class="font-size-13 font-weight-light">Got questions? Call us 24/7!</div>
-                                <a href="tel:{{ $info->company_phone_number }}" class="font-size-20 text-gray-90">
-                                    {{ $info->company_phone_number}}</a>
-                                
+                                @if( !empty($info->company_phone_number) )
+                                <a href="tel:{{ $info->company_phone_number }}" class="font-size-20 text-gray-90"> 
+                                    {{ $info->company_phone_number }}
+                                </a>  
+                                @endif     
                             </div>
                         </div>
                     </div>
@@ -88,6 +91,7 @@
                             </li>
                         </ul>
                     </div>
+                    @endif
                 </div>
                 <div class="col-lg-7">
                     <div class="row">

@@ -117,7 +117,7 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px">Quote Date</th>
+                                <th class="min-w-125px">Customer</th>
                                 <th class="min-w-125px">Due Date</th>
                                 <th class="min-w-125px">Quote Id</th>
                                 <th class="min-w-125px">Author</th>

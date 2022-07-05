@@ -29,5 +29,9 @@
 
 		<script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 
+		<!-- Toastr -->
+		<script src="{{ asset('frontend/assets/custom/toastr/toastr.min.js') }}"></script>
+		<link href="{{ asset('frontend/assets/custom/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
+
 
 </head>

@@ -19,7 +19,7 @@ use App\Http\Controllers\Frontend\Cart\CartController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutAuthController;
 use App\Http\Controllers\Frontend\Customer\CustomerController;
-use App\Http\Controllers\Frontend\Orders\OrdersController;
+use App\Http\Controllers\Orders\OrdersController;
 use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\Inventory\PurchaseController;
 use App\Http\Controllers\Pages\Home\StickerController;
@@ -58,15 +58,17 @@ Route::get('/customer/logout', [CustomerController::class, 'logout'])->name('cus
 
 /* ::: Single Product Page ::: */
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
+Route::post('/product/cart_store', [ProductPageController::class, 'cart_store'])->name('product.cart_store');
 
-Route::get('/search', [SearchPageController::class, 'index'])->name('search.index');
+/* ::: Search Page ::: */
+Route::get('/search', [SearchPageController::class, 'search'])->name('product.search');
 /* ::: Category Pages ::: */
 Route::get('/category', [CategoryPageController::class, 'index'])->name('category.index');
 Route::get('/category/{id}', [CategoryPageController::class, 'view'])->name('category.view');
 /* ::: Tag Pages ::: */
 Route::get('/tag', [TagPageController::class, 'index'])->name('tag.index');
 Route::get('/tag/{id}', [TagPageController::class, 'view'])->name('tag.view');
-/* ::: Tag Pages ::: */
+/* ::: Brand Pages ::: */
 Route::get('/brand', [BrandPageController::class, 'index'])->name('brand.index');
 Route::get('/brand/{id}', [BrandPageController::class, 'view'])->name('brand.view');
 
@@ -111,6 +113,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
     });
 
+    Route::prefix('orders')->group(function() {
+        Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
+        Route::get('/view/{id}', [OrdersController::class, 'view'])->name('admin.orders.view');
+    });
+
     /* :::::: Products ::::: */
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/products/add', [ProductController::class, 'add'])->name('admin.products.add');
@@ -140,6 +147,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/search', [TagController::class, 'search'])->name('admin.tag.search');
     });
 
+    
      /* :::::: Brands ::::: */
     Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand');
     Route::get('/brands/add', [BrandController::class, 'add'])->name('admin.brand.add');
@@ -201,17 +209,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
 
 
 Route::get('/add', function(){
-    //$shopping_session = RandomString(30);
-    // $add = new \App\Models\Cart\Cart ();
-    /* $add->create([
-        'shopping_session'=> $shopping_session,
-        'total' => 1200
-    ]); */
-    // setcookie('session_id', $shopping_session, time() + (86400 * 7), "/");
-    // $session_id = session()->getId(); // Create Session
-    // $session_id = session()->flush(); // Delete Dession
-    // setcookie('session_id', $shopping_session, time() + (86400 * 7), "/");
-    // dd($shopping_session);
+   
     $product_id = 4;
     $cart_item = \App\Models\Cart\CartItem::where('product_id', $product_id)->first();
     if(!empty($cart_item)){
@@ -252,13 +250,6 @@ Route::get('/show', function(){
         }
     }
 
-/* @foreach($product->categories as $_data)
-<a href="{{ route('category.index', $_data->id) }}" class="font-size-12 text-gray-5">
-    {{ $_data->name }},
-</a>
-@endforeach */
-
-
 });
 
 
@@ -271,17 +262,7 @@ Route::get('/show', function(){
     return view('frontend.pages.index');
 }); */
 
-Route::get('/shop', function () {
-    return view('frontend.pages.shop');
-});
 
-Route::get('/list', function () {
-    return view('frontend.pages.list');
-});
-
-Route::get('/search', function () {
-    return view('frontend.pages.search_results');
-});
 
 
 Route::get('/contact', function () {
@@ -312,26 +293,6 @@ Route::prefix('/backend')->group(function(){
     Route::get('/', function () {
         return view('backend.index');
     });
-
-    Route::get('/customers', function () {
-        return view('backend.customers.index');
-    });
-    Route::get('/customers/view', function () {
-        return view('backend.customers.view');
-    });
-    Route::get('/sales', function () {
-        return view('backend.reports.sales');
-    });
-    Route::get('/delivery', function () {
-        return view('backend.reports.delivery');
-    });
-    Route::get('/message', function () {
-        return view('backend.message.index');
-    });
-    Route::get('/message/add', function () {
-        return view('backend.message.add');
-    });
-
 
 });
 

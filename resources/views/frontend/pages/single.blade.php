@@ -12,8 +12,14 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../shop/shop.html">Accessories</a></li>
-                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../shop/shop.html">{{ $product->type }}</a></li>
+                                &nbsp; > &nbsp;
+                                <li class="flex-shrink-0 flex-xl-shrink-1">
+                                    @foreach($product->categories as $_data)
+                                    <a class="text-gray-5" href="{{ route('category.view', $_data->id) }}">,
+                                         {{ $_data->name }}
+                                    </a>
+                                    @endforeach
+                                </li>&nbsp; > &nbsp;
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ $product->name}}</li>
                             </ol>
                         </nav>
@@ -23,6 +29,8 @@
             </div>
             <!-- End breadcrumb -->
             <div class="container">
+                <form method="post" action="{{ route('product.cart_store') }}">
+                    @csrf
                 <!-- Single Product Body -->
                 <div class="mb-xl-14 mb-6">
                     <div class="row">
@@ -57,52 +65,85 @@
                         <div class="col-md-7 mb-md-6 mb-lg-0">
                             <div class="mb-2">
                                 <div class="border-bottom mb-3 pb-md-1 pb-3">
-                                    <a href="#" class="font-size-12 text-gray-5 mb-2 d-inline-block">{{ $product->type}}</a>
-                                    <h2 class="font-size-25 text-lh-1dot2">{{ $product->name }}</h2>
-                                    <div class="mb-2">
-                                        <a class="d-inline-flex align-items-center small font-size-15 text-lh-1" href="#">
-                                            <div class="text-warning mr-2">
-                                                <small class="fas fa-star"></small>
-                                                <small class="fas fa-star"></small>
-                                                <small class="fas fa-star"></small>
-                                                <small class="fas fa-star"></small>
-                                                <small class="far fa-star text-muted"></small>
-                                            </div>
-                                            <span class="text-secondary font-size-13">(3 customer reviews)</span>
-                                        </a>
-                                    </div>
+                                    @foreach($product->categories as $_data)
+                                    <a href="#" class="font-size-12 text-gray-5 mb-2 d-inline-block">
+                                        {{ $_data->name }}
+                                    </a>
+                                    @endforeach
+                                    <a class="text-gray-5" href="{{ route('category.view', $_data->id) }}">,
+                                         {{ $_data->name }}
+                                    </a>
+                                    
+                                    <h2 class="font-size-25 text-lh-1dot2">{!! $product->name !!}</h2>
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                
                                     <div class="d-md-flex align-items-center">
-                                        <a href="#" class="max-width-150 ml-n2 mb-2 mb-md-0 d-block"><img class="img-fluid" src="{{ asset('frontend/assets/img/200X60/img1.png') }}" alt="Image Description"></a>
-                                        <div class="ml-md-3 text-gray-9 font-size-14">Availability: 
-                                            <span class="text-green font-weight-bold">{{ $product->inventories->in_store_quantity }} in stock</span>
-                                        </div>
+                                        @foreach($product->brands as $_data)
+                                        <a href="{{ route('brand.view', $_data->id) }}" class="max-width-100 ml-n2 mb-2 mb-md-0 d-block">
+                                            <img class="img-fluid" src="{{ (!empty($_data->image)) ? '/storage/products/brand/' . $_data->image : '/storage/products/no_image.jpg' }}" alt="Image Description">
+                                        </a>
+                                        @endforeach
                                     </div>
+                                </div>
+                                <div class="text-gray-9 font-size-14 mb-3">Availability: 
+                                    <span class="text-green font-weight-bold">{{ $product->inventories->in_store_quantity }} in stock</span>
+                                    <input type="hidden" name="in_store_quantity" value="{{ $product->inventories->in_store_quantity }}">
                                 </div>
                                 <div class="flex-horizontal-center flex-wrap mb-4">
                                     <a href="#" class="text-gray-6 font-size-13 mr-2"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     <a href="#" class="text-gray-6 font-size-13 ml-2"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Quote</a>
                                 </div>
                                 <div class="mb-2">
-                                    {{ $product->short_description}}
+                                    {!! $product->short_description !!}
                                     </ul>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                                <p>{!! $product->description !!}</p>
                                 <p><strong>SKU</strong>: {{ $product->sku }}</p>
                                 <div class="mb-4 pricing">
                                     <div class="d-flex align-items-baseline">
+                                        <del class="font-size-18 mr-2 text-gray-2">
+                                            @php
+                                            $price = $product->price / 100;
+                                            @endphp
+                                            ${{ number_format((float)$price, 2, '.', '') }}
+                                        </del>
                                         <ins class="font-size-36 text-decoration-none">
-                                            $<span class="price__number">{{ number_format((float)$product->price, 2, '.', '') }}</span>
+                                            @php
+                                                $discount = ($product->discounts->discount_percent / 100) * $product->price;
+                                                $discount_price = $product->price - $discount;
+                                                $price = $discount_price / 100;
+                                            @endphp
+                                            <span class="price__number">
+                                                ${{ number_format((float)$price, 2, '.', '') }}
+                                            </span>
                                         </ins>
-                                        <ins class="font-size-20 ml-2 text-gray-6">
-                                            ZWL$<span class="zwl__priceNumber">{{ number_format((float)$product->zwl_price, 2, '.', '') }}</span>
+                                        <input type="hidden" name="product_price" value="{{ $discount_price }}">
+                                    </div>
+                                    <div class="d-flex align-items-baseline">
+                                        <del class="font-size-18 mr-2 text-gray-2">
+                                            @php
+                                            $zwl_price = $product->zwl_price / 100;
+                                            @endphp
+                                            ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
+                                        </del>
+                                        <ins class="font-size-36 text-decoration-none">
+                                            @php
+                                                $discount = ($product->discounts->discount_percent / 100) * $product->zwl_price ;
+                                                $discount_price = $product->zwl_price - $discount;
+                                                $zwl_price = $discount_price / 100;
+                                            @endphp
+                                            <span class="price__number">
+                                                ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
+                                            </span>
                                         </ins>
+                                        <input type="hidden" name="product_zwl_price" value="{{ $discount_price }}">
                                     </div>
                                 </div>
                                 <div class="border-top border-bottom py-3 mb-4">
                                     <div class="d-flex align-items-center">
                                         <h6 class="font-size-14 mb-0">Options</h6>
                                         <!-- Select -->
-                                        <select name="product_variations" class="js-select selectpicker dropdown-select ml-3"
+                                        <select name="product_variation" class="js-select selectpicker dropdown-select ml-3"
                                             data-style="btn-sm bg-white font-weight-normal py-2 border">
                                             @foreach($variations as $variation)
                                                 <option value="{{ $variation->name }}: {{ $variation->value }}" >
@@ -120,7 +161,7 @@
                                         <div class="border rounded-pill py-2 px-3 border-color-1">
                                             <div class="js-quantity row align-items-center">
                                                 <div class="col">
-                                                    <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" value="1">
+                                                    <input type="text" name="product_quantity" value="1" class="js-result form-control h-auto border-0 rounded p-0 shadow-none">
                                                 </div>
                                                 <div class="col-auto pr-1">
                                                     <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
@@ -135,21 +176,17 @@
                                         <!-- End Quantity -->
                                     </div>
                                     <div class="ml-md-3">
-                                        <a href="#" class="add__toCartBtn btn px-5 btn-primary-dark transition-3d-hover">
-                                            <i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</a>
+                                        <input type="submit" value="Add to Cart" class=" btn px-5 btn-primary-dark transition-3d-hover">
+                                            <!-- <i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</button> -->
                                     </div>
                                 </div>
-<script>
-$(document).ready(function(){
 
-})
-
-</script>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- End Single Product Body -->
+                </form>
                 <!-- Single Product Tab -->
                 <div class="mb-8">
                     <div class="position-relative position-md-static px-md-6">
@@ -162,9 +199,6 @@ $(document).ready(function(){
                             </li>
                             <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
                                 <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">Specification</a>
-                            </li>
-                            <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                                <a class="nav-link" id="Jpills-four-example1-tab" data-toggle="pill" href="#Jpills-four-example1" role="tab" aria-controls="Jpills-four-example1" aria-selected="false">Reviews</a>
                             </li>
                         </ul>
                     </div>
@@ -405,444 +439,66 @@ $(document).ready(function(){
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="Jpills-four-example1" role="tabpanel" aria-labelledby="Jpills-four-example1-tab">
-                                <div class="row mb-8">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <h3 class="font-size-18 mb-6">Based on 3 reviews</h3>
-                                            <h2 class="font-size-30 font-weight-bold text-lh-1 mb-0">4.3</h2>
-                                            <div class="text-lh-1">overall</div>
-                                        </div>
-
-                                        <!-- Ratings -->
-                                        <ul class="list-unstyled">
-                                            <li class="py-1">
-                                                <a class="row align-items-center mx-gutters-2 font-size-1" href="javascript:;">
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="progress ml-xl-5" style="height: 10px; width: 200px;">
-                                                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto text-right">
-                                                        <span class="text-gray-90">205</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-1">
-                                                <a class="row align-items-center mx-gutters-2 font-size-1" href="javascript:;">
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="progress ml-xl-5" style="height: 10px; width: 200px;">
-                                                            <div class="progress-bar" role="progressbar" style="width: 53%;" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto text-right">
-                                                        <span class="text-gray-90">55</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-1">
-                                                <a class="row align-items-center mx-gutters-2 font-size-1" href="javascript:;">
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="progress ml-xl-5" style="height: 10px; width: 200px;">
-                                                            <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto text-right">
-                                                        <span class="text-gray-90">23</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-1">
-                                                <a class="row align-items-center mx-gutters-2 font-size-1" href="javascript:;">
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="progress ml-xl-5" style="height: 10px; width: 200px;">
-                                                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto text-right">
-                                                        <span class="text-muted">0</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-1">
-                                                <a class="row align-items-center mx-gutters-2 font-size-1" href="javascript:;">
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                                            <small class="fas fa-star"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto mb-2 mb-md-0">
-                                                        <div class="progress ml-xl-5" style="height: 10px; width: 200px;">
-                                                            <div class="progress-bar" role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto text-right">
-                                                        <span class="text-gray-90">4</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!-- End Ratings -->
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h3 class="font-size-18 mb-5">Add a review</h3>
-                                        <!-- Form -->
-                                        <form class="js-validate">
-                                            <div class="row align-items-center mb-4">
-                                                <div class="col-md-4 col-lg-3">
-                                                    <label for="rating" class="form-label mb-0">Your Review</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <a href="#" class="d-block">
-                                                        <div class="text-warning text-ls-n2 font-size-16">
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                            <small class="far fa-star text-muted"></small>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="js-form-message form-group mb-3 row">
-                                                <div class="col-md-4 col-lg-3">
-                                                    <label for="descriptionTextarea" class="form-label">Your Review</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <textarea class="form-control" rows="3" id="descriptionTextarea"
-                                                    data-msg="Please enter your message."
-                                                    data-error-class="u-has-error"
-                                                    data-success-class="u-has-success"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="js-form-message form-group mb-3 row">
-                                                <div class="col-md-4 col-lg-3">
-                                                    <label for="inputName" class="form-label">Name <span class="text-danger">*</span></label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input type="text" class="form-control" name="name" id="inputName" aria-label="Alex Hecker" required
-                                                    data-msg="Please enter your name."
-                                                    data-error-class="u-has-error"
-                                                    data-success-class="u-has-success">
-                                                </div>
-                                            </div>
-                                            <div class="js-form-message form-group mb-3 row">
-                                                <div class="col-md-4 col-lg-3">
-                                                    <label for="emailAddress" class="form-label">Email <span class="text-danger">*</span></label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input type="email" class="form-control" name="emailAddress" id="emailAddress" aria-label="alexhecker@pixeel.com" required
-                                                    data-msg="Please enter a valid email address."
-                                                    data-error-class="u-has-error"
-                                                    data-success-class="u-has-success">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="offset-md-4 offset-lg-3 col-auto">
-                                                    <button type="submit" class="btn btn-primary-dark btn-wide transition-3d-hover">Add Review</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <!-- End Form -->
-                                    </div>
-                                </div>
-                                <!-- Review -->
-                                <div class="border-bottom border-color-1 pb-4 mb-4">
-                                    <!-- Review Rating -->
-                                    <div class="d-flex justify-content-between align-items-center text-secondary font-size-1 mb-2">
-                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="far fa-star text-muted"></small>
-                                            <small class="far fa-star text-muted"></small>
-                                        </div>
-                                    </div>
-                                    <!-- End Review Rating -->
-
-                                    <p class="text-gray-90">Fusce vitae nibh mi. Integer posuere, libero et ullamcorper facilisis, enim eros tincidunt orci, eget vestibulum sapien nisi ut leo. Cras finibus vel est ut mollis. Donec luctus condimentum ante et euismod.</p>
-
-                                    <!-- Reviewer -->
-                                    <div class="mb-2">
-                                        <strong>John Doe</strong>
-                                        <span class="font-size-13 text-gray-23">- April 3, 2019</span>
-                                    </div>
-                                    <!-- End Reviewer -->
-                                </div>
-                                <!-- End Review -->
-                                <!-- Review -->
-                                <div class="border-bottom border-color-1 pb-4 mb-4">
-                                    <!-- Review Rating -->
-                                    <div class="d-flex justify-content-between align-items-center text-secondary font-size-1 mb-2">
-                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                        </div>
-                                    </div>
-                                    <!-- End Review Rating -->
-
-                                    <p class="text-gray-90">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse eget facilisis odio. Duis sodales augue eu tincidunt faucibus. Etiam justo ligula, placerat ac augue id, volutpat porta dui.</p>
-
-                                    <!-- Reviewer -->
-                                    <div class="mb-2">
-                                        <strong>Anna Kowalsky</strong>
-                                        <span class="font-size-13 text-gray-23">- April 3, 2019</span>
-                                    </div>
-                                    <!-- End Reviewer -->
-                                </div>
-                                <!-- End Review -->
-                                <!-- Review -->
-                                <div class="pb-4">
-                                    <!-- Review Rating -->
-                                    <div class="d-flex justify-content-between align-items-center text-secondary font-size-1 mb-2">
-                                        <div class="text-warning text-ls-n2 font-size-16" style="width: 80px;">
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="fas fa-star"></small>
-                                            <small class="far fa-star text-muted"></small>
-                                        </div>
-                                    </div>
-                                    <!-- End Review Rating -->
-
-                                    <p class="text-gray-90">Sed id tincidunt sapien. Pellentesque cursus accumsan tellus, nec ultricies nulla sollicitudin eget. Donec feugiat orci vestibulum porttitor sagittis.</p>
-
-                                    <!-- Reviewer -->
-                                    <div class="mb-2">
-                                        <strong>Peter Wargner</strong>
-                                        <span class="font-size-13 text-gray-23">- April 3, 2019</span>
-                                    </div>
-                                    <!-- End Reviewer -->
-                                </div>
-                                <!-- End Review -->
-                            </div>
                         </div>
                     </div>
                     <!-- End Tab Content -->
                 </div>
                 <!-- End Single Product Tab -->
+
                 <!-- Related products -->
                 <div class="mb-6">
                     <div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4">
                         <h3 class="section-title mb-0 pb-2 font-size-22">Related products</h3>
                     </div>
                     <ul class="row list-unstyled products-group no-gutters">
+                        @foreach($trending_products as $product)
                         <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-4 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                        <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                        <div class="mb-2">
-                                            <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
-                                        </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                <div class="text-gray-100">$685,00</div>
-                                            </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                            </div>
+                            <div class="card product__item">
+                                <div class="mb-2">
+                                    @foreach($product->categories as $_data)
+                                    <a href="{{ route('category.index', $_data->id) }}" class="font-size-12 text-gray-5">
+                                        {{ $_data->name }},
+                                    </a>
+                                    @endforeach
+                                </div>
+                                <h5 class="mb-1 product-item__title">
+                                    <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                        {{ $product->name }}
+                                    </a>
+                                </h5>
+                                <div class="img__area">
+                                    <img class="card-img-top" 
+                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
+                                </div>
+                                <div class="flex-center-between my-3">
+                                    <div class="prodcut-price">
+                                        <div class="text-gray-100">
+                                            @php
+                                                $price_cents = $product->price / 100;
+                                            @endphp
+                                            $<span class="price__number">{{ number_format((float)$price_cents, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $product->price }}" class="price__cents">
                                         </div>
                                     </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Qoute</a>
-                                            <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href="{{ route('cart.add') }}" 
+                                            class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $product->id }}">
+                                                <i class="ec ec-add-to-cart"></i>
+                                        </a>
                                     </div>
+                                </div>
+                                <div class="border-top pt-2 flex-center-between flex-wrap">
+                                    <a href="#" id="{{ $product->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                 </div>
                             </div>
                         </li>
-                        <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-4 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                        <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Tablet White EliteBook Revolve 810 G2</a></h5>
-                                        <div class="mb-2">
-                                            <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description"></a>
-                                        </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price d-flex align-items-center position-relative">
-                                                <ins class="font-size-20 text-red text-decoration-none">$1999,00</ins>
-                                                <del class="font-size-12 tex-gray-6 position-absolute bottom-100">$2 299,00</del>
-                                            </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
-                                            <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-4 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                        <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Purple Solo 2 Wireless</a></h5>
-                                        <div class="mb-2">
-                                            <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description"></a>
-                                        </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                <div class="text-gray-100">$685,00</div>
-                                            </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
-                                            <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item remove-divider-md-lg">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-4 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                        <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Smartphone 6S 32GB LTE</a></h5>
-                                        <div class="mb-2">
-                                            <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
-                                        </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                <div class="text-gray-100">$685,00</div>
-                                            </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
-                                            <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item remove-divider-xl">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-4 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                        <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Widescreen NX Mini F1 SMART NX</a></h5>
-                                        <div class="mb-2">
-                                            <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description"></a>
-                                        </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price">
-                                                <div class="text-gray-100">$685,00</div>
-                                            </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
-                                            <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item remove-divider-wd d-xl-none d-wd-block">
-                            <div class="product-item__outer h-100">
-                                <div class="product-item__inner px-xl-4 p-3">
-                                    <div class="product-item__body pb-xl-2">
-                                        <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                        <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Tablet White EliteBook Revolve 810 G2</a></h5>
-                                        <div class="mb-2">
-                                            <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                <img class="img-fluid" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description"></a>
-                                        </div>
-                                        <div class="flex-center-between mb-1">
-                                            <div class="prodcut-price d-flex align-items-center position-relative">
-                                                <ins class="font-size-20 text-red text-decoration-none">$1999,00</ins>
-                                                <del class="font-size-12 tex-gray-6 position-absolute bottom-100">$2 299,00</del>
-                                            </div>
-                                            <div class="d-none d-xl-block prodcut-add-cart">
-                                                <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-item__footer">
-                                        <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Add To Quote</a>
-                                            <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                       @endforeach
                     </ul>
                 </div>
                 <!-- End Related products -->
+
                 <!-- Brand Carousel -->
                 <div class="mb-8">
                     <div class="py-2 border-top border-bottom">
@@ -868,36 +524,16 @@ $(document).ready(function(){
                                     "slidesToShow": 1
                                 }
                             }]'>
-                            <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
-                                    <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description">
-                                </a>
-                            </div>
-                            <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
-                                    <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description">
-                                </a>
-                            </div>
-                            <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
-                                    <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/images/212X200/3.png') }}" alt="Image Description">
-                                </a>
-                            </div>
-                            <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
-                                    <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/images/212X200/4.png') }}" alt="Image Description">
-                                </a>
-                            </div>
-                            <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
-                                    <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/images/212X200/1.png') }}" alt="Image Description">
-                                </a>
-                            </div>
-                            <div class="js-slide">
-                                <a href="#" class="link-hover__brand">
-                                    <img class="img-fluid m-auto max-height-50" src="{{ asset('frontend/assets/images/212X200/2.png') }}" alt="Image Description">
-                                </a>
-                            </div>
+                             @foreach($brands as $brand)
+                                <div class="js-slide">
+                                    <a href="{{ route('brand.view', $brand->id) }}" class="link-hover__brand">
+                                        <div style="width:200px; height:60px; object-fit:contain;">
+                                            <img class="img-fluid m-auto max-height-50" 
+                                            src="{{ (!empty($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }}" alt="Image Description">
+                                        </div>        
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

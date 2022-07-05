@@ -910,7 +910,12 @@
 
 
 <script>
+
+    
    
+   /* 
+    *   Form repeater for Category
+    */
     $('#category__repeaterBasic').repeater({
         initEmpty: false,
         defaultValues: {
@@ -924,7 +929,9 @@
         }
     });
 
-
+    /* 
+    *   Form repeater for Tag
+    */
     $('#tag__repeaterBasic').repeater({
         initEmpty: false,
 
@@ -941,6 +948,9 @@
         }
     });
 
+    /* 
+    *   Form repeater for Brand
+    */
     $('#brand__repeaterBasic').repeater({
         initEmpty: false,
 
@@ -957,6 +967,9 @@
         }
     });
 
+    /* 
+    *   Form repeater for Product Variations
+    */
     $('#variation__addOptions').repeater({
         initEmpty: false,
 
@@ -973,7 +986,29 @@
         }
     });
 
+    /* 
+    *   Form repeater for Serial Number 
+    */
     $('#add__serialNumber').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+    /* 
+    *   Form repeater for Image Uploader 
+    */
+    $('#add__imageUploader').repeater({
         initEmpty: false,
 
         defaultValues: {

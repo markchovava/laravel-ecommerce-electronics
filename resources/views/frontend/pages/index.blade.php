@@ -26,23 +26,23 @@
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">{!! $tag_first->subtitle !!}</span>
+                                                <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_first->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
                                                     @if( !empty($tag_first->amount) )
-                                                    <sup class="font-size-36">$</sup>
-                                                    @php
-                                                    $first_amount = $tag_first->amount / 100
-                                                    @endphp
-                                                    {{ number_format((float)$first_amount, 2, '.', '') }}
-                                                    <sub class="font-size-16">OFF!</sub>
+                                                        <sup class="font-size-36">$</sup>
+                                                        @php
+                                                        $first_amount = $tag_first->amount / 100
+                                                        @endphp
+                                                        {{ number_format((float)$first_amount, 2, '.', '') }}
+                                                        <sub class="font-size-16">OFF!</sub>
                                                     @else
-                                                    <sup class="font-size-36"></sup>
-                                                    {{ $tag_first->percent }}%
-                                                    <sub class="font-size-16">OFF!</sub>
+                                                        <sup class="font-size-36"></sup>
+                                                        {{ $tag_first->percent }}%
+                                                        <sub class="font-size-16">OFF!</sub>
                                                     @endif
                                                 </span>
                                             </div>
-                                            <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                            <a href="{{ route('tag.view', $tag_first->id) }}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="300">
                                                 Start Buying
@@ -76,19 +76,19 @@
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                 <span class="d-block font-size-36">{!! $tag_second->title !!}</span>
+                                                 <span class="d-block font-size-36">{!! strtoupper($tag_second->title) !!}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">{!! $tag_second->subtitle !!}</span>
+                                                <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_second->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
                                                     @if( !empty($tag_second->amount) )
                                                     <sup class="font-size-36">$</sup>
                                                     @php
                                                     $amount = $tag_second->amount / 100
                                                     @endphp
-                                                    {{ number_format((float)$amount, 2, '.', '') }}
+                                                    ${{ number_format((float)$amount, 2, '.', '') }}
                                                     <sub class="font-size-16">OFF!</sub>
                                                     @else
                                                     <sup class="font-size-36"></sup>
@@ -97,7 +97,7 @@
                                                     @endif
                                                 </span>
                                             </div>
-                                            <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                            <a href="{{ route('tag.view', $tag_second->id) }}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="300">
                                                 Start Buying
@@ -131,21 +131,28 @@
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                <span class="d-block font-size-36">{!! $tag_third->title !!}</span>
+                                                <span class="d-block font-size-36">{!! strtoupper($tag_third->title) !!}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
                                                 <span class="font-size-15 font-weight-bold">{!! $tag_third->subtitle !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    <sup class="font-size-36"></sup>
+                                                    @if( !empty($tag_third->amount) )
+                                                    <sup class="font-size-36">$</sup>
                                                     @php
-                                                    $percent = $tag_third->percent / 100
+                                                    $amount = $tag_third->amount / 100
                                                     @endphp
-                                                    {{ number_format((float)$percent, 2, '.', '') }}%<sub class="font-size-16">OFF!</sub>
+                                                    ${{ number_format((float)$amount, 2, '.', '') }}
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @else
+                                                    <sup class="font-size-36"></sup>
+                                                    {{ $tag_third->percent }}%
+                                                    <sub class="font-size-16">OFF!</sub>
+                                                    @endif
                                                 </span>
                                             </div>
-                                            <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                            <a href="{{ route('tag.view', $tag_third->id) }}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="300">
                                                 Start Buying
@@ -184,7 +191,7 @@
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">{!! $tag_forth->subtitle !!}</span>
+                                                <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_forth->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
                                                     @if( !empty($tag_forth->amount) )
                                                     <sup class="font-size-36">$</sup>
@@ -200,7 +207,7 @@
                                                     @endif
                                                 </span>
                                             </div>
-                                            <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                            <a href="{{ route('tag.view', $tag_forth->id) }}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="300">
                                                 Start Buying
@@ -235,13 +242,13 @@
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
                                                  <span class="d-block font-size-36">
-                                                    {!! ($tag_fifth->title) ? strtoupper($tag_fifth->title) : 'No title' !!}
+                                                    {!! strtoupper($tag_fifth->title) !!}
                                                 </span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">{!! $tag_fifth->subtitle !!}</span>
+                                                <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_fifth->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
                                                     @if( !empty($tag_fifth->amount) )
                                                     <sup class="font-size-36">$</sup>
@@ -257,7 +264,7 @@
                                                     @endif
                                                 </span>
                                             </div>
-                                            <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                            <a href="{{ route('tag.view', $tag_fifth->id) }}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="300">
                                                 Start Buying
@@ -291,12 +298,12 @@
                                         <div class="col-lg-5">
                                             <h1 class="font-size-58 text-lh-57 mb-3 font-weight-light"
                                                 data-scs-animation-in="fadeInUp">
-                                                 <span class="d-block font-size-36 ">{!! (!empty($tag_sixth->title)) ? strtoupper($tag_sixth->title) : 'No info' !!}</span>
+                                                 <span class="d-block font-size-36 ">{!! strtoupper($tag_sixth->title) !!}</span>
                                             </h1>
                                             <div class="mb-6"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="200">
-                                                <span class="font-size-15 font-weight-bold">{!! $tag_sixth->subtitle !!}</span>
+                                                <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_sixth->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
                                                     @if( !empty($tag_sixth->amount) )
                                                     <sup class="font-size-36">$</sup>
@@ -312,7 +319,7 @@
                                                     @endif
                                                 </span>
                                             </div>
-                                            <a href="#" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                            <a href="{{ route('tag.view', $tag_sixth->id) }}" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
                                                 data-scs-animation-in="fadeInUp"
                                                 data-scs-animation-delay="300">
                                                 Start Buying
@@ -352,7 +359,7 @@
                                         <a class="nav-link p-2 px-4 active" id="pills-one-code-features-tab" data-toggle="pill" href="#pills-one-code-features" role="tab" aria-controls="pills-one-code-features" aria-selected="true">
                                             <span class="font-size-14">
                                                 @if($tag_first)
-                                                    {{ ($tag_first->click_name) ? strtoupper($tag_first->click_name) : 'No info' }}
+                                                    {{ ($tag_first->click_name) ? $tag_first->click_name : 'No info' }}
                                                 @else
                                                     No Info
                                                 @endif
@@ -363,7 +370,7 @@
                                         <a class="nav-link p-2 px-4" id="pills-two-code-features-tab" data-toggle="pill" href="#pills-two-code-features" role="tab" aria-controls="pills-two-code-features" aria-selected="false">
                                             <span class="font-size-14">
                                                 @if($tag_second)
-                                                    {{ ($tag_second->click_name) ? strtoupper($tag_second->click_name) : 'No info' }}
+                                                    {{ ($tag_second->click_name) ? $tag_second->click_name : 'No info' }}
                                                 @else
                                                     No Info
                                                 @endif
@@ -425,309 +432,285 @@
                 <!-- Trending products -->
                 <section class="category__highlight position-relative" style="padding-bottom:3rem; padding-top:1rem;">
                     <div class="category__highlightCarousel owl-carousel owl-theme">
-                        @if( $category_first->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_first->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="{{ route('product.view', $category_first->products[0]->id) }}" class="text-blue font-weight-bold">
-                                        {{ $category_first->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty($category_first->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_first->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                    alt="{{ $category_first->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_first->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_first->products[0]->price }}" class="price__cents">
+                        @if(!empty($category_first) && sizeof($category_first->products) != 0)
+                            @if( $category_first->products[0] )
+                                <div class="card product__item">
+                                    <div class="mb-2">
+                                        <a href="{{ route('category.view', $category_first->id) }}" class="font-size-12 text-gray-5">
+                                            {{ $category_first->name }}
+                                        </a>
+                                    </div>
+                                    <h5 class="mb-1 product-item__title">
+                                        <a href="{{ route('product.view', $category_first->products[0]->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_first->products[0]->name }}
+                                        </a>
+                                    </h5>
+                                    <div class="img__area">
+                                        <img class="card-img-top" 
+                                        src="{{ (!empty($category_first->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_first->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_first->products[0]->name }}">
+                                    </div>
+                                    <div class="flex-center-between my-3">
+                                        <div class="prodcut-price">
+                                            <div class="text-gray-100">
+                                                @php
+                                                $price = $category_first->products[0]->price / 100;
+                                                @endphp
+                                                <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $category_first->products[0]->price }}" class="price__cents">
+                                            </div>
+                                        </div>
+                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                        id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="#" id="{{ $category_first->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_first->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
-                        @endif   
-                        @if( $category_second->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_second->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="#" class="text-blue font-weight-bold">
-                                        {{ $category_second->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                    alt="{{ $category_second->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_second->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_second->products[0]->price }}" class="price__cents">
+                            @endif   
+                        @endif
+                        @if(!empty($category_second) && sizeof($category_second->products) != 0)
+                            @if( $category_second->products[0] )
+                                <div class="card product__item">
+                                    <div class="mb-2">
+                                        <a href="{{ route('category.view', $category_second->id) }}" class="font-size-12 text-gray-5">
+                                            {{ $category_second->name }}
+                                        </a>
+                                    </div>
+                                    <h5 class="mb-1 product-item__title">
+                                        <a href="#" class="text-blue font-weight-bold">
+                                            {{ $category_second->products[0]->name }}
+                                        </a>
+                                    </h5>
+                                    <div class="img__area">
+                                        <img class="card-img-top" 
+                                        src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_second->products[0]->name }}">
+                                    </div>
+                                    <div class="flex-center-between my-3">
+                                        <div class="prodcut-price">
+                                            <div class="text-gray-100">
+                                                @php
+                                                $price = $category_second->products[0]->price / 100;
+                                                @endphp
+                                                <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $category_second->products[0]->price }}" class="price__cents">
+                                            </div>
+                                        </div>
+                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $category_second->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                        id="{{ $category_second->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="#" id="{{ $category_second->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_second->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
-                        @endif   
-                        @if( $category_third->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_third->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="{{ route('product.view', $category_third->products[0]->id) }}" class="text-blue font-weight-bold">
-                                        {{ $category_third->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty( $category_third->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_third->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                    alt="{{ $category_third->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_third->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_third->products[0]->price }}" class="price__cents">
+                            @endif 
+                        @endif
+                        @if(!empty($category_third) && sizeof($category_third->products) != 0)
+                            @if( $category_third->products[0] )
+                                <div class="card product__item">
+                                    <div class="mb-2">
+                                        <a href="{{ route('category.view', $category_third->id) }}" class="font-size-12 text-gray-5">
+                                            {{ $category_third->name }}
+                                        </a>
+                                    </div>
+                                    <h5 class="mb-1 product-item__title">
+                                        <a href="{{ route('product.view', $category_third->products[0]->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_third->products[0]->name }}
+                                        </a>
+                                    </h5>
+                                    <div class="img__area">
+                                        <img class="card-img-top" 
+                                        src="{{ (!empty( $category_third->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_third->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_third->products[0]->name }}">
+                                    </div>
+                                    <div class="flex-center-between my-3">
+                                        <div class="prodcut-price">
+                                            <div class="text-gray-100">
+                                                @php
+                                                $price = $category_third->products[0]->price / 100;
+                                                @endphp
+                                                <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $category_third->products[0]->price }}" class="price__cents">
+                                            </div>
+                                        </div>
+                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $category_third->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                        id="{{ $category_third->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="#" id="{{ $category_third->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_third->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
-                        @endif   
-                        @if( $category_forth->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_forth->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="{{ route('product.view', $category_forth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                        {{ $category_forth->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty( $category_forth->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_forth->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                    alt="{{ $category_forth->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_forth->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_forth->products[0]->price }}" class="price__cents">
-                                        </div>
-                                    </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                        id="{{ $category_forth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
-                                    </div>
-                                </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_forth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
-                        @endif   
-                        @if( $category_fifth->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_fifth->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                        {{ $category_fifth->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty($category_fifth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_fifth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
-                                    alt="{{ $category_fifth->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_fifth->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_fifth->products[0]->price }}" class="price__cents">
-                                        </div>
-                                    </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                        id="{{ $category_fifth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
-                                    </div>
-                                </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_fifth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
-                        @endif   
-                        @if( $category_fifth->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_fifth->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="#" class="text-blue font-weight-bold">
-                                        {{ $category_fifth->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty($category_fifth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_fifth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
-                                    alt="{{ $category_fifth->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_fifth->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_fifth->products[0]->price }}" class="price__cents">
-                                        </div>
-                                    </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                        id="{{ $category_fifth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
-                                    </div>
-                                </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_fifth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
-                        @endif   
-                        @if( $category_sixth->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_sixth->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="{{ route('product.view', $category_sixth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                        {{ $category_sixth->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty( $category_sixth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_sixth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
-                                    alt="{{ $category_sixth->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_sixth->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_sixth->products[0]->price }}" class="price__cents">
-                                        </div>
-                                    </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
-                                    </div>
-                                </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_sixth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
-                        @endif   
-                        @if( $category_seventh->products[0] )
-                            <div class="card product__item">
-                                <div class="mb-2">
-                                    <a href="#" class="font-size-12 text-gray-5">
-                                        {{ $category_seventh->name }}
-                                    </a>
-                                </div>
-                                <h5 class="mb-1 product-item__title">
-                                    <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                        {{ $category_seventh->products[0]->name }}
-                                    </a>
-                                </h5>
-                                <div class="img__area">
-                                    <img class="card-img-top" 
-                                    src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
-                                    alt="{{ $category_second->products[0]->name }}">
-                                </div>
-                                <div class="flex-center-between my-3">
-                                    <div class="prodcut-price">
-                                        <div class="text-gray-100">
-                                            @php
-                                            $price = $category_seventh->products[0]->price / 100;
-                                            @endphp
-                                            <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $category_seventh->products[0]->price }}" class="price__cents">
-                                        </div>
-                                    </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                        id="{{ $category_seventh->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
-                                    </div>
-                                </div>
-                                <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $category_seventh->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
-                                </div>
-                            </div>
+                            @endif 
                         @endif  
+                        @if(!empty($category_forth) && sizeof($category_forth->products) != 0)  
+                            @if( $category_forth->products[0] )
+                                <div class="card product__item">
+                                    <div class="mb-2">
+                                        <a href="{{ route('category.view', $category_forth->id) }}" class="font-size-12 text-gray-5">
+                                            {{ $category_forth->name }}
+                                        </a>
+                                    </div>
+                                    <h5 class="mb-1 product-item__title">
+                                        <a href="{{ route('product.view', $category_forth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_forth->products[0]->name }}
+                                        </a>
+                                    </h5>
+                                    <div class="img__area">
+                                        <img class="card-img-top" 
+                                        src="{{ (!empty( $category_forth->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_forth->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_forth->products[0]->name }}">
+                                    </div>
+                                    <div class="flex-center-between my-3">
+                                        <div class="prodcut-price">
+                                            <div class="text-gray-100">
+                                                @php
+                                                $price = $category_forth->products[0]->price / 100;
+                                                @endphp
+                                                <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $category_forth->products[0]->price }}" class="price__cents">
+                                            </div>
+                                        </div>
+                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $category_forth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="#" id="{{ $category_forth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                    </div>
+                                </div>
+                            @endif  
+                        @endif 
+                        @if(!empty($category_fifth) && sizeof($category_fifth->products) != 0)
+                            @if( $category_fifth->products[0] )
+                                <div class="card product__item">
+                                    <div class="mb-2">
+                                        <a href="{{ route('category.view', $category_fifth->id) }}" class="font-size-12 text-gray-5">
+                                            {{ $category_fifth->name }}
+                                        </a>
+                                    </div>
+                                    <h5 class="mb-1 product-item__title">
+                                        <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_fifth->products[0]->name }}
+                                        </a>
+                                    </h5>
+                                    <div class="img__area">
+                                        <img class="card-img-top" 
+                                        src="{{ (!empty($category_fifth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_fifth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                        alt="{{ $category_fifth->products[0]->name }}">
+                                    </div>
+                                    <div class="flex-center-between my-3">
+                                        <div class="prodcut-price">
+                                            <div class="text-gray-100">
+                                                @php
+                                                $price = $category_fifth->products[0]->price / 100;
+                                                @endphp
+                                                <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $category_fifth->products[0]->price }}" class="price__cents">
+                                            </div>
+                                        </div>
+                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $category_fifth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="#" id="{{ $category_fifth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                    </div>
+                                </div>
+                            @endif   
+                        @endif
+                        @if(!empty($category_sixth) && sizeof($category_sixth->products) != 0)
+                            @if( $category_sixth->products[0] )
+                                <div class="card product__item">
+                                    <div class="mb-2">
+                                        <a href="{{ route('category.view', $category_sixth->id) }}" class="font-size-12 text-gray-5">
+                                            {{ $category_sixth->name }}
+                                        </a>
+                                    </div>
+                                    <h5 class="mb-1 product-item__title">
+                                        <a href="{{ route('product.view', $category_sixth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_sixth->products[0]->name }}
+                                        </a>
+                                    </h5>
+                                    <div class="img__area">
+                                        <img class="card-img-top" 
+                                        src="{{ (!empty( $category_sixth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_sixth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                        alt="{{ $category_sixth->products[0]->name }}">
+                                    </div>
+                                    <div class="flex-center-between my-3">
+                                        <div class="prodcut-price">
+                                            <div class="text-gray-100">
+                                                @php
+                                                $price = $category_sixth->products[0]->price / 100;
+                                                @endphp
+                                                <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $category_sixth->products[0]->price }}" class="price__cents">
+                                            </div>
+                                        </div>
+                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="#" id="{{ $category_sixth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                    </div>
+                                </div>
+                            @endif   
+                        @endif
+                        @if(!empty($category_seventh) && sizeof($category_seventh->products) != 0)
+                            @if( $category_seventh->products[0] )
+                                <div class="card product__item">
+                                    <div class="mb-2">
+                                        <a href="{{ route('category.view', $category_seventh->id) }}" class="font-size-12 text-gray-5">
+                                            {{ $category_seventh->name }}
+                                        </a>
+                                    </div>
+                                    <h5 class="mb-1 product-item__title">
+                                        <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_seventh->products[0]->name }}
+                                        </a>
+                                    </h5>
+                                    <div class="img__area">
+                                        <img class="card-img-top" 
+                                        src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                        alt="{{ $category_second->products[0]->name }}">
+                                    </div>
+                                    <div class="flex-center-between my-3">
+                                        <div class="prodcut-price">
+                                            <div class="text-gray-100">
+                                                @php
+                                                $price = $category_seventh->products[0]->price / 100;
+                                                @endphp
+                                                <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $category_seventh->products[0]->price }}" class="price__cents">
+                                            </div>
+                                        </div>
+                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $category_seventh->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="#" id="{{ $category_seventh->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                    </div>
+                                </div>
+                            @endif  
+                        @endif
                     </div>
                 </section>
                 <!-- End Trending products -->
@@ -935,7 +918,7 @@
             <div class="container-fluid">
                 <div class="mb-2 d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Daily Hot Deals</h3>
-                    <a class="d-block text-gray-16" href="#">Go to Daily Hot Deals <i class="ec ec-arrow-right-categproes"></i></a>
+                    <a class="d-block text-gray-16" href="{{ route('tag.view', $tag_hot_deal->id) }}">Go to Daily Hot Deals <i class="ec ec-arrow-right-categproes"></i></a>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 px-4 py-2">
@@ -946,12 +929,14 @@
                                 <div class="d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1">
                                     <span class="font-size-12">Save</span>
                                     <div class="font-size-20 font-weight-bold">
+                                        @if(!empty($special_offer->discounts->discount_percent))
                                         {{ $special_offer->discounts->discount_percent }}%
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <a href="#" class="d-block text-center">
+                                <a href="{{ route('product.view', $special_offer->id) }}" class="d-block text-center">
                                     <div class="img__area">
                                         <img class="img-fluid" 
                                         src="{{ (!empty($special_offer->product_thumbnail)) ? url('storage/products/thumbnail/' . $special_offer->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Image Description">
@@ -959,18 +944,23 @@
                                 </a>
                             </div>
                             <h5 class="mb-2 font-size-14 text-center mx-auto text-lh-18">
-                                <a href="#" class="text-blue font-weight-bold">
+                                <a href="{{ route('product.view', $special_offer->id) }}" class="text-blue font-weight-bold">
+                                @if(!empty($special_offer))
                                 {{ $special_offer->name }}
+                                @endif
                                 </a>
                             </h5>
                             <div class="d-flex align-items-center justify-content-center mb-2">
                                 <del class="font-size-18 mr-2 text-gray-2">
+                                    @if(!empty($special_offer->price))
                                     @php
                                     $price = $special_offer->price / 100
                                     @endphp
                                     ${{ number_format((float)$price, 2, '.', '') }}
+                                    @endif
                                 </del>
                                 <ins class="font-size-30 text-red text-decoration-none">
+                                    @if(!empty($special_offer->discounts->discount_percent))
                                     @php
                                     $discount_percent = $special_offer->discounts->discount_percent / 100;
                                     $discount = $special_offer->price * $discount_percent;
@@ -978,11 +968,17 @@
                                     $price = $price_cents / 100;
                                     @endphp
                                     ${{ number_format((float)$price, 2, '.', '') }}
+                                    @endif
                                 </ins>
                             </div>
                             <div class="mb-3 mx-2">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <span class="">Available: <strong>{{ $special_offer->inventories->in_store_quantity}}</strong></span>  
+                                    <span class="">Available: 
+                                        <strong>
+                                            @if(!empty($special_offer))
+                                            {{ $special_offer->inventories->in_store_quantity }}
+                                            @endif
+                                        </strong></span>  
                                 </div>
                                 
                             </div>
@@ -1031,7 +1027,7 @@
                     <div class="col-lg-8">
                         <div class="container">
                             <div class="row">
-                                @foreach($hot_products as $product)
+                                @foreach($hot_deals as $product)
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card product__item">
                                         <div class="mb-2">
@@ -1087,7 +1083,7 @@
         <section class="trending__products mb__2">
             <div class="mb-2 d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
                 <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Trending Products</h3>
-                <a class="d-block text-gray-16" href="#">Go to Trending Products <i class="ec ec-arrow-right-categproes"></i></a>
+                <a class="d-block text-gray-16" href="{{ route('tag.view', $tag_trending->id) }}">Go to Trending Products <i class="ec ec-arrow-right-categproes"></i></a>
             </div>
             <div class="trending__productsCarousel owl-carousel owl-theme">
                 @foreach($trending_products as $product)
@@ -1171,7 +1167,7 @@
         <section class="latest__products mb__2">
             <div class="mb-3 d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
                 <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Latest Products</h3>
-                <a class="d-block text-gray-16" href="#">Go to Latest Products <i class="ec ec-arrow-right-categproes"></i></a>
+                <a class="d-block text-gray-16" href="{{ route('tag.view', $tag_latest->id) }}">Go to Latest Products <i class="ec ec-arrow-right-categproes"></i></a>
             </div>
             <div class="container-fluid">
                 <div class="row">
