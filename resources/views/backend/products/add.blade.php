@@ -595,6 +595,58 @@
                                         <!--end::Card header-->
                                     </div>
                                     <!--end::Media-->
+
+                                    <!--begin::Serial Number-->
+                                    <div class="card card-flush py-4">
+                                        <!--begin::Card header-->
+                                        <div class="card-header">
+                                            <div class="card-title">
+                                                <h2>Media</h2>
+                                            </div>
+                                        </div>
+                                        <!--end::Card header-->
+                                        <!--begin::Card body-->
+                                        <div class="card-body pt-0">
+                                            <!--begin::Repeater-->
+                                            <div id="add__imageUploader" class="container">
+                                                <div class="row">
+                                                    <div class="col-md-6 image_uploadSect">
+                                                        <!--begin::Form group-->
+                                                        <div class="form-group row mb-3">
+                                                            <div class="col-md-9">
+                                                                <input type="file" name="0" class="product__imageUpload form-control mb-md-0" placeholder="Upload Image" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="javascript:;" class="remove__imgBtn btn btn-sm btn-light-danger ">
+                                                                    <i class="la la-trash-o"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="product__uploadDisplayer">
+                                                                    <img alt="" class="img__fullCover">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Form group-->
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-info">Add</button>
+                                            </div>
+                                            <!--end::Repeater-->
+                                        </div>
+                                        <!--end::Card header-->
+                                    </div>
+                                    <!--end::Image Uploader-->
+<script>
+    console.log($('.product__uploadDisplayer').find('img').length)
+$('.product__imageUpload').change(function(e){
+    let display_image =  $(this).siblings('.product__uploadDisplayer').find('img');
+    //console.log(display_image.length)
+    let image_upload = URL.createObjectURL(e.target.files[0]);
+    display_image.attr('src', image_upload);   
+});
+</script>
+                                    
                                     <!--begin::Inventory-->
                                     <div class="card card-flush py-4">
                                         <!--begin::Card header-->
@@ -835,7 +887,7 @@
                             <!--begin::Tab pane-->
                             <div class="tab-pane fade" id="serial__number" role="tab-panel">
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
-                                    <!--begin::Variations-->
+                                    <!--begin::Serial Number-->
                                     <div class="card card-flush py-4">
                                         <!--begin::Card header-->
                                         <div class="card-header">
@@ -879,7 +931,7 @@
                                         </div>
                                         <!--end::Card header-->
                                     </div>
-                                    <!--end::Variations-->
+                                    <!--end::Serial Number-->
 
                                 </div>
                             </div>

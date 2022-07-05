@@ -115,3 +115,16 @@
     width: 1200px; 
     height: auto;
 }
+
+
+/* 
+*   On Add Image and Edit Image Pages
+*   Displays uploaded image
+*/
+
+.product__uploadDisplayer{
+    width:100%; 
+    border:1px dashed #000; 
+    aspect-ratio:4/2;
+    margin:0.5rem 0;
+}
