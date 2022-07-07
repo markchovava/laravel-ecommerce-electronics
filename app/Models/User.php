@@ -11,6 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
 use App\Models\Product\Product;
+use App\Models\Role\Role;
 
 class User extends Authenticatable
 {
@@ -26,20 +27,9 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'first_name',
-        'last_name',
-        'address',
-        'phone_number',
-        'date_of_birth',
-        'code',
-        'status',
-        'gender',
-        'image',
-        'role',
-        'id_number'
+        'name','email','password','first_name','last_name','address',
+        'phone_number','date_of_birth','code','status','gender',
+        'image','role_id','id_number','delivery_address'
     ];
 
 
@@ -66,6 +56,10 @@ class User extends Authenticatable
 
     public function carts(){
         return $this->belongsTo(Cart::class, 'customer_id', 'id');
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
     /**

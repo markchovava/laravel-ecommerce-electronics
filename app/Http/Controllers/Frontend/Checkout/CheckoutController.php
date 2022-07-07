@@ -68,6 +68,7 @@ class CheckoutController extends Controller
             $user->email = $request->email;
             $user->phone_number = $request->phone_number;
             $user->address = $request->address;
+            $user->delivery_address = $request->delivery_address;
             $user->city = $request->city;
             $user->company_name = $request->company_name;
             $user->company_phone_number = $request->company_phone_number;

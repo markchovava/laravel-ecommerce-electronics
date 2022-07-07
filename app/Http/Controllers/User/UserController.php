@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $data['users'] = User::where('role', '!=', 'Administrator')->get();
+        $data['users'] = User::where('id', '!=', Auth::id())->orderBy('updated_at', 'desc')->get();
         return view('backend.users.index', $data); 
     }
 
@@ -27,7 +28,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->user_name;
         $user->email = $request->user_email;
-        $user->role = $request->user_role;
+        $user->role_id = intval($request->user_role_id);
         $code = rand(100000, 1000000);
         $user->code = $code;        
         $user->password = Hash::make($code);      
@@ -68,15 +69,15 @@ class UserController extends Controller
     public function update(Request $request, $id){
         $user = User::find($id);
         $user->name = $request->user_name;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
+        $user->first_name = $request->user_first_name;
+        $user->last_name = $request->user_last_name;
         $user->email = $request->user_email;
-        $user->phone_number = $request->phone_number;
+        $user->phone_number = $request->user_phone_number;
         $user->address = $request->user_address;
-        $user->date_of_birth = $request->date_of_birth;
+        $user->date_of_birth = $request->user_date_of_birth;
         $user->gender = $request->user_gender;
         $user->id_number = $request->user_id_number;
-        $user->role = $request->user_role;       
+        $user->role_id = intval($request->user_role_id);     
         /* $code = rand(100000, 1000000);
         $user->code = $code;        
         $user->password = Hash::make($code);  
@@ -90,7 +91,9 @@ class UserController extends Controller
             $image_name = hexdec(uniqid()) . '.' . $image_extension;
             $upload_location = 'storage/users/images/';
             if($user->image){
-                unlink($upload_location . $user->image);
+                if(file_exists(public_path($upload_location . $user->image))){
+                    unlink($upload_location . $user->image);
+                }
                 $user_image->move($upload_location, $image_name);
                 $user->image = $image_name;                    
             }else{

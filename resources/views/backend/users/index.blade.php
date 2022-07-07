@@ -211,7 +211,7 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Administrator" id="kt_modal_update_role_option_0" />
+                                                            <input class="form-check-input me-3" name="user_role_id" type="radio" value="1" id="kt_modal_update_role_option_0" />
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_0">
@@ -228,7 +228,7 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Manager" id="kt_modal_update_role_option_1" />
+                                                            <input class="form-check-input me-3" name="user_role_id" type="radio" value="2" id="kt_modal_update_role_option_1" />
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_1">
@@ -245,11 +245,11 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Customer" id="kt_modal_update_role_option_2" checked='checked'/>
+                                                            <input class="form-check-input me-3" name="user_role_id" type="radio" value="3" id="kt_modal_update_role_option_2"/>
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_2">
-                                                                <div class="fw-bolder text-gray-800">Customer</div>
+                                                                <div class="fw-bolder text-gray-800">Operator</div>
                                                             </label>
                                                             <!--end::Label-->
                                                         </div>
@@ -262,11 +262,11 @@
                                                         <!--begin::Radio-->
                                                         <div class="form-check form-check-custom form-check-solid">
                                                             <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="Delivery" id="kt_modal_update_role_option_3" />
+                                                            <input class="form-check-input me-3" name="user_role_id" type="radio" value="4" checked='checked' id="kt_modal_update_role_option_3" />
                                                             <!--end::Input-->
                                                             <!--begin::Label-->
                                                             <label class="form-check-label" for="kt_modal_update_role_option_3">
-                                                                <div class="fw-bolder text-gray-800">Delivery</div>
+                                                                <div class="fw-bolder text-gray-800">Customer</div>
                                                             </label>
                                                             <!--end::Label-->
                                                         </div>
@@ -352,15 +352,15 @@
                                     <!--end::Avatar-->
                                     <!--begin::User details-->
                                     <div class="d-flex flex-column">
-                                        <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                            {{ $user->name }}</a>
+                                        <a href="{{ route('admin.users.view', $user->id) }}" class="text-gray-800 text-hover-primary mb-1">
+                                            {{ $user->first_name . ' ' . $user->last_name }}</a>
                                         <span> {{ $user->email }} </span>
                                     </div>
                                     <!--begin::User details-->
                                 </td>
                                 <!--end::User=-->
                                 <!--begin::Role=-->
-                                <td>{{ $user->role }}</td>
+                                <td>{{ ($user->role) ? $user->role->name : 'Not Defined' }}</td>
                                 <!--end::Role=-->
                                 <!--begin::Last login=-->
                                 <td>

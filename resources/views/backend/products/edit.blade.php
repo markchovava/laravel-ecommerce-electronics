@@ -710,12 +710,78 @@
                                         <!--end::Card header-->
                                         <!--begin::Card body-->
                                         <div class="card-body pt-0">
-                                            <!--begin::Info-->
-                                            <div class="ms-4">
-                                                <input type="file" multiple="" name="product_images[]" class="form-control mb-2" id="">
-                                                <span class="fs-7 fw-bold text-gray-400">Upload up to 10 files</span>
+                                            <!--begin::Repeater-->
+                                            <div class="container">
+                                                @if( !empty($product->product_images) )
+                                                <div class="row">
+                                                    @foreach($product->product_images as $image)
+                                                    <div class="col-md-6 image__uploadSect">
+                                                        <!--begin::Form group-->
+                                                        <div class="form-group row mb-3">
+                                                            <div class="col-md-9">
+                                                                <!-- <input type="file" value="{{ $image->image }}" multiple="" class="product__imageUpload form-control mb-md-0"/> -->
+                                                                <input type="hidden" name="db_product_images[]" class="db__productImages" value="{{ $image->image }}">
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="{{ route('admin.products.remove', $image->id )}}" 
+                                                                class="db__imageRemove btn btn-sm btn-light-danger ">
+                                                                    <i class="la la-trash-o"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="product__uploadDisplayer">
+                                                                    <img src="{{ (!empty($image->image)) ? url('storage/products/images/' . $image->image) : url('storage/products/no_image.jpg') }}" alt="" class="img__fullCover">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::-->
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                                @endif
+                                                <div class="upload__row row">
+                                                    <div class="col-md-6 image__uploadSect display__none">
+                                                        <!--begin::Form group-->
+                                                        <div class="form-group row mb-3">
+                                                            <div class="col-md-9">
+                                                                <input type="file" class="product__imageUpload form-control mb-md-0" placeholder="Upload Image" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="javascript:;" class="remove__uploadSectBtn btn btn-sm btn-light-danger ">
+                                                                    <i class="la la-trash-o"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="product__uploadDisplayer">
+                                                                    <img alt="" class="img__fullCover">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::-->
+                                                    </div>
+                                                    <div class="col-md-6 image__uploadSect">
+                                                        <!--begin::Form group-->
+                                                        <div class="form-group row mb-3">
+                                                            <div class="col-md-9">
+                                                                <input type="file" name="product_images[]" multiple="" class="product__imageUpload form-control mb-md-0" placeholder="Upload Image" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="javascript:;" class="remove__uploadSectBtn btn btn-sm btn-light-danger ">
+                                                                    <i class="la la-trash-o"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="product__uploadDisplayer">
+                                                                    <img alt="" class="img__fullCover">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::-->
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="add__uploader btn btn-info">Add</button>
                                             </div>
-                                            <!--end::Info-->
+                                            <!--end::Repeater-->
                                         </div>
                                         <!--end::Card header-->
                                     </div>
@@ -1085,7 +1151,66 @@
 </div>
 <!--end::Content-->
 
+<script>
+$(document).ready(function(){
+    $('.add__uploader').click(function(e){
+        e.preventDefault();
+        let upload__sect =  $(this).siblings('.upload__row').find('.image__uploadSect:first');
+        let clone_sect = upload__sect.clone(true)
+                .appendTo('.upload__row')
+                .removeClass('display__none');
+        clone_sect.find('.product__imageUpload').attr('name', 'product_images[]');
+    });
+    $('.product__imageUpload').change(function(e){
+        e.preventDefault();
+        let display_image =  $(this).closest('.image__uploadSect').find('.product__uploadDisplayer img');
+        let image_upload = URL.createObjectURL(e.target.files[0]);
+        display_image.attr('src', image_upload);   
+    });
+   /* 
+    *   Remove image from DB 
+    */
+    $('.db__imageRemove').click(function(e){
+        e.preventDefault();
+        let image_uploadSect = $(this).closest('.image__uploadSect');
+        //alert(image_uploadSect.html());
+        let image_name = $(this).closest('.image__uploadSect').find('.db__productImages').val();
+        let remove_image = $(this).attr('href');
+        //alert(remove_image);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+            
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: remove_image,
+            method: "GET",
+            dataType: "json",
+            data: {},
+            success: function(result){
+                console.log(result);
+                if(result){
+                    image_uploadSect.remove(); 
+                }   
+            }
+        }); 
+    });  
 
+    /* 
+    *   Remove from Upload 
+    */
+    $('.remove__uploadSectBtn').click(function(e){
+        e.preventDefault();
+        $(this).closest('.image__uploadSect').remove();
+    });
+     
+});  
+
+</script>
 <script>
 
 /* ::::::: Remove previous Categories:::::: */

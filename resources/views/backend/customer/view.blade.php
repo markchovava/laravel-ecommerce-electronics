@@ -45,105 +45,7 @@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page title-->
-            <!--begin::Actions-->
-            <div class="d-flex align-items-center gap-2 gap-lg-3">
-                <!--begin::Filter menu-->
-                <div class="m-0">
-                    <!--begin::Menu toggle-->
-                    <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                    <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->Filter</a>
-                    <!--end::Menu toggle-->
-                    <!--begin::Menu 1-->
-                    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_62079305ec88d">
-                        <!--begin::Header-->
-                        <div class="px-7 py-5">
-                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Menu separator-->
-                        <div class="separator border-gray-200"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Form-->
-                        <div class="px-7 py-5">
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Status:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <div>
-                                    <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_62079305ec88d" data-allow-clear="true">
-                                        <option></option>
-                                        <option value="1">Approved</option>
-                                        <option value="2">Pending</option>
-                                        <option value="2">In Process</option>
-                                        <option value="2">Rejected</option>
-                                    </select>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Member Type:</label>
-                                <!--end::Label-->
-                                <!--begin::Options-->
-                                <div class="d-flex">
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                        <span class="form-check-label">Author</span>
-                                    </label>
-                                    <!--end::Options-->
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                        <span class="form-check-label">Customer</span>
-                                    </label>
-                                    <!--end::Options-->
-                                </div>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Notifications:</label>
-                                <!--end::Label-->
-                                <!--begin::Switch-->
-                                <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                    <label class="form-check-label">Enabled</label>
-                                </div>
-                                <!--end::Switch-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                                <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                            </div>
-                            <!--end::Actions-->
-                        </div>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Menu 1-->
-                </div>
-                <!--end::Filter menu-->
-                <!--begin::Secondary button-->
-                <!--end::Secondary button-->
-                <!--begin::Primary button-->
-                <a href="../../demo1/dist/.html" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-                <!--end::Primary button-->
-            </div>
-            <!--end::Actions-->
+           
         </div>
         <!--end::Container-->
     </div>
@@ -164,22 +66,26 @@
                             <div class="d-flex flex-center flex-column mb-5">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-150px symbol-circle mb-7">
-                                    <img src="{{ asset('backend/assets/media/avatars/300-1.jpg') }}" alt="image" />
+                                    <img src="{{ (!empty($customer->image)) ? url('storage/users/images/' . $customer->image) : url('storage/users/no_image.jpg') }}" alt="image" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Name-->
-                                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">Max Smith</a>
+                                <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">
+                                    {{ $customer->first_name . ' ' . $customer->last_name }}
+                                </a>
                                 <!--end::Name-->
                                 <!--begin::Email-->
-                                <a href="#" class="fs-5 fw-bold text-muted text-hover-primary mb-6">max@kt.com</a>
+                                <a href="#" class="fs-5 fw-bold text-muted text-hover-primary mb-6">
+                                    {{ $customer->email }}
+                                </a>
                                 <!--end::Email-->
                             </div>
                             <!--end::Summary-->
                             <!--begin::Details toggle-->
                             <div class="d-flex flex-stack fs-4 py-3">
-                                <div class="fw-bolder">Details</div>
+                                <div class="fw-bolder">Role</div>
                                 <!--begin::Badge-->
-                                <div class="badge badge-light-info d-inline">Premium user</div>
+                                <div class="badge badge-light-info d-inline">{{ $customer->role->name }}</div>
                                 <!--begin::Badge-->
                             </div>
                             <!--end::Details toggle-->
@@ -187,30 +93,30 @@
                             <!--begin::Details content-->
                             <div class="pb-5 fs-6">
                                 <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Account ID</div>
-                                <div class="text-gray-600">ID-45453423</div>
+                                <div class="fw-bolder mt-5">Phone Number</div>
+                                <div class="text-gray-600">{{ $customer->phone_number }}</div>
                                 <!--begin::Details item-->
                                 <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Billing Email</div>
-                                <div class="text-gray-600">
-                                    <a href="#" class="text-gray-600 text-hover-primary">info@keenthemes.com</a>
+                                <div class="fw-bolder mt-5">Physical Address</div>
+                                <div class="text-gray-600" style="width:90%;">
+                                    {!! $customer->delivery_address !!}
                                 </div>
                                 <!--begin::Details item-->
                                 <!--begin::Details item-->
                                 <div class="fw-bolder mt-5">Delivery Address</div>
-                                <div class="text-gray-600">101 Collin Street,
-                                <br />Melbourne 3000 VIC
-                                <br />Australia</div>
-                                <!--begin::Details item-->
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Language</div>
-                                <div class="text-gray-600">English</div>
-                                <!--begin::Details item-->
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Latest Transaction</div>
-                                <div class="text-gray-600">
-                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary">#14534</a>
+                                <div class="text-gray-600" style="width:90%;">
+                                    {!! $customer->delivery_address !!}
                                 </div>
+                                <!--begin::Details item-->
+                                 <!--begin::Details item-->
+                                 <div class="fw-bolder mt-5">Company</div>
+                                <div class="text-gray-600" style="width:90%;">
+                                    {!! $customer->company_name !!}
+                                </div>
+                                <!--begin::Details item-->
+                                <!--begin::Details item-->
+                                <div class="fw-bolder mt-5">Id Number</div>
+                                <div class="text-gray-600">{{ $customer->id_number }}</div>
                                 <!--begin::Details item-->
                             </div>
                             <!--end::Details content-->
@@ -251,7 +157,7 @@
                                 <div class="card-header border-0">
                                     <!--begin::Card title-->
                                     <div class="card-title">
-                                        <h2>Transaction History</h2>
+                                        <h2>Orders History</h2>
                                     </div>
                                     <!--end::Card title-->
                                 </div>
@@ -264,10 +170,9 @@
                                         <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
                                             <!--begin::Table row-->
                                             <tr class="text-start text-muted text-uppercase gs-0">
-                                                <th class="min-w-100px">order No.</th>
+                                                <th class="min-w-100px">Order No.</th>
                                                 <th>Status</th>
                                                 <th>Amount</th>
-                                                <th class="min-w-100px">Rewards</th>
                                                 <th class="min-w-100px">Date</th>
                                             </tr>
                                             <!--end::Table row-->
@@ -275,213 +180,37 @@
                                         <!--end::Table head-->
                                         <!--begin::Table body-->
                                         <tbody class="fs-6 fw-bold text-gray-600">
+                                            @foreach($orders as $order)
                                             <!--begin::Table row-->
                                             <tr>
                                                 <!--begin::order=-->
                                                 <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#14768</a>
+                                                    <a href="" class="text-gray-600 text-hover-primary mb-1">
+                                                        {{ $order->reference_id }}
+                                                    </a>
                                                 </td>
                                                 <!--end::order=-->
                                                 <!--begin::Status=-->
                                                 <td>
-                                                    <span class="badge badge-light-success">Successful</span>
+                                                    <span class="badge badge-light-success">
+                                                        {{ $order->status }}
+                                                    </span>
                                                 </td>
                                                 <!--end::Status=-->
                                                 <!--begin::Amount=-->
-                                                <td>$1,200.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>120</td>
+                                                <td>
+                                                    @php 
+                                                    $total = $order->total / 100;
+                                                    @endphp
+                                                    ${{ number_format((float)$total, 2, '.', '') }}
+                                                </td>
                                                 <!--end::Amount=-->
                                                 <!--begin::Date=-->
-                                                <td>14 Dec 2020, 8:43 pm</td>
+                                                <td>{{ $order->created_at }}</td>
                                                 <!--end::Date=-->
                                             </tr>
                                             <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15461</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-success">Successful</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$79.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>7</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>01 Dec 2020, 10:12 am</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15930</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-success">Successful</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$5,500.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>550</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>12 Nov 2020, 2:01 pm</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15073</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-warning">Pending</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$880.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>88</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>21 Oct 2020, 5:54 pm</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15964</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-success">Successful</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$7,650.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>765</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>19 Oct 2020, 7:32 am</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15168</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-success">Successful</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$375.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>37</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>23 Sep 2020, 12:38 am</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15063</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-success">Successful</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$129.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>12</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>11 Sep 2020, 3:18 pm</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15354</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-danger">Rejected</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$450.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>45</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>03 Sep 2020, 1:08 am</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
-                                            <!--begin::Table row-->
-                                            <tr>
-                                                <!--begin::order=-->
-                                                <td>
-                                                    <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-gray-600 text-hover-primary mb-1">#15648</a>
-                                                </td>
-                                                <!--end::order=-->
-                                                <!--begin::Status=-->
-                                                <td>
-                                                    <span class="badge badge-light-warning">Pending</span>
-                                                </td>
-                                                <!--end::Status=-->
-                                                <!--begin::Amount=-->
-                                                <td>$8,700.00</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Amount=-->
-                                                <td>870</td>
-                                                <!--end::Amount=-->
-                                                <!--begin::Date=-->
-                                                <td>01 Sep 2020, 4:58 pm</td>
-                                                <!--end::Date=-->
-                                            </tr>
-                                            <!--end::Table row-->
+                                            @endforeach
                                         </tbody>
                                         <!--end::Table body-->
                                     </table>
@@ -521,16 +250,16 @@
                                             <div class="mt-1">
                                                 <!--begin::Image input-->
                                                 <div class="image-input image-input-outline" data-kt-image-input="true" 
-                                                
                                                 style="background-image:url({{ asset('backend/assets/media/svg/avatars/blank.svg') }});">
                                                     <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image:url(/backend/assets/media/avatars/300-1.jpg')"></div>
+                                                    <div class="image-input-wrapper w-125px h-125px" 
+                                                    style="background-image:url({{ (!empty($customer->image)) ? url('storage/users/images/' . $customer->image) : url('storage/users/no_image.jpg') }})"></div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Edit-->
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                                        <input type="file" name="customer_image" accept=".png, .jpg, .jpeg" />
                                                         <input type="hidden" name="avatar_remove" />
                                                         <!--end::Inputs-->
                                                     </label>
@@ -551,16 +280,6 @@
                                             <!--end::Image input wrapper-->
                                         </div>
                                         <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-7">
-                                            <!--begin::Label-->
-                                            <label class="fs-6 fw-bold mb-2 required">Name</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="Max Smith" />
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
                                         <!--begin::Row-->
                                         <div class="row row-cols-1 row-cols-md-2">
                                             <!--begin::Col-->
@@ -569,12 +288,12 @@
                                                 <div class="fv-row mb-7">
                                                     <!--begin::Label-->
                                                     <label class="fs-6 fw-bold mb-2">
-                                                        <span class="required">General Email</span>
+                                                        <span class="required">First Name</span>
                                                         <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Email address must be active"></i>
                                                     </label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input type="email" class="form-control form-control-solid" placeholder="" name="gen_email" value="max@kt.com" />
+                                                    <input type="text" class="form-control form-control-solid" placeholder="" name="customer_first_name" value="{{ $customer->first_name}}" />
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Input group-->
@@ -586,12 +305,12 @@
                                                 <div class="fv-row mb-7">
                                                     <!--begin::Label-->
                                                     <label class="fs-6 fw-bold mb-2">
-                                                        <span>Billing Email</span>
-                                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Email address must be active"></i>
+                                                        <span>Last Name</span>
+                                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Last Name"></i>
                                                     </label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input type="email" class="form-control form-control-solid" placeholder="" name="bill_email" value="info@keenthemes.com" />
+                                                    <input type="text" name="customer_last_name" value="{{ $customer->last_name }}"  class="form-control form-control-solid" placeholder="Last Name" />
                                                     <!--end::Input-->
                                                 </div>
                                                 <!--end::Input group-->
@@ -599,12 +318,31 @@
                                             <!--end::Col-->
                                         </div>
                                         <!--end::Row-->
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold mb-2 required">Email</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="email" name="customer_email" value="{{ $customer->email }}"  placeholder="mark@abs.com"  class="form-control form-control-solid"/>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold mb-2 required">Phone Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="customer_phone_number" value="{{ $customer->phone_number }}" class="form-control form-control-solid" placeholder="+263 (0) 782 210021" />
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        
                                         <div class="d-flex justify-content-end">
                                             <!--begin::Button-->
                                             <button type="submit" id="kt_ecommerce_customer_profile_submit" class="btn btn-light-primary">
                                                 <span class="indicator-label">Save</span>
-                                                <span class="indicator-progress">Please wait...
-                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                             </button>
                                             <!--end::Button-->
                                         </div>
@@ -614,484 +352,11 @@
                                 <!--end::Card body-->
                             </div>
                             <!--end::Card-->
-                            <!--begin::Card-->
-                            <div class="card pt-4 mb-6 mb-xl-9">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                        <h2>Address Book</h2>
-                                    </div>
-                                    <!--end::Card title-->
-                                    <!--begin::Card toolbar-->
-                                    <div class="card-toolbar">
-                                        <a href="#" class="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_address">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black" />
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black" />
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->Add new address</a>
-                                    </div>
-                                    <!--end::Card toolbar-->
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div id="kt_ecommerce_customer_addresses" class="card-body pt-0 pb-5">
-                                    <!--begin::Addresses-->
-                                    <!--begin::Address-->
-                                    <div class="py-0">
-                                        <!--begin::Header-->
-                                        <div class="py-3 d-flex flex-stack flex-wrap">
-                                            <!--begin::Toggle-->
-                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_ecommerce_customer_addresses_1" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_1">
-                                                <!--begin::Arrow-->
-                                                <div class="me-3 rotate-90">
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr071.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <!--end::Arrow-->
-                                                <!--begin::Summary-->
-                                                <div class="me-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="fs-4 fw-bolder">Home</div>
-                                                        <div class="badge badge-light-primary ms-5">Default Address</div>
-                                                    </div>
-                                                    <div class="text-muted">101 Collin Street</div>
-                                                </div>
-                                                <!--end::Summary-->
-                                            </div>
-                                            <!--end::Toggle-->
-                                            <!--begin::Toolbar-->
-                                            <div class="d-flex my-3 ms-9">
-                                                <!--begin::Edit-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_address">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
-                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                                        <span class="svg-icon svg-icon-3">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
-                                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </span>
-                                                </a>
-                                                <!--end::Edit-->
-                                                <!--begin::Delete-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Delete" data-kt-customer-payment-method="delete">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
-                                                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
-                                                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <!--end::Delete-->
-                                                <!--begin::More-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px" data-bs-toggle="tooltip" title="More Options" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
-                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <!--begin::Menu-->
-                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-                                                    <!--begin::Menu item-->
-                                                    <div class="menu-item px-3">
-                                                        <a href="#" class="menu-link px-3" data-kt-payment-mehtod-action="set_as_default">Set as default address</a>
-                                                    </div>
-                                                    <!--end::Menu item-->
-                                                </div>
-                                                <!--end::Menu-->
-                                                <!--end::More-->
-                                            </div>
-                                            <!--end::Toolbar-->
-                                        </div>
-                                        <!--end::Header-->
-                                        <!--begin::Body-->
-                                        <div id="kt_ecommerce_customer_addresses_1" class="collapse fs-6 ps-9" data-bs-parent="#kt_ecommerce_customer_addresses">
-                                            <!--begin::Details-->
-                                            <div class="d-flex flex-column pb-5">
-                                                <div class="fw-bolder text-gray-600">Max Smith</div>
-                                                <div class="text-muted">101 Collin Street,
-                                                <br />Melbourne, VIC 3000,
-                                                <br />Australia</div>
-                                            </div>
-                                            <!--end::Details-->
-                                        </div>
-                                        <!--end::Body-->
-                                    </div>
-                                    <!--end::Address-->
-                                    <!--begin::Address-->
-                                    <div class="py-0">
-                                        <!--begin::Header-->
-                                        <div class="py-3 d-flex flex-stack flex-wrap">
-                                            <!--begin::Toggle-->
-                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_ecommerce_customer_addresses_2" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_2">
-                                                <!--begin::Arrow-->
-                                                <div class="me-3 rotate-90">
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr071.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <!--end::Arrow-->
-                                                <!--begin::Summary-->
-                                                <div class="me-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="fs-4 fw-bolder">Work</div>
-                                                    </div>
-                                                    <div class="text-muted">54 Spring Street</div>
-                                                </div>
-                                                <!--end::Summary-->
-                                            </div>
-                                            <!--end::Toggle-->
-                                            <!--begin::Toolbar-->
-                                            <div class="d-flex my-3 ms-9">
-                                                <!--begin::Edit-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_address">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
-                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                                        <span class="svg-icon svg-icon-3">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
-                                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </span>
-                                                </a>
-                                                <!--end::Edit-->
-                                                <!--begin::Delete-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Delete" data-kt-customer-payment-method="delete">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
-                                                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
-                                                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <!--end::Delete-->
-                                                <!--begin::More-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px" data-bs-toggle="tooltip" title="More Options" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
-                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <!--begin::Menu-->
-                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-                                                    <!--begin::Menu item-->
-                                                    <div class="menu-item px-3">
-                                                        <a href="#" class="menu-link px-3" data-kt-payment-mehtod-action="set_as_default">Set as default address</a>
-                                                    </div>
-                                                    <!--end::Menu item-->
-                                                </div>
-                                                <!--end::Menu-->
-                                                <!--end::More-->
-                                            </div>
-                                            <!--end::Toolbar-->
-                                        </div>
-                                        <!--end::Header-->
-                                        <!--begin::Body-->
-                                        <div id="kt_ecommerce_customer_addresses_2" class="collapse fs-6 ps-9" data-bs-parent="#kt_ecommerce_customer_addresses">
-                                            <!--begin::Details-->
-                                            <div class="d-flex flex-column pb-5">
-                                                <div class="fw-bolder text-gray-600">Max Smith</div>
-                                                <div class="text-muted">54 Spring Street,
-                                                <br />Melbourne, VIC 3000,
-                                                <br />Australia</div>
-                                            </div>
-                                            <!--end::Details-->
-                                        </div>
-                                        <!--end::Body-->
-                                    </div>
-                                    <!--end::Address-->
-                                    <!--begin::Address-->
-                                    <div class="py-0">
-                                        <!--begin::Header-->
-                                        <div class="py-3 d-flex flex-stack flex-wrap">
-                                            <!--begin::Toggle-->
-                                            <div class="d-flex align-items-center collapsible collapsed rotate" data-bs-toggle="collapse" href="#kt_ecommerce_customer_addresses_3" role="button" aria-expanded="false" aria-controls="kt_customer_view_payment_method_3">
-                                                <!--begin::Arrow-->
-                                                <div class="me-3 rotate-90">
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr071.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <!--end::Arrow-->
-                                                <!--begin::Summary-->
-                                                <div class="me-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="fs-4 fw-bolder">Family</div>
-                                                    </div>
-                                                    <div class="text-muted">1521 Broadway</div>
-                                                </div>
-                                                <!--end::Summary-->
-                                            </div>
-                                            <!--end::Toggle-->
-                                            <!--begin::Toolbar-->
-                                            <div class="d-flex my-3 ms-9">
-                                                <!--begin::Edit-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_address">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit">
-                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                                        <span class="svg-icon svg-icon-3">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
-                                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </span>
-                                                </a>
-                                                <!--end::Edit-->
-                                                <!--begin::Delete-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Delete" data-kt-customer-payment-method="delete">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
-                                                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
-                                                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <!--end::Delete-->
-                                                <!--begin::More-->
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px" data-bs-toggle="tooltip" title="More Options" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
-                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <!--begin::Menu-->
-                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-                                                    <!--begin::Menu item-->
-                                                    <div class="menu-item px-3">
-                                                        <a href="#" class="menu-link px-3" data-kt-payment-mehtod-action="set_as_default">Set as default address</a>
-                                                    </div>
-                                                    <!--end::Menu item-->
-                                                </div>
-                                                <!--end::Menu-->
-                                                <!--end::More-->
-                                            </div>
-                                            <!--end::Toolbar-->
-                                        </div>
-                                        <!--end::Header-->
-                                        <!--begin::Body-->
-                                        <div id="kt_ecommerce_customer_addresses_3" class="collapse fs-6 ps-9" data-bs-parent="#kt_ecommerce_customer_addresses">
-                                            <!--begin::Details-->
-                                            <div class="d-flex flex-column pb-5">
-                                                <div class="fw-bolder text-gray-600">Francis Mitcham</div>
-                                                <div class="text-muted">1521 Broadway,
-                                                <br />New York,
-                                                <br />Melbourne, NY 10036,
-                                                <br />United States</div>
-                                            </div>
-                                            <!--end::Details-->
-                                        </div>
-                                        <!--end::Body-->
-                                    </div>
-                                    <!--end::Address-->
-                                    <!--end::Addresses-->
-                                </div>
-                                <!--end::Card body-->
-                            </div>
-                            <!--end::Card-->
+                            
                         </div>
                         <!--end:::Tab pane-->
                         <!--begin:::Tab pane-->
                         <div class="tab-pane fade" id="kt_ecommerce_customer_advanced" role="tabpanel">
-                            <!--begin::Card-->
-                            <div class="card pt-4 mb-6 mb-xl-9">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                        <h2>Security Details</h2>
-                                    </div>
-                                    <!--end::Card title-->
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body pt-0 pb-5">
-                                    <!--begin::Table wrapper-->
-                                    <div class="table-responsive">
-                                        <!--begin::Table-->
-                                        <table class="table align-middle table-row-dashed gy-5" id="kt_table_users_login_session">
-                                            <!--begin::Table body-->
-                                            <tbody class="fs-6 fw-bold text-gray-600">
-                                                <tr>
-                                                    <td>Phone</td>
-                                                    <td>+6141 234 567</td>
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-bs-toggle="modal" data-bs-target="#kt_modal_update_phone">
-                                                            <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                                            <span class="svg-icon svg-icon-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
-                                                                    <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
-                                                                </svg>
-                                                            </span>
-                                                            <!--end::Svg Icon-->
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Password</td>
-                                                    <td>******</td>
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" data-bs-toggle="modal" data-bs-target="#kt_modal_update_password">
-                                                            <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                                            <span class="svg-icon svg-icon-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                    <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
-                                                                    <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
-                                                                </svg>
-                                                            </span>
-                                                            <!--end::Svg Icon-->
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <!--end::Table body-->
-                                        </table>
-                                        <!--end::Table-->
-                                    </div>
-                                    <!--end::Table wrapper-->
-                                </div>
-                                <!--end::Card body-->
-                            </div>
-                            <!--end::Card-->
-                            <!--begin::Card-->
-                            <div class="card pt-4 mb-6 mb-xl-9">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0">
-                                    <!--begin::Card title-->
-                                    <div class="card-title flex-column">
-                                        <h2 class="mb-1">Two Step Authentication</h2>
-                                        <div class="fs-6 fw-bold text-muted">Keep your account extra secure with a second authentication step.</div>
-                                    </div>
-                                    <!--end::Card title-->
-                                    <!--begin::Card toolbar-->
-                                    <div class="card-toolbar">
-                                        <!--begin::Add-->
-                                        <button type="button" class="btn btn-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                        <!--begin::Svg Icon | path: icons/duotune/technology/teh004.svg-->
-                                        <span class="svg-icon svg-icon-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M21 10.7192H3C2.4 10.7192 2 11.1192 2 11.7192C2 12.3192 2.4 12.7192 3 12.7192H6V14.7192C6 18.0192 8.7 20.7192 12 20.7192C15.3 20.7192 18 18.0192 18 14.7192V12.7192H21C21.6 12.7192 22 12.3192 22 11.7192C22 11.1192 21.6 10.7192 21 10.7192Z" fill="black" />
-                                                <path d="M11.6 21.9192C11.4 21.9192 11.2 21.8192 11 21.7192C10.6 21.4192 10.5 20.7191 10.8 20.3191C11.7 19.1191 12.3 17.8191 12.7 16.3191C12.8 15.8191 13.4 15.4192 13.9 15.6192C14.4 15.7192 14.8 16.3191 14.6 16.8191C14.2 18.5191 13.4 20.1192 12.4 21.5192C12.2 21.7192 11.9 21.9192 11.6 21.9192ZM8.7 19.7192C10.2 18.1192 11 15.9192 11 13.7192V8.71917C11 8.11917 11.4 7.71917 12 7.71917C12.6 7.71917 13 8.11917 13 8.71917V13.0192C13 13.6192 13.4 14.0192 14 14.0192C14.6 14.0192 15 13.6192 15 13.0192V8.71917C15 7.01917 13.7 5.71917 12 5.71917C10.3 5.71917 9 7.01917 9 8.71917V13.7192C9 15.4192 8.4 17.1191 7.2 18.3191C6.8 18.7191 6.9 19.3192 7.3 19.7192C7.5 19.9192 7.7 20.0192 8 20.0192C8.3 20.0192 8.5 19.9192 8.7 19.7192ZM6 16.7192C6.5 16.7192 7 16.2192 7 15.7192V8.71917C7 8.11917 7.1 7.51918 7.3 6.91918C7.5 6.41918 7.2 5.8192 6.7 5.6192C6.2 5.4192 5.59999 5.71917 5.39999 6.21917C5.09999 7.01917 5 7.81917 5 8.71917V15.7192V15.8191C5 16.3191 5.5 16.7192 6 16.7192ZM9 4.71917C9.5 4.31917 10.1 4.11918 10.7 3.91918C11.2 3.81918 11.5 3.21917 11.4 2.71917C11.3 2.21917 10.7 1.91916 10.2 2.01916C9.4 2.21916 8.59999 2.6192 7.89999 3.1192C7.49999 3.4192 7.4 4.11916 7.7 4.51916C7.9 4.81916 8.2 4.91918 8.5 4.91918C8.6 4.91918 8.8 4.81917 9 4.71917ZM18.2 18.9192C18.7 17.2192 19 15.5192 19 13.7192V8.71917C19 5.71917 17.1 3.1192 14.3 2.1192C13.8 1.9192 13.2 2.21917 13 2.71917C12.8 3.21917 13.1 3.81916 13.6 4.01916C15.6 4.71916 17 6.61917 17 8.71917V13.7192C17 15.3192 16.8 16.8191 16.3 18.3191C16.1 18.8191 16.4 19.4192 16.9 19.6192C17 19.6192 17.1 19.6192 17.2 19.6192C17.7 19.6192 18 19.3192 18.2 18.9192Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->Add Authentication Step</button>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-6 w-200px py-4" data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_auth_app">Use authenticator app</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_one_time_password">Enable one-time password</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                        <!--end::Add-->
-                                    </div>
-                                    <!--end::Card toolbar-->
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body pb-5">
-                                    <!--begin::Item-->
-                                    <div class="d-flex flex-stack">
-                                        <!--begin::Content-->
-                                        <div class="d-flex flex-column">
-                                            <span>SMS</span>
-                                            <span class="text-muted fs-6">+6141 234 567</span>
-                                        </div>
-                                        <!--end::Content-->
-                                        <!--begin::Action-->
-                                        <div class="d-flex justify-content-end align-items-center">
-                                            <!--begin::Button-->
-                                            <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto me-5" data-bs-toggle="modal" data-bs-target="#kt_modal_add_one_time_password">
-                                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
-                                                        <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
-                                            </button>
-                                            <!--end::Button-->
-                                            <!--begin::Button-->
-                                            <button type="button" class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto" id="kt_users_delete_two_step">
-                                                <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                                <span class="svg-icon svg-icon-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
-                                                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
-                                                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
-                                            </button>
-                                            <!--end::Button-->
-                                        </div>
-                                        <!--end::Action-->
-                                    </div>
-                                    <!--end::Item-->
-                                    <!--begin:Separator-->
-                                    <div class="separator separator-dashed my-5"></div>
-                                    <!--end:Separator-->
-                                    <!--begin::Disclaimer-->
-                                    <div class="text-gray-600">If you lose your mobile device or security key, you can
-                                    <a href='#' class="me-1">generate a backup code</a>to sign in to your account.</div>
-                                    <!--end::Disclaimer-->
-                                </div>
-                                <!--end::Card body-->
-                            </div>
-                            <!--end::Card-->
                             <!--begin::Card-->
                             <div class="card pt-4 mb-6 mb-xl-9">
                                 <!--begin::Card header-->

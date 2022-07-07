@@ -31,7 +31,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data['products'] = Product::with(['categories','brands','tags', 'users'])->orderBy('updated_at','desc')->get();
+        $data['products'] = Product::with(['categories','brands','tags', 'users',])->orderBy('updated_at','desc')->get();
         //return $data['products'];
         return view('backend.products.index', $data);
     }
@@ -245,6 +245,7 @@ class ProductController extends Controller
             'categories',
             'brands',
             'product_metas',
+            'product_images',
             'discounts',
             'inventories',
             'taxes',
@@ -257,7 +258,9 @@ class ProductController extends Controller
 
     public function update(Request $request, $id){
         DB::transaction(function() use($request, $id){
-            /* Product */
+            /*
+            *   Product
+            */
             $product = Product::find($id);
             if( $request->file('product_thumbnail') ){
                 $product_thumbnail = $request->file('product_thumbnail');
@@ -367,14 +370,58 @@ class ProductController extends Controller
                     }            
                 }
             } 
-            /* Product Images */
-            if( $request->file('product_images') ){
+
+            /* 
+            *   Product Images 
+            */
+            //$db_product_images = $request->db_product_images;
+            /* 
+            *   Check if images are present inf the form request
+            */
+            if(!empty($request->db_product_images)){
+                if( !empty($request->file('product_images')) ){
+                    $images = $request->file('product_images');
+                    foreach($images as $image){
+                        $product_images = new ProductImage();
+                        $product_images->product_id = $product->id;
+                        $image_extension = strtolower($image->getClientOriginalExtension());
+                        $image_name = hexdec(uniqid()) . '.' . $image_extension;
+                        $upload_location = 'storage/products/images/'; 
+                        $image->move($upload_location, $image_name);
+                        $product_images->image = $image_name;
+                        $product_images->save();
+                    }
+                }
+            } elseif(empty($request->db_product_images)){
+                $images = ProductImage::where('product_id', $product->id)->get();
+                $upload_location = 'storage/products/images/'; 
+                for($i = 0; $i < count($images); $i++){
+                    if(file_exists(public_path($upload_location . $images[$i]->image))){
+                        unlink($upload_location . $images[$i]->image);
+                    }
+                }
+                $images = ProductImage::where('product_id', $product->id)->delete();
+                if( $request->file('product_images') ){
+                    $images = $request->file('product_images');
+                    foreach($images as $image){
+                        $product_images = new ProductImage();
+                        $product_images->product_id = $product->id;
+                        $image_extension = strtolower($image->getClientOriginalExtension());
+                        $image_name = hexdec(uniqid()) . '.' . $image_extension;
+                        $upload_location = 'storage/products/images/'; 
+                        $image->move($upload_location, $image_name);
+                        $product_images->image = $image_name;
+                        $product_images->save();
+                    }
+                }
+            }
+            
+            /* if( $request->file('product_images') ){
                 $images = $request->file('product_images');
                 $product_images = ProductImage::where('product_id', $product->id)->delete();
                 foreach($images as $image){
                     $product_images = new ProductImage();
                     $product_images->product_id = $product->id;
-
                     $image_extension = strtolower($image->getClientOriginalExtension());
                     $image_name = hexdec(uniqid()) . '.' . $image_extension;
                     $upload_location = 'storage/products/images/';    
@@ -388,8 +435,9 @@ class ProductController extends Controller
                         $product_images->image = $image_name;
                     }          
                     $product_images->save();
-                }         
-            }
+                }        
+            } */
+
             /* Product Metas */
             $product_meta = ProductMeta::where('product_id', $product->id)->first();
             $product_meta->title = $request->meta_title;  
@@ -446,6 +494,22 @@ class ProductController extends Controller
             'alert-type' => 'success'
         ];
         return redirect()->route('admin.products')->with($notification);
+    }
+
+    public function remove_image($id){
+        $image = ProductImage::where('id',  $id)->first();
+        $upload_location = 'storage/products/images/';
+        if(!empty($image)){
+            if(file_exists(public_path($upload_location .  $image->image))){
+                unlink($upload_location . $image->image);
+            }else{
+                return response()->json('Image Not found in Folder...');
+            } 
+            ProductImage::where('image', $image->image)->delete();
+            return response()->json('Deleted Successfully!...');
+        }else{
+            return response()->json('Image Not found in Database...');
+        }
     }
 
     public function delete($id){

@@ -60,7 +60,7 @@
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">Profile Details</h3>
+                        <h3 class="fw-bolder m-0">Customer Details</h3>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -68,7 +68,7 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form method="POST" action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data" class="form">
+                    <form method="POST" action="{{ route('admin.customer.update', $customer->id) }}" enctype="multipart/form-data" class="form">
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
@@ -83,13 +83,13 @@
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                                         <!--begin::Preview existing avatar-->
                                         <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url({{ (!empty($user->image)) ? url('storage/users/images/' . $user->image) : url('storage/users/no_image.jpg') }}" alt="{{ $user->name }})"></div>
+                                        style="background-image: url({{ (!empty($customer->image)) ? url('storage/users/images/' . $customer->image) : url('storage/users/no_image.jpg') }}" alt="{{ $customer->name }})"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" name="user_image" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" name="customer_image" accept=".png, .jpg, .jpeg" />
                                             <input type="hidden" name="avatar_remove" />
                                             <!--end::Inputs-->
                                         </label>
@@ -120,7 +120,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="user_name" value="{{ $user->name }}" class="form-control form-control-lg form-control-solid" placeholder="abc@example.come" />
+                                    <input type="text" name="customer_name" value="{{ $customer->name }}" class="form-control form-control-lg form-control-solid" placeholder="abc@example.come" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -136,40 +136,16 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="user_first_name" value="{{ $user->first_name }}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="Max" />
+                                            <input type="text" name="customer_first_name" value="{{ $customer->first_name }}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="Max" />
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="user_last_name" value="{{ $user->last_name }}" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="Smith" />
+                                            <input type="text" name="customer_last_name" value="{{ $customer->last_name }}" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="Smith" />
                                         </div>
                                         <!--end::Col-->
                                     </div>
                                     <!--end::Row-->
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                             <!--begin::Input group-->
-                             <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">User Role</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <!--begin::Input-->
-                                    <select name="user_role_id" aria-label="Select Role" data-control="select2" 
-                                    data-placeholder="Select a Role..." class="form-select form-select-solid form-select-lg">
-                                        <option value="">Select an option.</option>
-                                        <option value="1" {{ ($user->role_id == 1) ? "selected='selected'" : "" }}>Administrator</option>
-                                        <option value="2" {{ ($user->role_id == 2) ? "selected='selected'" : "" }}>Manager</option>
-                                        <option value="3" {{ ($user->role_id == 3) ? "selected='selected'" : "" }}>Operator</option>
-                                        <option value="4" {{ ($user->role_id == 4) ? "selected='selected'" : "" }}>Customer</option>
-                                    </select>
-                                    <!--end::Input-->
-                                    <!--begin::Hint-->
-                                    <div class="form-text">Please select a role.</div>
-                                    <!--end::Hint-->
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -181,7 +157,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="email" name="user_email" value="{{ $user->email }}" class="form-control form-control-lg form-control-solid" placeholder="abc@example.come" />
+                                    <input type="email" name="customer_email" value="{{ $customer->email }}" class="form-control form-control-lg form-control-solid" placeholder="abc@example.come" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -195,7 +171,9 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="tel" name="user_phone_number" value="{{ $user->phone_number }}" class="form-control form-control-lg form-control-solid" placeholder="Phone number" />
+                                    <input type="text" name="customer_phone_number" 
+                                    value="{{ $customer->phone_number }}" 
+                                    class="form-control form-control-lg form-control-solid" placeholder="Phone number" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -207,7 +185,43 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="user_address" value="{{ $user->address }}" class="form-control form-control-lg form-control-solid" placeholder="Address"/>
+                                    <input type="text" name="customer_address" value="{{ $customer->address }}" class="form-control form-control-lg form-control-solid" placeholder="Address"/>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Delivery Address</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="customer_delivery_address" value="{{ $customer->delivery_address }}" class="form-control form-control-lg form-control-solid" placeholder="Address"/>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">City</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="customer_city" value="{{ $customer->city }}" class="form-control form-control-lg form-control-solid" placeholder="Address"/>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Company</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="customer_company_name" value="{{ $customer->company_name }}" class="form-control form-control-lg form-control-solid" placeholder="Address"/>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -221,7 +235,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <input type="text" name="user_date_of_birth" value="{{ $user->date_of_birth }}" class="form-control form-control-lg form-control-solid" placeholder="04 January 2000" />
+                                    <input type="text" name="customer_date_of_birth" value="{{ $customer->date_of_birth }}" class="form-control form-control-lg form-control-solid" placeholder="04 January 2000" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -234,10 +248,10 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <!--begin::Input-->
-                                    <select name="user_gender" aria-label="Select a Gender" data-control="select2" 
+                                    <select name="customer_gender" aria-label="Select a Gender" data-control="select2" 
                                     data-placeholder="Select a Gender..." class="form-select form-select-solid form-select-lg">
-                                        <option value="Male" {{ ($user->gender == "Male") ? "selected='selected'" : "" }}>Male</option>
-                                        <option value="Female" {{ ($user->gender == "Female") ? "selected='selected'" : "" }}>Female</option>
+                                        <option value="Male" {{ ($customer->gender == "Male") ? "selected='selected'" : "" }}>Male</option>
+                                        <option value="Female" {{ ($customer->gender == "Female") ? "selected='selected'" : "" }}>Female</option>
                                     </select>
                                     <!--end::Input-->
                                     <!--begin::Hint-->
@@ -256,7 +270,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <input type="text" name="user_id_number" value="{{ $user->id_number }}" class="form-control form-control-lg form-control-solid" placeholder="" />
+                                    <input type="text" name="customer_id_number" value="{{ $customer->id_number }}" class="form-control form-control-lg form-control-solid" placeholder="" />
                                 </div>
                                 <!--end::Col-->
                             </div>

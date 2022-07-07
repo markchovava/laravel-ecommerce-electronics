@@ -18,7 +18,8 @@ use App\Http\Controllers\Quote\QuoteController;
 use App\Http\Controllers\Frontend\Cart\CartController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutController;
 use App\Http\Controllers\Frontend\Checkout\CheckoutAuthController;
-use App\Http\Controllers\Frontend\Customer\CustomerController;
+use App\Http\Controllers\Customer\CustomerAuthController;
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Orders\OrdersController;
 use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\Inventory\PurchaseController;
@@ -50,11 +51,11 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/admin/login', [ProfileController::class, 'login'])->name('admin.login');
 Route::get('/admin/logout', [ProfileController::class, 'logout'])->name('admin.logout');
 /* Customer Login and Logout */
-Route::get('/customer/login', [CustomerController::class, 'login'])->name('customer.login');
-Route::post('/customer/login', [CustomerController::class, 'login_process'])->name('customer.login.process');
-Route::get('/customer/register', [CustomerController::class, 'register'])->name('customer.register');
-Route::post('/customer/register', [CustomerController::class, 'register_process'])->name('customer.register.process');
-Route::get('/customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
+Route::get('/customer/login', [CustomerAuthController::class, 'login'])->name('customer.login');
+Route::post('/customer/login', [CustomerAuthController::class, 'login_process'])->name('customer.login.process');
+Route::get('/customer/register', [CustomerAuthController::class, 'register'])->name('customer.register');
+Route::post('/customer/register', [CustomerAuthController::class, 'register_process'])->name('customer.register.process');
+Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 
 /* ::: Single Product Page ::: */
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
@@ -112,6 +113,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::post('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
     });
+    
+    Route::prefix('customer')->group(function() {
+        Route::get('/', [CustomerController::class, 'index'])->name('admin.customer');
+        Route::get('/add', [CustomerController::class, 'add'])->name('admin.customer.add');
+        Route::post('/store', [CustomerController::class, 'store'])->name('admin.customer.store');
+        Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('admin.customer.edit');
+        Route::get('/view/{id}', [CustomerController::class, 'view'])->name('admin.customer.view');
+        Route::post('/update/{id}', [CustomerController::class, 'update'])->name('admin.customer.update');
+        Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('admin.customer.delete');
+    });
 
     Route::prefix('orders')->group(function() {
         Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
@@ -127,6 +138,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('admin.products.delete');
     Route::get('/products/serial/{id}', [ProductController::class, 'serial'])->name('admin.products.serial');
+    Route::get('/products/image/remove/{id}', [ProductController::class, 'remove_image'])->name('admin.products.remove');
     
      /* :::::: Category ::::: */
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
@@ -232,23 +244,8 @@ Route::get('/add', function(){
 
 Route::get('/show', function(){
 
-    /* $data = Product::with('categories')->whereHas('categories', function($query){
-        $query->where('product_categories.category_id', 3); //this refers id field from categories table
-    })
-    ->orderBy('id','desc')
-    ->paginate(8); */
-    $id = 2;
-    $data['tag'] = Product::with('categories')->whereHas('tags', function($query) use($id){
-        $query->where('product_tags.tag_id', $id); //this refers id field from categories table
-    })
-    ->orderBy('id','desc')
-    ->paginate(12);
-
-    foreach($data['tag'] as $product){
-        foreach($product->categories as $_data){
-            dd($_data->name);
-        }
-    }
+    $product_images = \App\Models\Product\ProductImage::where('product_id', 2)->get();
+    dd(count($product_images));
 
 });
 

@@ -316,10 +316,22 @@
                                         <!-- Input -->
                                         <div class="js-form-message mb-6">
                                             <label class="form-label">
-                                                Delivery address
+                                                Address
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->address }}</textarea>
+                                        </div>
+                                        <!-- End Input -->
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <!-- Input -->
+                                        <div class="js-form-message mb-6">
+                                            <label class="form-label">
+                                                Delivery address
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->delivery_address }}</textarea>
                                         </div>
                                         <!-- End Input -->
                                     </div>
@@ -499,10 +511,22 @@
                                         <!-- Input -->
                                         <div class="js-form-message mb-6">
                                             <label class="form-label">
-                                                Delivery address
+                                                Address
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <textarea class="form-control" name="address" id="" cols="30" rows="4"></textarea>
+                                            <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->address }}</textarea>
+                                        </div>
+                                        <!-- End Input -->
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <!-- Input -->
+                                        <div class="js-form-message mb-6">
+                                            <label class="form-label">
+                                                Delivery Address
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->delivery_address }}</textarea>
                                         </div>
                                         <!-- End Input -->
                                     </div>

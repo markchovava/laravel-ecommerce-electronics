@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Customer;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ use App\Models\Product\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
-class CustomerController extends Controller
+class CustomerAuthController extends Controller
 {
     public function login(){
         $data['role_id'] = CheckRoles::check_role();
@@ -89,8 +89,7 @@ class CustomerController extends Controller
         $user->last_name = $request->last_name;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role = 'Customer';
-        $user->role_id = 4;
+        $user->role_id = 4; // For Customer
         $user->password = Hash::make($request->password);
         $user->save();
 
