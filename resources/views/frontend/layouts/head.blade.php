@@ -31,7 +31,7 @@
 
     <!-- JS -->
     <script src="{{ asset('frontend/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/custom/sweetalert2.js') }}"></script>
+    <script src="{{ asset('frontend/assets/custom/toastr/toastr.min.css') }}"></script>
 </head>
 
         

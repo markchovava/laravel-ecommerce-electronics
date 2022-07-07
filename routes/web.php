@@ -25,10 +25,12 @@ use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\Inventory\PurchaseController;
 use App\Http\Controllers\Pages\Home\StickerController;
 use App\Http\Controllers\Ads\AdsController;
+use App\Http\Controllers\Contact\ContactPageController;
 use App\Http\Controllers\Frontend\Category\CategoryPageController;
 use App\Http\Controllers\Frontend\Tag\TagPageController;
 use App\Http\Controllers\Frontend\Brand\BrandPageController;
 use App\Http\Controllers\Frontend\Search\SearchPageController;
+use App\Http\Controllers\Message\MessageController;
 
 //use App\Http\Controllers\PDF\PDFController;
 
@@ -47,7 +49,15 @@ use App\Http\Controllers\Frontend\Search\SearchPageController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-/* Admin Login & Logout */
+
+/* 
+*   Contact Page 
+*/
+Route::get('/contact', [ContactPageController::class, 'index'])->name('contact.index');
+Route::post('/contact/store', [ContactPageController::class, 'store'])->name('contact.store');
+/* 
+*   Admin Login & Logout 
+*/
 Route::get('/admin/login', [ProfileController::class, 'login'])->name('admin.login');
 Route::get('/admin/logout', [ProfileController::class, 'logout'])->name('admin.logout');
 /* Customer Login and Logout */
@@ -94,7 +104,9 @@ Route::middleware(['auth'])->group(function (){
 Route::get('/track/order', [OrdersController::class, 'track'])->name('order.track');
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
-    /* :::::: Account Profile :::::: */
+    /* :::::: 
+    *   Account Profile 
+    :::::: */
     Route::prefix('profile')->group(function() {
         Route::get('/view', [ProfileController::class, 'view'])->name('profile.view');
         Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -168,6 +180,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::post('/brands/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
     Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
 
+    /* 
+    *   Ads 
+    */
     Route::prefix('ads')->group(function(){
         Route::get('/', [AdsController::class, 'index'])->name('admin.ad');
         Route::get('/add', [AdsController::class, 'add'])->name('admin.ad.add');
@@ -175,6 +190,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/edit/{id}', [AdsController::class, 'edit'])->name('admin.ad.edit');
         Route::post('/update/{id}', [AdsController::class, 'update'])->name('admin.ad.update');
         Route::get('/delete/{id}', [AdsController::class, 'delete'])->name('admin.ad.delete');
+    });
+
+    Route::prefix('message')->group(function(){
+        Route::get('/', [MessageController::class, 'index'])->name('admin.message');
+        Route::get('/view', [MessageController::class, 'view'])->name('admin.message.view');
     });
 
     /* Homepage top Sticker */
@@ -255,16 +275,9 @@ Route::get('/show', function(){
         START OF FRONTEND
 ::::::::::::::::::::::::::::::::::::::
 */
-/* Route::get('/', function () {
-    return view('frontend.pages.index');
-}); */
 
 
 
-
-Route::get('/contact', function () {
-    return view('frontend.pages.contact');
-});
 
 Route::get('/about', function () {
     return view('frontend.pages.about');

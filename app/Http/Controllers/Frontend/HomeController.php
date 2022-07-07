@@ -6,10 +6,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Actions\RoleManagement\CheckRoles;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ads\Ads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Ads\Ads;
 use App\Models\UserProduct;
 use App\Models\Product\Product;
 use App\Models\Product\Category;
