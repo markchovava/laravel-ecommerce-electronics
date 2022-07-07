@@ -69,45 +69,43 @@
                                 <!--begin::Menu item-->
                                 <div class="menu-item mb-3">
                                     <a href="{{ route('admin.message.all') }}">
-                                        <!--begin::Inbox-->
-                                        <span class="menu-link active">
-                                            <span class="menu-icon">
-                                                <!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
-                                                <span class="svg-icon svg-icon-2 me-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
-                                                        <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
+                                    <!--begin::Inbox-->
+                                    <span class="menu-link">
+                                        <span class="menu-icon">
+                                            <!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
+                                            <span class="svg-icon svg-icon-2 me-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
+                                                    <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
+                                                </svg>
                                             </span>
-                                            <span class="menu-title fw-bolder">All Messages</span>
-                                            <span class="badge badge-light-primary">{{ count($all) }}</span>
+                                            <!--end::Svg Icon-->
                                         </span>
-                                        <!--end::Inbox-->
+                                        <span class="menu-title fw-bolder">All Messages</span>
+                                        <span class="badge badge-light-primary">{{ count($all) }}</span>
+                                    </span>
+                                    <!--end::Inbox-->
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item mb-3">
-                                    <a href="{{ route('admin.message.unread') }}">
-                                        <!--begin::Inbox-->
-                                        <span class="menu-link">
-                                            <span class="menu-icon">
-                                                <!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
-                                                <span class="svg-icon svg-icon-2 me-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
-                                                        <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
+                                    <!--begin::Inbox-->
+                                    <span class="menu-link active">
+                                        <span class="menu-icon">
+                                            <!--begin::Svg Icon | path: icons/duotune/communication/com010.svg-->
+                                            <span class="svg-icon svg-icon-2 me-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
+                                                    <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
+                                                </svg>
                                             </span>
-                                            <span class="menu-title fw-bolder">Unread Messages</span>
-                                            <span class="badge badge-light-warning">{{ count($unread) }}</span>
+                                            <!--end::Svg Icon-->
                                         </span>
-                                        <!--end::Inbox-->
-                                    </a>
+                                        <span class="menu-title fw-bolder">Unread Messages</span>
+                                        <span class="badge badge-light-warning">{{ count($unread) }}</span>
+                                    </span>
+                                    <!--end::Inbox-->
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
@@ -152,7 +150,6 @@
                                     <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_inbox_listing .form-check-input" value="1" />
                                 </div>
                                 <!--end::Checkbox-->
-                                
                                 <!--begin::Reload-->
                                 <a href="#" class="btn btn-sm btn-icon btn-clear btn-active-light-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Reload">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr029.svg-->
@@ -201,8 +198,7 @@
                                 <!--end::Table head-->
                                 <!--begin::Table body-->
                                 <tbody>
-                                    @if(!empty($all))
-                                    @foreach($all as $message)
+                                    @foreach($unread as $message)
                                     <tr>
                                         <td class="ps-9">
                                             <!--begin::Checkbox-->
@@ -284,7 +280,6 @@
                                         <!--end::Date-->
                                     </tr>
                                     @endforeach
-                                    @endif
                                 </tbody>
                                 <!--end::Table body-->
                             </table>

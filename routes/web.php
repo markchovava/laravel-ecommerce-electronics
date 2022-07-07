@@ -193,8 +193,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     });
 
     Route::prefix('message')->group(function(){
-        Route::get('/', [MessageController::class, 'index'])->name('admin.message');
-        Route::get('/view', [MessageController::class, 'view'])->name('admin.message.view');
+        Route::get('/', [MessageController::class, 'index'])->name('admin.message.all');
+        Route::get('/unread', [MessageController::class, 'unread'])->name('admin.message.unread');
+        Route::get('/read', [MessageController::class, 'read'])->name('admin.message.read');
+        Route::get('/view/{id}', [MessageController::class, 'view'])->name('admin.message.view');
+        Route::get('/add', [MessageController::class, 'add'])->name('admin.message.add');
+        Route::get('/delete/{id}', [MessageController::class, 'delete'])->name('admin.message.delete');
     });
 
     /* Homepage top Sticker */
