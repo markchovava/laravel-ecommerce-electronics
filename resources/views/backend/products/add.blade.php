@@ -635,29 +635,7 @@
                                         <!--end::Card header-->
                                     </div>
                                     <!--end::Media-->
-<script>
-$(document).ready(function(){
-    $('.add__uploader').click(function(e){
-        e.preventDefault();
-        let upload__sect =  $(this).siblings('.upload__row').find('.image__uploadSect:first');
-        let clone_sect = upload__sect.clone(true)
-                .appendTo('.upload__row')
-                .removeClass('display__none');
-        clone_sect.find('.product__imageUpload').attr('name', 'product_images[]');
-    });
-    $('.product__imageUpload').change(function(e){
-        e.preventDefault();
-        let display_image =  $(this).closest('.image__uploadSect').find('.product__uploadDisplayer img');
-        let image_upload = URL.createObjectURL(e.target.files[0]);
-        display_image.attr('src', image_upload);   
-    });
-    $('.remove__uploadSectBtn').click(function(e){
-        e.preventDefault();
-        $(this).closest('.image__uploadSect').remove();       
-    });    
-});  
 
-</script>
                                     
                                     <!--begin::Inventory-->
                                     <div class="card card-flush py-4">
@@ -745,6 +723,57 @@ $(document).ready(function(){
                                                 <!--begin::Form group-->
                                                 <div class="form-group">
                                                     <div data-repeater-list="variation__addOptions">
+                                                        <div data-repeater-item>
+                                                            <div class="form-group row">
+                                                                <div class="col-md-5">
+                                                                    <label class="form-label">Name:</label>
+                                                                    <input type="text" name="0" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="form-label">Value:</label>
+                                                                    <input type="text" name="1" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
+                                                                </div>
+                                                            
+                                                                <div class="col-md-2">
+                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                        <i class="la la-trash-o"></i>Delete
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end::Form group-->
+
+                                                <!--begin::Form group-->
+                                                <div class="form-group mt-5">
+                                                    <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                                        <i class="la la-plus"></i>Add
+                                                    </a>
+                                                </div>
+                                                <!--end::Form group-->
+                                            </div>
+                                            <!--end::Repeater-->
+                                        </div>
+                                        <!--end::Card header-->
+                                    </div>
+                                    <!--end::Variations-->
+                                    <!--begin::Variations-->
+                                    <div class="card card-flush py-4">
+                                        <!--begin::Card header-->
+                                        <div class="card-header">
+                                            <div class="card-title">
+                                                <h2>Specifications</h2>
+                                            </div>
+                                        </div>
+                                        <!--end::Card header-->
+                                        <!--begin::Card body-->
+                                        <div class="card-body pt-0">
+                                            <!--begin::Repeater-->
+                                            <div id="specification__addOptions">
+                                                <!--begin::Form group-->
+                                                <div class="form-group">
+                                                    <div data-repeater-list="specification__addOptions">
                                                         <div data-repeater-item>
                                                             <div class="form-group row">
                                                                 <div class="col-md-5">
@@ -972,11 +1001,30 @@ $(document).ready(function(){
 </div>
 <!--end::Content-->
 
-
 <script>
+$(document).ready(function(){
+    $('.add__uploader').click(function(e){
+        e.preventDefault();
+        let upload__sect =  $(this).siblings('.upload__row').find('.image__uploadSect:first');
+        let clone_sect = upload__sect.clone(true)
+                .appendTo('.upload__row')
+                .removeClass('display__none');
+        clone_sect.find('.product__imageUpload').attr('name', 'product_images[]');
+    });
+    $('.product__imageUpload').change(function(e){
+        e.preventDefault();
+        let display_image =  $(this).closest('.image__uploadSect').find('.product__uploadDisplayer img');
+        let image_upload = URL.createObjectURL(e.target.files[0]);
+        display_image.attr('src', image_upload);   
+    });
+    $('.remove__uploadSectBtn').click(function(e){
+        e.preventDefault();
+        $(this).closest('.image__uploadSect').remove();       
+    });    
+});  
 
-    
-   
+</script>
+<script>   
    /* 
     *   Form repeater for Category
     */
@@ -1035,6 +1083,26 @@ $(document).ready(function(){
     *   Form repeater for Product Variations
     */
     $('#variation__addOptions').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+    
+    /* 
+    *   Form repeater for Product Specifications
+    */
+    $('#specification__addOptions').repeater({
         initEmpty: false,
 
         defaultValues: {

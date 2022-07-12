@@ -15,6 +15,8 @@ use App\Models\Cart\CartItem;
 use App\Models\Product\Inventory;
 use App\Models\Product\Product;
 use App\Models\Backend\BasicInfo;
+use App\Models\Miscellaneous\Miscellaneous;
+use App\Models\Shipping\Shipping;
 
 class CartController extends Controller
 {
@@ -149,10 +151,13 @@ class CartController extends Controller
             if( isset($_COOKIE['shopping_session']) ){
                 $shopping_session = $_COOKIE['shopping_session'];
                 $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
-                $data['cart']->customer_id = Auth::id();
+                If(Auth::check()){
+                    $data['cart']->customer_id = Auth::id();
+                }
                 $data['cart']->shipping_fee = $request->shipping_feeCents;
                 $data['cart']->cart_subtotal = $request->cart_subtotalCents;
                 $data['cart']->total = $request->cart_totalCents;
+                $data['cart']->zwl_total = $request->cart_zwltotalCents;
                 $data['cart']->save();
                 $cart_id = $data['cart']->id;
                 $old_cart_items = CartItem::where('cart_id', $cart_id)->delete();
@@ -224,6 +229,14 @@ class CartController extends Controller
                 $cart_id =  $data['carts']->id;
                 $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
                 /* 
+                *   Shipping Fee 
+                */
+                $data['shipping'] = Shipping::first();
+                /*
+                *   ZWL Currency Value 
+                */
+                $data['currency'] = Miscellaneous::where('name', 'ZWL')->first();
+                /* 
                 *  Main Web Info 
                 */
                 $data['info'] = BasicInfo::first();
@@ -232,6 +245,14 @@ class CartController extends Controller
                 //dd('Cart Empty');
                 $data['cart_quantity'] = 0;
                 $data['message'] = "The Shopping Cart is empty at the moment.";
+                /* 
+                *   Shipping Fee 
+                */
+                $data['shipping'] = Shipping::first();
+                /*
+                *   ZWL Currency Value 
+                */
+                $data['currency'] = Miscellaneous::where('name', 'ZWL')->first();
                 /* 
                 *  Main Web Info 
                 */
@@ -242,6 +263,14 @@ class CartController extends Controller
         //dd('Here');
         $data['cart_quantity'] = 0;
         $data['message'] = "The Shopping Cart is empty at the moment.";
+        /* 
+        *   Shipping Fee 
+        */
+        $data['shipping'] = Shipping::first();
+        /*
+        *   ZWL Currency Value 
+        */
+        $data['currency'] = Miscellaneous::where('name', 'ZWL')->first();
         /* 
         *  Main Web Info 
         */

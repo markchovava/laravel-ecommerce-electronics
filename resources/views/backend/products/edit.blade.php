@@ -944,6 +944,81 @@
                                         <!--end::Card header-->
                                     </div>
                                     <!--end::Variations-->
+                                     <!--begin::Specifications-->
+                                     <div class="card card-flush py-4">
+                                        <!--begin::Card header-->
+                                        <div class="card-header">
+                                            <div class="card-title">
+                                                <h2>Specifications</h2>
+                                            </div>
+                                        </div>
+                                        <!--end::Card header-->
+                                        <!--begin::Card body-->
+                                        <div class="card-body pt-0">
+                                            <!--begin::Repeater Display-->
+                                            <section id="specification_repeaterDisplay">
+                                                @php($i = 0)
+                                                @foreach($specifications as $specification)
+                                                <div class="specification__Row form-group row">
+                                                    <div class="col-md-5">
+                                                        <label class="form-label">Name:</label>
+                                                        <input type="text" name="specification_from_db[{{ $i }}][0]" value="{{ $specification->name }}" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label class="form-label">Value:</label>
+                                                        <input type="text" name="specification_from_db[{{ $i }}][1]" value="{{ $specification->value }}" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
+                                                    </div> 
+                                                    
+                                                    <div class="col-md-2">
+                                                        <a href="javascript:;" id="btn__removeSpecification" class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                @php($i++)
+                                                @endforeach  
+                                            </section>
+                                            <!--end::Repeater Display-->
+                                            <!--begin::Repeater-->
+                                            <div id="specification__addOptions">
+                                                <!--begin::Form group-->
+                                                <div class="form-group">
+                                                    <div data-repeater-list="specification__addOptions">
+                                                        <div data-repeater-item>
+                                                            <div class="form-group row">
+                                                                <div class="col-md-5">
+                                                                    <label class="form-label">Name:</label>
+                                                                    <input type="text" name="0" class="form-control mb-2 mb-md-0" placeholder="Enter name" />
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="form-label">Value:</label>
+                                                                    <input type="text" name="1" class="form-control mb-2 mb-md-0" placeholder="Enter value" />
+                                                                </div>
+                                                            
+                                                                <div class="col-md-2">
+                                                                    <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                        <i class="la la-trash-o"></i>Delete
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end::Form group-->
+
+                                                <!--begin::Form group-->
+                                                <div class="form-group mt-5">
+                                                    <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                                        <i class="la la-plus"></i>Add
+                                                    </a>
+                                                </div>
+                                                <!--end::Form group-->
+                                            </div>
+                                            <!--end::Repeater-->
+                                        </div>
+                                        <!--end::Card header-->
+                                    </div>
+                                    <!--end::Specifications-->
                                     <!--begin::Shipping-->
                                     <div class="card card-flush py-4">
                                         <!--begin::Card header-->
@@ -1216,33 +1291,36 @@ $(document).ready(function(){
 /* ::::::: Remove previous Categories:::::: */
 $(document).ready(function(){
     $(document).on('click', '#btn__removeCategory', function(){
-        $(this).closest('.category__Row').remove();
+        $(this).closest('.category__Row').slideUp().remove();
     })
 });
 
 /* ::::::: Remove previous Brands:::::: */
 $(document).ready(function(){
     $(document).on('click', '#btn__removeBrand', function(){
-        $(this).closest('.brand__Row').remove();
+        $(this).closest('.brand__Row').slideUp().remove();
     })
 });
 
 /* ::::::: Remove previous Tags:::::: */
 $(document).ready(function(){
     $(document).on('click', '#btn__removeTag', function(){
-        $(this).closest('.tag__Row').remove();
+        $(this).closest('.tag__Row').slideUp().remove();
     })
 });
 
 $(document).ready(function(){
     $(document).on('click', '#btn__removeVariation', function(){
-        $(this).closest('.variation__Row').remove();
+        $(this).closest('.variation__Row').slideUp().remove();
     })
 });
 
 $(document).on('click', '#btn__removeSerial', function(){
-    $(this).closest('.serial__Row').remove();
-})
+    $(this).closest('.serial__Row').slideUp().remove();
+});
+$(document).on('click', '#btn__removeSpecification', function(){
+    $(this).closest('.specification__Row').remove();
+});
 
 
    
@@ -1293,6 +1371,22 @@ $(document).on('click', '#btn__removeSerial', function(){
     });
 
     $('#variation__addOptions').repeater({
+        initEmpty: false,
+
+        defaultValues: {
+            'text-input': 'foo'
+        },
+
+        show: function () {
+            $(this).slideDown();
+        },
+
+        hide: function (deleteElement) {
+            $(this).slideUp(deleteElement);
+        }
+    });
+
+    $('#specification__addOptions').repeater({
         initEmpty: false,
 
         defaultValues: {

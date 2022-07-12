@@ -31,6 +31,9 @@ use App\Http\Controllers\Frontend\Tag\TagPageController;
 use App\Http\Controllers\Frontend\Brand\BrandPageController;
 use App\Http\Controllers\Frontend\Search\SearchPageController;
 use App\Http\Controllers\Message\MessageController;
+use App\Http\Controllers\Miscellaneous\MiscellaneousController;
+use App\Http\Controllers\Shipping\ShippingController;
+use App\Http\Controllers\Payment\PaymentController;
 
 //use App\Http\Controllers\PDF\PDFController;
 
@@ -67,6 +70,10 @@ Route::get('/customer/register', [CustomerAuthController::class, 'register'])->n
 Route::post('/customer/register', [CustomerAuthController::class, 'register_process'])->name('customer.register.process');
 Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 
+
+/* Payment */
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+
 /* ::: Single Product Page ::: */
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
 Route::post('/product/cart_store', [ProductPageController::class, 'cart_store'])->name('product.cart_store');
@@ -102,6 +109,7 @@ Route::middleware(['auth'])->group(function (){
 
 /* Orders Frontend */
 Route::get('/track/order', [OrdersController::class, 'track'])->name('order.track');
+Route::get('/track/order/email', [OrdersController::class, 'order_email'])->name('order.email');
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
     /* :::::: 
@@ -192,6 +200,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [AdsController::class, 'delete'])->name('admin.ad.delete');
     });
 
+    Route::get('/shipping', [ShippingController::class, 'edit'])->name('admin.shipping');
+    Route::post('/shipping/update', [ShippingController::class, 'update'])->name('admin.shipping.update');
+
+    /* 
+    *   Messaging
+    */
     Route::prefix('message')->group(function(){
         Route::get('/', [MessageController::class, 'index'])->name('admin.message.all');
         Route::get('/unread', [MessageController::class, 'unread'])->name('admin.message.unread');
@@ -239,38 +253,23 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/edit', [BasicInfoController::class, 'edit'])->name('admin.info.edit');
         Route::post('/update', [BasicInfoController::class, 'update'])->name('admin.info.update');
     });
+
+    /* 
+    *   Currency Conversion
+    */
+    Route::get('/zwl/edit', [MiscellaneousController::class, 'zwl_edit'])->name('admin.zwl.edit');
+    Route::post('/zwl/store', [MiscellaneousController::class, 'zwl_store'])->name('admin.zwl.store');
 });
 
 
 
 
 Route::get('/add', function(){
-   
-    $product_id = 4;
-    $cart_item = \App\Models\Cart\CartItem::where('product_id', $product_id)->first();
-    if(!empty($cart_item)){
-        $cart_item->quantity++;
-        $cart_item->save();
-    }
-    else{
-        $cart_item = new \App\Models\Cart\CartItem();
-        $cart_item->product_id = $product_id;
-        $cart_item->quantity = 1;	
-       /*  $cart_item->variation_name = "Color";	
-        $cart_item->variation_value = "Red"; */
-        $cart_item->save();
-
-    }
-    
-      
+    $a = \Illuminate\Support\Facades\Cookie::queue('testing', 'QWTYEFTEYTFCDCY',20);  
 });
 
-
 Route::get('/show', function(){
-
-    $product_images = \App\Models\Product\ProductImage::where('product_id', 2)->get();
-    dd(count($product_images));
-
+    dd($_COOKIE);
 });
 
 

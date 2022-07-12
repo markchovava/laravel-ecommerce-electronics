@@ -146,24 +146,8 @@
     <div class="bg-gray-14 py-2">
         <div class="container">
             <div class="flex-center-between d-block d-md-flex">
-                <div class="mb-3 mb-md-0">© <a href="#" class="font-weight-bold text-gray-90">Electro</a> - All rights Reserved</div>
-                <div class="text-md-right">
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="{{ asset('frontend/assets/img/100X60/img1.jpg') }}" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="{{ asset('frontend/assets/img/100X60/img2.jpg') }}" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="{{ asset('frontend/assets/img/100X60/img3.jpg') }}" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="{{ asset('frontend/assets/img/100X60/img4.jpg') }}" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="{{ asset('frontend/assets/img/100X60/img5.jpg') }}" alt="Image Description">
-                    </span>
-                </div>
+                <div class="mb-3 mb-md-0">© <a href="#" class="font-weight-bold text-gray-90">Lunartech Store</a> - All rights Reserved 2022</div>
+                
             </div>
         </div>
     </div>

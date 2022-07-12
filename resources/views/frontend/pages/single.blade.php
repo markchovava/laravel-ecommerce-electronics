@@ -13,14 +13,17 @@
                             <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ url('/')}}">Home</a></li>
                                 &nbsp; > &nbsp;
+                                @if(!empty($product->categories) )
                                 <li class="flex-shrink-0 flex-xl-shrink-1">
                                     @foreach($product->categories as $_data)
-                                    <a class="text-gray-5" href="{{ route('category.view', $_data->id) }}">,
+                                    <a class="text-gray-5" href="{{ (!empty($_data->id)) ? route('category.view', $_data->id) : '#'}}">,
                                          {{ $_data->name }}
                                     </a>
                                     @endforeach
-                                </li>&nbsp; > &nbsp;
-                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ $product->name}}</li>
+                                </li>
+                                @endif
+                                &nbsp; > &nbsp;
+                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ !empty($product->name) ? $product->name : '' }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -48,7 +51,6 @@
                                 </div>
                                 @endforeach
                             </div>
-
                             <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
                                 data-infinite="true"
                                 data-slides-show="5"
@@ -65,91 +67,112 @@
                         <div class="col-md-7 mb-md-6 mb-lg-0">
                             <div class="mb-2">
                                 <div class="border-bottom mb-3 pb-md-1 pb-3">
+                                    @if(!empty($product->categories) )
                                     @foreach($product->categories as $_data)
-                                    <a href="#" class="font-size-12 text-gray-5 mb-2 d-inline-block">
-                                        {{ $_data->name }}
-                                    </a>
-                                    @endforeach
-                                    <a class="text-gray-5" href="{{ route('category.view', $_data->id) }}">,
+                                    <a class="text-gray-5" href="{{ (!empty($_data->id)) ? route('category.view', $_data->id) : '#'}}">,
                                          {{ $_data->name }}
                                     </a>
-                                    
-                                    <h2 class="font-size-25 text-lh-1dot2">{!! $product->name !!}</h2>
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    @endforeach
+                                    @endif
+                                    <h2 class="font-size-25 text-lh-1dot2">{!! !empty($product->name) ? $product->name : ""  !!}</h2>
+                                    <input type="hidden" name="product_id" value="{{ !empty($product->id) ? $product->id : '' }}">
                                 
                                     <div class="d-md-flex align-items-center">
+                                        @if( !empty($product->brands) )
                                         @foreach($product->brands as $_data)
-                                        <a href="{{ route('brand.view', $_data->id) }}" class="max-width-100 ml-n2 mb-2 mb-md-0 d-block">
-                                            <img class="img-fluid" src="{{ (!empty($_data->image)) ? '/storage/products/brand/' . $_data->image : '/storage/products/no_image.jpg' }}" alt="Image Description">
+                                        <a href="{{ (!empty($_data->id)) ? route('brand.view', $_data->id) : '#' }}" 
+                                        class=" ml-n2 mb-2 mb-md-0 d-block"
+                                        style="margin-right:0.5rem;">
+                                            <img class="img-fluid" style="width:auto; height:30px !important;" src="{{ (!empty($_data->image)) ? '/storage/products/brand/' . $_data->image : '/storage/products/no_image.jpg' }}" alt="Image Description">
                                         </a>
                                         @endforeach
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="text-gray-9 font-size-14 mb-3">Availability: 
-                                    <span class="text-green font-weight-bold">{{ $product->inventories->in_store_quantity }} in stock</span>
-                                    <input type="hidden" name="in_store_quantity" value="{{ $product->inventories->in_store_quantity }}">
+                                        @if( intval($product->inventories->in_store_quantity) < 10 && intval($product->inventories->in_store_quantity) != 0)
+                                            <span class="text-warning font-weight-bold">
+                                                {{ $product->inventories->in_store_quantity }}, Low in Stock</span>
+                                            </span>
+                                        @elseif(intval($product->inventories->in_store_quantity) == 0)
+                                            <span class="text-red font-weight-bold">
+                                                {{ $product->inventories->in_store_quantity }} Not in Stock</span>
+                                            </span>
+                                        @else
+                                            <span class="text-green font-weight-bold">
+                                                {{ $product->inventories->in_store_quantity }}</span>
+                                            </span>
+                                        @endif
+                                    
+                                        <input type="hidden" name="in_store_quantity" value="{{ !empty($product->inventories) ? $product->inventories->in_store_quantity : '' }}">
                                 </div>
                                 <div class="flex-horizontal-center flex-wrap mb-4">
-                                    <a href="#" class="text-gray-6 font-size-13 mr-2"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     <a href="#" class="text-gray-6 font-size-13 ml-2"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Quote</a>
                                 </div>
                                 <div class="mb-2">
-                                    {!! $product->short_description !!}
+                                    {!! !empty($product->short_description) ? : '' !!}
                                     </ul>
                                 </div>
-                                <p>{!! $product->description !!}</p>
-                                <p><strong>SKU</strong>: {{ $product->sku }}</p>
+                    
+                                <p><strong>SKU</strong>: {{ !empty($product->sku ) ? : '' }}</p>
+                                @if(!empty($product->price))
                                 <div class="mb-4 pricing">
                                     <div class="d-flex align-items-baseline">
                                         <del class="font-size-18 mr-2 text-gray-2">
                                             @php
-                                            $price = $product->price / 100;
+                                            $usd_price = $product->price;
+                                            $price = $usd_price / 100;
                                             @endphp
                                             ${{ number_format((float)$price, 2, '.', '') }}
                                         </del>
                                         <ins class="font-size-36 text-decoration-none">
                                             @php
-                                                $discount = ($product->discounts->discount_percent / 100) * $product->price;
-                                                $discount_price = $product->price - $discount;
-                                                $price = $discount_price / 100;
+                                                $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                                $discount_usd_price = $usd_price - $discount;
+                                                $price = $discount_usd_price / 100;
                                             @endphp
                                             <span class="price__number">
                                                 ${{ number_format((float)$price, 2, '.', '') }}
                                             </span>
                                         </ins>
-                                        <input type="hidden" name="product_price" value="{{ $discount_price }}">
+                                        <input type="hidden" name="discounted_usd_priceCents" value="{{ $discount_usd_price }}">
                                     </div>
                                     <div class="d-flex align-items-baseline">
                                         <del class="font-size-18 mr-2 text-gray-2">
                                             @php
-                                            $zwl_price = $product->zwl_price / 100;
+                                            $zwl_priceCents = ($product->price * $currency->value);
+                                            $zwl_price = $zwl_priceCents / 100;
                                             @endphp
                                             ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
                                         </del>
                                         <ins class="font-size-36 text-decoration-none">
                                             @php
-                                                $discount = ($product->discounts->discount_percent / 100) * $product->zwl_price ;
-                                                $discount_price = $product->zwl_price - $discount;
+                                                $discount = ($product->discounts->discount_percent / 100) * $zwl_priceCents;
+                                                $discount_price = $zwl_priceCents - $discount;
                                                 $zwl_price = $discount_price / 100;
                                             @endphp
                                             <span class="price__number">
                                                 ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
                                             </span>
                                         </ins>
-                                        <input type="hidden" name="product_zwl_price" value="{{ $discount_price }}">
+                                        <input type="hidden" name="discounted_zwl_price" value="{{ $discount_price }}">
                                     </div>
                                 </div>
+                                @endif
                                 <div class="border-top border-bottom py-3 mb-4">
                                     <div class="d-flex align-items-center">
                                         <h6 class="font-size-14 mb-0">Options</h6>
                                         <!-- Select -->
                                         <select name="product_variation" class="js-select selectpicker dropdown-select ml-3"
                                             data-style="btn-sm bg-white font-weight-normal py-2 border">
+                                            <option value="">Select an option.</option>
+                                            @if($variations)
                                             @foreach($variations as $variation)
                                                 <option value="{{ $variation->name }}: {{ $variation->value }}" >
                                                     {{ $variation->name }}: {{ $variation->value }}
                                                 </option>
                                             @endforeach
+                                            @endif
                                         </select>
                                         <!-- End Select -->
                                     </div>
@@ -161,7 +184,7 @@
                                         <div class="border rounded-pill py-2 px-3 border-color-1">
                                             <div class="js-quantity row align-items-center">
                                                 <div class="col">
-                                                    <input type="text" name="product_quantity" value="1" class="js-result form-control h-auto border-0 rounded p-0 shadow-none">
+                                                    <input type="number" name="product_quantity" value="0" class="js-result form-control h-auto border-0 rounded p-0 shadow-none">
                                                 </div>
                                                 <div class="col-auto pr-1">
                                                     <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
@@ -176,8 +199,17 @@
                                         <!-- End Quantity -->
                                     </div>
                                     <div class="ml-md-3">
-                                        <input type="submit" value="Add to Cart" class=" btn px-5 btn-primary-dark transition-3d-hover">
+                                        @if(intval($product->inventories->in_store_quantity) == 0)
+                                        <input type="submit" onclick="return false;" value="Add to Cart" class=" btn px-5 btn-primary-dark transition-3d-hover">
                                             <!-- <i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</button> -->
+                                        <script>
+                                            $('input[value="Add to Cart"]').click(() => (
+                                                alert('Not in stock')
+                                            ));
+                                        </script>
+                                        @else
+                                            <input type="submit" value="Add to Cart" class=" btn px-5 btn-primary-dark transition-3d-hover">
+                                        @endif
                                     </div>
                                 </div>
 
@@ -192,118 +224,26 @@
                     <div class="position-relative position-md-static px-md-6">
                         <ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0" id="pills-tab-8" role="tablist">
                             <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                                <a class="nav-link active" id="Jpills-one-example1-tab" data-toggle="pill" href="#Jpills-one-example1" role="tab" aria-controls="Jpills-one-example1" aria-selected="true">Accessories</a>
+                                <a class="nav-link active" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">
+                                    Description
+                                </a>
                             </li>
                             <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                                <a class="nav-link" id="Jpills-two-example1-tab" data-toggle="pill" href="#Jpills-two-example1" role="tab" aria-controls="Jpills-two-example1" aria-selected="false">Description</a>
-                            </li>
-                            <li class="nav-item flex-shrink-0 flex-xl-shrink-1 z-index-2">
-                                <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">Specification</a>
+                                <a class="nav-link" id="Jpills-three-example1-tab" data-toggle="pill" href="#Jpills-three-example1" role="tab" aria-controls="Jpills-three-example1" aria-selected="false">
+                                    Specification
+                                </a>
                             </li>
                         </ul>
                     </div>
                     <!-- Tab Content -->
                     <div class="borders-radius-17 border p-4 mt-4 mt-md-0 px-lg-10 py-lg-9">
                         <div class="tab-content" id="Jpills-tabContent">
-                            <div class="tab-pane fade active show" id="Jpills-one-example1" role="tabpanel" aria-labelledby="Jpills-one-example1-tab">
-                                <div class="row no-gutters">
-                                    <div class="col mb-6 mb-md-0">
-                                        <ul class="row list-unstyled products-group no-gutters border-bottom border-md-bottom-0">
-                                            <li class="col-4 col-md-4 col-xl-2gdot5 product-item remove-divider-sm-down border-0">
-                                                <div class="product-item__outer h-100">
-                                                    <div class="remove-prodcut-hover product-item__inner px-xl-4 p-3">
-                                                        <div class="product-item__body pb-xl-2">
-                                                            <div class="mb-2 d-none d-md-block"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                                            <h5 class="mb-1 product-item__title d-none d-md-block"><a href="#" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                                            <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                                            </div>
-                                                            <div class="flex-center-between mb-1 d-none d-md-block">
-                                                                <div class="prodcut-price">
-                                                                    <div class="text-gray-100">$685,00</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="col-4 col-md-4 col-xl-2gdot5 product-item remove-divider-sm-down">
-                                                <div class="product-item__outer h-100">
-                                                    <div class="remove-prodcut-hover add-accessories product-item__inner px-xl-4 p-3">
-                                                        <div class="product-item__body pb-xl-2">
-                                                            <div class="mb-2 d-none d-md-block"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                                            <h5 class="mb-1 product-item__title d-none d-md-block"><a href="#" class="text-blue font-weight-bold">Tablet White EliteBook Revolve 810 G2</a></h5>
-                                                            <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/1.png') }}" alt="Image Description"></a>
-                                                            </div>
-                                                            <div class="flex-center-between mb-1 d-none d-md-block">
-                                                                <div class="prodcut-price d-flex align-items-center position-relative">
-                                                                    <ins class="font-size-20 text-red text-decoration-none">$1999,00</ins>
-                                                                    <del class="font-size-12 tex-gray-6 position-absolute bottom-100">$2 299,00</del>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="col-4 col-md-4 col-xl-2gdot5 product-item remove-divider-sm-down remove-divider">
-                                                <div class="product-item__outer h-100">
-                                                    <div class="remove-prodcut-hover add-accessories product-item__inner px-xl-4 p-3">
-                                                        <div class="product-item__body pb-xl-2">
-                                                            <div class="mb-2 d-none d-md-block"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
-                                                            <h5 class="mb-1 product-item__title d-none d-md-block"><a href="#" class="text-blue font-weight-bold">Purple Solo 2 Wireless</a></h5>
-                                                            <div class="mb-2">
-                                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center">
-                                                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" src="{{ asset('frontend/assets/images/212x200/1.png') }}"alt="Image Description"></a>
-                                                            </div>
-                                                            <div class="flex-center-between mb-1 d-none d-md-block">
-                                                                <div class="prodcut-price">
-                                                                    <div class="text-gray-100">$685,00</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="form-check pl-4 pl-md-0 ml-md-4 mb-2 pb-2 pb-md-0 mb-md-0 border-bottom border-md-bottom-0">
-                                            <input class="form-check-input" type="checkbox" value="" id="inlineCheckbox1" checked disabled>
-                                            <label class="form-check-label mb-1" for="inlineCheckbox1">
-                                                <strong>This product: </strong> Ultra Wireless S50 Headphones S50 with Bluetooth - <span class="text-red font-size-16">$35.00</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check pl-4 pl-md-0 ml-md-4 mb-2 pb-2 pb-md-0 mb-md-0 border-bottom border-md-bottom-0">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1" checked>
-                                            <label class="form-check-label mb-1 text-blue" for="inlineCheckbox2">
-                                                <span class="text-decoration-on cursor-pointer-on">Universal Headphones Case in Black</span> - <span class="text-red font-size-16">$159.00</span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check pl-4 pl-md-0 ml-md-4 mb-2 pb-2 pb-md-0 mb-md-0 border-bottom border-md-bottom-0">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" checked>
-                                            <label class="form-check-label mb-1 text-blue" for="inlineCheckbox3">
-                                                <span class="text-decoration-on cursor-pointer-on">Headphones USB Wires</span> - <span class="text-red font-size-16">$50.00</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-auto">
-                                        <div class="mr-xl-15">
-                                            <div class="mb-3">
-                                                <div class="text-red font-size-26 text-lh-1dot2">$244.00</div>
-                                                <div class="text-gray-6">for 3 item(s)</div>
-                                            </div>
-                                            <a href="#" class="btn btn-sm btn-block btn-primary-dark btn-wide transition-3d-hover">Add all to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
+                            <div class="tab-pane fade  active show" id="Jpills-two-example1" role="tabpanel" aria-labelledby="Jpills-two-example1-tab">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="pt-lg-8 pt-xl-10">
-                                            <h3 class="font-size-24 mb-3">{{ $product->type }}</h3>
-                                            <p>{{ $product->description }}</p>
+                                            <h3 class="font-size-24 mb-3"></h3>
+                                            <p><p>{!! (!empty($product->description)) ? $product->description : '' !!}</p></p>
                                         </div>
                                     </div>
                                     <div class="col-md-6 text-right">
@@ -313,129 +253,43 @@
                                     
                                 </div>
                                 <ul class="nav flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1"><strong>SKU:</strong> <span class="sku">{{ $product->sku }}</span></li>
+                                    <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1"><strong>SKU:</strong> <span class="sku">{{ ( !empty($product->sku) ) ? : '' }}</span></li>
                                     <li class="nav-item text-gray-111 mx-3 flex-shrink-0 flex-xl-shrink-1">/</li>
                                     <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1">
                                         <strong>Category:</strong> 
+                                        @if(!empty($product->categories))
                                         @foreach( $product->categories as $category)
-                                        <a href="#" class="text-blue">{{ $category->name }}</a>,
+                                        <a href="{{ route('category.view', $category->id) }}" class="text-blue">{{ $category->name }}</a> |
                                         @endforeach
+                                        @endif
                                     </li>
                                     <li class="nav-item text-gray-111 mx-3 flex-shrink-0 flex-xl-shrink-1">/</li>
                                     <li class="nav-item text-gray-111 flex-shrink-0 flex-xl-shrink-1">
                                         <strong>Tags:</strong> 
-                                        @foreach( $product->tags as $tag)
-                                        <a href="#" class="text-blue">{{ $tag->name }}</a>,
-                                        @endforeach
+                                        @if(!empty($product->tags))
+                                            @foreach( $product->tags as $tag)
+                                            <a href="{{ route('tag.view', $tag->id) }}" class="text-blue">{{ $tag->click_name }}</a> |
+                                            @endforeach
+                                        @endif
                                     </li>
                                 </ul>
                             </div>
                             <div class="tab-pane fade" id="Jpills-three-example1" role="tabpanel" aria-labelledby="Jpills-three-example1-tab">
                                 <div class="mx-md-5 pt-1">
-                                    <div class="table-responsive mb-4">
-                                        <table class="table table-hover">
-                                            <tbody>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5 border-top-0">Weight</th>
-                                                    <td class="border-top-0">7.25kg</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Dimensions</th>
-                                                    <td>90 x 60 x 90 cm</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Size</th>
-                                                    <td>One Size Fits all</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">color</th>
-                                                    <td>Black with Red, White with Gold</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Guarantee</th>
-                                                    <td>5 years</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <h3 class="font-size-18 mb-4">Technical Specifications</h3>
+                                    <h3 class="font-size-18 mb-4">All Specifications</h3>
                                     <div class="table-responsive">
+                                        @if(!empty($specifications))
                                         <table class="table table-hover">
                                             <tbody>
+                                                @foreach($specifications as $specification)
                                                 <tr>
-                                                    <th class="px-4 px-xl-5 border-top-0">Brand</th>
-                                                    <td class="border-top-0">Apple</td>
+                                                    <th class="px-4 px-xl-5 border-top-0">{{ $specification->name }}</th>
+                                                    <td class="border-top-0">{{ $specification->value }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Item Height</th>
-                                                    <td>18 Millimeters</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Item Width</th>
-                                                    <td>31.4 Centimeters</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Screen Size</th>
-                                                    <td>13 Inches</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Item Weight</th>
-                                                    <td>1.6 Kg</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Product Dimensions</th>
-                                                    <td>21.9 x 31.4 x 1.8 cm</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Item model number</th>
-                                                    <td>MF841HN/A</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Processor Brand</th>
-                                                    <td>Intel</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Processor Type</th>
-                                                    <td>Core i5</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Processor Speed</th>
-                                                    <td>2.9 GHz</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">RAM Size</th>
-                                                    <td>8 GB</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Hard Drive Size</th>
-                                                    <td>512 GB</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Hard Disk Technology</th>
-                                                    <td>Solid State Drive</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Graphics Coprocessor</th>
-                                                    <td>Intel Integrated Graphics</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Graphics Card Description</th>
-                                                    <td>Integrated Graphics Card</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Hardware Platform</th>
-                                                    <td>Mac</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Operating System</th>
-                                                    <td>Mac OS</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="px-4 px-xl-5">Average Battery Life (in hours)</th>
-                                                    <td>9</td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -448,15 +302,16 @@
                 <!-- Related products -->
                 <div class="mb-6">
                     <div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4">
-                        <h3 class="section-title mb-0 pb-2 font-size-22">Related products</h3>
+                        <h3 class="section-title mb-0 pb-2 font-size-22">Trending Products</h3>
                     </div>
+                    @if(!empty($trending_products) )
                     <ul class="row list-unstyled products-group no-gutters">
                         @foreach($trending_products as $product)
                         <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item">
                             <div class="card product__item">
                                 <div class="mb-2">
                                     @foreach($product->categories as $_data)
-                                    <a href="{{ route('category.index', $_data->id) }}" class="font-size-12 text-gray-5">
+                                    <a href="{{ !empty($_data->id) ? route('category.index', $_data->id) : '#' }}" class="font-size-12 text-gray-5">
                                         {{ $_data->name }},
                                     </a>
                                     @endforeach
@@ -474,28 +329,28 @@
                                     <div class="prodcut-price">
                                         <div class="text-gray-100">
                                             @php
-                                                $price_cents = $product->price / 100;
+                                                $usd_price = intval($product->price);
+                                                $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                                $discount_usd_price = $usd_price - $discount;
+                                                $price = $discount_usd_price / 100;
                                             @endphp
-                                            $<span class="price__number">{{ number_format((float)$price_cents, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $product->price }}" class="price__cents">
+                                            $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                            <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                         </div>
                                     </div>
-                                    <div class="d-none d-xl-block prodcut-add-cart">
-                                        <a href="{{ route('cart.add') }}" 
-                                            class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $product->id }}">
-                                                <i class="ec ec-add-to-cart"></i>
-                                        </a>
-                                    </div>
+                                    <div class=" prodcut-add-cart">
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
+                                            id="{{ $product->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                        </div>
                                 </div>
                                 <div class="border-top pt-2 flex-center-between flex-wrap">
                                     <a href="#" id="{{ $product->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                    <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                 </div>
                             </div>
                         </li>
                        @endforeach
                     </ul>
+                    @endif
                 </div>
                 <!-- End Related products -->
 
@@ -541,6 +396,131 @@
             </div>
         </main>
         <!-- ========== END MAIN CONTENT ========== -->
+
+<!-- Footer-top-widget -->
+<div class="container d-none d-lg-block mb-3">
+    <div class="row">
+        <div class="col-wd-3 col-lg-4">
+            <div class="border-bottom border-color-1 mb-5">
+                <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Latest Products</h3>
+            </div>
+            <ul class="list-unstyled products-group">
+                @foreach($latest_three as $product)
+                <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                    <div class="col-auto">
+                        <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                            <div style="width:75px;height:75px;overflow:hidden;">
+                                <img class="img__fit" 
+                                src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                            </div> 
+                        </a>        
+                    </div>
+                    <div class="col pl-4 d-flex flex-column">
+                        <h5 class="product-item__title mb-0">
+                            <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                {{ $product->name }}
+                            </a>
+                        </h5>
+                        <div class="prodcut-price mt-auto flex-horizontal-center">
+                            <ins class="font-size-15 text-decoration-none">
+                                @php
+                                    $usd_price = intval($product->price);
+                                    $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                    $discount_usd_price = $usd_price - $discount;
+                                    $price = $discount_usd_price / 100;
+                                @endphp
+                                $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                            </ins>
+                        </div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="col-wd-3 col-lg-4">
+            <div class="widget-column">
+                <div class="border-bottom border-color-1 mb-5">
+                    <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Trending Products</h3>
+                </div>
+                <ul class="list-unstyled products-group">
+                    @foreach($tag_first_three as $product)
+                    <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                        <div class="col-auto">
+                            <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                                <div style="width:75px;height:75px;overflow:hidden;">
+                                    <img class="img__fit" 
+                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                </div> 
+                        </a>
+                        </div>
+                        <div class="col pl-4 d-flex flex-column">
+                            <h5 class="product-item__title mb-0">
+                                <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
+                            <div class="prodcut-price mt-auto">
+                                <ins class="font-size-15 text-decoration-none">
+                                    @php
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
+                                    @endphp
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="col-wd-3 col-lg-4">
+            <div class="widget-column">
+                <div class="border-bottom border-color-1 mb-5">
+                    <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Daily Hot Deals</h3>
+                </div>
+                <ul class="list-unstyled products-group">
+                    @foreach($tag_second_three as $product)
+                    <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                        <div class="col-auto">
+                            <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                                <div style="width:75px;height:75px;overflow:hidden;">
+                                    <img class="img__fit" 
+                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                </div> 
+                            </a>
+                        </div>
+                        <div class="col pl-4 d-flex flex-column">
+                            <h5 class="product-item__title mb-0">
+                                <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
+                            <div class="prodcut-price mt-auto">
+                                <ins class="font-size-15 text-decoration-none">
+                                    @php
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
+                                    @endphp
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Footer-top-widget -->
 
 @endsection
 

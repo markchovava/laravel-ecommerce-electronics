@@ -15,7 +15,7 @@
                         <div class="col">
                             <!-- Tab Content -->
                             <div class="tab-content">
-                                @if($tag_first)
+                                @if(isset($tag_first))
                                 <div class="tab-pane fade show active" id="pills-one-code-features" role="tabpanel" aria-labelledby="pills-one-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
@@ -28,7 +28,7 @@
                                                 data-scs-animation-delay="200">
                                                 <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_first->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    @if( !empty($tag_first->amount) )
+                                                    @if( isset($tag_first->amount) )
                                                         <sup class="font-size-36">$</sup>
                                                         @php
                                                         $first_amount = $tag_first->amount / 100
@@ -52,7 +52,7 @@
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
                                             <img class="img-fluid rounded-lg" 
-                                            src="{{ (!empty($tag_first->image)) ? url('storage/tags/' . $tag_first->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
+                                            src="{{ (isset($tag_first->image)) ? url('storage/tags/' . $tag_first->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                @if($tag_second)
+                                @if(isset($tag_second))
                                 <div class="tab-pane fade" id="pills-two-code-features" role="tabpanel" aria-labelledby="pills-two-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
@@ -83,7 +83,7 @@
                                                 data-scs-animation-delay="200">
                                                 <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_second->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    @if( !empty($tag_second->amount) )
+                                                    @if( isset($tag_second->amount) )
                                                     <sup class="font-size-36">$</sup>
                                                     @php
                                                     $amount = $tag_second->amount / 100
@@ -107,7 +107,7 @@
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
                                             <img class="img-fluid rounded-lg" 
-                                            src="{{ (!empty($tag_second->image)) ? url('storage/tags/' . $tag_second->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
+                                            src="{{ (isset($tag_second->image)) ? url('storage/tags/' . $tag_second->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                @if($tag_third)
+                                @if( isset($tag_third) )
                                 <div class="tab-pane fade" id="pills-three-code-features" role="tabpanel" aria-labelledby="pills-three-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
@@ -138,7 +138,7 @@
                                                 data-scs-animation-delay="200">
                                                 <span class="font-size-15 font-weight-bold">{!! $tag_third->subtitle !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    @if( !empty($tag_third->amount) )
+                                                    @if( isset($tag_third->amount) )
                                                     <sup class="font-size-36">$</sup>
                                                     @php
                                                     $amount = $tag_third->amount / 100
@@ -162,7 +162,7 @@
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
                                             <img class="img-fluid rounded-lg" 
-                                            src="{{ (!empty($tag_third->image)) ? url('storage/tags/' . $tag_third->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
+                                            src="{{ (isset($tag_third->image)) ? url('storage/tags/' . $tag_third->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                @if($tag_forth)
+                                @if( isset($tag_forth) )
                                 <div class="tab-pane fade" id="pills-four-code-features" role="tabpanel" aria-labelledby="pills-four-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
@@ -193,7 +193,7 @@
                                                 data-scs-animation-delay="200">
                                                 <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_forth->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    @if( !empty($tag_forth->amount) )
+                                                    @if( isset($tag_forth->amount) )
                                                     <sup class="font-size-36">$</sup>
                                                     @php
                                                     $amount = $tag_forth->amount / 100
@@ -217,7 +217,7 @@
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
                                             <img class="img-fluid rounded-lg" 
-                                            src="{{ (!empty($tag_forth->image)) ? url('storage/tags/' . $tag_forth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
+                                            src="{{ (isset($tag_forth->image)) ? url('storage/tags/' . $tag_forth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -235,7 +235,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                @if($tag_fifth)
+                                @if( isset($tag_fifth) )
                                 <div class="tab-pane fade" id="pills-five-code-features" role="tabpanel" aria-labelledby="pills-five-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
@@ -250,7 +250,7 @@
                                                 data-scs-animation-delay="200">
                                                 <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_fifth->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    @if( !empty($tag_fifth->amount) )
+                                                    @if( isset($tag_fifth->amount) )
                                                     <sup class="font-size-36">$</sup>
                                                     @php
                                                     $amount = $tag_fifth->amount / 100
@@ -274,7 +274,7 @@
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
                                             <img class="img-fluid rounded-lg" 
-                                            src="{{ (!empty($tag_fifth->image)) ? url('storage/tags/' . $tag_fifth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
+                                            src="{{ (isset($tag_fifth->image)) ? url('storage/tags/' . $tag_fifth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +292,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                @if($tag_sixth)
+                                @if( isset($tag_sixth) )
                                 <div class="tab-pane fade" id="pills-six-code-features" role="tabpanel" aria-labelledby="pills-six-code-features-tab">
                                     <div class="row align-items-end">
                                         <div class="col-lg-5">
@@ -305,7 +305,7 @@
                                                 data-scs-animation-delay="200">
                                                 <span class="font-size-15 font-weight-bold">{!! strtoupper($tag_sixth->subtitle) !!}</span>
                                                 <span class="font-size-55 font-weight-bold text-lh-45">
-                                                    @if( !empty($tag_sixth->amount) )
+                                                    @if( isset($tag_sixth->amount) )
                                                     <sup class="font-size-36">$</sup>
                                                     @php
                                                     $amount = $tag_sixth->amount / 100
@@ -329,7 +329,7 @@
                                             data-scs-animation-in="zoomIn"
                                             data-scs-animation-delay="500">
                                             <img class="img-fluid rounded-lg" 
-                                            src="{{ (!empty($tag_sixth->image)) ? url('storage/tags/' . $tag_sixth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
+                                            src="{{ (isset($tag_sixth->image)) ? url('storage/tags/' . $tag_sixth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                                         </div>
                                     </div>
                                 </div>
@@ -358,7 +358,7 @@
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4 active" id="pills-one-code-features-tab" data-toggle="pill" href="#pills-one-code-features" role="tab" aria-controls="pills-one-code-features" aria-selected="true">
                                             <span class="font-size-14">
-                                                @if($tag_first)
+                                                @if( isset($tag_first) )
                                                     {{ ($tag_first->click_name) ? $tag_first->click_name : 'No info' }}
                                                 @else
                                                     No Info
@@ -369,7 +369,7 @@
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-two-code-features-tab" data-toggle="pill" href="#pills-two-code-features" role="tab" aria-controls="pills-two-code-features" aria-selected="false">
                                             <span class="font-size-14">
-                                                @if($tag_second)
+                                                @if( isset($tag_second) )
                                                     {{ ($tag_second->click_name) ? $tag_second->click_name : 'No info' }}
                                                 @else
                                                     No Info
@@ -380,7 +380,7 @@
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-three-code-features-tab" data-toggle="pill" href="#pills-three-code-features" role="tab" aria-controls="pills-three-code-features" aria-selected="false">
                                             <span class="font-size-14">
-                                                @if($tag_third)
+                                                @if(isset($tag_third))
                                                 {{ ($tag_third->click_name) ? $tag_third->click_name : 'No info' }}
                                                 @else
                                                     No Info
@@ -391,7 +391,7 @@
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-four-code-features-tab" data-toggle="pill" href="#pills-four-code-features" role="tab" aria-controls="pills-four-code-features" aria-selected="false">
                                             <span class="font-size-14">
-                                                @if($tag_forth)
+                                                @if( isset($tag_forth) )
                                                 {{ ($tag_forth->click_name) ? $tag_forth->click_name : 'No info' }}
                                                 @else
                                                     No Info
@@ -402,7 +402,7 @@
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-five-code-features-tab" data-toggle="pill" href="#pills-five-code-features" role="tab" aria-controls="pills-five-code-features" aria-selected="false">
                                             <span class="font-size-14">
-                                                @if($tag_fifth)
+                                                @if(isset($tag_fifth))
                                                     {{ ($tag_fifth->click_name) ? $tag_fifth->click_name : 'No info' }}
                                                 @else
                                                     No Info
@@ -413,7 +413,7 @@
                                     <li class="nav-item mx-0">
                                         <a class="nav-link p-2 px-4" id="pills-six-code-features-tab" data-toggle="pill" href="#pills-six-code-features" role="tab" aria-controls="pills-six-code-features" aria-selected="false">
                                             <span class="font-size-14">
-                                                @if($tag_sixth)
+                                                @if(isset($tag_sixth))
                                                     {{ ($tag_sixth->click_name) ? $tag_sixth->click_name : 'No info' }}
                                                 @else
                                                     No Info
@@ -432,8 +432,8 @@
                 <!-- Trending products -->
                 <section class="category__highlight position-relative" style="padding-bottom:3rem; padding-top:1rem;">
                     <div class="category__highlightCarousel owl-carousel owl-theme">
-                        @if(!empty($category_first) && sizeof($category_first->products) != 0)
-                            @if( $category_first->products[0] )
+                        @if(isset($category_first->products))
+                            @if( $category_first->products->first() !== NULL) )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_first->id) }}" class="font-size-12 text-gray-5">
@@ -441,39 +441,42 @@
                                         </a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
-                                        <a href="{{ route('product.view', $category_first->products[0]->id) }}" class="text-blue font-weight-bold">
-                                            {{ $category_first->products[0]->name }}
+                                        <a href="{{ route('product.view', $category_first->products->first()->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_first->products->first()->name }}
                                         </a>
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty($category_first->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_first->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                        alt="{{ $category_first->products[0]->name }}">
+                                        src="{{ (isset($category_first->products->first()->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_first->products->first()->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_first->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                $price = $category_first->products[0]->price / 100;
+                                                    $usd_price = intval($category_first->products->first()->price);
+                                                    $discount = ($category_first->products->first()->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
                                                 <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $category_first->products[0]->price }}" class="price__cents">
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
-                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                        <div class="d-none prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                            id="{{ $category_first->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_first->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" id="{{ $category_first->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                         <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
                             @endif   
                         @endif
-                        @if(!empty($category_second) && sizeof($category_second->products) != 0)
-                            @if( $category_second->products[0] )
+                        @if(isset($category_second->products))
+                            @if( $category_second->products->first() != NULL )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_second->id) }}" class="font-size-12 text-gray-5">
@@ -482,38 +485,41 @@
                                     </div>
                                     <h5 class="mb-1 product-item__title">
                                         <a href="#" class="text-blue font-weight-bold">
-                                            {{ $category_second->products[0]->name }}
+                                            {{ $category_second->products->first()->name }}
                                         </a>
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                        alt="{{ $category_second->products[0]->name }}">
+                                        src="{{ (isset($category_second->products->first()->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products->first()->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_second->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                $price = $category_second->products[0]->price / 100;
+                                                    $usd_price = intval($category_second->products->first()->price);
+                                                    $discount = ($category_second->products->first()->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
                                                 <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $category_second->products[0]->price }}" class="price__cents">
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $category_second->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                            id="{{ $category_second->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_second->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" id="{{ $category_second->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                         <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
                             @endif 
                         @endif
-                        @if(!empty($category_third) && sizeof($category_third->products) != 0)
-                            @if( $category_third->products[0] )
+                        @if(isset($category_third->products))
+                            @if( $category_third->products->first() != NULL )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_third->id) }}" class="font-size-12 text-gray-5">
@@ -521,39 +527,42 @@
                                         </a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
-                                        <a href="{{ route('product.view', $category_third->products[0]->id) }}" class="text-blue font-weight-bold">
-                                            {{ $category_third->products[0]->name }}
+                                        <a href="{{ route('product.view', $category_third->products->first()->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_third->products->first()->name }}
                                         </a>
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty( $category_third->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_third->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                        alt="{{ $category_third->products[0]->name }}">
+                                        src="{{ (isset( $category_third->products->first()->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_third->products->first()->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_third->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                $price = $category_third->products[0]->price / 100;
+                                                    $usd_price = intval($category_third->products->first()->price);
+                                                    $discount = ($category_third->products->first()->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
                                                 <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $category_third->products[0]->price }}" class="price__cents">
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $category_third->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                            id="{{ $category_third->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_third->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" id="{{ $category_third->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                         <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
                             @endif 
                         @endif  
-                        @if(!empty($category_forth) && sizeof($category_forth->products) != 0)  
-                            @if( $category_forth->products[0] )
+                        @if(isset($category_forth->products))  
+                            @if( $category_forth->products->first() != NULL )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_forth->id) }}" class="font-size-12 text-gray-5">
@@ -561,39 +570,43 @@
                                         </a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
-                                        <a href="{{ route('product.view', $category_forth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                            {{ $category_forth->products[0]->name }}
+                                        <a href="{{ route('product.view', $category_forth->products->first()->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_forth->products->first()->name }}
                                         </a>
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty( $category_forth->products[0]->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_forth->products[0]->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
-                                        alt="{{ $category_forth->products[0]->name }}">
+                                        src="{{ (isset( $category_forth->products->first()->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_forth->products->first()->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        alt="{{ $category_forth->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                $price = $category_forth->products[0]->price / 100;
+                                                    $usd_price = intval($category_forth->products->first()->price);
+                                                    $discount = ($category_forth->products->first()->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
                                                 <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $category_forth->products[0]->price }}" class="price__cents">
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $category_forth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                            id="{{ $category_forth->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_forth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="#" id="{{ $category_forth->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>
+                                        Add To Quote
+                                    </a>
                                     </div>
                                 </div>
                             @endif  
                         @endif 
-                        @if(!empty($category_fifth) && sizeof($category_fifth->products) != 0)
-                            @if( $category_fifth->products[0] )
+                        @if(isset($category_fifth->products))
+                            @if( $category_fifth->products->first() != NULL )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_fifth->id) }}" class="font-size-12 text-gray-5">
@@ -601,39 +614,42 @@
                                         </a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
-                                        <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                            {{ $category_fifth->products[0]->name }}
+                                        <a href="{{ route('product.view', $category_fifth->products->first()->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_fifth->products->first()->name }}
                                         </a>
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty($category_fifth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_fifth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
-                                        alt="{{ $category_fifth->products[0]->name }}">
+                                        src="{{ (isset($category_fifth->products->first()->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_fifth->products->first()->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                        alt="{{ $category_fifth->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                $price = $category_fifth->products[0]->price / 100;
+                                                    $usd_price = intval($category_fifth->products->first()->price);
+                                                    $discount = ($category_fifth->products->first()->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
                                                 <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $category_fifth->products[0]->price }}" class="price__cents">
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $category_fifth->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                            id="{{ $category_fifth->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_fifth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" id="{{ $category_fifth->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                         <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
                             @endif   
                         @endif
-                        @if(!empty($category_sixth) && sizeof($category_sixth->products) != 0)
-                            @if( $category_sixth->products[0] )
+                        @if(isset($category_sixth->products))
+                            @if( $category_sixth->products->first() != NULL )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_sixth->id) }}" class="font-size-12 text-gray-5">
@@ -641,38 +657,41 @@
                                         </a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
-                                        <a href="{{ route('product.view', $category_sixth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                            {{ $category_sixth->products[0]->name }}
+                                        <a href="{{ route('product.view', $category_sixth->products->first()->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_sixth->products->first()->name }}
                                         </a>
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty( $category_sixth->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_sixth->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
-                                        alt="{{ $category_sixth->products[0]->name }}">
+                                        src="{{ (isset( $category_sixth->products->first()->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_sixth->products->first()->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                        alt="{{ $category_sixth->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                $price = $category_sixth->products[0]->price / 100;
+                                                    $usd_price = intval($category_sixth->products->first()->price);
+                                                    $discount = ($category_sixth->products->first()->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
                                                 <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $category_sixth->products[0]->price }}" class="price__cents">
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
-                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" id="{{ $category_first->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                            <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" id="{{ ($category_first->products->first() != NULL) ?? $category_first->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_sixth->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" id="{{ $category_sixth->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                         <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
                             @endif   
                         @endif
-                        @if(!empty($category_seventh) && sizeof($category_seventh->products) != 0)
-                            @if( $category_seventh->products[0] )
+                        @if(isset($category_seventh->products))
+                            @if( $category_seventh->products->first() != NULL )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_seventh->id) }}" class="font-size-12 text-gray-5">
@@ -680,32 +699,35 @@
                                         </a>
                                     </div>
                                     <h5 class="mb-1 product-item__title">
-                                        <a href="{{ route('product.view', $category_fifth->products[0]->id) }}" class="text-blue font-weight-bold">
-                                            {{ $category_seventh->products[0]->name }}
+                                        <a href="{{ route('product.view', $category_fifth->products->first()->id) }}" class="text-blue font-weight-bold">
+                                            {{ $category_seventh->products->first()->name }}
                                         </a>
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty($category_second->products[0]->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products[0]->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
-                                        alt="{{ $category_second->products[0]->name }}">
+                                        src="{{ (isset($category_second->products->first()->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_second->products->first()->product_thumbnail) : url('storage/tags/no_image.jpg') }}" 
+                                        alt="{{ $category_second->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                $price = $category_seventh->products[0]->price / 100;
+                                                    $usd_price = intval($category_seventh->products->first()->price);
+                                                    $discount = ($category_seventh->products->first()->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
                                                 <span class="price__number">${{ number_format((float)$price, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $category_seventh->products[0]->price }}" class="price__cents">
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $category_seventh->products[0]->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                            id="{{ $category_seventh->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_seventh->products[0]->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                        <a href="#" id="{{ $category_seventh->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                         <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
@@ -721,13 +743,17 @@
     <!-- End Slider Section -->
 
     <div class="container">
-    
-        @if( !empty($ad_first) )
+        <!-- 
+        *
+        *
+        *
+         -->
+        @if( isset($ad_first) )
         <!-- Full banner -->
         <div class="mb-8">
             <a href="#" class="d-block text-gray-90">
                 <div class="bg__cover" 
-                style="background-image: url({{ (!empty($ad_first->image)) ? url('storage/images/ad/' . $ad_first->image) : '' }});">
+                style="background-image: url({{ (isset($ad_first->image)) ? url('storage/images/ad/' . $ad_first->image) : '' }});">
                     <div class="space-top-2-md p-4 pt-6 pt-md-8 pt-lg-6 pt-xl-8 pb-lg-4 px-xl-8 px-lg-6">
                         <div class="flex-horizontal-center mt-lg-3 mt-xl-0 overflow-auto overflow-md-visble">
                             <h1 class="text-lh-38 font-size-32 font-weight-light mb-0 flex-shrink-0 flex-md-shrink-1">
@@ -751,174 +777,17 @@
         </div>
         <!-- End Full banner -->
         @endif
-
-        <!-- Categories Carousel -->
-        <div class="mb-5">
-            <div class="position-relative">
-                <div class="js-slick-carousel u-slick u-slick--gutters-0 position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1"
-                    data-arrows-classes="d-none d-xl-block u-slick__arrow-normal u-slick__arrow-centered--y rounded-circle text-black font-size-30 z-index-2"
-                    data-arrow-left-classes="fa fa-angle-left u-slick__arrow-inner--left left-n16"
-                    data-arrow-right-classes="fa fa-angle-right u-slick__arrow-inner--right right-n20"
-                    data-pagi-classes="d-xl-none text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
-                    data-slides-show="10"
-                    data-slides-scroll="1"
-                    data-responsive='[{
-                        "breakpoint": 1400,
-                        "settings": {
-                        "slidesToShow": 8
-                        }
-                    }, {
-                        "breakpoint": 1200,
-                        "settings": {
-                            "slidesToShow": 6
-                        }
-                    }, {
-                        "breakpoint": 992,
-                        "settings": {
-                        "slidesToShow": 5
-                        }
-                    }, {
-                        "breakpoint": 768,
-                        "settings": {
-                        "slidesToShow": 3
-                        }
-                    }, {
-                        "breakpoint": 554,
-                        "settings": {
-                        "slidesToShow": 2
-                        }
-                    }]'>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-laptop font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Accessories</h6>
-                            </div>
-                        </a>
-                    </div> 
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-smartwatch font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Smart Watch</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-gamepad font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Game Joy stick</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-headphones font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Headphones</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-tvs font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">LED TV</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-drone font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Drone</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-cameras font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">DSLR Camera</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-speaker font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Audio Speakers</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-smartphones font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Smartphones</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-laptop font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Accessories</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-cameras font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">DSLR Camera</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="d-block text-center bg-on-hover width-122 mx-auto">
-                            <div class="bg pt-4 rounded-circle-top width-122 height-75">
-                                <i class="ec ec-gamepad font-size-40"></i>
-                            </div>
-                            <div class="bg-white px-2 pt-2 width-122">
-                                <h6 class="font-weight-semi-bold font-size-14 text-gray-90 mb-0 text-lh-1dot2">Game Joy stick</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Categories Carousel -->
-
+        <!-- 
+        *
+        *
+        *
+         -->
         <!-- Catch Daily Deals! -->
         <section id="hot-deals" class="mb-4">
             <div class="container-fluid">
                 <div class="mb-2 d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
                     <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Daily Hot Deals</h3>
-                    <a class="d-block text-gray-16" href="{{ route('tag.view', $tag_hot_deal->id) }}">Go to Daily Hot Deals <i class="ec ec-arrow-right-categproes"></i></a>
+                    <a class="d-block text-gray-16" href="{{ (isset($tag_hot_deal->id)) ? route('tag.view', $tag_hot_deal->id) : '#' }}">Go to Daily Hot Deals <i class="ec ec-arrow-right-categproes"></i></a>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 px-4 py-2">
@@ -929,30 +798,30 @@
                                 <div class="d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1">
                                     <span class="font-size-12">Save</span>
                                     <div class="font-size-20 font-weight-bold">
-                                        @if(!empty($special_offer->discounts->discount_percent))
+                                        @if(isset($special_offer->discounts->discount_percent))
                                         {{ $special_offer->discounts->discount_percent }}%
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <a href="{{ route('product.view', $special_offer->id) }}" class="d-block text-center">
+                                <a href="{{ (isset($special_offer->id)) ? route('product.view', $special_offer->id) : '#' }}" class="d-block text-center">
                                     <div class="img__area">
                                         <img class="img-fluid" 
-                                        src="{{ (!empty($special_offer->product_thumbnail)) ? url('storage/products/thumbnail/' . $special_offer->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Image Description">
+                                        src="{{ (isset($special_offer->product_thumbnail)) ? url('storage/products/thumbnail/' . $special_offer->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Image Description">
                                     </div>
                                 </a>
                             </div>
                             <h5 class="mb-2 font-size-14 text-center mx-auto text-lh-18">
-                                <a href="{{ route('product.view', $special_offer->id) }}" class="text-blue font-weight-bold">
-                                @if(!empty($special_offer))
+                                @if(isset($special_offer))
+                                <a href="{{ route('product.view', $special_offer->id) }}" class="text-blue font-weight-bold">   
                                 {{ $special_offer->name }}
-                                @endif
                                 </a>
+                                @endif
                             </h5>
                             <div class="d-flex align-items-center justify-content-center mb-2">
                                 <del class="font-size-18 mr-2 text-gray-2">
-                                    @if(!empty($special_offer->price))
+                                    @if(isset($special_offer->price))
                                     @php
                                     $price = $special_offer->price / 100
                                     @endphp
@@ -960,7 +829,7 @@
                                     @endif
                                 </del>
                                 <ins class="font-size-30 text-red text-decoration-none">
-                                    @if(!empty($special_offer->discounts->discount_percent))
+                                    @if(isset($special_offer->discounts->discount_percent))
                                     @php
                                     $discount_percent = $special_offer->discounts->discount_percent / 100;
                                     $discount = $special_offer->price * $discount_percent;
@@ -975,7 +844,7 @@
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="">Available: 
                                         <strong>
-                                            @if(!empty($special_offer))
+                                            @if(isset($special_offer))
                                             {{ $special_offer->inventories->in_store_quantity }}
                                             @endif
                                         </strong></span>  
@@ -1026,14 +895,21 @@
                     </div>
                     <div class="col-lg-8">
                         <div class="container">
+                            @if(isset($hot_deals) )
                             <div class="row">
                                 @foreach($hot_deals as $product)
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card product__item">
-                                        <div class="mb-2">
-                                            <a href="{{ route('category.index', $product->categories[0]->id) }}" class="font-size-12 text-gray-5">
-                                                {{ $product->categories[0]->name }}
-                                            </a>
+                                        <div class="mb-2">   
+                                            @if( isset($product->categories) )
+                                               @for( $i = 0; $i < $product->categories->count(); $i++ )
+                                                   
+                                                    <a href="{{ route('category.view', $product->categories[$i]->id) }}" class="font-size-12 text-gray-5">
+                                                        {{ $product->categories[$i]->name }}
+                                                    </a>,&nbsp;
+                                                
+                                                @endfor
+                                            @endif
                                         </div>
                                         <h5 class="mb-1 product-item__title">
                                             <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
@@ -1042,16 +918,19 @@
                                         </h5>
                                         <div class="img__area">
                                             <img class="card-img-top" 
-                                            src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
+                                            src="{{ (isset($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
                                         </div>
                                         <div class="flex-center-between my-3">
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">
                                                     @php
-                                                        $price_cents = $product->price / 100;
+                                                        $usd_price = intval($product->price);
+                                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                                        $discount_usd_price = $usd_price - $discount;
+                                                        $price = $discount_usd_price / 100;
                                                     @endphp
-                                                    $<span class="price__number">{{ number_format((float)$price_cents, 2, '.', '') }}</span>
-                                                    <input type="hidden" value="{{ $product->price }}" class="price__cents">
+                                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                                 </div>
                                             </div>
                                             <div class="d-none d-xl-block prodcut-add-cart">
@@ -1070,28 +949,38 @@
                                 </div>
                                 @endforeach
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </section>   
         <!-- End Catch Daily Deals! -->
-
-
-
+        <!-- 
+        *
+        *
+        *
+         -->
+        @if( isset($trending_products) )
         <!-- Trending products -->
         <section class="trending__products mb__2">
             <div class="mb-2 d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
                 <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Trending Products</h3>
-                <a class="d-block text-gray-16" href="{{ route('tag.view', $tag_trending->id) }}">Go to Trending Products <i class="ec ec-arrow-right-categproes"></i></a>
+                <a class="d-block text-gray-16" href="{{ (isset($tag_trending->id)) ? route('tag.view', $tag_trending->id) : '#' }}">Go to Trending Products <i class="ec ec-arrow-right-categproes"></i></a>
             </div>
             <div class="trending__productsCarousel owl-carousel owl-theme">
                 @foreach($trending_products as $product)
                     <div class="card product__item">
                         <div class="mb-2">
-                            <a href="{{ route('category.index', $product->categories[0]->id) }}" class="font-size-12 text-gray-5">
-                                {{ $product->categories[0]->name }}
-                            </a>
+                            @if( isset($product->categories) )
+                                @for( $i = 0; $i < $product->categories->count(); $i++ )
+                                    
+                                    <a href="{{ route('category.view', $product->categories[$i]->id) }}" class="font-size-12 text-gray-5">
+                                        {{ $product->categories[$i]->name }}
+                                    </a>,&nbsp;
+                                
+                                @endfor
+                            @endif
                         </div>
                         <h5 class="mb-1 product-item__title">
                             <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
@@ -1100,16 +989,19 @@
                         </h5>
                         <div class="img__area">
                             <img class="card-img-top" 
-                            src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
+                            src="{{ (isset($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
                         </div>
                         <div class="flex-center-between my-3">
                             <div class="prodcut-price">
                                 <div class="text-gray-100">
-                                    @php
-                                        $price_cents = $product->price / 100;
-                                    @endphp
-                                    $<span class="price__number">{{ number_format((float)$price_cents, 2, '.', '') }}</span>
-                                    <input type="hidden" value="{{ $product->price }}" class="price__cents">
+                                @php
+                                    $usd_price = intval($product->price);
+                                    $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                    $discount_usd_price = $usd_price - $discount;
+                                    $price = $discount_usd_price / 100;
+                                @endphp
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                 </div>
                             </div>
                             <div class="d-none d-xl-block prodcut-add-cart">
@@ -1125,16 +1017,18 @@
             </div>
         </section>
         <!-- End Trending products -->
-
-
-
-
-        @if( !empty($ad_second) )
+        @endif
+        <!-- 
+        *
+        *
+        *
+         -->
+        @if( isset($ad_second) )
         <!-- Full banner -->
         <div class="mb-8">
             <a href="#" class="d-block text-gray-90">
                 <div class="bg__cover" 
-                style="background-image: url({{ (!empty($ad_second->image)) ? url('storage/images/ad/' . $ad_second->image) : '' }});">
+                style="background-image: url({{ (isset($ad_second->image)) ? url('storage/images/ad/' . $ad_second->image) : '' }});">
                     <div class="space-top-2-md p-4 pt-6 pt-md-8 pt-lg-6 pt-xl-8 pb-lg-4 px-xl-8 px-lg-6">
                         <div class="flex-horizontal-center mt-lg-3 mt-xl-0 overflow-auto overflow-md-visble">
                             <h1 class="text-lh-38 font-size-32 font-weight-light mb-0 flex-shrink-0 flex-md-shrink-1">
@@ -1158,33 +1052,38 @@
         </div>
         <!-- End Full banner -->
         @endif
-
-
-
-
-
+        <!-- 
+        *
+        *
+        *
+         -->
         <!-- :::::: Latest Products ::::::: -->
         <section class="latest__products mb__2">
             <div class="mb-3 d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
                 <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Latest Products</h3>
-                <a class="d-block text-gray-16" href="{{ route('tag.view', $tag_latest->id) }}">Go to Latest Products <i class="ec ec-arrow-right-categproes"></i></a>
+                <a class="d-block text-gray-16" href="{{ (isset($tag_latest->id)) ? route('tag.view', $tag_latest->id) : '#' }}">Go to Latest Products <i class="ec ec-arrow-right-categproes"></i></a>
             </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="img__area">
-                            <img src="{{ (!empty($tag_second->image)) ? url('storage/tags/' . $tag_second->image) : url('storage/tags/no_image.jpg') }}" alt="">
+                            <img src="{{ (isset($tag_second->image)) ? url('storage/tags/' . $tag_second->image) : url('storage/tags/no_image.jpg') }}" alt="">
                         </div>
                     </div>
                     <div class="col-lg-9">
+                        @if(isset($latest_products))
                         <div class="row">
                             <div class="latest__productsCarousel owl-carousel owl-theme">
                                 @foreach($latest_products as $product)
                                 <div class="card product__item">
                                     <div class="mb-2">
-                                        <a href="{{ route('category.index', $product->categories[0]->id) }}" class="font-size-12 text-gray-5">
-                                            {{ $product->categories[0]->name }}
-                                        </a>
+                                        @if( isset($product->categories) )
+                                            @for( $i = 0; $i < $product->categories->count(); $i++ )
+                                                <a href="{{ route('category.view', $product->categories[$i]->id) }}" class="font-size-12 text-gray-5">
+                                                    {{ $product->categories[$i]->name }}
+                                                </a>,&nbsp; 
+                                            @endfor
+                                        @endif
                                     </div>
                                     <h5 class="mb-1 product-item__title">
                                         <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
@@ -1193,16 +1092,19 @@
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
+                                        src="{{ (isset($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Card image cap">
                                     </div>
                                     <div class="flex-center-between my-3">
                                         <div class="prodcut-price">
                                             <div class="text-gray-100">
                                                 @php
-                                                    $price_cents = $product->price / 100;
+                                                    $usd_price = intval($product->price);
+                                                    $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                                    $discount_usd_price = $usd_price - $discount;
+                                                    $price = $discount_usd_price / 100;
                                                 @endphp
-                                                $<span class="price__number">{{ number_format((float)$price_cents, 2, '.', '') }}</span>
-                                                <input type="hidden" value="{{ $product->price }}" class="price__cents">
+                                                $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
@@ -1217,17 +1119,21 @@
                                 @endforeach
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </section>
         <!-- :::::: End Latest Products ::::::: -->
-
-
+         <!-- 
+        *
+        *
+        *
+         -->
         <!-- Banner -->
         <div class="mb-11">
             <div class="row flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                @if(!empty($tag_seventh) )
+                @if(isset($tag_seventh) )
                 <div class="col-md-6 mb-4 mb-xl-0 col-xl-4 col-wd-3 flex-shrink-0 flex-xl-shrink-1">
                     <a href="#" class="min-height-132 py-1 py-xl-2 py-wd-1 banner-bg d-flex align-items-center text-gray-90">
                         <div class="col-6 col-xl-7 col-wd-6 pr-0" 
@@ -1248,13 +1154,13 @@
                     </a>
                 </div>
                 @endif
-                @if(!empty($tag_eighth) )
+                @if(isset($tag_eighth) )
                 <div class="col-md-6 mb-4 mb-xl-0 col-xl-4 col-wd-3 flex-shrink-0 flex-xl-shrink-1">
                     <a href="#" class="min-height-132 py-1 py-xl-2 py-wd-1 banner-bg d-flex align-items-center text-gray-90">
                         <div class="col-6 col-xl-7 col-wd-6 pr-0" 
                         style="width:190px; height:171px; background-color:white; margin-top: 0.2rem; margin-bottom:0.2rem; margin-left:0.7rem;">
                            <img class="img-fluid img__fit" 
-                           src="{{ (!empty($tag_eighth->image)) ? url('storage/tags/' . $tag_eighth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
+                           src="{{ (isset($tag_eighth->image)) ? url('storage/tags/' . $tag_eighth->image) : url('storage/tags/no_image.jpg') }}" alt="Image Description">
                         </div>
                         <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                             <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
@@ -1270,13 +1176,13 @@
                     </a>
                 </div>
                 @endif
-                @if(!empty($tag_nineth) )
+                @if(isset($tag_nineth) )
                 <div class="col-md-6 mb-4 mb-xl-0 col-xl-4 col-wd-3 flex-shrink-0 flex-xl-shrink-1">
                     <a href="#" class="min-height-132 py-1 py-xl-2 py-wd-1 banner-bg d-flex align-items-center text-gray-90">
                         <div class="col-6 col-xl-7 col-wd-6 pr-0" 
                         style="width:190px; height:171px; background-color:white; margin-top: 0.2rem; margin-bottom:0.2rem; margin-left:0.7rem;">
                            <img class="img-fluid" 
-                           src="{{ (!empty($tag_nineth->image)) ? url('storage/tags/' . $tag_nineth->image) : url('storage/tags/no_image.jpg') }}"  alt="Image Description"> -->
+                           src="{{ (isset($tag_nineth->image)) ? url('storage/tags/' . $tag_nineth->image) : url('storage/tags/no_image.jpg') }}"  alt="Image Description"> -->
                         </div>
                         <div class="col-6 col-xl-5 col-wd-6 pr-xl-4 pr-wd-3">
                             <div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23">
@@ -1296,7 +1202,13 @@
         </div>
         <!-- End Banner -->
 
-
+        <!-- 
+            *
+            *
+            *
+            *
+         -->
+        @if(isset($brands))
         <!-- Brand Carousel -->
         <div class="mb-8">
             <div class="py-2 border-top border-bottom">
@@ -1327,7 +1239,7 @@
                             <a href="{{ route('brand.view', $brand->id) }}" class="link-hover__brand">
                                 <div style="width:200px; height:60px; object-fit:contain;">
                                     <img class="img-fluid m-auto max-height-50" 
-                                    src="{{ (!empty($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }}" alt="Image Description">
+                                    src="{{ (isset($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }}" alt="Image Description">
                                 </div>
                                 
                             </a>
@@ -1337,18 +1249,22 @@
             </div>
         </div>
         <!-- End Brand Carousel -->
+        @endif
+        
     </div>
 </main>
 <!-- ========== END MAIN CONTENT ========== -->
 
- <!-- Footer-top-widget -->
- <div class="container d-none d-lg-block mb-3">
+
+
+<!-- Footer-top-widget -->
+<div class="container d-none d-lg-block mb-3">
     <div class="row">
-        @if( !empty($latest_three) )
         <div class="col-wd-3 col-lg-4">
             <div class="border-bottom border-color-1 mb-5">
                 <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Latest Products</h3>
             </div>
+            @if( isset($latest_three) )
             <ul class="list-unstyled products-group">
                 @foreach($latest_three as $product)
                 <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
@@ -1356,7 +1272,7 @@
                         <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
                             <div style="width:75px;height:75px;overflow:hidden;">
                                 <img class="img__fit" 
-                                src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                src="{{ (isset($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
                             </div> 
                         </a>        
                     </div>
@@ -1369,24 +1285,27 @@
                         <div class="prodcut-price mt-auto flex-horizontal-center">
                             <ins class="font-size-15 text-decoration-none">
                                 @php
-                                $price = $product->price / 100;
+                                    $usd_price = intval($product->price);
+                                    $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                    $discount_usd_price = $usd_price - $discount;
+                                    $price = $discount_usd_price / 100;
                                 @endphp
-                                ${{ number_format((float)$price, 2, '.', '') }}
+                                $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                             </ins>
-                            <!-- <del class="font-size-12 text-gray-9 ml-2">$250.00</del> -->
                         </div>
                     </div>
                 </li>
                 @endforeach
             </ul>
+            @endif
         </div>
-        @endif
-        @if( !empty($tag_first_three) )
         <div class="col-wd-3 col-lg-4">
             <div class="widget-column">
                 <div class="border-bottom border-color-1 mb-5">
                     <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Trending Products</h3>
                 </div>
+                @if( isset($latest_three) )
                 <ul class="list-unstyled products-group">
                     @foreach($tag_first_three as $product)
                     <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
@@ -1394,7 +1313,7 @@
                             <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
                                 <div style="width:75px;height:75px;overflow:hidden;">
                                     <img class="img__fit" 
-                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                    src="{{ (isset($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
                                 </div> 
                         </a>
                         </div>
@@ -1405,26 +1324,30 @@
                                 </a>
                             </h5>
                             <div class="prodcut-price mt-auto">
-                                <div class="font-size-15">
+                                <ins class="font-size-15 text-decoration-none">
                                     @php
-                                    $price = $product->price / 100;
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
                                     @endphp
-                                    ${{ number_format((float)$price, 2, '.', '') }}
-                                </div>
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
                             </div>
                         </div>
                     </li>
                     @endforeach
                 </ul>
+                @endif
             </div>
         </div>
-        @endif
-        @if( !empty($tag_second_three) )
         <div class="col-wd-3 col-lg-4">
             <div class="widget-column">
                 <div class="border-bottom border-color-1 mb-5">
                     <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Daily Hot Deals</h3>
                 </div>
+                @if( isset($tag_second_three) )
                 <ul class="list-unstyled products-group">
                     @foreach($tag_second_three as $product)
                     <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
@@ -1432,7 +1355,7 @@
                             <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
                                 <div style="width:75px;height:75px;overflow:hidden;">
                                     <img class="img__fit" 
-                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                    src="{{ (isset($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
                                 </div> 
                             </a>
                         </div>
@@ -1443,20 +1366,24 @@
                                 </a>
                             </h5>
                             <div class="prodcut-price mt-auto">
-                                <div class="font-size-15">
+                                <ins class="font-size-15 text-decoration-none">
                                     @php
-                                    $price = $product->price / 100;
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
                                     @endphp
-                                    ${{ number_format((float)$price, 2, '.', '') }}
-                                </div>
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
                             </div>
                         </div>
                     </li>
                     @endforeach
                 </ul>
+                @endif
             </div>
         </div>
-        @endif
     </div>
 </div>
 <!-- End Footer-top-widget -->

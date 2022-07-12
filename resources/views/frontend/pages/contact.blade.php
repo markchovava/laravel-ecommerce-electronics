@@ -112,5 +112,130 @@
     </div>
 </main>
 
+<!-- Footer-top-widget -->
+<div class="container d-none d-lg-block mb-3">
+    <div class="row">
+        <div class="col-wd-3 col-lg-4">
+            <div class="border-bottom border-color-1 mb-5">
+                <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Latest Products</h3>
+            </div>
+            <ul class="list-unstyled products-group">
+                @foreach($latest_three as $product)
+                <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                    <div class="col-auto">
+                        <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                            <div style="width:75px;height:75px;overflow:hidden;">
+                                <img class="img__fit" 
+                                src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                            </div> 
+                        </a>        
+                    </div>
+                    <div class="col pl-4 d-flex flex-column">
+                        <h5 class="product-item__title mb-0">
+                            <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                {{ $product->name }}
+                            </a>
+                        </h5>
+                        <div class="prodcut-price mt-auto flex-horizontal-center">
+                            <ins class="font-size-15 text-decoration-none">
+                                @php
+                                    $usd_price = intval($product->price);
+                                    $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                    $discount_usd_price = $usd_price - $discount;
+                                    $price = $discount_usd_price / 100;
+                                @endphp
+                                $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                            </ins>
+                        </div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="col-wd-3 col-lg-4">
+            <div class="widget-column">
+                <div class="border-bottom border-color-1 mb-5">
+                    <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Trending Products</h3>
+                </div>
+                <ul class="list-unstyled products-group">
+                    @foreach($tag_first_three as $product)
+                    <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                        <div class="col-auto">
+                            <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                                <div style="width:75px;height:75px;overflow:hidden;">
+                                    <img class="img__fit" 
+                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                </div> 
+                        </a>
+                        </div>
+                        <div class="col pl-4 d-flex flex-column">
+                            <h5 class="product-item__title mb-0">
+                                <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
+                            <div class="prodcut-price mt-auto">
+                                <ins class="font-size-15 text-decoration-none">
+                                    @php
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
+                                    @endphp
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="col-wd-3 col-lg-4">
+            <div class="widget-column">
+                <div class="border-bottom border-color-1 mb-5">
+                    <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Daily Hot Deals</h3>
+                </div>
+                <ul class="list-unstyled products-group">
+                    @foreach($tag_second_three as $product)
+                    <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                        <div class="col-auto">
+                            <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                                <div style="width:75px;height:75px;overflow:hidden;">
+                                    <img class="img__fit" 
+                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                </div> 
+                            </a>
+                        </div>
+                        <div class="col pl-4 d-flex flex-column">
+                            <h5 class="product-item__title mb-0">
+                                <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
+                            <div class="prodcut-price mt-auto">
+                                <ins class="font-size-15 text-decoration-none">
+                                    @php
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
+                                    @endphp
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Footer-top-widget -->
+
 
 @endsection

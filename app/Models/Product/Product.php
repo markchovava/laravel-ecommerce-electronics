@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Product\ProductImage;
 use App\Models\Product\ProductSerialNumber;
 use App\Models\Inventory\Stock;
+use App\Models\Product\Specification\Specification;
 use App\Models\Sticker\Sticker;
 use App\Models\Product\Tag\Tag;
 
@@ -33,6 +34,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductSerialNumber::class, 'product_id', 'id');
     }
+
+     /* One to many */
+     public function specifications()
+     {
+         return $this->hasMany(Specification::class, 'product_id', 'id');
+     }
 
     /* Many to Many */
     public function brands()

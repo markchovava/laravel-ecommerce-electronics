@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
+            $table->string('quantity')->nullable();
+            $table->string('city')->nullable();
+            $table->integer('price')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,13 @@ Username: lunarte1
 Password: zZ;sxLO3@58l0C
 
 
+DB_DATABASE=lunartec1_laravel_ecom
+DB_USERNAME=lunarte1_lunartech_user
+DB_PASSWORD=lunartech_db_pass
+
+Email: info@lunartechstore.co.zw
+Pass: lunartechstore
+
 
 
 SSH

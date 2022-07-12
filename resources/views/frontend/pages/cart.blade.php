@@ -147,7 +147,7 @@
                 <div class="row">
                     <div class="col-xl-5 col-lg-6 offset-lg-6 offset-xl-7 col-md-8 offset-md-4">
                         <div class="border-bottom border-color-1 mb-3">
-                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Cart totals</h3>
+                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Cart Total</h3>
                         </div>
                         <table class="table mb-3 mb-md-0">
                             <tbody>
@@ -159,17 +159,30 @@
                                     </td>
                                 </tr>
                                 <tr class="shipping">
-                                    <th>Shipping / Transportation</th>
+                                    <th>Shipping Fee (Around Harare)</th>
                                     <td data-title="Shipping">
-                                        Flat Fee: <span class="shipping__fee">$20.00</span>
-                                        <input type="hidden" name="shipping_feeCents" value="2000" class="shipping__feeCents">
+                                        Flat Fee: <span class="shipping__fee">
+                                            @php
+                                            $fee = $shipping->fee / 100
+                                            @endphp
+                                            {{ number_format((float)$fee, 2, '.', '') }}
+                                        </span>
+                                        <input type="hidden" name="shipping_feeCents" value="{{ $shipping->fee }}" class="shipping__feeCents">
                                     </td>
                                 </tr>
                                 <tr class="order-total">
-                                    <th>Total</th>
+                                    <th>Total (USD$)</th>
                                     <td data-title="Total">
                                         <strong>$<span class="cart__total">00</span></strong>
                                         <input type="hidden" name="cart_totalCents" class="cart__totalCents">
+                                    </td>
+                                </tr>
+                                <tr class="order-zwltotal">
+                                    <th>Total (ZWL$)</th>
+                                    <td data-title="Total">
+                                        <strong>$<span class="cart__zwltotal">00</span></strong>
+                                        <input type="hidden" name="cart_zwl" value="{{ $currency->value }}" class="cart__zwl">
+                                        <input type="hidden" name="cart_zwltotalCents" class="cart__zwltotalCents">
                                     </td>
                                 </tr>
                             </tbody>
@@ -199,16 +212,32 @@
     let cart_subtotalDecimal = cart_subtotalCalculate.toFixed(2);
     cart_subtotalInsert.text(cart_subtotalDecimal);
     cart_subtotalCentsInsert.val(cart_subtotalCents);
-    // Calculate Cart Total
+    /* 
+    *   Calculate Cart Total
+    */ 
     let cart_totalCentsInsert = $('.cart__totalCents');
     let cart_totalInsert = $('.cart__total');
     let shipping_feeCents = $('.shipping__feeCents').val();
     let shipping_feeCentsNumber = Number(shipping_feeCents);
+    /* 
+    *   Calculate Total
+    */
     let cart_totalCentsCalculate = Number(cart_subtotalCents) + shipping_feeCentsNumber;
     let cart_totalCalculate = cart_totalCentsCalculate / 100;
     let cart_totalDecimal = cart_totalCalculate.toFixed(2);
     cart_totalCentsInsert.val(cart_totalCentsCalculate);
     cart_totalInsert.text(cart_totalDecimal);
+
+    /* 
+    *   Zim Dollar Coversion
+    */
+    let cart_zwltotalCentsInsert = $('.cart__zwltotalCents');
+    let cart_zwltotalInsert = $('.cart__zwltotal');
+    let cart_zwltotalCents = cart_totalCentsCalculate * 500;
+    let cart_zwltotalCalculate = cart_zwltotalCents / 100;
+    let cart_zwltotalCentsDecimal = cart_zwltotalCalculate.toFixed(2);
+    cart_zwltotalInsert.text(cart_zwltotalCentsDecimal);
+    cart_zwltotalCentsInsert.val(cart_zwltotalCents);
 
     /* Restrict user form typing  */
     $('.product__quantity').keydown(() => {
@@ -298,6 +327,18 @@
         let cart_totalDecimal = cart_totalCalculate.toFixed(2);
         cart_totalCentsInsert.val(cart_totalCentsCalculate);
         cart_totalInsert.text(cart_totalDecimal);
+        /* 
+        *   Zim Dollar Coversion
+        */
+        let cart_zwl = $('.cart__zwl').val();
+        let cart_zwlNumber = Number(cart_zwl);
+        let cart_zwltotalCentsInsert = $('.cart__zwltotalCents');
+        let cart_zwltotalInsert = $('.cart__zwltotal');
+        let cart_zwltotalCents = cart_totalCentsCalculate * cart_zwlNumber;
+        let cart_zwltotalCalculate = cart_zwltotalCents / 100;
+        let cart_zwltotalCentsDecimal = cart_zwltotalCalculate.toFixed(2); // Convert to Decimals
+        cart_zwltotalInsert.text(cart_zwltotalCentsDecimal); // Display Decimals
+        cart_zwltotalCentsInsert.val(cart_zwltotalCents);
 
     });
 

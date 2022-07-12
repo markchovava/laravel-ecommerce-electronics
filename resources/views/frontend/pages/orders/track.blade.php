@@ -25,17 +25,30 @@
         <div class="mx-xl-10">
             <div class="mb-6 text-center">
                 <h1 class="mb-6">Track your Order</h1>
-                <p class="text-gray-90 px-xl-10">To track your order please enter your Order ID in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
+                    @if( !empty($order) )
+                    <div class="alert alert-primary mb-4" style="text-align:left;">
+                        Order Number: <b>{{ $order->reference_id }}</b><br>
+                        Status: <b>{{ $order->status }}</b>
+                    </div>
+                    @endif
+                    @if( !empty($track_order) )
+                    <div class="alert alert-primary mb-4" style="text-align:left;">
+                        Your order has been sent to your email. Check your Inbox for Order Status.
+                    </div>
+                    @endif
+                <p class="text-gray-90 px-xl-10">
+                    The progress status will be sent to the email you write below.
+                </p>
             </div>
             <div class="my-4 my-xl-8">
-                <form class="js-validate" novalidate="novalidate">
+                <form method="post" action="{{ route('order.email') }}">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <!-- Form Group -->
                             <div class="js-form-message form-group">
-                                <label class="form-label" for="orderid">Order ID
+                                <label class="form-label" for="orderid">Order Reference Number
                                 </label>
-                                <input type="text" class="form-control" name="text" id="orderid" placeholder="Found in your order confirmation email." aria-label="Found in your order confirmation email.">
+                                <input type="text" class="form-control" name="order_number" id="orderid" placeholder="Found in your order confirmation email." aria-label="Found in your order confirmation email.">
                             </div>
                             <!-- End Form Group -->
                         </div>
@@ -63,5 +76,132 @@
     </div>
 </main>
 <!-- ========== END MAIN CONTENT ========== -->
+
+
+
+<!-- Footer-top-widget -->
+<div class="container d-none d-lg-block mb-3">
+    <div class="row">
+        <div class="col-wd-3 col-lg-4">
+            <div class="border-bottom border-color-1 mb-5">
+                <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Latest Products</h3>
+            </div>
+            <ul class="list-unstyled products-group">
+                @foreach($latest_three as $product)
+                <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                    <div class="col-auto">
+                        <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                            <div style="width:75px;height:75px;overflow:hidden;">
+                                <img class="img__fit" 
+                                src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                            </div> 
+                        </a>        
+                    </div>
+                    <div class="col pl-4 d-flex flex-column">
+                        <h5 class="product-item__title mb-0">
+                            <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                {{ $product->name }}
+                            </a>
+                        </h5>
+                        <div class="prodcut-price mt-auto flex-horizontal-center">
+                            <ins class="font-size-15 text-decoration-none">
+                                @php
+                                    $usd_price = intval($product->price);
+                                    $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                    $discount_usd_price = $usd_price - $discount;
+                                    $price = $discount_usd_price / 100;
+                                @endphp
+                                $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                            </ins>
+                        </div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="col-wd-3 col-lg-4">
+            <div class="widget-column">
+                <div class="border-bottom border-color-1 mb-5">
+                    <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Trending Products</h3>
+                </div>
+                <ul class="list-unstyled products-group">
+                    @foreach($tag_first_three as $product)
+                    <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                        <div class="col-auto">
+                            <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                                <div style="width:75px;height:75px;overflow:hidden;">
+                                    <img class="img__fit" 
+                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                </div> 
+                        </a>
+                        </div>
+                        <div class="col pl-4 d-flex flex-column">
+                            <h5 class="product-item__title mb-0">
+                                <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
+                            <div class="prodcut-price mt-auto">
+                                <ins class="font-size-15 text-decoration-none">
+                                    @php
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
+                                    @endphp
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="col-wd-3 col-lg-4">
+            <div class="widget-column">
+                <div class="border-bottom border-color-1 mb-5">
+                    <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Daily Hot Deals</h3>
+                </div>
+                <ul class="list-unstyled products-group">
+                    @foreach($tag_second_three as $product)
+                    <li class="product-item product-item__list row no-gutters mb-6 remove-divider">
+                        <div class="col-auto">
+                            <a href="{{ route('product.view', $product->id) }}" class="d-block width-75 text-center">
+                                <div style="width:75px;height:75px;overflow:hidden;">
+                                    <img class="img__fit" 
+                                    src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}"  alt="Image Description">
+                                </div> 
+                            </a>
+                        </div>
+                        <div class="col pl-4 d-flex flex-column">
+                            <h5 class="product-item__title mb-0">
+                                <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                    {{ $product->name }}
+                                </a>
+                            </h5>
+                            <div class="prodcut-price mt-auto">
+                                <ins class="font-size-15 text-decoration-none">
+                                    @php
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
+                                    @endphp
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Footer-top-widget -->
 
 @endsection

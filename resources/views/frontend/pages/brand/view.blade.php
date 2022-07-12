@@ -137,10 +137,13 @@
                                                             <div class="prodcut-price">
                                                                 <div class="text-gray-100">
                                                                     @php
-                                                                        $price_cents = $product->price / 100;
+                                                                        $usd_price = intval($product->price);
+                                                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                                                        $discount_usd_price = $usd_price - $discount;
+                                                                        $price = $discount_usd_price / 100;
                                                                     @endphp
-                                                                    $<span class="price__number">{{ number_format((float)$price_cents, 2, '.', '') }}</span>
-                                                                    <input type="hidden" value="{{ $product->price }}" class="price__cents">
+                                                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                                                 </div>
                                                             </div>
                                                             <div class="d-none d-xl-block prodcut-add-cart">
@@ -223,8 +226,10 @@
         <!-- ========== END MAIN CONTENT ========== -->
 
 
+
+
 <!-- Footer-top-widget -->
- <div class="container d-none d-lg-block mb-3">
+<div class="container d-none d-lg-block mb-3">
     <div class="row">
         <div class="col-wd-3 col-lg-4">
             <div class="border-bottom border-color-1 mb-5">
@@ -250,11 +255,14 @@
                         <div class="prodcut-price mt-auto flex-horizontal-center">
                             <ins class="font-size-15 text-decoration-none">
                                 @php
-                                $price = $product->price / 100;
+                                    $usd_price = intval($product->price);
+                                    $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                    $discount_usd_price = $usd_price - $discount;
+                                    $price = $discount_usd_price / 100;
                                 @endphp
-                                ${{ number_format((float)$price, 2, '.', '') }}
+                                $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                             </ins>
-                            <!-- <del class="font-size-12 text-gray-9 ml-2">$250.00</del> -->
                         </div>
                     </div>
                 </li>
@@ -284,12 +292,16 @@
                                 </a>
                             </h5>
                             <div class="prodcut-price mt-auto">
-                                <div class="font-size-15">
+                                <ins class="font-size-15 text-decoration-none">
                                     @php
-                                    $price = $product->price / 100;
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
                                     @endphp
-                                    ${{ number_format((float)$price, 2, '.', '') }}
-                                </div>
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
                             </div>
                         </div>
                     </li>
@@ -320,22 +332,22 @@
                                 </a>
                             </h5>
                             <div class="prodcut-price mt-auto">
-                                <div class="font-size-15">
+                                <ins class="font-size-15 text-decoration-none">
                                     @php
-                                    $price = $product->price / 100;
+                                        $usd_price = intval($product->price);
+                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
+                                        $discount_usd_price = $usd_price - $discount;
+                                        $price = $discount_usd_price / 100;
                                     @endphp
-                                    ${{ number_format((float)$price, 2, '.', '') }}
-                                </div>
+                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                </ins>
                             </div>
                         </div>
                     </li>
                     @endforeach
                 </ul>
             </div>
-        </div>
-        
-        <div class="col-wd-3 d-none d-wd-block">
-            <a href="#" class="d-block"><img class="img-fluid" src="{{ asset('frontend/assets/img/330X360/img1.jpg') }}" alt="Image Description"></a>
         </div>
     </div>
 </div>

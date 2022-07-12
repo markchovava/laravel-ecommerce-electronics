@@ -37,16 +37,85 @@ class CheckoutAuthController extends Controller
                     $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
                     $cart_id =  $data['carts']->id;
                     $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
+
+                    /* 
+                    *   Footer Products 
+                    *   3 First Tag, Trending Products 
+                    */
+                    $data['tag_first_three'] = Product::whereHas('tags', function($query){
+                        $query->where('position', 'First'); //this refers id field from categories table
+                    })
+                    ->orderBy('updated_at','desc')
+                    ->paginate(3);
+                    /* 
+                    *   3 Latest Products 
+                    */
+                    $data['latest_three'] = Product::latest()->paginate(3);
+                    /* 
+                    *  3 Daily Hot Products 
+                    */
+                    $data['tag_second_three'] = Product::whereHas('tags', function($query){
+                        $query->where('position', 'Second'); //this refers id field from categories table
+                    })
+                    ->orderBy('updated_at','desc')
+                    ->paginate(3);
+
                     return view('frontend.pages.checkout.login', $data);
                 } else{
                     $data['cart_quantity'] = 0;
                     $data['message'] = "The Shopping Cart is empty at the moment.";
+
+                    /* 
+                    *   Footer Products 
+                    *   3 First Tag, Trending Products 
+                    */
+                    $data['tag_first_three'] = Product::whereHas('tags', function($query){
+                        $query->where('position', 'First'); //this refers id field from categories table
+                    })
+                    ->orderBy('updated_at','desc')
+                    ->paginate(3);
+                    /* 
+                    *   3 Latest Products 
+                    */
+                    $data['latest_three'] = Product::latest()->paginate(3);
+                    /* 
+                    *  3 Daily Hot Products 
+                    */
+                    $data['tag_second_three'] = Product::whereHas('tags', function($query){
+                        $query->where('position', 'Second'); //this refers id field from categories table
+                    })
+                    ->orderBy('updated_at','desc')
+                    ->paginate(3);
+
                     return view('frontend.pages.checkout.login', $data);
                 } 
             } 
             else{
                 $data['cart_quantity'] = 0;
                 $data['message'] = "The Shopping Cart is empty at the moment.";
+
+                /* 
+                    *   Footer Products 
+                    *   3 First Tag, Trending Products 
+                    */
+                    $data['tag_first_three'] = Product::whereHas('tags', function($query){
+                        $query->where('position', 'First'); //this refers id field from categories table
+                    })
+                    ->orderBy('updated_at','desc')
+                    ->paginate(3);
+                    /* 
+                    *   3 Latest Products 
+                    */
+                    $data['latest_three'] = Product::latest()->paginate(3);
+                    /* 
+                    *  3 Daily Hot Products 
+                    */
+                    $data['tag_second_three'] = Product::whereHas('tags', function($query){
+                        $query->where('position', 'Second'); //this refers id field from categories table
+                    })
+                    ->orderBy('updated_at','desc')
+                    ->paginate(3);
+
                 return view('frontend.pages.checkout.login', $data);
             } 
         }
@@ -76,6 +145,31 @@ class CheckoutAuthController extends Controller
 
     public function register(){
         $data['role_id'] = CheckRoles::check_role();
+        /* 
+        *   Footer Products 
+        *   3 First Tag, Trending Products 
+        */
+        $data['tag_first_three'] = Product::whereHas('tags', function($query){
+            $query->where('position', 'First'); //this refers id field from categories table
+        })
+        ->orderBy('updated_at','desc')
+        ->paginate(3);
+        /* 
+        *   3 Latest Products 
+        */
+        $data['latest_three'] = Product::latest()->paginate(3);
+        /* 
+        *  3 Daily Hot Products 
+        */
+        $data['tag_second_three'] = Product::whereHas('tags', function($query){
+            $query->where('position', 'Second'); //this refers id field from categories table
+        })
+        ->orderBy('updated_at','desc')
+        ->paginate(3);
+
+        /* 
+        *   Check if user is logged in 
+        */
         if( Auth::check() ){
             return redirect()->route('checkout'); 
         } 
@@ -91,12 +185,14 @@ class CheckoutAuthController extends Controller
                 } else{
                     $data['cart_quantity'] = 0;
                     $data['message'] = "The Shopping Cart is empty at the moment.";
+
                     return view('frontend.pages.checkout.register', $data);
                 } 
             } 
             else{
                 $data['cart_quantity'] = 0;
                 $data['message'] = "The Shopping Cart is empty at the moment.";
+
                 return view('frontend.pages.checkout.register', $data);
             }     
         }    
@@ -116,7 +212,6 @@ class CheckoutAuthController extends Controller
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
-        $user->role = 'Customer';
         $user->role_id = 4;
         $user->password = Hash::make($request->password);
         $user->save();
