@@ -50,8 +50,7 @@
                                                 {{ $product->product->name }}&nbsp;
                                                 <input type="hidden" name="product_name[]" value="{{ $product->product->name }}">
                                                 <input type="hidden" name="product_id[]" value="{{ $product->product_id }}">
-                                                <input type="hidden" name="product_variation_name[]" value="{{ $product->variation_name }}">
-                                                <input type="hidden" name="product_variation_value[]" value="{{ $product->variation_value }}">
+                                                <input type="hidden" name="product_variation[]" value="{{ $product->variation }}">
                                                 <strong class="product-quantity">
                                                     × {{ $product->quantity }}
                                                     <input type="hidden" name="product_quantity[]" value="{{ $product->quantity }}">
@@ -62,11 +61,13 @@
                                                 $discount = ($product->product->discounts->discount_percent / 100) * $product->product->price;
                                                 $discount_price = $product->product->price - $discount;
                                                 $product_totalCents = $discount_price * $product->quantity;
+                                                $product_zwl_totalCents = $product_totalCents * intval($zwl_currency->value);
                                                 $total_price = $product_totalCents / 100;
                                                 @endphp
                                                 <input type="hidden" name="product_unit_price[]" value="{{ $discount_price }}">
                                                 ${{ number_format((float)$total_price, 2, '.', '') }}
                                                 <input type="hidden" name="product_total[]" value="{{ $product_totalCents }}">
+                                                <input type="hidden" name="product_zwl_total[]" value="{{ $product_zwl_totalCents }}">
                                             </td>
                                         </tr>
                                         @endforeach
@@ -76,17 +77,17 @@
                                             <th>Subtotal</th>
                                             <td>
                                                 @php
-                                                $subtotal = $carts->cart_subtotal / 100;
+                                                $subtotal = $cart->cart_subtotal / 100;
                                                 @endphp
                                                 ${{ number_format((float)$subtotal, 2, '.', '') }}
-                                                <input type="hidden" name="cart_subtotal" value="{{ $product_totalCents }}">
+                                                <input type="hidden" name="cart_subtotal" value="{{ $cart->cart_subtotal }}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Shipping</th>
                                             <td>
                                                 @php
-                                                $shipping_feeCents = $carts->shipping_fee;
+                                                $shipping_feeCents = $cart->shipping_fee;
                                                 $shipping_fee = $shipping_feeCents / 100;
                                                 @endphp
                                                 ${{ number_format((float)$shipping_fee, 2, '.', '') }}
@@ -97,7 +98,7 @@
                                             <th>Total (USD)</th>
                                             <td>
                                                 @php
-                                                $cart_totalCents = $carts->total;
+                                                $cart_totalCents = $cart->total;
                                                 $cart_total = $cart_totalCents / 100;
                                                 @endphp
                                                 <strong>${{ number_format((float)$cart_total, 2, '.', '') }}</strong>
@@ -109,7 +110,7 @@
                                             <th>Total (ZWL)</th>
                                             <td>
                                                 @php
-                                                $cart_zwltotalCents = $carts->zwl_total;
+                                                $cart_zwltotalCents = $cart->zwl_total;
                                                 $cart_zwltotal = $cart_zwltotalCents / 100;
                                                 @endphp
                                                 <strong>${{ number_format((float)$cart_zwltotal, 2, '.', '') }}</strong>
@@ -172,16 +173,9 @@
                                     <h6><b>Choose Currency</b></h6>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-check">
-                                                <input type="radio" name="currency" value="USD" 
-                                                class="form-check-input" >
-                                                <label class="form-check-label"><b> USD</b></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
                                             <div class="form-check" >
                                                 <input type="radio" name="currency" value="ZWL" 
-                                                class="form-check-input" >
+                                                class="form-check-input" checked="checked">
                                                 <label class="form-check-label"><b>ZWL </b></label>
                                             </div>
                                         </div>
@@ -218,7 +212,7 @@
                                         <div class="border-bottom border-color-1 border-dotted-bottom">
                                             <div class="p-3" id="basicsHeadingFour">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" name="payment_method" value="Paynow" class="custom-control-input" id="FourstylishRadio1">
+                                                    <input type="radio" name="payment_method" checked="checked" value="Paynow" class="custom-control-input" id="FourstylishRadio1">
                                                     <label class="custom-control-label form-label" for="FourstylishRadio1"
                                                         data-toggle="collapse"
                                                         data-target="#basicsCollapseFour"
@@ -247,7 +241,7 @@
                                             data-error-class="u-has-error"
                                             data-success-class="u-has-success">
                                         <label class="form-check-label form-label" for="defaultCheck10">
-                                            I have read and agree to the website <a href="#" class="text-blue">Terms and Conditions.</a>
+                                            I have read and agree to the website <a href="{{ route('privacy.index') }}" class="text-blue">Terms and Conditions.</a>
                                             <span class="text-danger">*</span>
                                         </label>
                                     </div>
@@ -262,11 +256,11 @@
                 </div>
 
                 <div class="col-lg-7 order-lg-1">
-                    @if($user != false)
+                    @if( isset($user) )
                     <div class="pb-7 mb-7">
                         <!-- Title -->
                         <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title mb-0 pb-2 font-size-25">Billing details</h3>
+                            <h3 class="section-title mb-0 pb-2 font-size-25">Billing Details</h3>
                         </div>
                         <!-- End Title -->
 
@@ -279,7 +273,7 @@
                                         First name
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="first_name" value="{{ $user->first_name }}" placeholder="Your First name." class="form-control"  aria-label="Jack" autocomplete="off">
+                                    <input type="text" name="first_name" value="{{ $user->first_name }}" required="required" placeholder="Your First name." class="form-control"  aria-label="Jack" autocomplete="off">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -291,7 +285,7 @@
                                         Last name
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input name="last_name" type="text" value="{{ $user->last_name }}" class="form-control" placeholder="Your Surname.">
+                                    <input name="last_name" type="text" value="{{ $user->last_name }}" required="required" class="form-control" placeholder="Your Surname.">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -303,7 +297,7 @@
                                         Phone Number
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input name="phone_number" type="text" value="{{ $user->phone_number }}" class="form-control" placeholder="+263 (0) 782 210021">
+                                    <input name="phone_number" type="text" value="{{ $user->phone_number }}" required="required" class="form-control" placeholder="+263 (0) 782 210021">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -315,19 +309,7 @@
                                         Email
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input name="email" type="text"  value="{{ $user->email }}" class="form-control" placeholder="abc@example.com">
-                                </div>
-                                <!-- End Input -->
-                            </div>
-
-                            <div class="col-md-12">
-                                <!-- Input -->
-                                <div class="js-form-message mb-6">
-                                    <label class="form-label">
-                                        Address
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->address }}</textarea>
+                                    <input name="email" type="text"  value="{{ $user->email }}" required="required" class="form-control" placeholder="abc@example.com">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -339,7 +321,7 @@
                                         Delivery address
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->delivery_address }}</textarea>
+                                    <textarea class="form-control" name="delivery_address" required="required" id="" cols="30" rows="3">{{ $user->delivery_address }}</textarea>
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -348,10 +330,10 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
                                     <label class="form-label">
-                                        City
+                                        City (Delivery in Harare Only)
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" name="city" value="{{ $user->city }}" placeholder="Harare" aria-label="London" data-msg="Please enter a valid city." autocomplete="off">
+                                    <input type="text" class="form-control" name="city" value="{{ $user->city }}" placeholder="Harare" aria-label="London" autocomplete="off">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -371,7 +353,7 @@
                             <!-- Card -->
                             <div class="card border-0">
                                 <div id="shopCartHeadingFour" class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="shippingdiffrentAddress" name="shippingdiffrentAddress" >
+                                    <input type="checkbox" class="custom-control-input" id="shippingdiffrentAddress" name="to_company_address" >
                                     <label class="custom-control-label form-label" for="shippingdiffrentAddress" data-toggle="collapse" data-target="#shopCartfour" aria-expanded="false" aria-controls="shopCartfour">
                                         Ship to a Company address?
                                     </label>
@@ -461,7 +443,7 @@
                     <div class="pb-7 mb-7">
                         <!-- Title -->
                         <div class="border-bottom border-color-1 mb-5">
-                            <h3 class="section-title mb-0 pb-2 font-size-25">Billing details</h3>
+                            <h3 class="section-title mb-0 pb-2 font-size-25">Billing Details</h3>
                         </div>
                         <!-- End Title -->
 
@@ -474,7 +456,7 @@
                                         First name
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="first_name" placeholder="Your First name." class="form-control"  aria-label="Jack" autocomplete="off">
+                                    <input type="text" name="first_name" value="{{ $user->first_name }}" required="required" placeholder="Your First name." class="form-control"  aria-label="Jack" autocomplete="off">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -486,7 +468,7 @@
                                         Last name
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input name="last_name" type="text" class="form-control" placeholder="Your Surname.">
+                                    <input name="last_name" type="text" required="required" class="form-control" placeholder="Your Surname.">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -498,7 +480,7 @@
                                         Phone Number
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input name="phone_number" type="text" class="form-control" placeholder="+263 (0) 782 210021">
+                                    <input name="phone_number" type="text" required="required" class="form-control" placeholder="+263 (0) 782 210021">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -510,7 +492,7 @@
                                         Email
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input name="email" type="text" class="form-control" placeholder="abc@example.com">
+                                    <input name="email" type="text" required="required" class="form-control" placeholder="abc@example.com">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -519,10 +501,10 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
                                     <label class="form-label">
-                                        Address
+                                        Delivery address
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->address }}</textarea>
+                                    <textarea class="form-control" name="delivery_address" placeholder="Write your Delivery Address" required="required" id="" cols="30" rows="3"></textarea>
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -531,22 +513,10 @@
                                 <!-- Input -->
                                 <div class="js-form-message mb-6">
                                     <label class="form-label">
-                                        Delivery Address
+                                        City (Delivery in Harare Only)
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <textarea class="form-control" name="address" id="" cols="30" rows="4">{{ $user->delivery_address }}</textarea>
-                                </div>
-                                <!-- End Input -->
-                            </div>
-
-                            <div class="col-md-12">
-                                <!-- Input -->
-                                <div class="js-form-message mb-6">
-                                    <label class="form-label">
-                                        City
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="form-control" name="city" placeholder="Harare" aria-label="London" data-msg="Please enter a valid city." autocomplete="off">
+                                    <input type="text" class="form-control" name="city" placeholder="Write the city" aria-label="London" autocomplete="off">
                                 </div>
                                 <!-- End Input -->
                             </div>
@@ -566,7 +536,7 @@
                             <!-- Card -->
                             <div class="card border-0">
                                 <div id="shopCartHeadingFour" class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="shippingdiffrentAddress" name="shippingdiffrentAddress" >
+                                    <input type="checkbox" class="custom-control-input" id="shippingdiffrentAddress" name="to_company_address" >
                                     <label class="custom-control-label form-label" for="shippingdiffrentAddress" data-toggle="collapse" data-target="#shopCartfour" aria-expanded="false" aria-controls="shopCartfour">
                                         Ship to a Company address?
                                     </label>
@@ -628,7 +598,7 @@
                                                     City
                                                     <span class="text-danger">*</span>
                                                 </label>
-                                                <input type="text" class="form-control" name="company_city" placeholder="Harare" aria-label="Harare" autocomplete="off">
+                                                <input type="text" class="form-control" name="company_city" placeholder="Write the city." aria-label="Harare" autocomplete="off">
                                             </div>
                                             <!-- End Input -->
                                         </div>
@@ -647,7 +617,7 @@
                             </label>
 
                             <div class="input-group">
-                                <textarea class="form-control p-5" rows="4" name="notes"  placeholder="Notes about your order."></textarea>
+                                <textarea class="form-control p-5" rows="4" name="notes" placeholder="Notes about your order."></textarea>
                             </div>
                         </div>
                         <!-- End Input -->

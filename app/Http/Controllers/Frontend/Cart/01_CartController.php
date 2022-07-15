@@ -29,8 +29,7 @@ class CartController extends Controller
         $shopping_session = Cookie::get('shopping_session');
         /*  IP Address */
         $ip_address = $this->ip();
-        /* Customer ID */
-        if( !(isset($shopping_session)) || !isset($ip_address) ){
+        if( !(isset($shopping_session)) ){
             $cart = new Cart();
             $shopping_session = $this->randomString(30);
             $cart->shopping_session = $shopping_session;
@@ -57,18 +56,18 @@ class CartController extends Controller
                 $quantity = $product->inventories->in_store_quantity;
                 $cart_item->quantity++; 
             }  
-            if( isset($request->product_variation) ){
+            if($request->product_variation != false){
                 $cart_item->product_variation = $request->product_variation;
             }
             $cart_item->save();
         }
-        elseif( isset($shopping_session) || isset($ip_address) ){
-            $cart = Cart::where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+        elseif( isset($shopping_session) ){
+            $cart = Cart::where('shopping_session', $shopping_session)->first();
             if(!empty($cart)){
                 if(auth()->check()){
                     $cart->customer_id = Auth::id();
                 }
-                if( isset($cart->total) ){ 
+                if($cart->total != false){ 
                     $db_total = $cart->total;
                     $cart->total = intval($db_total) + intval($request->price_cents);
                 }
@@ -80,16 +79,14 @@ class CartController extends Controller
             elseif( empty($cart) ){
                 $cart = new Cart();
                 $cart->shopping_session = $shopping_session;
-                $cart->ip_address = $this->ip();
                 if(auth()->check()){
-                    $customer_id = Auth::id();
-                    $cart->customer_id = $customer_id;
+                    $cart->customer_id = Auth::id();
                 }
-                if( isset($cart->total) ){ 
+                if( $cart->total != false ){ 
                     $db_total = $cart->total;
                     $cart->total = intval($db_total) + intval($request->price_cents);
                 }
-                if( !isset($cart->total) ){
+                if( $cart->total == false ){
                     $cart->total = intval($request->price_cents);
                 }
                 $cart->save();
@@ -158,7 +155,7 @@ class CartController extends Controller
             return redirect()->route('checkout.login');
         }
         else{
-            $customer_id = Auth::id();
+            $customer_id = Auth::user()->id;
             if( isset($shopping_session) || isset($ip_address) ){
                 $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
                 $data['cart']->customer_id = $customer_id;
@@ -170,7 +167,7 @@ class CartController extends Controller
                 $cart_id = $data['cart']->id;
                 $old_cart_items = CartItem::where('cart_id', $cart_id)->delete();
                 $product_id = $request->product_id;
-                if(isset($product_id)){
+                if($product_id){
                     $count_id = count($request->product_id);
                     for($i = 0; $i < $count_id; $i++){
                         $cart_items = new CartItem();
@@ -196,7 +193,7 @@ class CartController extends Controller
                     return redirect()->route('checkout'); 
                 }
             }
-            elseif( !(isset($shopping_session)) || !isset($ip_address) ){
+            elseif( !(isset($shopping_session)) ){
                 $notification = [
                     'message' => 'You need Products in the Cart to Proceed to Checkout.',
                     'alert-type' => 'danger'

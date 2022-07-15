@@ -21,7 +21,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                        <a href="#" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -111,7 +111,7 @@
                             <tr>
                                 <!--begin::Customer name=-->
                                 <td>
-                                    <a href="#" class="text-dark text-hover-primary">
+                                    <a href="{{ route('admin.orders.view', $order->id) }}" class="text-dark text-hover-primary">
                                         {{ $order->customers->first_name . ' ' . $order->customers->first_name }}
                                     </a>
                                 </td>
@@ -129,7 +129,8 @@
                                 </td>
                                 <!--begin::Status=-->
                                 <!--begin::Status=-->
-                                <td>{{ count($order->order_items) }}</td>
+                                <td>
+                                    {{ $order->order_items->sum('quantity') }}</td>
                                 <!--begin::Status=-->
                                 <!--begin::No orders=-->
                                 <td class="text-end pe-0">
@@ -158,7 +159,18 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.orders.view',$order->id) }}" class="menu-link px-3">View</a>
+                                            <a href="{{ route('admin.orders.view',$order->id) }}" 
+                                                class="menu-link px-3">
+                                                View
+                                            </a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="{{ route('admin.orders.edit', $order->id) }}" 
+                                                class="menu-link px-3">
+                                                Edit
+                                            </a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->

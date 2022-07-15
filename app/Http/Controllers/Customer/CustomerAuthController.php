@@ -17,15 +17,22 @@ use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use App\Models\Product\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 class CustomerAuthController extends Controller
 {
     public function login(){
+        /*   Check Roles    */
         $data['role_id'] = CheckRoles::check_role();
-        if( isset($_COOKIE['shopping_session']) ){
-            $shopping_session = $_COOKIE['shopping_session'];
-            $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+        /*  Check Cookie */
+        $shopping_session = Cookie::get('shopping_session');
+        /*  IP Address */
+        $ip_address = $this->ip();
+
+        if( isset($shopping_session) || isset($ip_address) ){
+            $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)
+                                    ->orWhere('ip_address', $ip_address)->first();
             $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
             $cart_id =  $data['carts']->id;
             $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
@@ -58,13 +65,18 @@ class CustomerAuthController extends Controller
     }
 
     public function register(){
+        /*   Check Roles    */
         $data['role_id'] = CheckRoles::check_role();
+        /*  Check Cookie */
+        $shopping_session = Cookie::get('shopping_session');
+        /*  IP Address */
+        $ip_address = $this->ip();
         if( Auth::check() ){
             return redirect()->route('index'); 
         } 
-        if( isset($_COOKIE['shopping_session']) ){
-            $shopping_session = $_COOKIE['shopping_session'];
-            $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+        if( isset($shopping_session) || isset($ip_address) ){
+            $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)
+                            ->orWhere('ip_address', $ip_address)->first();
             $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
             $cart_id =  $data['carts']->id;
             $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
@@ -105,5 +117,26 @@ class CustomerAuthController extends Controller
         Session::flush();
         Auth::logout();
         return redirect()->route('index');
+    }
+
+
+    /* 
+    *   Get Ip
+    */
+    public function getIp(){
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+            if (array_key_exists($key, $_SERVER) === true){
+                foreach (explode(',', $_SERVER[$key]) as $ip){
+                    $ip = trim($ip); // just to be safe
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                        return $ip;
+                    }
+                }
+            }
+        }
+        return request()->ip(); // it will return server ip when no client ip found
+    }
+    public function ip(){
+        return $this->getIp(); // the above method
     }
 }

@@ -433,7 +433,7 @@
                 <section class="category__highlight position-relative" style="padding-bottom:3rem; padding-top:1rem;">
                     <div class="category__highlightCarousel owl-carousel owl-theme">
                         @if(isset($category_first->products))
-                            @if( $category_first->products->first() !== NULL) )
+                            @if( $category_first->products->first() != NULL )
                                 <div class="card product__item">
                                     <div class="mb-2">
                                         <a href="{{ route('category.view', $category_first->id) }}" class="font-size-12 text-gray-5">
@@ -447,7 +447,7 @@
                                     </h5>
                                     <div class="img__area">
                                         <img class="card-img-top" 
-                                        src="{{ (isset($category_first->products->first()->product_thumbnail)) ? url('storage/products/thumbnail/' . $category_first->products->first()->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
+                                        src="{{ (isset( $category_first->products->first()->product_thumbnail )) ? url('storage/products/thumbnail/' . $category_first->products->first()->product_thumbnail) : url('storage/products/thumbnail/no_image.jpg') }}" 
                                         alt="{{ $category_first->products->first()->name }}">
                                     </div>
                                     <div class="flex-center-between my-3">
@@ -463,7 +463,7 @@
                                                 <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
                                             </div>
                                         </div>
-                                        <div class="d-none prodcut-add-cart">
+                                        <div class="d-none d-xl-block prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
                                             id="{{ $category_first->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
@@ -473,7 +473,7 @@
                                         <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
                                     </div>
                                 </div>
-                            @endif   
+                            @endif  
                         @endif
                         @if(isset($category_second->products))
                             @if( $category_second->products->first() != NULL )

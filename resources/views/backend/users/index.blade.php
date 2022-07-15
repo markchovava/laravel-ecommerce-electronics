@@ -57,7 +57,7 @@
                 <!--begin::Secondary button-->
                 <!--end::Secondary button-->
                 <!--begin::Primary button-->
-                <a href="../../demo1/dist/.html" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
+                <a href="" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
                 <!--end::Primary button-->
             </div>
             <!--end::Actions-->
@@ -360,7 +360,7 @@
                                 </td>
                                 <!--end::User=-->
                                 <!--begin::Role=-->
-                                <td>{{ ($user->role) ? $user->role->name : 'Not Defined' }}</td>
+                                <td>{{ (!isset($user->role->name)) ? $user->role->name : 'Not Defined' }}</td>
                                 <!--end::Role=-->
                                 <!--begin::Last login=-->
                                 <td>
@@ -369,7 +369,7 @@
                                 <!--end::Last login=-->
                                 <!--begin::Two step=-->
                                 <td>
-                                <div class="badge badge-light-success fw-bolder">{{ $user->code }}</div>
+                                <div class="badge badge-light-success fw-bolder">{{ isset($user->code) ? $user->code : '' }}</div>
                                 </td>
                                 <!--end::Two step=-->
                                 <!--begin::Joined-->

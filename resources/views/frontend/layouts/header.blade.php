@@ -46,6 +46,11 @@
                                 </div>
                             </li>
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                                <a href="{{ route('privacy.index') }}" class="u-header-topbar__nav-link">
+                                     Terms and Conditions
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <!-- Account Sidebar Toggle Button -->
                                 @if(Auth::check() && $role_id > 1)
                                 <a id="sidebarNavToggler" href="{{ route('customer.logout') }}" role="button" class="u-header-topbar__nav-link"
@@ -191,6 +196,9 @@
                                                     <li class="nav-item u-header__nav-item">
                                                         <a class="nav-link u-header__nav-link" href="{{ route('contact.index') }}">Contact Us</a>
                                                     </li>
+                                                    <li class="nav-item u-header__nav-item">
+                                                        <a class="nav-link u-header__nav-link" href="{{ route('privacy.index') }}">Terms and Conditions</a>
+                                                    </li>
                                                 </ul>
 
                                                 
@@ -231,6 +239,7 @@
                                     <li class="nav-item u-header__nav-item">
                                         <a class="nav-link u-header__nav-link" href="{{ route('contact.index') }}">Contact Us</a>
                                     </li>
+                                    
                                 </ul>
                             </div>
                             <!-- End Navigation -->

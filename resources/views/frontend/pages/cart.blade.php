@@ -128,8 +128,9 @@
                                         </div>
                                         
                                         <div class="d-md-flex">
-                                            <button type="submit" 
-                                            class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</button>
+                                            <input type="submit" 
+                                            class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block"
+                                            value="Proceed to checkout">
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +189,9 @@
                             </tbody>
                         </table>
                         <div class="d-md-flex" style="float:right; margin-top:1.5rem;">
-                            <button type="submit" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block">Proceed to checkout</button>
+                            <input type="submit" 
+                            class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100 w-md-auto d-none d-md-inline-block"
+                            value="Proceed to checkout">
                         </div>
                     </div>
                 </div>

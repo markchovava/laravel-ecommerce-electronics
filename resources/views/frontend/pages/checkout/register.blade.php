@@ -61,7 +61,7 @@
                                             <th>Subtotal</th>
                                             <td>
                                                 @php
-                                                $subtotal = $carts->cart_subtotal / 100;
+                                                $subtotal = $cart->cart_subtotal / 100;
                                                 @endphp
                                                 ${{ number_format((float)$subtotal, 2, '.', '') }}
                                             </td>
@@ -70,7 +70,7 @@
                                             <th>Shipping</th>
                                             <td>
                                                 @php
-                                                $shipping_fee = $carts->shipping_fee / 100;
+                                                $shipping_fee = $cart->shipping_fee / 100;
                                                 @endphp
                                                 ${{ number_format((float)$shipping_fee, 2, '.', '') }}
                                             </td>
@@ -79,7 +79,7 @@
                                             <th>Total</th>
                                             <td>
                                                 @php
-                                                $cart_total = $carts->total / 100;
+                                                $cart_total = $cart->total / 100;
                                                 @endphp
                                                 <strong>${{ number_format((float)$cart_total, 2, '.', '') }}</strong>
                                             </td>
@@ -191,7 +191,7 @@
                                     <!-- Input -->
                                     <div class="js-form-message mb-6">
                                         <label class="form-label">
-                                            Username (Optional):
+                                            Username:
                                         </label>
                                         <input type="name" class="form-control" name="name" placeholder="abc@example.com" data-msg="Please enter your username here." autocomplete="off">
                                     </div>

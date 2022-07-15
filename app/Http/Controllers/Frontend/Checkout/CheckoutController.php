@@ -17,31 +17,39 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Cart\Cart;
 use App\Models\Cart\CartItem;
+use App\Models\Miscellaneous\Miscellaneous;
 use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use App\Models\Payment\PaymentDetail;
 use App\Models\Product\Product;
 use App\Models\User;
-use Paynow\Payments\Paynow as PaymentsPaynow;
+use Illuminate\Support\Facades\Cookie;
 
 class CheckoutController extends Controller
 {
     public function index(){
+
+        /*   Check Roles    */
+        $data['role_id'] = CheckRoles::check_role();
+        /*  Check Cookie */
+        $shopping_session = Cookie::get('shopping_session');
+        /*  IP Address */
+        $ip_address = $this->ip();
+        
         if( Auth::check() ){
-            $data['role_id'] = CheckRoles::check_role();
             /* 
             *   Auth user ID
             */
             $user_id = Auth::id();
             $data['user'] = User::where('id', $user_id)->first();
-            if( isset($_COOKIE['shopping_session']) ){
-                $shopping_session = $_COOKIE['shopping_session'];
-                $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
-                if( !empty($data['carts']) ){
-                    $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
-                    $cart_id =  $data['carts']->id;
+            if( isset($shopping_session) || isset($ip_address) ){
+                $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+                if( !empty($data['cart']) ){
+                    $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
+                    $cart_id =  $data['cart']->id;
                     $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
-
+                    /* Currency Convertion */
+                    $data['zwl_currency'] = Miscellaneous::where('name', 'ZWL')->first();
 
                      /* 
                     *   Footer Products 
@@ -143,6 +151,18 @@ class CheckoutController extends Controller
     }
 
     public function checkout_process(Request $request){
+         /*   Check Roles    */
+         $data['role_id'] = CheckRoles::check_role();
+         /*  Check Cookie */
+         $shopping_session = Cookie::get('shopping_session');
+         /*  IP Address */
+         $ip_address = $this->ip();
+         /*   User Id   */
+         $customer_id = Auth::user()->id;
+        $shopping_session = Cookie::get('shopping_session');
+        $payment_session = $this->randomString(40);
+        Cookie::queue('payment_session', $payment_session, 10080);
+
         if( Auth::check() ){
             /* Insert User */
             $id = Auth::id();
@@ -151,7 +171,6 @@ class CheckoutController extends Controller
             $user->last_name = $request->last_name;
             $user->email = $request->email;
             $user->phone_number = $request->phone_number;
-            $user->address = $request->address;
             $user->delivery_address = $request->delivery_address;
             $user->city = $request->city;
             $user->company_name = $request->company_name;
@@ -160,44 +179,14 @@ class CheckoutController extends Controller
             $user->company_address = $request->company_address;
             $user->company_city = $request->company_city;
             $user->company_name = $request->company_name;
-            if( $user->role_id == false){
-                $user->role_id = 4;
-            }
+            $user->role_id = isset($user->role_id) ? $user->role_id : 4;
             $user->save();      
-             
-            /* 
-            *   Pay NoW Integration 
-            */
-           /* $paynow = new PaymentsPaynow(
-                    env('PAYNOW_KEY'),
-                    env('PAYNOW_ID'),
-                    'http://lunartechstore.co.zw/checkout',
-                
-                    // The return url can be set at later stages. You might want to do this if you want to pass data to the return url (like the reference of the transaction)
-                    'http://lunartechstore.co.zw/track/order'
-                );  
-                
-                # $paynow->setResultUrl('');
-                # $paynow->setReturnUrl('');
-                
-                $payment = $paynow->createPayment($this->reference_id(), $user->email);
-                $payment->add($this->reference_id(), 1.25);
-                $response = $paynow->send($payment);
-                
-                if($response->success()) {
-                    // Or if you prefer more control, get the link to redirect the user to, then use it as you see fit
-                    $link = $response->redirectUrl();
-                    $pollUrl = $response->pollUrl();
-                    // Check the status of the transaction
-                    $status = $paynow->pollTransaction($pollUrl);
-                }  
-            */
            
             /*
             *   Adds an Order 
             */
             $order = new Order();
-            $order->customer_id = Auth::id();            
+            $order->customer_id = $user->id;            
             $order->reference_id = $this->reference_id();
             $order->subtotal = $request->cart_subtotal;
             $order->shipping_fee = $request->shipping_fee;
@@ -207,6 +196,7 @@ class CheckoutController extends Controller
             $order->notes = $request->notes;
             $order->created_at = now();
             $order->updated_at = now();
+            $order->delivery = (isset($request->to_company_address)) ? "To Company Address" : "To Delivery Address";
             $order->save();
             /*
             *   Adds Order Items 
@@ -220,23 +210,11 @@ class CheckoutController extends Controller
                     $order_items->product_id = $request->product_id[$i];
                     $order_items->quantity = $request->product_quantity[$i];
                     $order_items->unit_price = $request->product_unit_price[$i];
-                    if($request->product_variation_name[$i] && $request->product_variation_value[$i]){
-                        $order_items->product_variation = $request->product_variation_name[$i] + ' : ' 
-                        + $request->product_variation_value[$i];
-                    }
+                    $order_items->product_variation = ( isset($request->product_variation[$i]) ) ? $request->product_variation[$i] : NULL;
                     $order_items->product_total = $request->product_total[$i];
+                    $order_items->product_zwl_total = $request->product_zwl_total[$i];
                     $order_items->save();
                 }
-            }
-            /* Delete Cart And Cart Items */
-            if(isset($_COOKIE['shopping_session'])){
-                $shopping_session = $_COOKIE['shopping_session'];
-                $cart = Cart::where('shopping_session', $shopping_session)->first();
-                $cart_id = $cart->id;
-                $cart_items = CartItem::where('cart_id', $cart_id)->delete();
-                $cart = Cart::where('shopping_session', $shopping_session)->delete();
-                unset($_COOKIE['shopping_session']);
-                setcookie('shopping_session','', time() - 3600);
             }
             
             /* 
@@ -244,27 +222,85 @@ class CheckoutController extends Controller
             */
             $pay = new PaymentDetail();
             $pay->order_id = $order->id; 
-            //$pay->amount = $order->total; 
-            //$pay->zwl_amount = $order->zwl_total; 
-            //$pay->currency = $order->currency; 
-            $pay->method = $order->payment_method; 
+            $pay->reference_id = $order->reference_id; 
+            $pay->customer_id = $order->customer_id; 
+            $pay->amount = $request->total_payamount; 
+            $pay->zwl_amount = $request->total_payzwlamount;  
+            $pay->method = $request->payment_method; 
+            $pay->status = 'Submitted to Paynow'; 
+            $pay->currency = $request->currency; 
+            $pay->payment_session = $payment_session; 
             //$pay->status = $status; 
             //$pay->poll_url = $pollUrl; 
             $pay->created_at = now();
+            $pay->updated_at = now();
             $pay->save();
 
+            
+            Session::put('order_id', $order->id );
             Session::put('reference_id', $order->reference_id );
             Session::put('email', $user->email );
-            Session::put('total', $order->total );
+            Session::put('total', $pay->amount );
+            Session::put('zwl_total', $pay->zwl_amount );
             Session::put('payment_method', $pay->method );
+            Session::put('currency', $pay->currency );
 
+
+             /* Delete Cart And Cart Items */
+             if(isset($shopping_session) || isset($ip_address)){
+                $cart = Cart::where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+                $cart_id = $cart->id;
+                $cart_items = CartItem::where('cart_id', $cart_id)->delete();
+                $cart = Cart::where('shopping_session', $shopping_session)->delete();
+                Cookie::queue(Cookie::forget('shopping_session'));
+                unset($shopping_session );
+                setcookie('shopping_session','', time() - 3600);
+            }
+
+            
             $notification = [
                 'message' => 'The Order has been processed.',
                 'alert-type' => 'success'
             ];
             return redirect()->route('payment.index');    
+        } else{
+            return redirect()->route('customer.login');
         }
        
+    }
+
+
+    /* 
+    *   Generate random string
+    */
+    public function randomString($length) {
+        $keys = array_merge(range(0,9), range('a', 'z'));
+        $key = "";
+        for($i=0; $i < $length; $i++) {
+            $key .= $keys[mt_rand(0, count($keys) - 1)];
+        }
+        return $key;
+    }
+
+
+    /* 
+    *   Get Ip
+    */
+    public function getIp(){
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+            if (array_key_exists($key, $_SERVER) === true){
+                foreach (explode(',', $_SERVER[$key]) as $ip){
+                    $ip = trim($ip); // just to be safe
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                        return $ip;
+                    }
+                }
+            }
+        }
+        return request()->ip(); // it will return server ip when no client ip found
+    }
+    public function ip(){
+        return $this->getIp(); // the above method
     }
 
 }

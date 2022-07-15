@@ -16,19 +16,26 @@ use App\Models\Cart\CartItem;
 use App\Models\Backend\BasicInfo;
 use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
+use App\Models\Payment\PaymentDetail;
 use App\Models\Product\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 class OrdersController extends Controller
 {
     public function track()
     {
-        $data['role_id'] = CheckRoles::check_role();
-        if( isset($_COOKIE['shopping_session']) ){
-            $shopping_session = $_COOKIE['shopping_session'];
-            $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
-            $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
-            $cart_id =  $data['carts']->id;
+         /*   Check Roles    */
+         $data['role_id'] = CheckRoles::check_role();
+         /*  Check Cookie */
+         $shopping_session = Cookie::get('shopping_session');
+         /*  IP Address */
+         $ip_address = $this->ip();
+        if( isset($shopping_session) || isset($ip_address) ){
+            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+            $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
+            $cart_id =  $data['cart']->id;
             $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
 
              /* 
@@ -111,7 +118,41 @@ class OrdersController extends Controller
         return view('backend.orders.view', $data);
     }
 
+    public function edit($id){
+        $data['order'] = Order::with(['customers', 'order_items'])->where('id', $id)->first();
+        $data['order_items'] = OrderItem::where('order_id', $id)->get();
+        $data['payment'] = PaymentDetail::where('order_id', $id)->first();
+        return view('backend.orders.edit', $data);
+    }
+
+    public function update($id){
+        $order = Order::find($id);
+        $order->save();
+        $customer = User::where('id', $order->customer_id)->first();
+    }
+
     public function order_email(){
 
+    }
+
+
+     /* 
+    *   Get Ip
+    */
+    public function getIp(){
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+            if (array_key_exists($key, $_SERVER) === true){
+                foreach (explode(',', $_SERVER[$key]) as $ip){
+                    $ip = trim($ip); // just to be safe
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                        return $ip;
+                    }
+                }
+            }
+        }
+        return request()->ip(); // it will return server ip when no client ip found
+    }
+    public function ip(){
+        return $this->getIp(); // the above method
     }
 }

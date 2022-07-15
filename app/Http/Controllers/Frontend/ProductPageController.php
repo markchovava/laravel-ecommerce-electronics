@@ -35,25 +35,22 @@ use App\Models\Product\Specification\Specification;
 class ProductPageController extends Controller
 {
 
-    public $shopping_session;
-    public $ip_address;
-    
     public function view($id){
-        /*  
-        *    Check Roles
-        */
+        /*   Check Roles    */
         $data['role_id'] = CheckRoles::check_role();
-        /* 
-        *   Check Cookie 
-        */
-        if( isset($_COOKIE['shopping_session'])){
-            $shopping_session = $_COOKIE['shopping_session'];
-            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
+        /*  Check Cookie */
+        $shopping_session = Cookie::get('shopping_session');
+        /*  IP Address */
+        $ip_address = $this->ip();
+        //dd($shopping_session);
+        if( isset($shopping_session) || isset($ip_address) ){
+            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
             if( !empty($data['cart']) ){
                 $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
+                //dd($data['cart_quantity']);
             } 
         }
-        elseif( !(isset($_COOKIE['shopping_session'])) ){
+        elseif( !(isset($shopping_session)) || !isset($ip_address) ){
             $data['cart'] = NULL;
             $data['cart_quantity'] = 0;
         }
@@ -136,62 +133,89 @@ class ProductPageController extends Controller
 
     public function cart_store(Request $request){  
         $ip_address = $this->ip();
-        $cart = Cart::where('ip_address', $ip_address)->first();
-        /* 
-        *   Checks if Cookie is present 
-        */
+        if(auth()->check()){
+            $customer_id = Auth::user()->id;
+        }
         $shopping_session = Cookie::get('shopping_session'); 
-        
-        if( isset($shopping_session) ){
-            dd($shopping_session);
-            /* Checks if shopping session is in database */
-            $cart = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
-            if( !empty($cart) ){
-                /*  Get IP Address, ip() is in this class   */
-                $cart->ip_address = $this->ip();
-                /*   Check user is Logged in   */
-                if(auth()->check()){
-                    $cart->customer_id = Auth::id();
+        if(isset($shopping_session) || isset($ip_address)){
+            $db_shopping_session = Cart::where('shopping_session', $shopping_session)->first();
+            $db_ip_address = Cart::where('ip_address', $ip_address)->first();
+            if( isset($db_shopping_session) || isset( $db_ip_address) ){
+                $cart = Cart::where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+                $cart->customer_id = isset($customer_id) ? $customer_id : NULL;
+                if( !(isset($cart->shopping_session)) ){
+                    $cart->shopping_session = $shopping_session;
                 }
-                /* Adding Total to DB */
-                if(!empty($cart->total)){
-                    $cart->total = ($cart->quantity * intval($request->discounted_usd_priceCents)) + $cart->total;
-                }else{
-                    $cart->total = $cart->quantity; 
+                if( !(isset($cart->ip_address)) ){
+                    $cart->ip_address = $ip_address;
                 }
-                /* Save Cart */
                 $cart->save();
-                /* 
-                *   Add CartItem
-                */   
-                $product_id = $request->product_id;
-                $cart_item = CartItem::where('product_id', $product_id)->first();
-                if( !empty($cart_item) ){
-                    $cart_item->cart_id = $cart->id;
-                    if( !empty($cart_item->quantity) ){
-                        $quantity = intval($cart_item->quantity) + intval($request->product_quantity);
-                    }else{
-                        $quantity = $request->product_quantity;
-                    }
-                    $cart_item->quantity = $quantity;
-                    if( !empty($request->product_variation) ){
-                        $cart_item->product_variation = $request->product_variation;
-                    }
+                $cart_item = CartItem::where('cart_id', $cart->id)->first();
+                if( isset($cart_item)){
+                    $cart_item->product_id = $request->product_id;
+                    $cart_item->quantity = (isset($cart_item->quantity)) ? $request->product_quantity + $cart_item->quantity : $request->product_quantity;
+                    $cart_item->product_variation = (isset($request->product_variation)) ? $request->product_variation : NULL; 
                     $cart_item->save();
+                    //dd('1 here');
                 } else{
                     $cart_item = new CartItem();
-                    $cart_item->product_id = $request->product_id;
                     $cart_item->cart_id = $cart->id;
+                    $cart_item->product_id =  $request->product_id;
                     $cart_item->quantity = $request->product_quantity;
-                    if( !empty($request->product_variation) ){
-                        $cart_item->product_variation = $request->product_variation;
-                    }
+                    $cart_item->product_variation = (isset($request->product_variation)) ? $request->product_variation : NULL; 
                     $cart_item->save();
-                } 
-                 /* 
-                *   Saves new quantity in store 
-                */
-                if( !empty($request->in_store_quantity) ){
+                    //dd('2 here');
+                }
+                /*   Saves new quantity in store    */
+                if( isset($request->in_store_quantity) ){
+                    $in_store_quantity = intval($request->in_store_quantity) - intval($request->product_quantity);
+                    $product = Product::find($request->product_id);
+                    $inventory_id = $product->inventories->id;
+                    $inventory = Inventory::find($inventory_id);
+                    $inventory->in_store_quantity = $in_store_quantity;
+                    $inventory->save();
+                } else{
+                    $in_store_quantity = $request->in_store_quantity;
+                    $product = Product::find($request->product_id);
+                    $inventory_id = $product->inventories->id;
+                    $inventory = Inventory::find($inventory_id);
+                    $inventory->in_store_quantity = $request->in_store_quantity;
+                    $inventory->save();
+                }  
+                $notification = [
+                    'message' => 'Added to cart Successfully.',
+                    'alert-type' => 'info'
+                ];
+                return redirect()->back()->with($notification);       
+            }else{
+                $cart = new Cart();
+                $cart->shopping_session = $shopping_session;
+                $cart->ip_address = $ip_address;
+                $cart->customer_id = $customer_id;
+                $cart->save();
+                /* Cart Item */
+                $cart_item = CartItem::where('cart_id', $cart->id)->first();
+                //dd($cart_item);
+                if(!isset($cart_item)){
+                    $cart_item = new CartItem();
+                    $cart_item->cart_id = $cart->id;
+                    $cart_item->product_id =  $request->product_id;
+                    $cart_item->quantity = $request->product_quantity;
+                    $cart_item->product_variation = (isset($request->product_variation)) ? $request->product_variation : NULL; 
+                    $cart_item->save();
+                    /* Creating cookie */
+                    $shopping_session = $this->randomString(30);
+                    Cookie::queue('shopping_session', $shopping_session, 10080);
+                    //dd('4 here');
+                } elseif($cart_item->product_id == $request->product_id){
+                    $cart_item->cart_id = $cart->id;
+                    $cart_item->quantity = (isset($cart_item->quantity)) ? $request->product_quantity + $cart_item->quantity : $request->product_quantity;
+                    $cart_item->product_variation = (isset($request->product_variation)) ? $request->product_variation : NULL; 
+                    $cart_item->save();
+                    //dd('3 here');
+                }
+                /*   Saves new quantity in store    */
+                if( isset($request->in_store_quantity) ){
                     $in_store_quantity = intval($request->in_store_quantity) - intval($request->product_quantity);
                     $product = Product::find($request->product_id);
                     $inventory_id = $product->inventories->id;
@@ -206,84 +230,40 @@ class ProductPageController extends Controller
                     $inventory->in_store_quantity = $request->in_store_quantity;
                     $inventory->save();
                 }  
-                /* Save Cart Item */
-                return redirect()->back(); 
-
-            } else{
-                $cart = new Cart();
-                $cart->ip_address = $this->ip();
-                $shopping_session = $this->randomString(30);
-                /*  Save Shopping Session as a Cookie    */
-                $cart->shopping_session = $shopping_session;
-                Cookie::queue('shopping_session', $shopping_session, 10080);
-                /*  Check user is Logged in */
-                if(auth()->check()){
-                    $cart->customer_id = Auth::id();
-                }
-                $cart->save();
-                /* 
-                *   Add CartItem
-                */
-                $product_id = $request->product_id;
-                $cart_item = CartItem::where('product_id', $product_id)->first();
-                if(!empty($cart_item)){
-                    $cart_item->cart_id = $cart->id;
-                    if( !empty($cart_item->quantity) ){
-                        $cart_item->quantity = intval($cart_item->quantity) + intval($request->product_quantity);
-                    }else{
-                        $cart_item->quantity = $request->product_quantity;
-                    }
-                    /* Variations */
-                    if( !empty($request->product_variation) ){
-                        $cart_item->product_variation = $request->product_variation;
-                    }
-                    /* Save Cart Item */
-                    $cart_item->save();
-                } else{
-                    /** 
-                    *   Add Cart Item 
-                    **/
-                    $cart_item = new CartItem();
-                    $cart_item->product_id = $request->product_id;
-                    $cart_item->cart_id = $cart->id;
-                    if(!empty($cart_item->quantity)){
-                        $cart_item->quantity = intval($cart_item->quantity) + intval($request->product_quantity);
-                    }else{
-                        $cart_item->quantity = $request->product_quantity;
-                    }
-                    if( !empty($request->product_variation) ){
-                        $cart_item->product_variation = $request->product_variation;
-                    }
-                    $cart_item->save();
-                }
-
-                 /* 
-                *   Saves new quantity in store 
-                */
-                if( !empty($request->in_store_quantity) ){
-                    $in_store_quantity = intval($request->in_store_quantity) - intval($request->product_quantity);
-                    $product = Product::find($request->product_id);
-                    $inventory_id = $product->inventories->id;
-                    $inventory = Inventory::find($inventory_id);
-                    $inventory->in_store_quantity = $in_store_quantity;
-                    $inventory->save();
-                }else{
-                    $in_store_quantity = $request->in_store_quantity;
-                    $product = Product::find($request->product_id);
-                    $inventory_id = $product->inventories->id;
-                    $inventory = Inventory::find($inventory_id);
-                    $inventory->in_store_quantity = $request->in_store_quantity;
-                    $inventory->save();
-                }      
                 $notification = [
                     'message' => 'Added to cart Successfully.',
                     'alert-type' => 'info'
                 ];
-                return redirect()->back();    
-            }               
-            /* 
-            *   Saves new quantity in store 
-            */
+                return redirect()->back()->with($notification); 
+            }
+        }else{
+            /* Creating cookie */
+            $shopping_session = $this->randomString(30);
+            Cookie::queue('shopping_session', $shopping_session, 10080);
+            /* New Cart */
+            $cart = new Cart();
+            $cart->shopping_session = $shopping_session;
+            $cart->ip_address = $ip_address;
+            $cart->customer_id = $customer_id;
+            $cart->save();
+            /* Cart Item */
+            $cart_item = CartItem::where('cart_id', $cart->id)->first();
+            if(!isset($cart_item)){
+                $cart_item = new CartItem();
+                $cart_item->cart_id = $cart->id;
+                $cart_item->product_id =  $request->product_id;
+                $cart_item->quantity = $request->product_quantity;
+                $cart_item->product_variation = (isset($request->product_variation)) ? $request->product_variation : NULL; 
+                $cart_item->save();
+                //dd('6 here');
+            }elseif($cart_item->product_id == $request->product_id){
+                $cart_item->cart_id = $cart->id;
+                $cart_item->quantity = (isset($cart_item->quantity)) ? $request->product_quantity + $cart_item->quantity : $request->product_quantity;
+                $cart_item->product_variation = (isset($request->product_variation)) ? $request->product_variation : NULL; 
+                $cart_item->save();
+                //dd('5 here');
+            }   
+            /*   Saves new quantity in store    */
             if( !empty($request->in_store_quantity) ){
                 $in_store_quantity = intval($request->in_store_quantity) - intval($request->product_quantity);
                 $product = Product::find($request->product_id);
@@ -298,72 +278,13 @@ class ProductPageController extends Controller
                 $inventory = Inventory::find($inventory_id);
                 $inventory->in_store_quantity = $request->in_store_quantity;
                 $inventory->save();
-            }       
+            }  
             $notification = [
                 'message' => 'Added to cart Successfully.',
                 'alert-type' => 'info'
             ];
-            return redirect()->back();  
-        } elseif( !(isset($_COOKIE['shopping_session'])) ){
-            $cart = new Cart();
-            $cart->ip_address = $this->ip();
-            $shopping_session = $this->randomString(30);
-            $cart->shopping_session = $shopping_session;
-            /* Save Shopping Session as a Cookie */
-            Cookie::queue('shopping_session', $shopping_session, 20);
-            /* Check if User is logged in */
-            if( auth()->check() ){
-                $cart->customer_id = Auth::id();
-            }
-            $cart->save();   
-            /* 
-            *   Add CartItem
-            */
-            $product_id = $request->product_id;
-            $cart_item = CartItem::where('product_id', $product_id)->first();
-            if(!empty($cart_item)){
-                $cart_item->cart_id = $cart->id;
-                if(!empty($cart_item->quantity)){
-                    $quantity = intval($cart_item->quantity) + intval($request->product_quantity);
-                }else{
-                    $quantity = $request->product_quantity;
-                }
-                $cart_item->quantity = $quantity;
-                if( !empty($request->product_variation) ){
-                    $cart_item->product_variation = $request->product_variation;
-                }
-                $cart_item->save();
-            } else{
-                $cart_item = new CartItem();
-                $cart_item->product_id = $request->product_id;
-                $cart_item->cart_id = $cart->id;
-                $quantity = $request->product_quantity;
-                if( !empty($request->product_variation) ){
-                    $cart_item->product_variation = $request->product_variation;
-                }
-                $cart_item->save();
-            }
-            /* 
-            *   Saves new quantity in store 
-            */
-            if( !empty($request->in_store_quantity) ){
-                $in_store_quantity = intval($request->in_store_quantity) - intval($request->product_quantity);
-                $product = Product::find($request->product_id);
-                $inventory_id = $product->inventories->id;
-                $inventory = Inventory::find($inventory_id);
-                $inventory->in_store_quantity = $in_store_quantity;
-                $inventory->save();
-            }else{
-                $in_store_quantity = $request->in_store_quantity;
-                $product = Product::find($request->product_id);
-                $inventory_id = $product->inventories->id;
-                $inventory = Inventory::find($inventory_id);
-                $inventory->in_store_quantity = $request->in_store_quantity;
-                $inventory->save();
-            } 
-            /* Redirect Back to Product Page */
-            return redirect()->back();
-        }
+            return redirect()->back()->with($notification); 
+        }     
     }
 
 

@@ -16,27 +16,25 @@ use App\Models\Backend\BasicInfo;
 use App\Models\Message\Message;
 use App\Models\Product\Product;
 use App\Models\Product\Category;
+use Illuminate\Support\Facades\Cookie;
 
 class ContactPageController extends Controller
 {
     public function index(){
-        /* 
+       /* 
         *   Role Management
         */
         $data['role_id'] = CheckRoles::check_role();
-        /* 
-        *   Checks for Cart Session 
-        */
-        if( isset($_COOKIE['shopping_session']) ){
-            $shopping_session = $_COOKIE['shopping_session'];
+        $shopping_session = Cookie::get('shopping_session');
+        //dd($shopping_session);
+        if( isset($shopping_session) ){
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->first();
             if( !empty($data['cart']) ){
                 $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
-            } else{
-                $data['cart_quantity'] = 0; 
-            }
+                //dd($data['cart_quantity']);
+            } 
         }
-        elseif( !(isset($_COOKIE['shopping_session'])) ){
+        elseif( !(isset($shopping_session)) ){
             $data['cart'] = NULL;
             $data['cart_quantity'] = 0;
         }

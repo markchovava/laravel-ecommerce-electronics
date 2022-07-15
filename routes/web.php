@@ -29,6 +29,7 @@ use App\Http\Controllers\Contact\ContactPageController;
 use App\Http\Controllers\Frontend\Category\CategoryPageController;
 use App\Http\Controllers\Frontend\Tag\TagPageController;
 use App\Http\Controllers\Frontend\Brand\BrandPageController;
+use App\Http\Controllers\Frontend\Privacy\PrivacyPageController;
 use App\Http\Controllers\Frontend\Search\SearchPageController;
 use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\Miscellaneous\MiscellaneousController;
@@ -53,6 +54,8 @@ use App\Http\Controllers\Payment\PaymentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::get('/privacy', [PrivacyPageController::class, 'index'])->name('privacy.index');
+
 /* 
 *   Contact Page 
 */
@@ -64,15 +67,22 @@ Route::post('/contact/store', [ContactPageController::class, 'store'])->name('co
 Route::get('/admin/login', [ProfileController::class, 'login'])->name('admin.login');
 Route::get('/admin/logout', [ProfileController::class, 'logout'])->name('admin.logout');
 /* Customer Login and Logout */
-Route::get('/customer/login', [CustomerAuthController::class, 'login'])->name('customer.login');
-Route::post('/customer/login', [CustomerAuthController::class, 'login_process'])->name('customer.login.process');
-Route::get('/customer/register', [CustomerAuthController::class, 'register'])->name('customer.register');
-Route::post('/customer/register', [CustomerAuthController::class, 'register_process'])->name('customer.register.process');
-Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
+Route::prefix('customer')->group(function() {
+    Route::get('/login', [CustomerAuthController::class, 'login'])->name('customer.login');
+    Route::post('/login', [CustomerAuthController::class, 'login_process'])->name('customer.login.process');
+    Route::get('/register', [CustomerAuthController::class, 'register'])->name('customer.register');
+    Route::post('/register', [CustomerAuthController::class, 'register_process'])->name('customer.register.process');
+    Route::get('/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
+});
+
 
 
 /* Payment */
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+Route::middleware(['auth'])->prefix('payment')->group(function (){
+    Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
+});
+    Route::post('payment/update', [PaymentController::class, 'update'])->name('payment.update');
+
 
 /* ::: Single Product Page ::: */
 Route::get('/product/{id}', [ProductPageController::class, 'view'])->name('product.view');
@@ -91,24 +101,29 @@ Route::get('/brand', [BrandPageController::class, 'index'])->name('brand.index')
 Route::get('/brand/{id}', [BrandPageController::class, 'view'])->name('brand.view');
 
 /* :::::: Cart :::::: */
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
-Route::get('/cart/view', [CartController::class, 'view'])->name('cart.view');
-Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-
-/* Checkout */
-Route::get('/checkout/register', [CheckoutAuthController::class, 'register'])->name('checkout.register');
-Route::post('/checkout/register', [CheckoutAuthController::class, 'register_process'])->name('checkout.register.process');
-Route::get('/checkout/login', [CheckoutAuthController::class, 'login'])->name('checkout.login');
-Route::post('/checkout/login', [CheckoutAuthController::class, 'login_process'])->name('checkout.login.process');
-Route::middleware(['auth'])->group(function (){
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-    Route::post('/checkout', [CheckoutController::class, 'checkout_process'])->name('checkout.process');
+Route::prefix('cart')->group(function() {
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/store', [CartController::class, 'store'])->name('cart.store');
+    Route::get('/view', [CartController::class, 'view'])->name('cart.view');
+    Route::get('/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
 
+/* Checkout */
+Route::prefix('checkout')->group(function() {
+    Route::get('/register', [CheckoutAuthController::class, 'register'])->name('checkout.register');
+    Route::post('/register', [CheckoutAuthController::class, 'register_process'])->name('checkout.register.process');
+    Route::get('/login', [CheckoutAuthController::class, 'login'])->name('checkout.login');
+    Route::post('/login', [CheckoutAuthController::class, 'login_process'])->name('checkout.login.process');
+    Route::middleware(['auth'])->group(function (){
+        Route::get('/', [CheckoutController::class, 'index'])->name('checkout');
+        Route::post('/', [CheckoutController::class, 'checkout_process'])->name('checkout.process');
+    });
+});
+
+
 /* Orders Frontend */
-Route::get('/track/order', [OrdersController::class, 'track'])->name('order.track');
+Route::get('/order/track', [OrdersController::class, 'track'])->name('order.track');
 Route::get('/track/order/email', [OrdersController::class, 'order_email'])->name('order.email');
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
@@ -147,27 +162,33 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::prefix('orders')->group(function() {
         Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
         Route::get('/view/{id}', [OrdersController::class, 'view'])->name('admin.orders.view');
+        Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.orders.edit');
     });
 
     /* :::::: Products ::::: */
-    Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
-    Route::get('/products/add', [ProductController::class, 'add'])->name('admin.products.add');
-    Route::post('/products/store', [ProductController::class, 'store'])->name('admin.products.store');
-    Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
-    Route::get('/products/view/{id}', [ProductController::class, 'view'])->name('admin.products.view');
-    Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
-    Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('admin.products.delete');
-    Route::get('/products/serial/{id}', [ProductController::class, 'serial'])->name('admin.products.serial');
-    Route::get('/products/image/remove/{id}', [ProductController::class, 'remove_image'])->name('admin.products.remove');
+    Route::prefix('/products')->group(function() {
+        Route::get('/', [ProductController::class, 'index'])->name('admin.products');
+        Route::get('/add', [ProductController::class, 'add'])->name('admin.products.add');
+        Route::post('/store', [ProductController::class, 'store'])->name('admin.products.store');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
+        Route::get('/view/{id}', [ProductController::class, 'view'])->name('admin.products.view');
+        Route::post('/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
+        Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('admin.products.delete');
+        Route::get('/serial/{id}', [ProductController::class, 'serial'])->name('admin.products.serial');
+        Route::get('/image/remove/{id}', [ProductController::class, 'remove_image'])->name('admin.products.remove');
+    });
+
     
      /* :::::: Category ::::: */
-    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
-    Route::get('/category/add', [CategoryController::class, 'add'])->name('admin.category.add');
-    Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
-    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
-    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
-    Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
-
+     Route::prefix('category')->group(function() {
+        Route::get('/', [CategoryController::class, 'index'])->name('admin.category');
+        Route::get('/add', [CategoryController::class, 'add'])->name('admin.category.add');
+        Route::post('/store', [CategoryController::class, 'store'])->name('admin.category.store');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+     });
+   
     /* :::::: Tag ::::: */
     Route::prefix('tags')->group(function() {
         Route::get('/', [TagController::class, 'index'])->name('admin.tag');
@@ -215,13 +236,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [MessageController::class, 'delete'])->name('admin.message.delete');
     });
 
-    /* Homepage top Sticker */
-    Route::get('pages/home/sticker', [StickerController::class, 'index'])->name('admin.pages.home.sticker');
-    Route::get('pages/home/sticker/add', [StickerController::class, 'add'])->name('admin.pages.home.sticker.add');
-    Route::post('pages/home/sticker/store', [StickerController::class, 'store'])->name('admin.pages.home.sticker.store');
-    Route::get('pages/home/sticker/edit/{id}', [StickerController::class, 'edit'])->name('admin.pages.home.sticker.edit');
-    Route::post('pages/home/sticker/update/{id}', [StickerController::class, 'update'])->name('admin.pages.home.sticker.update');
-
      /* :::::: Quote ::::: */
     Route::prefix('quote')->group(function() {
         Route::get('/', [QuoteController::class, 'index'])->name('admin.quote');
@@ -265,11 +279,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
 
 
 Route::get('/add', function(){
-    $a = \Illuminate\Support\Facades\Cookie::queue('testing', 'QWTYEFTEYTFCDCY',20);  
+    //$a = \Illuminate\Support\Facades\Cookie::queue('testing', 'QWTYEFTEYTFCDCY',20); 
+    unset($_COOKIE['shopping_session']); 
+    setcookie('remember_user', null, -1, '/');  
 });
 
 Route::get('/show', function(){
-    dd($_COOKIE);
+    //dd($_COOKIE);
+    dd(\Illuminate\Support\Facades\Cookie::get('shopping_session'));
 });
 
 

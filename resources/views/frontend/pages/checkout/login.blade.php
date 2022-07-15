@@ -61,7 +61,7 @@
                                             <th>Subtotal</th>
                                             <td>
                                                 @php
-                                                $subtotal = $carts->cart_subtotal / 100;
+                                                $subtotal = $cart->cart_subtotal / 100;
                                                 @endphp
                                                 ${{ number_format((float)$subtotal, 2, '.', '') }}
                                             </td>
@@ -70,7 +70,7 @@
                                             <th>Shipping</th>
                                             <td>
                                                 @php
-                                                $shipping_fee = $carts->shipping_fee / 100;
+                                                $shipping_fee = $cart->shipping_fee / 100;
                                                 @endphp
                                                 ${{ number_format((float)$shipping_fee, 2, '.', '') }}
                                             </td>
@@ -79,7 +79,7 @@
                                             <th>Total</th>
                                             <td>
                                                 @php
-                                                $cart_total = $carts->total / 100;
+                                                $cart_total = $cart->total / 100;
                                                 @endphp
                                                 <strong>${{ number_format((float)$cart_total, 2, '.', '') }}</strong>
                                             </td>
@@ -187,6 +187,18 @@
                                         @enderror
                                     </div>
                                     <!-- End Input -->
+                                </div>
+                                <div class="col-md-12">
+                                    <!-- Checkbox -->
+                                    <div class="js-form-message mb-3">
+                                        <div class="custom-control custom-checkbox d-flex align-items-center">
+                                            <input type="checkbox" name="remember" class="custom-control-input" id="rememberCheckbox" name="rememberCheckbox">
+                                            <label class="custom-control-label form-label" for="rememberCheckbox">
+                                                Remember me
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- End Checkbox -->
                                 </div>
                                 <div class="d-md-flex">
                                     <button type="submit" 
