@@ -163,6 +163,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
         Route::get('/view/{id}', [OrdersController::class, 'view'])->name('admin.orders.view');
         Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.orders.edit');
+        Route::get('/product/search', [OrdersController::class, 'search_product'])->name('admin.orders.search.product');
     });
 
     /* :::::: Products ::::: */

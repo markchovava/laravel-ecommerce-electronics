@@ -14,6 +14,7 @@ use App\Actions\RoleManagement\CheckRoles;
 use App\Models\Cart\Cart;
 use App\Models\Cart\CartItem;
 use App\Models\Backend\BasicInfo;
+use App\Models\Miscellaneous\Miscellaneous;
 use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use App\Models\Payment\PaymentDetail;
@@ -114,7 +115,7 @@ class OrdersController extends Controller
 
     public function view($id){
         $data['order'] = Order::with(['customers', 'order_items'])->where('id', $id)->first();
-        $data['order_items'] = OrderItem::where('order_id', $id)->get();
+        $data['order_items'] = OrderItem::with(['product','inventories'])->where('order_id', $id)->get();
         return view('backend.orders.view', $data);
     }
 
@@ -122,13 +123,70 @@ class OrdersController extends Controller
         $data['order'] = Order::with(['customers', 'order_items'])->where('id', $id)->first();
         $data['order_items'] = OrderItem::where('order_id', $id)->get();
         $data['payment'] = PaymentDetail::where('order_id', $id)->first();
+        $data['currency'] = Miscellaneous::where('name', 'ZWL')->first();
+        // dd($data['currency']);
         return view('backend.orders.edit', $data);
     }
 
-    public function update($id){
-        $order = Order::find($id);
-        $order->save();
-        $customer = User::where('id', $order->customer_id)->first();
+    public function update(Request $request, $id){
+         /* Insert User */
+         $customer_id = Auth::id();
+         $user = User::find($customer_id);
+         $user->first_name = $request->first_name;
+         $user->last_name = $request->last_name;
+         $user->email = $request->email;
+         $user->phone_number = $request->phone_number;
+         $user->delivery_address = $request->delivery_address;
+         $user->city = $request->city;
+         $user->company_name = $request->company_name;
+         $user->company_phone_number = $request->company_phone_number;
+         $user->company_email = $request->company_email;
+         $user->company_address = $request->company_address;
+         $user->company_city = $request->company_city;
+         $user->company_name = $request->company_name;
+         $user->role_id = isset($user->role_id) ? $user->role_id : 4;
+         $user->save();      
+        
+         /*
+         *   Adds an Order 
+         */
+         $order = Order::find($id);
+         $order->customer_id = $customer_id;            
+         $order->reference_id = $this->reference_id();
+         $order->subtotal = $request->cart_subtotal;
+         $order->shipping_fee = $request->shipping_fee;
+         $order->total = $request->cart_total;
+         $order->zwl_total = $request->cart_zwltotal;
+         $order->status = $request->status;
+         $order->notes = $request->notes;
+         $order->updated_at = now();
+         $order->save();
+         /*
+         *   Adds Order Items 
+         */
+         if($request->product_id){
+             $product_id = count($request->product_id);
+             for($i = 0; $i < $product_id; $i++){
+                 $order_items = new OrderItem();
+                 $order_items->product_name = $request->product_name[$i];
+                 $order_items->order_id = $order->id;
+                 $order_items->product_id = $request->product_id[$i];
+                 $order_items->quantity = $request->product_quantity[$i];
+                 $order_items->unit_price = $request->product_unit_price[$i];
+                 $order_items->product_variation = ( isset($request->product_variation[$i]) ) ? $request->product_variation[$i] : NULL;
+                 $order_items->product_total = $request->product_total[$i];
+                 $order_items->product_zwl_total = $request->product_zwl_total[$i];
+                 $order_items->save();
+             }
+         }
+
+         return redirect()->route('admin.orders');
+    }
+
+    public function search_product(Request $request){
+        $product_name = $request->name;
+        $data['product'] = Product::with(['inventories', 'discounts'])->where('name', 'LIKE', '%' . $product_name . '%')->get();
+        return response()->json($data);
     }
 
     public function order_email(){

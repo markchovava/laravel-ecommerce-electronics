@@ -165,7 +165,7 @@ $(document).on('click', '.product__results li', function(e){
     var product__id = $(this).attr('id');
     var product__price = $(this).attr('price');
     var product__priceNumber = Number(product__price);
-    //alert(product__price);
+    //alert(product__item);
     var product__list = $(this).closest('.product__results');
     var product__value = $(this).closest('.product__search').find('.product__name');
     var product__priceInsert = $(this).closest('.product__searchItem').find('.product__priceInsert');
