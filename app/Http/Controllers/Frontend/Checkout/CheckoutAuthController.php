@@ -15,7 +15,10 @@ use App\Models\Cart\Cart;
 use App\Models\Cart\CartItem;
 use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
+use App\Models\Product\Brand;
+use App\Models\Product\Category;
 use App\Models\Product\Product;
+use App\Models\Product\Tag\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -65,6 +68,16 @@ class CheckoutAuthController extends Controller
                     ->orderBy('updated_at','desc')
                     ->paginate(3);
 
+                    /* Categories */
+                    $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+                    /* Tags */
+                    $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+                    /* Brands */
+                    $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
+                    /*  */
                     return view('frontend.pages.checkout.login', $data);
                 } else{
                     $data['cart_quantity'] = 0;
@@ -91,6 +104,15 @@ class CheckoutAuthController extends Controller
                     })
                     ->orderBy('updated_at','desc')
                     ->paginate(3);
+                    /* Categories */
+                    $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+                    /* Tags */
+                    $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+                    /* Brands */
+                    $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
 
                     return view('frontend.pages.checkout.login', $data);
                 } 
@@ -120,6 +142,15 @@ class CheckoutAuthController extends Controller
                     })
                     ->orderBy('updated_at','desc')
                     ->paginate(3);
+                    /* Categories */
+                    $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+                    /* Tags */
+                    $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+                    /* Brands */
+                    $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+                    $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
 
                 return view('frontend.pages.checkout.login', $data);
             } 
@@ -187,6 +218,15 @@ class CheckoutAuthController extends Controller
         })
         ->orderBy('updated_at','desc')
         ->paginate(3);
+        /* Categories */
+        $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+        /* Tags */
+        $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+        /* Brands */
+        $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
 
         /* 
         *   Check if user is logged in 

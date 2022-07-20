@@ -16,6 +16,9 @@ use App\Models\Product\Inventory;
 use App\Models\Product\Product;
 use App\Models\Backend\BasicInfo;
 use App\Models\Miscellaneous\Miscellaneous;
+use App\Models\Product\Brand;
+use App\Models\Product\Category;
+use App\Models\Product\Tag\Tag;
 use App\Models\Shipping\Shipping;
 use Illuminate\Support\Facades\Cookie;
 
@@ -257,6 +260,16 @@ class CartController extends Controller
                 *  Main Web Info 
                 */
                 $data['info'] = BasicInfo::first();
+                /* Categories */
+                $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+                $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+                /* Tags */
+                $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+                $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+                /* Brands */
+                $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+                $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
+                /*  */
                 return view('frontend.pages.cart', $data);
             } else{
                 //dd('Cart Empty');
@@ -274,6 +287,16 @@ class CartController extends Controller
                 *  Main Web Info 
                 */
                 $data['info'] = BasicInfo::first();
+                /* Categories */
+                $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+                $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+                /* Tags */
+                $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+                $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+                /* Brands */
+                $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+                $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
+                
                 return view('frontend.pages.cart', $data);
             }           
         } 
@@ -292,6 +315,17 @@ class CartController extends Controller
         *  Main Web Info 
         */
         $data['info'] = BasicInfo::first();
+        /* Categories */
+        $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+        /* Tags */
+        $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+        /* Brands */
+        $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
+        
+        /* Return Page */
         return view('frontend.pages.cart', $data);     
     }
 

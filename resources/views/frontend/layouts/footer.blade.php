@@ -99,13 +99,15 @@
                             <h6 class="mb-3 font-weight-bold">Find it Fast</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Laptops & Computers</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Cameras & Photography</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Smart Phones & Tablets</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Video Games & Consoles</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">TV & Audio</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Gadgets</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Car Electronic & GPS</a></li>
+                                @if( isset($footer_categories) )
+                                    @foreach($footer_categories as $category)
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('category.view', $category->id) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                @endif
                             </ul>
                             <!-- End List Group -->
                         </div>
@@ -113,11 +115,15 @@
                         <div class="col-12 col-md mb-4 mb-md-0">
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent mt-md-6">
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Printers & Ink</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Software</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Office Supplies</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Computer Components</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/product-categories-5-column-sidebar.html">Accesories</a></li>
+                                @if( isset($footer_brands) )
+                                    @foreach($footer_brands as $brand)
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('brand.view', $brand->id) }}">
+                                            {{ $brand->name }}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                @endif
                             </ul>
                             <!-- End List Group -->
                         </div>
@@ -126,13 +132,20 @@
                             <h6 class="mb-3 font-weight-bold">Customer Care</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                <li><a class="list-group-item list-group-item-action" href="../shop/my-account.html">My Account</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/track-your-order.html">Order Tracking</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../shop/wishlist.html">Wish List</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Customer Service</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Returns / Exchange</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../home/faq.html">FAQs</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Product Support</a></li>
+                                @if(Auth::check() && $role_id > 1)
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('order.track') }}">Order Tracking</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('customer.login') }}">My Account</a>
+                                    </li>
+                                @endif
+                                <li><a class="list-group-item list-group-item-action" href="{{ route('cart.index') }}">Cart</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{ route('contact.index') }}">Contact Us</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{ route('brand.index') }}">Brands</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{ route('tag.index') }}">Tags</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="{{ route('privacy.index') }}">Terms and Conditions</a></li>
                             </ul>
                             <!-- End List Group -->
                         </div>

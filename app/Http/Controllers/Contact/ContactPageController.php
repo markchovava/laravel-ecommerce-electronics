@@ -16,6 +16,7 @@ use App\Models\Backend\BasicInfo;
 use App\Models\Message\Message;
 use App\Models\Product\Product;
 use App\Models\Product\Category;
+use App\Models\Product\Tag\Tag;
 use Illuminate\Support\Facades\Cookie;
 
 class ContactPageController extends Controller
@@ -73,6 +74,15 @@ class ContactPageController extends Controller
         *   Website Basic Info
         */
         $data['info'] = BasicInfo::first();
+        /* Categories */
+        $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+        /* Tags */
+        $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+        /* Brands */
+        $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
 
 
         return view('frontend.pages.contact.index', $data);

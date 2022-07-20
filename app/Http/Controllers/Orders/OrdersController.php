@@ -19,8 +19,10 @@ use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use App\Models\Payment\PaymentDetail;
 use App\Models\Product\Product;
+use App\Models\Shipping\Shipping;
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class OrdersController extends Controller
@@ -109,13 +111,19 @@ class OrdersController extends Controller
     }
 
     public function index(){
-        $data['orders'] = Order::with(['customers', 'order_items'])->latest()->get();
+        $data['orders'] = Order::with(['customers', 'order_items'])->orderBy('updated_at', 'desc')->get();
+        return view('backend.orders.index', $data);
+    }
+
+    public function search(Request $request){
+        $reference_id = $request->reference_id;
+        $data['results'] = Order::with(['customers', 'order_items'])->where('reference_id', $reference_id)->get();
         return view('backend.orders.index', $data);
     }
 
     public function view($id){
         $data['order'] = Order::with(['customers', 'order_items'])->where('id', $id)->first();
-        $data['order_items'] = OrderItem::with(['product','inventories'])->where('order_id', $id)->get();
+        $data['order_items'] = OrderItem::with(['product'])->where('order_id', $id)->get();
         return view('backend.orders.view', $data);
     }
 
@@ -124,63 +132,80 @@ class OrdersController extends Controller
         $data['order_items'] = OrderItem::where('order_id', $id)->get();
         $data['payment'] = PaymentDetail::where('order_id', $id)->first();
         $data['currency'] = Miscellaneous::where('name', 'ZWL')->first();
+        $data['shipping'] = Shipping::where('city', 'Harare')->first();
         // dd($data['currency']);
         return view('backend.orders.edit', $data);
     }
 
     public function update(Request $request, $id){
-         /* Insert User */
-         $customer_id = Auth::id();
-         $user = User::find($customer_id);
-         $user->first_name = $request->first_name;
-         $user->last_name = $request->last_name;
-         $user->email = $request->email;
-         $user->phone_number = $request->phone_number;
-         $user->delivery_address = $request->delivery_address;
-         $user->city = $request->city;
-         $user->company_name = $request->company_name;
-         $user->company_phone_number = $request->company_phone_number;
-         $user->company_email = $request->company_email;
-         $user->company_address = $request->company_address;
-         $user->company_city = $request->company_city;
-         $user->company_name = $request->company_name;
-         $user->role_id = isset($user->role_id) ? $user->role_id : 4;
-         $user->save();      
-        
-         /*
-         *   Adds an Order 
-         */
-         $order = Order::find($id);
-         $order->customer_id = $customer_id;            
-         $order->reference_id = $this->reference_id();
-         $order->subtotal = $request->cart_subtotal;
-         $order->shipping_fee = $request->shipping_fee;
-         $order->total = $request->cart_total;
-         $order->zwl_total = $request->cart_zwltotal;
-         $order->status = $request->status;
-         $order->notes = $request->notes;
-         $order->updated_at = now();
-         $order->save();
-         /*
-         *   Adds Order Items 
-         */
-         if($request->product_id){
-             $product_id = count($request->product_id);
-             for($i = 0; $i < $product_id; $i++){
-                 $order_items = new OrderItem();
-                 $order_items->product_name = $request->product_name[$i];
-                 $order_items->order_id = $order->id;
-                 $order_items->product_id = $request->product_id[$i];
-                 $order_items->quantity = $request->product_quantity[$i];
-                 $order_items->unit_price = $request->product_unit_price[$i];
-                 $order_items->product_variation = ( isset($request->product_variation[$i]) ) ? $request->product_variation[$i] : NULL;
-                 $order_items->product_total = $request->product_total[$i];
-                 $order_items->product_zwl_total = $request->product_zwl_total[$i];
-                 $order_items->save();
-             }
-         }
+        DB::transaction(function() use($request, $id){
+            /* Insert User */
+            $customer_id = $request->customer_id;
+            $user = User::find($customer_id);
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->email = $request->email;
+            $user->phone_number = $request->phone_number;
+            $user->delivery_address = $request->delivery_address;
+            $user->city = $request->city;
+            $user->company_name = $request->company_name;
+            $user->company_phone_number = $request->company_phone_number;
+            $user->company_email = $request->company_email;
+            $user->company_address = $request->company_address;
+            $user->company_city = $request->company_city;
+            $user->company_name = $request->company_name;
+            $user->role_id = isset($user->role_id) ? $user->role_id : 4;
+            $user->save();       
+            /*
+            *   Adds an Order 
+            */
+            $order = Order::find($id);
+            $order->customer_id = $customer_id;            
+            $order->reference_id = $request->reference_id;
+            $order->subtotal = $request->cart_subtotal;
+            $order->currency = $request->currency;
+            $order->delivery = $request->delivery;
+            $order->status = $request->status;
+            $order->include_shipping = $request->include_shipping;
+            $order->shipping_fee = (isset($request->include_shipping)) ? $request->shipping_fee : NULL;
+            $order->subtotal = $request->total_usdCents;
+            $order->zwl_subtotal = $request->total_zwlCents;
+            /* Calculating Total */
+            $order->total = intval($order->subtotal) + intval($order->shipping_fee);
+            $order->zwl_total = $order->total * intval($request->currency_zwl_rate);
+            $order->notes = $request->notes;
+            $order->updated_at = now();
+            $order->save();
+            /*
+            *   Adds Order Items 
+            */
+            if($request->product_id){
+                $order_items = OrderItem::where('order_id', $order->id)->delete();
+                $product_id = count($request->product_id);
+                for($i = 0; $i < $product_id; $i++){
+                    $order_items = new OrderItem();
+                    //dd($request->product_name[$i]);
+                    $order_items->product_name = $request->product_name[$i];
+                    $order_items->order_id = $order->id;
+                    $order_items->product_id = $request->product_id[$i];
+                    // dd($request->product_quantity[$i]);
+                    $order_items->quantity = isset($request->product_quantity[$i]) ? $request->product_quantity[$i] : NULL;
+                    $order_items->unit_price = $request->product_unit_price[$i];
+                    $order_items->zwl_unit_price = $request->product_zwl_unit_price[$i];
+                    $order_items->product_variation = ( isset($request->product_variation[$i]) ) ? $request->product_variation[$i] : NULL;
+                    $order_items->product_total = $request->product_total[$i];
+                    $order_items->product_zwl_total = $request->product_zwl_total[$i];
+                    $order_items->save();
+                }
+            }
+        });
 
-         return redirect()->route('admin.orders');
+        $notification = [
+            'message' => 'Updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+
+         return redirect()->route('admin.orders')->with($notification);
     }
 
     public function search_product(Request $request){
@@ -191,6 +216,18 @@ class OrdersController extends Controller
 
     public function order_email(){
 
+    }
+
+    public function delete($id){
+        $order = Order::find($id);
+        $order->delete();
+        OrderItem::where('order_id', $order->id)->delete();
+
+        $notification = [
+            'message' => 'Deleted Successfully!!...',
+            'alert-type' => 'danger'
+        ];
+        return redirect()->route('admin.orders')->with($notification);
     }
 
 

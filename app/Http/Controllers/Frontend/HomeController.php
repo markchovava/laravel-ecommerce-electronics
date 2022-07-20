@@ -194,6 +194,16 @@ class HomeController extends Controller
         })->orderBy('id','desc')->paginate(12);
         $data['trending_products'] = (!empty($trending_products)) ? $trending_products : NULL;
        
+        /* Categories */
+        $footer_categories = Category::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_categories'] = (!empty($footer_categories)) ? $footer_categories : NULL;
+        /* Tags */
+        $footer_tags = Tag::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_tags'] = (!empty($footer_tags)) ? $footer_tags : NULL;
+        /* Brands */
+        $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
+        $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
+
         $data['products'] = Product::with([
             'categories',
             'brands',
@@ -204,6 +214,7 @@ class HomeController extends Controller
             'tags',
             'variations',
             ])->get();
+
         return view('frontend.pages.index', $data);
     }
 

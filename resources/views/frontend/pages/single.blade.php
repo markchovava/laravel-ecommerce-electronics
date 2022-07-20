@@ -46,7 +46,7 @@
                                 data-nav-for="#sliderSyncingThumb">
                                 @foreach($product_images as $_data)
                                 <div class="js-slide">
-                                    <img class="img-fluid" style="object-fit:cover; width:100%; height:100%;" 
+                                    <img class="img-fluid" style="object-fit:contain; width:100%; aspect-ratio:5/4;" 
                                     src="{{ (!empty($_data->image)) ? url('storage/products/images/' . $_data->image) : '' }}" alt="Image Description">
                                 </div>
                                 @endforeach
@@ -123,7 +123,9 @@
                                             $usd_price = $product->price;
                                             $price = $usd_price / 100;
                                             @endphp
-                                            ${{ number_format((float)$price, 2, '.', '') }}
+                                            @if($product->discounts->discount_percent != false)
+                                                ${{ number_format((float)$price, 2, '.', '') }}
+                                            @endif
                                         </del>
                                         <ins class="font-size-36 text-decoration-none">
                                             @php
@@ -143,7 +145,9 @@
                                             $zwl_priceCents = ($product->price * $currency->value);
                                             $zwl_price = $zwl_priceCents / 100;
                                             @endphp
-                                            ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
+                                            @if($zwl_priceCents != false)
+                                                ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
+                                            @endif
                                         </del>
                                         <ins class="font-size-36 text-decoration-none">
                                             @php
@@ -152,7 +156,9 @@
                                                 $zwl_price = $discount_price / 100;
                                             @endphp
                                             <span class="price__number">
+                                            @if($zwl_price != false)
                                                 ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
+                                            @endif
                                             </span>
                                         </ins>
                                         <input type="hidden" name="discounted_zwl_price" value="{{ $discount_price }}">
@@ -242,12 +248,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="pt-lg-8 pt-xl-10">
-                                            <h3 class="font-size-24 mb-3"></h3>
+                                            <h3 class="font-size-24 mb-3">Description</h3>
                                             <p><p>{!! (!empty($product->description)) ? $product->description : '' !!}</p></p>
                                         </div>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <img class="img-fluid mr-n4 mr-lg-n10" style="object-fit:cover; width:100%; height:100%;" 
+                                        <img class="img-fluid mr-n4 mr-lg-n10" style="object-fit:contain; width:100%; aspect-ratio:5/4;"
                                         src="{{ (!empty($product->product_thumbnail)) ? url('storage/products/thumbnail/' . $product->product_thumbnail) : url('storage/products/no_image.jpg') }}" alt="Image Description">
                                     </div>
                                     

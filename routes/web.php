@@ -163,7 +163,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
         Route::get('/view/{id}', [OrdersController::class, 'view'])->name('admin.orders.view');
         Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.orders.edit');
+        Route::post('/update/{id}', [OrdersController::class, 'update'])->name('admin.orders.update');
         Route::get('/product/search', [OrdersController::class, 'search_product'])->name('admin.orders.search.product');
+        Route::get('/delete/{id}', [OrdersController::class, 'delete'])->name('admin.orders.delete');
+        Route::get('/search', [OrdersController::class, 'search'])->name('admin.orders.search');
     });
 
     /* :::::: Products ::::: */

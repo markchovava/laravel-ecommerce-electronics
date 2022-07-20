@@ -56,6 +56,7 @@
                     <!--begin::Card title-->
                     <div class="card-title">
                         <!--begin::Search-->
+                        <form method="get" action="{{ route('admin.orders.search') }}">
                         <div class="d-flex align-items-center position-relative my-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                             <span class="svg-icon svg-icon-1 position-absolute ms-4">
@@ -65,8 +66,10 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search Report" />
+                            <input type="text" name="reference_id"
+                            class="form-control form-control-solid w-250px ps-14" placeholder="Search Order Number.." />
                         </div>
+                        </form>
                         <!--end::Search-->
                         <!--begin::Export buttons-->
                         <div id="kt_ecommerce_report_customer_orders_export" class="d-none"></div>
@@ -106,13 +109,14 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @foreach($orders as $order)
+                        @if(isset($results) )
+                            @foreach($results as $order)
                             <!--begin::Table row-->
                             <tr>
                                 <!--begin::Customer name=-->
                                 <td>
                                     <a href="{{ route('admin.orders.view', $order->id) }}" class="text-dark text-hover-primary">
-                                        {{ $order->customers->first_name . ' ' . $order->customers->first_name }}
+                                        {{ $order->customers->first_name . ' ' . $order->customers->last_name }}
                                     </a>
                                 </td>
                                 <!--end::Customer name=-->
@@ -175,7 +179,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="" class="menu-link px-3" data-kt-ecommerce-brand-filter="delete_row">Delete</a>
+                                            <a href="{{ route('admin.orders.delete', $order->id) }}" class="menu-link px-3">Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -185,6 +189,88 @@
                             </tr>
                             <!--end::Table row-->
                             @endforeach
+                        @endif
+                        @if(isset($orders) )
+                            @foreach($orders as $order)
+                            <!--begin::Table row-->
+                            <tr>
+                                <!--begin::Customer name=-->
+                                <td>
+                                    <a href="{{ route('admin.orders.view', $order->id) }}" class="text-dark text-hover-primary">
+                                        {{ $order->customers->first_name . ' ' . $order->customers->last_name }}
+                                    </a>
+                                </td>
+                                <!--end::Customer name=-->
+                                <!--begin::Email=-->
+                                <td>
+                                {{ $order->reference_id }}
+                                </td>
+                                <!--end::Email=-->
+                                <!--begin::Status=-->
+                                <td>
+                                    <div class="badge badge-light-success">
+                                        {{ $order->status }}
+                                    </div>
+                                </td>
+                                <!--begin::Status=-->
+                                <!--begin::Status=-->
+                                <td>
+                                    {{ $order->order_items->sum('quantity') }}</td>
+                                <!--begin::Status=-->
+                                <!--begin::No orders=-->
+                                <td class="text-end pe-0">
+                                    @php 
+                                    $total = $order->total / 100;
+                                    @endphp
+                                    ${{ number_format((float)$total, 2, '.', '') }}
+                                </td>
+                                <!--end::No orders=-->
+                                <!--begin::No products=-->
+                                <td class="text-end pe-0">
+                                    {{ $order->created_at }}
+                                </td>
+                                <!--end::No products=-->
+                                <!--begin::Action=-->
+                                <td class="text-end">
+                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                    <span class="svg-icon svg-icon-5 m-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon--></a>
+                                    <!--begin::Menu-->
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="{{ route('admin.orders.view',$order->id) }}" 
+                                                class="menu-link px-3">
+                                                View
+                                            </a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="{{ route('admin.orders.edit', $order->id) }}" 
+                                                class="menu-link px-3">
+                                                Edit
+                                            </a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="{{ route('admin.orders.delete', $order->id) }}" class="menu-link px-3">Delete</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    </div>
+                                    <!--end::Menu-->
+                                </td>
+                                <!--end::Action=-->
+                            </tr>
+                            <!--end::Table row-->
+                            @endforeach
+                        @endif
                         </tbody>
                         <!--end::Table body-->
                     </table>
