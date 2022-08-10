@@ -32,6 +32,7 @@ use App\Http\Controllers\Frontend\Brand\BrandPageController;
 use App\Http\Controllers\Frontend\Privacy\PrivacyPageController;
 use App\Http\Controllers\Frontend\Search\SearchPageController;
 use App\Http\Controllers\Message\MessageController;
+use App\Http\Controllers\Message\MessageReplyController;
 use App\Http\Controllers\Miscellaneous\MiscellaneousController;
 use App\Http\Controllers\Shipping\ShippingController;
 use App\Http\Controllers\Payment\PaymentController;
@@ -238,6 +239,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/view/{id}', [MessageController::class, 'view'])->name('admin.message.view');
         Route::get('/add', [MessageController::class, 'add'])->name('admin.message.add');
         Route::get('/delete/{id}', [MessageController::class, 'delete'])->name('admin.message.delete');
+        /* Reply Message */
+        Route::post('/reply/send', [MessageReplyController::class, 'send'])->name('admin.message.send');
+
+
     });
 
      /* :::::: Quote ::::: */

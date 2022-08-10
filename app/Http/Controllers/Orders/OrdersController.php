@@ -37,8 +37,11 @@ class OrdersController extends Controller
          $ip_address = $this->ip();
         if( isset($shopping_session) || isset($ip_address) ){
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
-            $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
-            $cart_id =  $data['cart']->id;
+            //$cart_quantity = $data['cart']->cart_items->sum('quantity');
+            //$data['cart_quantity'] = isset($cart_quantity) ? $cart_quantity : '';
+            $data['cart_quantity'] = 0;
+            //$cart_id =  $data['cart']->id;
+            $cart_id =  0;
             $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
 
              /* 
@@ -141,6 +144,7 @@ class OrdersController extends Controller
         DB::transaction(function() use($request, $id){
             /* Insert User */
             $customer_id = $request->customer_id;
+            //dd($customer_id);
             $user = User::find($customer_id);
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;

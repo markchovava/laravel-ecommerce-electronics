@@ -33,7 +33,8 @@ class CustomerAuthController extends Controller
         if( isset($shopping_session) || isset($ip_address) ){
             $data['carts'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)
                                     ->orWhere('ip_address', $ip_address)->first();
-            $data['cart_quantity'] = $data['carts']->cart_items->sum('quantity');
+            $cart_quantity = $data['carts']->cart_items->sum('quantity');
+            $data['cart_quantity'] = isset($cart_quantity) ? $data['carts']->cart_items->sum('quantity') : 0;
             $cart_id =  $data['carts']->id;
             $data['cart_items'] = CartItem::with('product')->where('cart_id', $cart_id)->get();
             return view('frontend.pages.customer.login',$data);     

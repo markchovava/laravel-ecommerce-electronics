@@ -44,6 +44,9 @@
                     <div class="js-form-message form-group">
                         <label class="form-label" for="signinSrEmailExample3">Email address</label>
                         <input type="email" class="form-control" name="email" autocomplete="off" id="signinSrEmailExample3" placeholder="Email address" aria-label="Email address" required>
+                        @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- End Form Group -->
                 </div>
@@ -52,6 +55,9 @@
                     <div class="js-form-message form-group">
                         <label class="form-label" for="">Password</label>
                         <input type="password" class="form-control" name="password" autocomplete="off" id="" placeholder="********" aria-label="********" required>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- End Form Group -->
                 </div>

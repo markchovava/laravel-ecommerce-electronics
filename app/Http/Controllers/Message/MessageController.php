@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Message;
 
 use App\Http\Controllers\Controller;
 use App\Models\Message\Message;
+use App\Models\Message\MessageReply;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -33,7 +34,10 @@ class MessageController extends Controller
         $message = Message::find($id);
         $message->status = 'Read';
         $message->save();
+
         $data['message'] = Message::find($id);
+        $data['replies'] = MessageReply::where('message_id', $message->id)->get();
+        //dd( $data['reply'] );
         
         $data['unread'] = Message::where('status', 'Unread')->orderBy('created_at', 'desc')->get();
         $data['read'] = Message::where('status', 'Read')->orderBy('created_at', 'desc')->get();
@@ -51,6 +55,9 @@ class MessageController extends Controller
     public function delete($id){
         $message = Message::find($id);
         $message->delete();
+
+        $reply = MessageReply::where('message_id', $id);
+        $reply->delete();
 
         $notification = [
             'message' => 'Message Deleted Successfully!!...',

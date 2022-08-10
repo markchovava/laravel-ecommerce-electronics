@@ -7,6 +7,10 @@ namespace App\Http\Controllers\Contact;
 */
 use App\Actions\RoleManagement\CheckRoles;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -100,6 +104,45 @@ class ContactPageController extends Controller
         $message->created_at = now();
         $message->updated_at = now();
         $message->save();
+
+        $name = $message->first_name . ' ' . $message->last_name;
+
+
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);    
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = env('MAIL_HOST');                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = env('MAIL_USERNAME');                     //SMTP username
+        $mail->Password   = env('MAIL_PASSWORD');                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        //Recipients
+        $mail->setFrom(env('MAIL_USERNAME'), $name);
+        $mail->addAddress(env('MAIL_USERNAME'), env('APP_NAME'));     //Add a recipient
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = $message->subject;
+        $mail->Body    = $message->message;
+        $mail->AltBody = $message->message;
+        $dt = $mail->send();  
+        if( $dt ){
+            $notification = [
+                'message' => 'Message Sent Successfully.',
+                'alert-type' => 'success'
+            ];
+        } else{
+            $notification = [
+                'message' => 'Message Not Sent.',
+                'alert-type' => 'danger'
+            ];
+        } 
+        return redirect()->route('admin.message.all')->with($notification);
 
         $notification = [
             'message' => 'Message sent Successfully!!...',

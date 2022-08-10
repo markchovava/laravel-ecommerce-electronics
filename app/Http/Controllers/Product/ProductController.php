@@ -47,11 +47,9 @@ class ProductController extends Controller
 
     public function store(Request $request){
         DB::transaction(function() use($request){
-
             /* Product */
             $product = new Product();
-            if( $request->file('product_thumbnail') )
-            {
+            if( $request->file('product_thumbnail') ){
                 $product_thumbnail = $request->file('product_thumbnail');
                 $image_extension = strtolower($product_thumbnail->getClientOriginalExtension());
                 $image_name = date('YmdHi'). '.' . $image_extension;

@@ -13,4 +13,8 @@ class Message extends Model
         'first_name', 'last_name', 'email', 'subject',
         'message'
     ];
+
+    public function message_reply(){
+        return $this->hasOne(Message::class, 'message_id', 'id');
+    }
 }

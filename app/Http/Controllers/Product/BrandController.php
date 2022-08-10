@@ -19,7 +19,7 @@ class BrandController extends Controller
 
     public function store(Request $request){
         $brand = new Brand();
-        $brand->create_at = $brand->updated_at = now();
+        $brand->created_at = $brand->updated_at = now();
         $brand->name = $request->brand_name;
         if( $request->file('brand_image') )
         {
@@ -54,7 +54,7 @@ class BrandController extends Controller
 
     public function update(Request $request, $id){
         $brand = Brand::find($id);
-        $brand->create_at = $brand->updated_at = now();
+        $brand->created_at = $brand->updated_at = now();
         $brand->name = $request->brand_name;
         if( $request->file('brand_image') ){
             $brand_image = $request->file('brand_image');
