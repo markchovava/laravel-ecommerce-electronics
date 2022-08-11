@@ -7,7 +7,7 @@ $(document).on('click', '.add__toQuoteBtn', function(e){
     let product_id = $(this).attr('id');
     let price_centsNumber = Number(price_cents);
     let product_idNumber = Number(product_id);
-
+    //alert(csrf_token)
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

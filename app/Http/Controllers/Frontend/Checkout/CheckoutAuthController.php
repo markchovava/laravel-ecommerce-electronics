@@ -19,6 +19,7 @@ use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
 use App\Models\Product\Tag\Tag;
+use App\Models\Quote\CustomerQuote;
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -27,13 +28,41 @@ class CheckoutAuthController extends Controller
 {
     
     public function login(){
-        /*   Check Roles    */
-        $data['role_id'] = CheckRoles::check_role();
-        /*  Check Cookie */
-        $shopping_session = Cookie::get('shopping_session');
-        /*  IP Address */
-        $ip_address = $this->ip();
-        
+       
+       /*   Check Roles    */
+       $data['role_id'] = CheckRoles::check_role();
+       /*  Check Cookie */
+       $shopping_session = Cookie::get('shopping_session');
+       $quote_session = Cookie::get('quote_session');
+       /*  IP Address */
+       $ip_address = $this->ip();
+       /* Shopping Cart */
+       if( isset($shopping_session) || isset($ip_address) ){
+           $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+           if( !empty($data['cart']) ){
+               $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
+           } 
+       }
+       elseif( !(isset($shopping_session)) || !isset($ip_address) ){
+           $data['cart'] = NULL;
+           $data['cart_quantity'] = 0;
+       }
+       /* Shopping Quote */
+       if( isset($quote_session) || isset($ip_address) ){
+           $quote = CustomerQuote::with('customer_quote_items')
+                   ->where('quote_session', $shopping_session)
+                   ->orWhere('ip_address', $ip_address)->first();
+           $data['quote'] = $quote;
+           if( !empty($data['quote']) ){
+               $data['quote_quantity'] = $data['quote']->customer_quote_items->sum('quantity');
+           } 
+       }
+       elseif( !(isset($quote_session)) || !isset($ip_address) ){
+           $data['quote'] = NULL;
+           $data['quote_quantity'] = 0;
+       }
+       
+        /*  */
         if( Auth::check() ){
             return redirect()->route('checkout');
         }
@@ -180,23 +209,39 @@ class CheckoutAuthController extends Controller
     }
 
     public function register(){
-       /*   Check Roles    */
-       $data['role_id'] = CheckRoles::check_role();
-       /*  Check Cookie */
-       $shopping_session = Cookie::get('shopping_session');
-       /*  IP Address */
-       $ip_address = $this->ip();
+        /*   Check Roles    */
+        $data['role_id'] = CheckRoles::check_role();
+        /*  Check Cookie */
+        $shopping_session = Cookie::get('shopping_session');
+        $quote_session = Cookie::get('quote_session');
+        /*  IP Address */
+        $ip_address = $this->ip();
+        /* Shopping Cart */
         if( isset($shopping_session) || isset($ip_address) ){
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
             if( !empty($data['cart']) ){
                 $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
-                //dd($data['cart_quantity']);
             } 
         }
         elseif( !(isset($shopping_session)) || !isset($ip_address) ){
             $data['cart'] = NULL;
             $data['cart_quantity'] = 0;
         }
+        /* Shopping Quote */
+        if( isset($quote_session) || isset($ip_address) ){
+            $quote = CustomerQuote::with('customer_quote_items')
+                    ->where('quote_session', $shopping_session)
+                    ->orWhere('ip_address', $ip_address)->first();
+            $data['quote'] = $quote;
+            if( !empty($data['quote']) ){
+                $data['quote_quantity'] = $data['quote']->customer_quote_items->sum('quantity');
+            } 
+        }
+        elseif( !(isset($quote_session)) || !isset($ip_address) ){
+            $data['quote'] = NULL;
+            $data['quote_quantity'] = 0;
+        }
+
         /* 
         *   Footer Products 
         *   3 First Tag, Trending Products 

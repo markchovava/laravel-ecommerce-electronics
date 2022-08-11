@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('customer_quotes', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id')->nullable();
-            $table->integer('usd_cents')->nullable();
-            $table->integer('zwl_cents')->nullable();
+            $table->integer('shopping_session')->nullable();
+            $table->string('ip_address')->nullable();
+            $table->string('user_id')->nullable();
             $table->integer('quantity')->nullable();
-            $table->id('variation')->nullable();
+            $table->integer('usd_subtotal')->nullable();
+            $table->integer('zwl_subtotal')->nullable();
+            $table->integer('tax')->nullable();
+            $table->integer('usd_grandtotal')->nullable();
+            $table->integer('zwl_grandtotal')->nullable();
             $table->timestamps();
         });
     }

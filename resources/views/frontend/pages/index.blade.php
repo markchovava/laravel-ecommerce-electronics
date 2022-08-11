@@ -1009,8 +1009,9 @@
                             </div>
                         </div>
                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                            <a href="#" id="{{ $product->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                            <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                            <a href="{{ route('add.to.quote') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                    <i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote
+                            </a>
                         </div>
                     </div>
                 @endforeach
@@ -1112,8 +1113,9 @@
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $product->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="{{ route('add.to.quote') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote
+                                        </a>
                                     </div>
                                 </div>
                                 @endforeach

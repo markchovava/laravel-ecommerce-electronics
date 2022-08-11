@@ -14,6 +14,7 @@ use App\Models\Product\Tag\Tag;
 use App\Models\Backend\BasicInfo;
 use App\Models\Cart\Cart;
 use App\Models\Product\Brand;
+use App\Models\Quote\CustomerQuote;
 use Illuminate\Support\Facades\Cookie;
 
 class BrandPageController extends Controller
@@ -21,12 +22,14 @@ class BrandPageController extends Controller
     public function index()
     {
          /*   Check Roles    */
-         $data['role_id'] = CheckRoles::check_role();
-         /*  Check Cookie */
-         $shopping_session = Cookie::get('shopping_session');
-         /*  IP Address */
-         $ip_address = $this->ip();
-        if( isset($shopping_session) || isset($ip_address) ){
+        $data['role_id'] = CheckRoles::check_role();
+        /*  Check Cookie */
+        $shopping_session = Cookie::get('shopping_session');
+        $quote_session = Cookie::get('quote_session');
+        /*  IP Address */
+        $ip_address = $this->ip();
+        /* Shopping Cart */
+        if( isset($shopping_session) || $ip_address){
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
             if( !empty($data['cart']) ){
                 $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
@@ -36,6 +39,20 @@ class BrandPageController extends Controller
         elseif( !(isset($shopping_session)) || !isset($ip_address) ){
             $data['cart'] = NULL;
             $data['cart_quantity'] = 0;
+        }
+        /* Shopping Quote */
+        if( isset($quote_session) || $ip_address){
+            $quote = CustomerQuote::with('customer_quote_items')
+                    ->where('quote_session', $shopping_session)
+                    ->orWhere('ip_address', $ip_address)->first();
+            $data['quote'] = $quote;
+            if( !empty($data['quote']) ){
+                $data['quote_quantity'] = $data['quote']->customer_quote_items->sum('quantity');
+            } 
+        }
+        elseif( !(isset($quote_session)) || !isset($ip_address) ){
+            $data['quote'] = NULL;
+            $data['quote_quantity'] = 0;
         }
 
         /* 
@@ -105,9 +122,10 @@ class BrandPageController extends Controller
         $data['role_id'] = CheckRoles::check_role();
         /*  Check Cookie */
         $shopping_session = Cookie::get('shopping_session');
+        $quote_session = Cookie::get('quote_session');
         /*  IP Address */
         $ip_address = $this->ip();
-
+        /* Shopping Cart */
         if( isset($shopping_session) || $ip_address){
             $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
             if( !empty($data['cart']) ){
@@ -119,6 +137,23 @@ class BrandPageController extends Controller
             $data['cart'] = NULL;
             $data['cart_quantity'] = 0;
         }
+        /* Shopping Quote */
+        if( isset($quote_session) || $ip_address){
+            $quote = CustomerQuote::with('customer_quote_items')
+                    ->where('quote_session', $shopping_session)
+                    ->orWhere('ip_address', $ip_address)->first();
+            $data['quote'] = $quote;
+            if( !empty($data['quote']) ){
+                $data['quote_quantity'] = $data['quote']->customer_quote_items->sum('quantity');
+            } 
+        }
+        elseif( !(isset($quote_session)) || !isset($ip_address) ){
+            $data['quote'] = NULL;
+            $data['quote_quantity'] = 0;
+        }
+
+
+
 
         
         $data['brand_name'] = Brand::find($id);

@@ -57,6 +57,20 @@ use App\Http\Controllers\Role\RoleController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+/* :::::: Cart :::::: */
+Route::prefix('cart')->group(function() {
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/store', [CartController::class, 'store'])->name('cart.store');
+    Route::get('/view', [CartController::class, 'view'])->name('cart.view');
+    Route::get('/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+});
+/* :::::: Customer Quote :::::: */
+Route::prefix('quote')->group(function() {
+    Route::post('/add', [CustomerQuoteController::class, 'add'])->name('add.to.quote');
+    Route::get('/view', [CustomerQuoteController::class, 'view'])->name('quote.view');
+});
+
 Route::get('/privacy', [PrivacyPageController::class, 'index'])->name('privacy.index');
 
 /* 
@@ -100,18 +114,6 @@ Route::get('/tag/{id}', [TagPageController::class, 'view'])->name('tag.view');
 /* ::: Brand Pages ::: */
 Route::get('/brand', [BrandPageController::class, 'index'])->name('brand.index');
 Route::get('/brand/{id}', [BrandPageController::class, 'view'])->name('brand.view');
-
-/* :::::: Cart :::::: */
-Route::prefix('cart')->group(function() {
-    Route::get('/', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/add', [CartController::class, 'add'])->name('cart.add');
-    Route::post('/store', [CartController::class, 'store'])->name('cart.store');
-    Route::get('/view', [CartController::class, 'view'])->name('cart.view');
-    Route::get('/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-});
-
-/* :::::: Add to quote :::::: */
-Route::get('/quote/add', [CustomerQuoteController::class, 'add'])->name('add.to.quote');
 
 /* Checkout */
 Route::prefix('checkout')->group(function() {
