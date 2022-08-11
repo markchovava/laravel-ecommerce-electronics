@@ -36,6 +36,8 @@ use App\Http\Controllers\Message\MessageReplyController;
 use App\Http\Controllers\Miscellaneous\MiscellaneousController;
 use App\Http\Controllers\Shipping\ShippingController;
 use App\Http\Controllers\Payment\PaymentController;
+use App\Http\Controllers\Quote\CustomerQuoteController;
+use App\Http\Controllers\Role\RoleController;
 
 //use App\Http\Controllers\PDF\PDFController;
 
@@ -76,8 +78,6 @@ Route::prefix('customer')->group(function() {
     Route::get('/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 });
 
-
-
 /* Payment */
 Route::middleware(['auth'])->prefix('payment')->group(function (){
     Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
@@ -110,6 +110,9 @@ Route::prefix('cart')->group(function() {
     Route::get('/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
 
+/* :::::: Add to quote :::::: */
+Route::get('/quote/add', [CustomerQuoteController::class, 'add'])->name('add.to.quote');
+
 /* Checkout */
 Route::prefix('checkout')->group(function() {
     Route::get('/register', [CheckoutAuthController::class, 'register'])->name('checkout.register');
@@ -124,14 +127,16 @@ Route::prefix('checkout')->group(function() {
 
 
 /* Orders Frontend */
-Route::get('/order/track', [OrdersController::class, 'track'])->name('order.track');
-Route::get('/track/order/email', [OrdersController::class, 'order_email'])->name('order.email');
+Route::prefix('order')->group(function() {
+    Route::get('/track', [OrdersController::class, 'track'])->name('order.track');
+    Route::get('/order/email', [OrdersController::class, 'order_email'])->name('order.email');
+});
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function(){ 
-    /* :::::: 
-    *   Account Profile 
-    :::::: */
-    Route::prefix('profile')->group(function() {
+    
+    /* :::::: Profile :::::: */
+    Route::middleware(['isOperator'])->prefix('profile')->group(function() {
         Route::get('/view', [ProfileController::class, 'view'])->name('profile.view');
         Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -140,7 +145,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     });
 
     /* :::::: Users :::::: */
-    Route::prefix('users')->group(function() {
+    Route::middleware(['isAdmin'])->prefix('users')->group(function() {
         Route::get('/', [UserController::class, 'index'])->name('admin.users');
         Route::get('/add', [UserController::class, 'add'])->name('admin.users.add');
         Route::post('/store', [UserController::class, 'store'])->name('admin.users.store');
@@ -149,8 +154,21 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::post('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
     });
+
+    /* :::::: Roles :::::: */
+    Route::middleware(['isModerator'])->prefix('role')->group(function() {
+        Route::get('/', [RoleController::class, 'index'])->name('admin.role');
+        Route::get('/add', [RoleController::class, 'add'])->name('admin.role.add');
+        Route::post('/store', [RoleController::class, 'store'])->name('admin.role.store');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('admin.role.edit');
+        Route::get('/view/{id}', [RoleController::class, 'view'])->name('admin.role.view');
+        Route::post('/update/{id}', [RoleController::class, 'update'])->name('admin.role.update');
+        Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('admin.role.delete');
+        Route::get('/search', [RoleController::class, 'search'])->name('admin.role.search');
+    });
     
-    Route::prefix('customer')->group(function() {
+    /* :::::: Customer ::::: */
+    Route::middleware(['isEditor'])->prefix('customer')->group(function() {
         Route::get('/', [CustomerController::class, 'index'])->name('admin.customer');
         Route::get('/add', [CustomerController::class, 'add'])->name('admin.customer.add');
         Route::post('/store', [CustomerController::class, 'store'])->name('admin.customer.store');
@@ -160,7 +178,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('admin.customer.delete');
     });
 
-    Route::prefix('orders')->group(function() {
+    /* :::::: Orders ::::: */
+    Route::middleware(['isOperator'])->prefix('orders')->group(function() {
         Route::get('/', [OrdersController::class, 'index'])->name('admin.orders');
         Route::get('/view/{id}', [OrdersController::class, 'view'])->name('admin.orders.view');
         Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.orders.edit');
@@ -171,7 +190,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     });
 
     /* :::::: Products ::::: */
-    Route::prefix('/products')->group(function() {
+    Route::middleware(['isModerator'])->prefix('/products')->group(function() {
         Route::get('/', [ProductController::class, 'index'])->name('admin.products');
         Route::get('/add', [ProductController::class, 'add'])->name('admin.products.add');
         Route::post('/store', [ProductController::class, 'store'])->name('admin.products.store');
@@ -183,9 +202,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/image/remove/{id}', [ProductController::class, 'remove_image'])->name('admin.products.remove');
     });
 
-    
      /* :::::: Category ::::: */
-     Route::prefix('category')->group(function() {
+     Route::middleware(['isEditor'])->prefix('category')->group(function() {
         Route::get('/', [CategoryController::class, 'index'])->name('admin.category');
         Route::get('/add', [CategoryController::class, 'add'])->name('admin.category.add');
         Route::post('/store', [CategoryController::class, 'store'])->name('admin.category.store');
@@ -195,7 +213,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
      });
    
     /* :::::: Tag ::::: */
-    Route::prefix('tags')->group(function() {
+    Route::middleware(['isEditor'])->prefix('tags')->group(function() {
         Route::get('/', [TagController::class, 'index'])->name('admin.tag');
         Route::get('/add', [TagController::class, 'add'])->name('admin.tag.add');
         Route::post('/store', [TagController::class, 'store'])->name('admin.tag.store');
@@ -204,20 +222,19 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [TagController::class, 'delete'])->name('admin.tag.delete');
         Route::get('/search', [TagController::class, 'search'])->name('admin.tag.search');
     });
-
     
      /* :::::: Brands ::::: */
-    Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand');
-    Route::get('/brands/add', [BrandController::class, 'add'])->name('admin.brand.add');
-    Route::post('/brands/store', [BrandController::class, 'store'])->name('admin.brand.store');
-    Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
-    Route::post('/brands/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
-    Route::get('/brands/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
+    Route::middleware(['isEditor'])->prefix('brands')->group(function(){
+        Route::get('/', [BrandController::class, 'index'])->name('admin.brand');
+        Route::get('/add', [BrandController::class, 'add'])->name('admin.brand.add');
+        Route::post('/store', [BrandController::class, 'store'])->name('admin.brand.store');
+        Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
+        Route::post('/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
+        Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('admin.brand.delete');
+    });
 
-    /* 
-    *   Ads 
-    */
-    Route::prefix('ads')->group(function(){
+    /* :::::: Adverts ::::: */
+    Route::middleware(['isEditor'])->prefix('ads')->group(function(){
         Route::get('/', [AdsController::class, 'index'])->name('admin.ad');
         Route::get('/add', [AdsController::class, 'add'])->name('admin.ad.add');
         Route::post('/store', [AdsController::class, 'store'])->name('admin.ad.store');
@@ -226,13 +243,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [AdsController::class, 'delete'])->name('admin.ad.delete');
     });
 
-    Route::get('/shipping', [ShippingController::class, 'edit'])->name('admin.shipping');
-    Route::post('/shipping/update', [ShippingController::class, 'update'])->name('admin.shipping.update');
+    /* ::::::Shipping ::::: */
+    Route::middleware(['isEditor'])->prefix('shipping')->group(function(){
+        Route::get('/', [ShippingController::class, 'edit'])->name('admin.shipping');
+        Route::post('/update', [ShippingController::class, 'update'])->name('admin.shipping.update');
+    });
 
-    /* 
-    *   Messaging
-    */
-    Route::prefix('message')->group(function(){
+    /* :::::: Message ::::: */
+    Route::middleware(['isEditor'])->prefix('message')->group(function(){
         Route::get('/', [MessageController::class, 'index'])->name('admin.message.all');
         Route::get('/unread', [MessageController::class, 'unread'])->name('admin.message.unread');
         Route::get('/read', [MessageController::class, 'read'])->name('admin.message.read');
@@ -241,12 +259,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [MessageController::class, 'delete'])->name('admin.message.delete');
         /* Reply Message */
         Route::post('/reply/send', [MessageReplyController::class, 'send'])->name('admin.message.send');
-
-
     });
 
      /* :::::: Quote ::::: */
-    Route::prefix('quote')->group(function() {
+    Route::middleware(['isEditor'])->prefix('quote')->group(function() {
         Route::get('/', [QuoteController::class, 'index'])->name('admin.quote');
         Route::get('/add', [QuoteController::class, 'add'])->name('admin.quote.add');
         Route::get('/view/{id}', [QuoteController::class, 'view'])->name('admin.quote.view');
@@ -258,8 +274,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('pdf/{id}', [PDFController::class, 'pdf'])->name('admin.quote.pdf');
     });
 
-    /* Inventory */
-    Route::prefix('inventory')->group(function() {
+     /* :::::: Inventory ::::: */
+    Route::middleware(['isEditor'])->prefix('inventory')->group(function() {
         Route::get('/purchase', [PurchaseController::class, 'index'])->name('inventory.purchase');
         Route::get('/purchase/add', [PurchaseController::class, 'add'])->name('inventory.purchase.add');
         Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('inventory.purchase.store');
@@ -271,76 +287,30 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
         Route::get('/purchase/search/supplier', [PurchaseController::class, 'search_supplier'])->name('inventory.purchase.search.supplier');
     });
 
-    Route::prefix('info')->group(function() {
+     /* :::::: Info ::::: */
+    Route::middleware(['isEditor'])->prefix('info')->group(function() {
         Route::get('/', [BasicInfoController::class, 'view'])->name('admin.info');
         Route::get('/edit', [BasicInfoController::class, 'edit'])->name('admin.info.edit');
         Route::post('/update', [BasicInfoController::class, 'update'])->name('admin.info.update');
     });
-
-    /* 
-    *   Currency Conversion
-    */
-    Route::get('/zwl/edit', [MiscellaneousController::class, 'zwl_edit'])->name('admin.zwl.edit');
-    Route::post('/zwl/store', [MiscellaneousController::class, 'zwl_store'])->name('admin.zwl.store');
-});
-
-
-
-
-Route::get('/add', function(){
-    //$a = \Illuminate\Support\Facades\Cookie::queue('testing', 'QWTYEFTEYTFCDCY',20); 
-    unset($_COOKIE['shopping_session']); 
-    setcookie('remember_user', null, -1, '/');  
-});
-
-Route::get('/show', function(){
-    //dd($_COOKIE);
-    dd(\Illuminate\Support\Facades\Cookie::get('shopping_session'));
-});
-
-
-/*
-::::::::::::::::::::::::::::::::::::::
-        START OF FRONTEND
-::::::::::::::::::::::::::::::::::::::
-*/
-
-
-
-
-Route::get('/about', function () {
-    return view('frontend.pages.about');
-});
-
-Route::get('/terms', function () {
-    return view('frontend.pages.terms');
-});
-
-
-/* 
-::::::::::::::::::::::::::::::::::::::
-        END OF FRONTEND
-::::::::::::::::::::::::::::::::::::::
-*/
-
-/* 
-::::::::::::::::::::::::::::::::::::::
-        START OF BACKEND
-::::::::::::::::::::::::::::::::::::::
-*/
-Route::prefix('/backend')->group(function(){
-    Route::get('/', function () {
-        return view('backend.index');
+     /* :::::: ZWL ::::: */
+    Route::middleware(['isEditor'])->prefix('zwl')->group(function() {
+        Route::get('/edit', [MiscellaneousController::class, 'zwl_edit'])->name('admin.zwl.edit');
+        Route::post('/store', [MiscellaneousController::class, 'zwl_store'])->name('admin.zwl.store');
     });
 
 });
 
 
-/* 
-::::::::::::::::::::::::::::::::::::::
-        END OF BACKEND
-::::::::::::::::::::::::::::::::::::::
-*/
+
+/* Testing */
+Route::get('/add', function(){
+    // 
+});
+
+Route::get('/show', function(){
+   //
+});
 
 
 

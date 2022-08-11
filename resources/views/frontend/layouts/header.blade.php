@@ -331,8 +331,7 @@
                                             data-target="#basicsCollapseOne"
                                             aria-expanded="true"
                                             aria-controls="basicsCollapseOne">
-                                            <span class="pl-1 text-gray-90">Lunartech Store</span>
-                                           
+                                            <span class="pl-1 text-gray-90">Lunartech Store</span>        
                                         </button>
                                     </div>
                                 </div>
@@ -370,6 +369,18 @@
                         <div class="d-flex">
                             <ul class="d-flex list-unstyled mb-0">
                                 <li class="col pr-0">
+                                    <a href="{{ route('cart.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Quote">
+                                        <i class="font-size-22 ec ec-favorites"></i>
+                                        <span id="quote__quantity" 
+                                        class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">      
+                                            {{ ( !empty($quote_quantity) ) ? $quote_quantity : 0 }}
+                                        </span>
+                                        <span class="text-gray-90 ml-3">
+                                            <span class="ec ec-arrow-down-search"></span>
+                                        </span>
+                                    </a>       
+                                </li>
+                                <li class="col pr-0">
                                     <a href="{{ route('cart.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span id="cart__quantity" 
@@ -379,12 +390,7 @@
                                         <span class="text-gray-90 ml-3">
                                             <span class="ec ec-arrow-down-search"></span>
                                         </span>
-                                        <!-- <span class="font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span> -->
-                                    </a>
-                                    <ul>
-
-                                    </ul>
-                                    
+                                    </a>       
                                 </li>
                             </ul>
                         </div>

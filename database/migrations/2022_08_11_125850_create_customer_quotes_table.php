@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('customer_quotes', function (Blueprint $table) {
             $table->id();
-            $table->integer('level_id')->nullable();
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
+            $table->integer('product_id')->nullable();
+            $table->integer('usd_cents')->nullable();
+            $table->integer('zwl_cents')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->id('variation')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('customer_quotes');
     }
 };

@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'name', 'description']; 
+    protected $fillable = ['id', 'level_id', 'name', 'description']; 
 
     /* One to many */
     public function users()
     {
-        return $this->hasMany(User::class, 'role_id', 'id');
+        return $this->hasMany(User::class, 'role_id', 'level_id');
     }
 }

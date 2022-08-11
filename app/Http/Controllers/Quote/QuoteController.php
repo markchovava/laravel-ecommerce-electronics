@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Quote;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\BasicInfo;
 use Illuminate\Http\Request;

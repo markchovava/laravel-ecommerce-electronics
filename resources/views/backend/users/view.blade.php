@@ -128,7 +128,7 @@
                                                     </svg>
                                                 </span>
                                                 <!--end::Svg Icon-->
-                                                <div class="fs-2 fw-bolder">{{ $user->role }}</div>
+                                                <div class="fs-2 fw-bolder">{{ $user->role->name }}</div>
                                             </div>
                                             <!--end::Number-->
                                             <!--begin::Label-->
@@ -202,7 +202,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                            <span class="fw-bold text-gray-800 fs-6">{{ $user->role }}</span>
+                            <span class="fw-bold text-gray-800 fs-6">{{ $user->role->name }}</span>
                         </div>
                         <!--end::Col-->
                     </div>
