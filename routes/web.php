@@ -23,7 +23,6 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Orders\OrdersController;
 use App\Http\Controllers\BasicInfo\BasicInfoController;
 use App\Http\Controllers\Inventory\PurchaseController;
-use App\Http\Controllers\Pages\Home\StickerController;
 use App\Http\Controllers\Ads\AdsController;
 use App\Http\Controllers\Contact\ContactPageController;
 use App\Http\Controllers\Frontend\Category\CategoryPageController;
@@ -36,7 +35,8 @@ use App\Http\Controllers\Message\MessageReplyController;
 use App\Http\Controllers\Miscellaneous\MiscellaneousController;
 use App\Http\Controllers\Shipping\ShippingController;
 use App\Http\Controllers\Payment\PaymentController;
-use App\Http\Controllers\Quote\CustomerQuoteController;
+use App\Http\Controllers\Frontend\CustomerQuote\CustomerQuoteController;
+use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Role\RoleController;
 
 //use App\Http\Controllers\PDF\PDFController;
@@ -69,6 +69,10 @@ Route::prefix('cart')->group(function() {
 Route::prefix('quote')->group(function() {
     Route::post('/add', [CustomerQuoteController::class, 'add'])->name('add.to.quote');
     Route::get('/view', [CustomerQuoteController::class, 'view'])->name('quote.view');
+    Route::get('/index', [CustomerQuoteController::class, 'index'])->name('quote.index');
+    Route::get('/store', [CustomerQuoteController::class, 'index'])->name('quote.store');
+    Route::get('/delete/{id}', [CustomerQuoteController::class, 'delete'])->name('quote.delete');
+    Route::get('/pdf', [PDFController::class, 'quote_pdf'])->name('quote.pdf');
 });
 
 Route::get('/privacy', [PrivacyPageController::class, 'index'])->name('privacy.index');
@@ -311,7 +315,16 @@ Route::get('/add', function(){
 });
 
 Route::get('/show', function(){
-   //
+    $c = ['Audi', 'Benz', 'Chrysler'];
+    $d = implode(', ', $c);
+   $b = '';
+   for($i = 0; $i < 10; $i++){
+    $b .= '<b>' . $i . '</b><br>';
+   }
+   $a = $b . '<br>' . $d . "<br>The end.";
+   //$e = explode('<br>', $a);
+
+   return $a;
 });
 
 

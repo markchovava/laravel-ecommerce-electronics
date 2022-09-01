@@ -369,7 +369,7 @@
                         <div class="d-flex">
                             <ul class="d-flex list-unstyled mb-0">
                                 <li class="col pr-0">
-                                    <a href="{{ route('cart.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Quote">
+                                    <a href="{{ route('quote.index') }}" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Quote">
                                         <i class="font-size-22 ec ec-favorites"></i>
                                         <span id="quote__quantity" 
                                         class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">      
