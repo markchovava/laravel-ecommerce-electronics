@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\CustomerQuote;
 
+use App\Libraries\Fpdf\FPDF;
 use App\Actions\RoleManagement\CheckRoles;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\BasicInfo;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class CustomerQuoteController extends Controller
 {
+    
     public function add(Request $request){
         // Get Ip
         $ip_address = $this->ip();
@@ -206,7 +208,7 @@ class CustomerQuoteController extends Controller
         } 
         //dd('Here');
         //$data['cart_quantity'] = 0;
-        $data['message'] = "The Shopping Cart is empty at the moment.";
+        $data['message'] = "The Shopping Quote is empty at the moment.";
         /* 
         *   Shipping Fee 
         */
@@ -298,6 +300,7 @@ class CustomerQuoteController extends Controller
 
    public function pdf(){
     
+       
    }
 
 

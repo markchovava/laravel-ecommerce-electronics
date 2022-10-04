@@ -39,7 +39,7 @@ class CartController extends Controller
             $shopping_session = $this->randomString(30);
             $cart->shopping_session = $shopping_session;
             if(auth()->check()){
-                $cart->customer_id = Auth::id();
+                $cart->customer_id = Auth::user()->id;
             }
             $cart->total = $request->price_cents;
             $cart->save();   
@@ -67,7 +67,8 @@ class CartController extends Controller
             $cart_item->save();
         }
         elseif( isset($shopping_session) || isset($ip_address) ){
-            $cart = Cart::where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+            $cart = Cart::where('shopping_session', $shopping_session)
+                        ->orWhere('ip_address', $ip_address)->first();
             if(!empty($cart)){
                 if(auth()->check()){
                     $cart->customer_id = Auth::id();

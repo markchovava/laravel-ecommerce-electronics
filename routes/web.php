@@ -75,6 +75,18 @@ Route::prefix('quote')->group(function() {
     Route::get('/pdf', [PDFController::class, 'quote_pdf'])->name('quote.pdf');
 });
 
+/* Customer Quote Checkout */
+Route::prefix('checkout')->group(function() {
+    Route::get('/register', [CustomerQuoteCheckoutAuthController::class, 'register'])->name('customer.quote.checkout.register');
+    Route::post('/register', [CustomerQuoteCheckoutAuthController::class, 'register_process'])->name('customer.quote.checkout.register.process');
+    Route::get('/login', [CustomerQuoteCheckoutAuthController::class, 'login'])->name('customer.quote.checkout.login');
+    Route::post('/login', [CustomerQuoteCheckoutAuthController::class, 'login_process'])->name('customer.quote.checkout.login.process');
+    Route::middleware(['auth'])->group(function (){
+        Route::get('/', [CustomerQuoteCheckoutController::class, 'index'])->name('customer.quote.checkout');
+        Route::post('/', [CustomerQuoteCheckoutController::class, 'checkout_process'])->name('customer.quote.checkout.process');
+    });
+});
+
 Route::get('/privacy', [PrivacyPageController::class, 'index'])->name('privacy.index');
 
 /* 
