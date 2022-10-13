@@ -9,7 +9,23 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
     public function index(){
-        $data['tags'] = Tag::orderby('updated_at', 'desc')->paginate(15);
+        $tags = Tag::orderby('updated_at', 'desc')->paginate(15);
+        $data['tags'] = isset($tags) ? $tags : NULL;
+        $data['results'] = NULL;
+        $data['search'] = NULL;
+        /*  */
+        return view('backend.tag.index', $data);
+    }
+
+    public function search(Request $request){
+        $search = $request->search;
+        $results = Tag::where('title', 'LIKE', '%' . $search . '%')
+                        ->orderby('updated_at', 'desc')
+                        ->paginate(15);
+        $data['results'] = isset($results) ? $results : NULL;
+        $data['tags'] = NULL;
+        $data['search'] = $search;
+        /*  */
         return view('backend.tag.index', $data);
     }
 
@@ -90,5 +106,4 @@ class TagController extends Controller
         return redirect()->route('admin.tag')->with($notification);
     }
     
-    public function search(){}
 }

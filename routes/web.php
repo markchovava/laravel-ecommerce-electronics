@@ -190,6 +190,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     /* :::::: Customer ::::: */
     Route::middleware(['isEditor'])->prefix('customer')->group(function() {
         Route::get('/', [CustomerController::class, 'index'])->name('admin.customer');
+        Route::get('/search', [CustomerController::class, 'search'])->name('admin.customer.search');
         Route::get('/add', [CustomerController::class, 'add'])->name('admin.customer.add');
         Route::post('/store', [CustomerController::class, 'store'])->name('admin.customer.store');
         Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('admin.customer.edit');
@@ -212,6 +213,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     /* :::::: Products ::::: */
     Route::middleware(['isModerator'])->prefix('/products')->group(function() {
         Route::get('/', [ProductController::class, 'index'])->name('admin.products');
+        Route::get('/search', [ProductController::class, 'search'])->name('admin.products.search');
         Route::get('/add', [ProductController::class, 'add'])->name('admin.products.add');
         Route::post('/store', [ProductController::class, 'store'])->name('admin.products.store');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
@@ -225,6 +227,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
      /* :::::: Category ::::: */
      Route::middleware(['isEditor'])->prefix('category')->group(function() {
         Route::get('/', [CategoryController::class, 'index'])->name('admin.category');
+        Route::get('/search', [CategoryController::class, 'search'])->name('admin.category.search');
         Route::get('/add', [CategoryController::class, 'add'])->name('admin.category.add');
         Route::post('/store', [CategoryController::class, 'store'])->name('admin.category.store');
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
@@ -235,6 +238,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     /* :::::: Tag ::::: */
     Route::middleware(['isEditor'])->prefix('tags')->group(function() {
         Route::get('/', [TagController::class, 'index'])->name('admin.tag');
+        Route::get('/search', [TagController::class, 'search'])->name('admin.tag.search');
         Route::get('/add', [TagController::class, 'add'])->name('admin.tag.add');
         Route::post('/store', [TagController::class, 'store'])->name('admin.tag.store');
         Route::get('/edit/{id}', [TagController::class, 'edit'])->name('admin.tag.edit');
@@ -246,6 +250,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
      /* :::::: Brands ::::: */
     Route::middleware(['isEditor'])->prefix('brands')->group(function(){
         Route::get('/', [BrandController::class, 'index'])->name('admin.brand');
+        Route::get('/search', [BrandController::class, 'search'])->name('admin.brand.search');
         Route::get('/add', [BrandController::class, 'add'])->name('admin.brand.add');
         Route::post('/store', [BrandController::class, 'store'])->name('admin.brand.store');
         Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');

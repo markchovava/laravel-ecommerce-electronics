@@ -73,9 +73,9 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <form>
-                            <input type="text" name="search" data-kt-ecommerce-brand-filter="search" 
-                            class="form-control form-control-solid w-250px ps-14" placeholder="Search Brand" />
+                            <form action="{{ route('admin.brand.search') }}" method="GET">
+                                <input type="text" name="search" value="{{ isset($search) ? $search : '' }}" 
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Brand" />
                             </form>
                         </div>
                         <!--end::Search-->
@@ -99,12 +99,9 @@
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_brand_table .form-check-input" value="1" />
-                                    </div>
+                                    #
                                 </th>
                                 <th class="min-w-250px">Brand</th>
-                                <th class="min-w-150px"></th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -112,72 +109,138 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @foreach($brands as $brand)
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::brand=-->
-                                <td>
-                                    <div class="d-flex">
-                                        <!--begin::Thumbnail-->
-                                        <a href="" class="symbol symbol-50px">
-                                            <span class="symbol-label" 
-                                            style="background-image:url({{ (!empty($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }});"></span>
-                                        </a>
-                                        <!--end::Thumbnail-->
-                                        <div class="ms-5">
-                                            <!--begin::Title-->
-                                            <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-brand-filter="brand_name">
-                                                {{ $brand->name }}</a>
-                                            <!--end::Title-->
+                            @php
+                                $i = 1;
+                            @endphp
+                            @if( isset($brands) )
+                                @foreach($brands as $brand)
+                                <!--begin::Table row-->
+                                <tr>
+                                    <!--begin::Checkbox-->
+                                    <td>
+                                        {{ $i++ }}
+                                    </td>
+                                    <!--end::Checkbox-->
+                                    <!--begin::brand=-->
+                                    <td>
+                                        <div class="d-flex">
+                                            <!--begin::Thumbnail-->
+                                            <a href="" class="symbol symbol-50px">
+                                                <span class="symbol-label" 
+                                                style="background-image:url({{ (!empty($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }});"></span>
+                                            </a>
+                                            <!--end::Thumbnail-->
+                                            <div class="ms-5">
+                                                <!--begin::Title-->
+                                                <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-brand-filter="brand_name">
+                                                    {{ $brand->name }}</a>
+                                                <!--end::Title-->
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <!--end::brand=-->
-                                <!--begin::Type=-->
-                                <td>
-                                    
-                                </td>
-                                <!--end::Type=-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="{{ route('admin.brand.edit', $brand->id) }}" class="menu-link px-3">Edit</a>
+                                    </td>
+                                    <!--end::brand=-->
+                                    <!--begin::Action=-->
+                                    <td class="text-end">
+                                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                        <span class="svg-icon svg-icon-5 m-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon--></a>
+                                        <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('admin.brand.edit', $brand->id) }}" class="menu-link px-3">Edit</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('admin.brand.delete', $brand->id) }}" class="menu-link px-3" data-kt-ecommerce-brand-filter="delete_row">Delete</a>
+                                            </div>
+                                            <!--end::Menu item-->
                                         </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="{{ route('admin.brand.delete', $brand->id) }}" class="menu-link px-3" data-kt-ecommerce-brand-filter="delete_row">Delete</a>
+                                        <!--end::Menu-->
+                                    </td>
+                                    <!--end::Action=-->
+                                </tr>
+                                <!--end::Table row-->
+                                @endforeach
+                            @endif
+                            @if( isset($results) )
+                                @foreach($results as $brand)
+                                <!--begin::Table row-->
+                                <tr>
+                                    <!--begin::Checkbox-->
+                                    <td>
+                                        {{ $i++ }}
+                                    </td>
+                                    <!--end::Checkbox-->
+                                    <!--begin::brand=-->
+                                    <td>
+                                        <div class="d-flex">
+                                            <!--begin::Thumbnail-->
+                                            <a href="" class="symbol symbol-50px">
+                                                <span class="symbol-label" 
+                                                style="background-image:url({{ (!empty($brand->image)) ? url('storage/products/brand/' . $brand->image) : url('storage/products/no_image.jpg') }});"></span>
+                                            </a>
+                                            <!--end::Thumbnail-->
+                                            <div class="ms-5">
+                                                <!--begin::Title-->
+                                                <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1" data-kt-ecommerce-brand-filter="brand_name">
+                                                    {{ $brand->name }}</a>
+                                                <!--end::Title-->
+                                            </div>
                                         </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
-                            @endforeach
+                                    </td>
+                                    <!--end::brand=-->
+                                    <!--begin::Action=-->
+                                    <td class="text-end">
+                                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                        <span class="svg-icon svg-icon-5 m-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon--></a>
+                                        <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('admin.brand.edit', $brand->id) }}" class="menu-link px-3">Edit</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('admin.brand.delete', $brand->id) }}" class="menu-link px-3" data-kt-ecommerce-brand-filter="delete_row">Delete</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        </div>
+                                        <!--end::Menu-->
+                                    </td>
+                                    <!--end::Action=-->
+                                </tr>
+                                <!--end::Table row-->
+                                @endforeach
+                            @endif
                         </tbody>
                         <!--end::Table body-->
                     </table>
                     <!--end::Table-->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5"></div>
+                        <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                            @if( isset($brands) )
+                                {{ $brands->links() }}
+                            @endif
+                            @if( isset($results) )
+                                {{ $results->links() }}
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <!--end::Card body-->
             </div>

@@ -9,7 +9,22 @@ use Illuminate\Http\Request;
 class BrandController extends Controller
 {
     public function index(){
-        $data['brands'] = Brand::latest()->paginate(15);
+        $brands = Brand::orderBy('name', 'ASC')
+                                ->paginate(15);
+        $data['brands'] = $brands;
+        $data['search'] = NULL;
+        $data['results'] = NULL;
+        return view('backend.brand.index', $data);
+    }
+
+    public function search(Request $request){
+        $search = $request->search;
+        $results = Brand::where('name', 'LIKE', '%' . $search . '%')
+                                        ->orderBy('name', 'ASC')
+                                        ->paginate(15);
+        $data['results'] = $results;
+        $data['search'] = $search;
+        $data['brands'] = NULL;
         return view('backend.brand.index', $data);
     }
 
@@ -97,5 +112,4 @@ class BrandController extends Controller
         return redirect()->route('admin.brand')->with($notification);
     }
 
-    public function search(){}
 }

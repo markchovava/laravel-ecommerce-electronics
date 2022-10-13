@@ -9,7 +9,21 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index(){
-        $data['categories'] = Category::with('products')->orderBy('updated_at','desc')->paginate(15);
+        $data['categories'] = Category::orderBy('updated_at','desc')
+                                        ->paginate(15);
+        $data['results'] = NULL;
+        $data['search'] = NULL;
+        return view('backend.category.index', $data);
+    }
+
+    public function search(Request $request){
+        $search = $request->search;
+        $results = Category::where('name', 'LIKE', '%' . $search . '%')
+                                ->orderBy('updated_at','desc')
+                                ->paginate(15);
+        $data['results'] = $results;
+        $data['search'] = $search;
+        $data['categories'] = NULL;
         return view('backend.category.index', $data);
     }
 
@@ -95,5 +109,4 @@ class CategoryController extends Controller
         ];
         return redirect()->route('admin.category')->with($notification);
     }
-    public function search(){}
 }

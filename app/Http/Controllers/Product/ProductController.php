@@ -32,9 +32,27 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data['products'] = Product::with(['categories','brands','tags', 'users',])
-                                    ->orderBy('updated_at','desc')->paginate(15);
-        //return $data['products'];
+        $products = Product::with(['categories','brands','tags', 'users',])
+                                    ->orderBy('updated_at','desc')
+                                    ->paginate(15);
+        $data['products'] = isset($products) ? $products : NULL;
+        $data['results'] = NULL;
+        $data['search'] = NULL;
+        /*  */
+        return view('backend.products.index', $data);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $results = Product::with(['categories','brands','tags', 'users',])
+                                    ->where('name', 'LIKE', '%' . $search . '%')
+                                    ->orderBy('updated_at','desc')
+                                    ->paginate(15);
+        $data['results'] = isset($results) ? $results : NULL;
+        $data['search'] = $search;
+        $data['products'] = NULL;
+        /*  */
         return view('backend.products.index', $data);
     }
 

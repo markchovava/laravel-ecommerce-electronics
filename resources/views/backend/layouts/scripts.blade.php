@@ -36,8 +36,6 @@ $route = url()->current();
 		<script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/catalog/categories.js') }}"></script>
-		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/customers/listing/listing.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/customers/listing/add.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/apps/ecommerce/customers/listing/export.js') }}"></script>
 
