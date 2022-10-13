@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class AdsController extends Controller
 {
     public function index(){
-        $data['ads'] = Ads::latest()->get();
+        $data['ads'] = Ads::latest()->paginate(15);
         return view('backend.ads.index', $data);
     }
 

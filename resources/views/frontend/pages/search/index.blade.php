@@ -113,7 +113,8 @@
                     @if(!empty($results))
                     <ul class="d-block list-unstyled products-group prodcut-list-view-small">
                         @foreach($results as $product)
-                        <li class="product-item remove-divider">
+                        <li class="product__item product-item remove-divider">
+                            <input type="hidden" name="csrf_token" value={{ csrf_token() }} id="csrf__token">
                             <div class="product-item__outer w-100">
                                 <div class="product-item__inner remove-prodcut-hover py-4 row">
                                     <div class="product-item__header col-6 col-md-2">
@@ -132,8 +133,12 @@
                                                 </a>
                                                 @endforeach
                                             </div>
-                                            <h5 class="mb-2 product-item__title"><a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
-                                                {{ $product->name }}</a></h5>
+                                            <h5 class="mb-2 product-item__title">
+                                                <a href="{{ route('product.view', $product->id) }}" class="text-blue font-weight-bold">
+                                                    {{ $product->name }}
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}" class="product__id">
+                                                </a>
+                                            </h5>
                                             <div class="prodcut-price d-md-none">
                                                 <div class="text-gray-100">$685,00</div>
                                             </div>
@@ -155,11 +160,18 @@
                                                 </div>
                                             </div>
                                             <div class="prodcut-add-cart">
-                                                <a href="" class="add__searchCartBtn btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                <a href="{{ route('cart.add') }}" 
+                                                    class="add__searchCartBtn btn-add-cart btn-primary transition-3d-hover">
+                                                    <i class="ec ec-add-to-cart"></i>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">
-                                            <a href="#" class="text-gray-6 font-size-13 mx-wd-3"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Quote</a>
+                                        <div 
+                                            class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">
+                                            <a href="{{ route('quote.add') }}" class="add__searchQuoteBtn text-gray-6 font-size-13 mx-wd-3">
+                                                <i class="ec ec-compare mr-1 font-size-15"></i> 
+                                                Add to Quote
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

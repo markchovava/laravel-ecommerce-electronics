@@ -131,7 +131,8 @@ class OrdersController extends Controller
     }
 
     public function index(){
-        $data['orders'] = Order::with(['customers', 'order_items'])->orderBy('updated_at', 'desc')->get();
+        $data['orders'] = Order::with(['customers', 'order_items'])
+        ->orderBy('updated_at', 'desc')->paginate(15);;
         return view('backend.orders.index', $data);
     }
 

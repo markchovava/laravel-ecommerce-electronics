@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class BrandController extends Controller
 {
     public function index(){
-        $data['brands'] = Brand::latest()->get();
+        $data['brands'] = Brand::latest()->paginate(15);
         return view('backend.brand.index', $data);
     }
 

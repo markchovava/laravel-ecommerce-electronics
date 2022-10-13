@@ -10,7 +10,7 @@ use App\Models\Product\Sales;
 class SalesController extends Controller
 {
     public function index(){
-        $data['sales'] = Sales::latest()->get();
+        $data['sales'] = Sales::latest()->paginate(15);
         return view('', $data);
     }
 }

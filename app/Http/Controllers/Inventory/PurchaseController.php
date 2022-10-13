@@ -14,7 +14,7 @@ use App\Models\User;
 class PurchaseController extends Controller
 {
     public function index(){
-        $data['purchases'] = Purchase::with(['product', 'supplier'])->paginate(25);
+        $data['purchases'] = Purchase::with(['product', 'supplier'])->paginate(15);
         return view('backend.inventory.purchase.index', $data);
     }
 

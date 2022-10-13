@@ -30,7 +30,10 @@ class BrandPageController extends Controller
         $ip_address = $this->ip();
         /* Shopping Cart */
         if( isset($shopping_session) || $ip_address){
-            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+            $data['cart'] = Cart::with('cart_items')
+                                    ->where('shopping_session', $shopping_session)
+                                    ->orWhere('ip_address', $ip_address)
+                                    ->first();
             if( !empty($data['cart']) ){
                 $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
                 //dd($data['cart_quantity']);

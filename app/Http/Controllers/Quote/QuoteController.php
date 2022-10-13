@@ -17,7 +17,7 @@ class QuoteController extends Controller
 {
     public function index()
     {
-        $data['quotes'] = Quote::with('users')->get();
+        $data['quotes'] = Quote::with('users')->paginate(15);
         return view('backend.quote.index', $data);
     }
 

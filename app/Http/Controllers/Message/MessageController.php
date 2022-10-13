@@ -10,9 +10,13 @@ use Illuminate\Http\Request;
 class MessageController extends Controller
 {
     public function index(){
-        $data['unread'] = Message::where('status', 'Unread')->orderBy('created_at', 'desc')->get();
-        $data['read'] = Message::where('status', 'Read')->orderBy('created_at', 'desc')->get();
-        $data['all'] = Message::orderBy('created_at', 'desc')->get();
+        $data['unread'] = Message::where('status', 'Unread')
+                                ->orderBy('created_at', 'desc')
+                                ->paginate(15);;
+        $data['read'] = Message::where('status', 'Read')
+                                ->orderBy('created_at', 'desc')
+                                ->paginate(15);
+        $data['all'] = Message::orderBy('created_at', 'desc')->paginate(15);
         return view('backend.message.index', $data);
     }
 

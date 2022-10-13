@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     public function index(){
-        $data['customers'] = User::where('role_id', 4)->orderBy('updated_at', 'desc')->get();
+        $data['customers'] = User::where('role_id', 4)->orderBy('updated_at', 'desc')->paginate(15);
         return view('backend.customer.index', $data);
     }
 

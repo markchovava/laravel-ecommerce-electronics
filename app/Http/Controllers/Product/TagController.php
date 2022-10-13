@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
     public function index(){
-        $data['tags'] = Tag::orderby('updated_at', 'desc')->paginate(20);
+        $data['tags'] = Tag::orderby('updated_at', 'desc')->paginate(15);
         return view('backend.tag.index', $data);
     }
 

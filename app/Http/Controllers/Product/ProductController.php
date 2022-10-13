@@ -32,7 +32,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data['products'] = Product::with(['categories','brands','tags', 'users',])->orderBy('updated_at','desc')->get();
+        $data['products'] = Product::with(['categories','brands','tags', 'users',])
+                                    ->orderBy('updated_at','desc')->paginate(15);
         //return $data['products'];
         return view('backend.products.index', $data);
     }

@@ -14,7 +14,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['users'] = User::with('role')->where('id', '!=', Auth::id())->orderBy('updated_at', 'desc')->get();
+        $data['users'] = User::with('role')->where('id', '!=', Auth::id())
+                                    ->orderBy('updated_at', 'desc')
+                                    ->paginate(15);
         return view('backend.users.index', $data); 
     }
 
