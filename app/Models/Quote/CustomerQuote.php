@@ -2,6 +2,7 @@
 
 namespace App\Models\Quote;
 
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,4 +23,11 @@ class CustomerQuote extends Model
     public function users(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-}
+
+    public function products(){
+        return $this->belongsToMany(Product::class, 'customer_quote_items', 'customer_quote_id', 'product_id')
+            ->withTimestamps();
+    }
+
+    
+} 

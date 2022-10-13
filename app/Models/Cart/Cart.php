@@ -17,7 +17,7 @@ class Cart extends Model
         'customer_id',
         'total'
     ];
-
+ 
     public function products(){
             return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')
                 ->withTimestamps();

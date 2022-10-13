@@ -19,7 +19,7 @@ class CartItem extends Model
         'variation_name',
         'variation_value'
     ];
-
+ 
     public function carts(){
         return $this->belongsTo(Cart::class, 'cart_id', 'id');
     }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 
 /* Custom Function call */
 use App\Actions\RoleManagement\CheckRoles;
@@ -21,8 +23,6 @@ use App\Models\Product\Product;
 use App\Models\Product\Tag\Tag;
 use App\Models\Quote\CustomerQuote;
 use App\Models\User;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 
 class CheckoutAuthController extends Controller
 {

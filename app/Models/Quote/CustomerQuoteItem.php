@@ -24,3 +24,4 @@ class CustomerQuoteItem extends Model
     }
 
 }
+ 

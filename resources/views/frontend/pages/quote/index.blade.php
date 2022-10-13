@@ -153,7 +153,7 @@
                                     <th>Subtotal</th>
                                     <td data-title="Subtotal">
                                         <span class="quote__subtotal">0</span>
-                                        <input type="hidden" name="cart_subtotalCents" value="0" class="quote__subtotalCents">
+                                        <input type="hidden" name="quote_subtotalCents" value="0" class="quote__subtotalCents">
                                     </td>
                                 </tr>
                                 <tr class="shipping">
@@ -172,15 +172,15 @@
                                     <th>Total (USD$)</th>
                                     <td data-title="Total">
                                         <strong>$<span class="quote__total">00</span></strong>
-                                        <input type="hidden" name="cart_totalCents" class="quote__totalCents">
+                                        <input type="hidden" name="quote_totalCents" class="quote__totalCents">
                                     </td>
                                 </tr>
                                 <tr class="order-zwltotal">
                                     <th>Total (ZWL$)</th>
                                     <td data-title="Total">
                                         <strong>$<span class="quote__zwltotal">00</span></strong>
-                                        <input type="hidden" name="cart_zwl" value="{{ $currency->value }}" class="quote__zwl">
-                                        <input type="hidden" name="cart_zwltotalCents" class="quote__zwltotalCents">
+                                        <input type="hidden" name="quote_zwl" value="{{ $currency->value }}" class="quote__zwl">
+                                        <input type="hidden" name="quote_zwltotalCents" class="quote__zwltotalCents">
                                     </td>
                                 </tr>
                             </tbody>

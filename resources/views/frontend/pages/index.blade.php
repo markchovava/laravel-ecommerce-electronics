@@ -469,8 +469,8 @@
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_first->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="{{ route('quote.add') }}" id="{{ $category_first->products->first()->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                     </div>
                                 </div>
                             @endif  
@@ -512,8 +512,10 @@
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_second->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="{{ route('quote.add') }}" id="{{ $category_second->products->first()->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                                            Add To Quote
+                                        </a>
                                     </div>
                                 </div>
                             @endif 
@@ -551,12 +553,16 @@
                                         </div>
                                         <div class="d-none d-xl-block prodcut-add-cart">
                                             <a href="{{ route('cart.add') }}" class="add__toCartBtn btn-add-cart btn-primary transition-3d-hover" 
-                                            id="{{ $category_third->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
+                                                id="{{ $category_third->products->first()->id }}">
+                                                <i class="ec ec-add-to-cart"></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_third->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="{{ route('quote.add') }}" id="{{ $category_third->products->first()->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                                            Add To Quote
+                                        </a>
                                     </div>
                                 </div>
                             @endif 
@@ -598,9 +604,10 @@
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_forth->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>
-                                        Add To Quote
-                                    </a>
+                                        <a href="{{ route('quote.add') }}" id="{{ $category_forth->products->first()->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                                            Add To Quote
+                                        </a>
                                     </div>
                                 </div>
                             @endif  
@@ -642,8 +649,10 @@
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_fifth->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="{{ route('quote.add') }}" id="{{ $category_fifth->products->first()->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                                            Add To Quote
+                                        </a>
                                     </div>
                                 </div>
                             @endif   
@@ -684,9 +693,12 @@
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_sixth->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="{{ route('quote.add') }}" id="{{ $category_sixth->products->first()->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                                            Add To Quote
+                                        </a>
                                     </div>
+
                                 </div>
                             @endif   
                         @endif
@@ -726,10 +738,14 @@
                                             id="{{ $category_seventh->products->first()->id }}"><i class="ec ec-add-to-cart"></i></a>
                                         </div>
                                     </div>
+                                    
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="#" id="{{ $category_seventh->products->first()->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
-                                        <a href="#" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                        <a href="{{ route('quote.add') }}" id="{{ $category_seventh->products->first()->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                                            Add To Quote
+                                        </a>
                                     </div>
+
                                 </div>
                             @endif  
                         @endif
@@ -942,7 +958,7 @@
                                             </div>
                                         </div>
                                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                                            <a href="{{ route('add.to.quote') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                            <a href="{{ route('quote.add') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
                                                 <i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
                                         </div>
                                     </div>
@@ -1009,7 +1025,7 @@
                             </div>
                         </div>
                         <div class="border-top pt-2 flex-center-between flex-wrap">
-                            <a href="{{ route('add.to.quote') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                            <a href="{{ route('quote.add') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
                                     <i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote
                             </a>
                         </div>
@@ -1113,7 +1129,7 @@
                                         </div>
                                     </div>
                                     <div class="border-top pt-2 flex-center-between flex-wrap">
-                                        <a href="{{ route('add.to.quote') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
+                                        <a href="{{ route('quote.add') }}" id="{{ $product->id }}" class="text-gray-6 font-size-13 add__toQuoteBtn">
                                             <i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote
                                         </a>
                                     </div>

@@ -68,18 +68,13 @@ class CartController extends Controller
         }
         elseif( isset($shopping_session) || isset($ip_address) ){
             $cart = Cart::where('shopping_session', $shopping_session)
-                        ->orWhere('ip_address', $ip_address)->first();
+                        ->orWhere('ip_address', $ip_address)
+                        ->first();
             if(!empty($cart)){
                 if(auth()->check()){
                     $cart->customer_id = Auth::id();
                 }
-                if( isset($cart->total) ){ 
-                    $db_total = $cart->total;
-                    $cart->total = intval($db_total) + intval($request->price_cents);
-                }
-                if($cart->total == false){
-                    $cart->total = intval($request->price_cents);
-                }
+                $cart->total = isset($cart->total) ? (int)$cart->ttotal + (int)$request->price_cents : $request->price_cents;
                 $cart->save();
             } 
             elseif( empty($cart) ){
@@ -90,25 +85,19 @@ class CartController extends Controller
                     $customer_id = Auth::id();
                     $cart->customer_id = $customer_id;
                 }
-                if( isset($cart->total) ){ 
-                    $db_total = $cart->total;
-                    $cart->total = intval($db_total) + intval($request->price_cents);
-                }
-                if( !isset($cart->total) ){
-                    $cart->total = intval($request->price_cents);
-                }
+                $cart->total = isset($cart->total) ? (int)$cart->ttotal + (int)$request->price_cents : $request->price_cents;
                 $cart->save();
+
             }
-            $product_id = $request->product_id;
+            $product_id = (int)$request->product_id;
             $cart_item = CartItem::where('product_id', $product_id)->first();
             if(!empty($cart_item)){
                 $cart_item->cart_id = $cart->id;
-                $cart_item->product_id = $request->product_id;
                 $product = Product::find($request->product_id);
                 $quantity = $product->inventories->in_store_quantity; 
                  /* Add Quantity in Cart Items and Deduct quantity in Inventory */
-                if(intval($quantity) > 10){
-                    $inventory = Inventory::where('product_id', $request->product_id)->first();
+                if((int)$quantity > 10){
+                    $inventory = Inventory::where('product_id', $product_id)->first();
                     $inventory = Inventory::find($inventory->id);
                     $deduct_instore = intval($inventory->in_store_quantity) - 1;
                     $inventory->in_store_quantity = $deduct_instore; 
@@ -116,7 +105,7 @@ class CartController extends Controller
                     $quantity = $product->inventories->in_store_quantity;
                     $cart_item->quantity++; 
                 }     
-                if($request->product_variation == ''){
+                if( !empty($request->product_variation) ){
                     $cart_item->product_variation = $request->product_variation;
                 }
                 $cart_item->save();
@@ -131,13 +120,13 @@ class CartController extends Controller
                 if(intval($quantity) > 10){
                     $inventory = Inventory::where('product_id', $request->product_id)->first();
                     $inventory = Inventory::find($inventory->id);
-                    $deduct_instore = intval($inventory->in_store_quantity) - 1;
+                    $deduct_instore = (int)$inventory->in_store_quantity - 1;
                     $inventory->in_store_quantity = $deduct_instore;  
                     $inventory->save();
                     $quantity = $product->inventories->in_store_quantity;
                     $cart_item->quantity++; 
                 }  
-                if(isset($request->product_variation)){
+                if(!empty($request->product_variation)){
                     $cart_item->product_variation = $request->product_variation;
                 }
                 $cart_item->save();

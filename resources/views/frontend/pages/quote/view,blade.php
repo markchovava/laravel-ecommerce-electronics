@@ -1,3 +1,0 @@
-@php
-    {{ $pdf }}
-@endphp

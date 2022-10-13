@@ -28,6 +28,8 @@ use App\Http\Controllers\Contact\ContactPageController;
 use App\Http\Controllers\Frontend\Category\CategoryPageController;
 use App\Http\Controllers\Frontend\Tag\TagPageController;
 use App\Http\Controllers\Frontend\Brand\BrandPageController;
+use App\Http\Controllers\Frontend\CustomerQuote\CustomerQuoteCheckoutAuthController;
+use App\Http\Controllers\Frontend\CustomerQuote\CustomerQuoteCheckoutController;
 use App\Http\Controllers\Frontend\Privacy\PrivacyPageController;
 use App\Http\Controllers\Frontend\Search\SearchPageController;
 use App\Http\Controllers\Message\MessageController;
@@ -67,16 +69,15 @@ Route::prefix('cart')->group(function() {
 });
 /* :::::: Customer Quote :::::: */
 Route::prefix('quote')->group(function() {
-    Route::post('/add', [CustomerQuoteController::class, 'add'])->name('add.to.quote');
+    Route::get('/add', [CustomerQuoteController::class, 'add'])->name('quote.add');
     Route::get('/view', [CustomerQuoteController::class, 'view'])->name('quote.view');
     Route::get('/index', [CustomerQuoteController::class, 'index'])->name('quote.index');
-    Route::get('/store', [CustomerQuoteController::class, 'index'])->name('quote.store');
+    Route::post('/store', [CustomerQuoteController::class, 'store'])->name('quote.store');
     Route::get('/delete/{id}', [CustomerQuoteController::class, 'delete'])->name('quote.delete');
-    Route::get('/pdf', [PDFController::class, 'quote_pdf'])->name('quote.pdf');
 });
 
 /* Customer Quote Checkout */
-Route::prefix('checkout')->group(function() {
+Route::prefix('customer/checkout')->group(function() {
     Route::get('/register', [CustomerQuoteCheckoutAuthController::class, 'register'])->name('customer.quote.checkout.register');
     Route::post('/register', [CustomerQuoteCheckoutAuthController::class, 'register_process'])->name('customer.quote.checkout.register.process');
     Route::get('/login', [CustomerQuoteCheckoutAuthController::class, 'login'])->name('customer.quote.checkout.login');
@@ -84,6 +85,7 @@ Route::prefix('checkout')->group(function() {
     Route::middleware(['auth'])->group(function (){
         Route::get('/', [CustomerQuoteCheckoutController::class, 'index'])->name('customer.quote.checkout');
         Route::post('/', [CustomerQuoteCheckoutController::class, 'checkout_process'])->name('customer.quote.checkout.process');
+        Route::get('/pdf', [PDFController::class, 'quote_pdf'])->name('customer.quote.pdf');
     });
 });
 

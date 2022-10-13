@@ -11,8 +11,6 @@ use App\Models\Cart\CartItem;
 use App\Models\Miscellaneous\Miscellaneous;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
-use App\Models\Product\Inventory;
-use App\Models\Product\Product;
 use App\Models\Product\Tag\Tag;
 use App\Models\Quote\CustomerQuote;
 use App\Models\Quote\CustomerQuoteItem;
@@ -31,25 +29,35 @@ class CustomerQuoteController extends Controller
         // Get Cookie
         $quote_session = Cookie::get('quote_session');
         // Check if Ip and Cookie is in DB
-        $quote = CustomerQuote::with('customer_quote_items')->where('quote_session', $quote_session)
-                                                    ->orWhere('ip_address', $ip_address)->first();
+        $quote = CustomerQuote::with('customer_quote_items')
+                                ->where('quote_session', $quote_session)
+                                ->orWhere('ip_address', $ip_address)
+                                ->first();
         if( isset($quote) ){
             if( Auth::check() ){
-                $quote->user_id = Auth::id();
+                $quote->customer_id = Auth::id();
             }
-            $quote->quantity += 1;
+            /* Adds Quantity into the DB */
+            if(isset($request->quantity)){
+                $quote->quantity = (int)$request->quantity;
+            } else{
+                $quote->quantity += 1;
+            }
             $quote->save();
             $item = CustomerQuoteItem::with('product')->where('product_id', $request->product_id)
                                                 ->where('customer_quote_id', $quote->id)->first();
             if( isset($item) ){
-                $item->quantity += 1;
+                /* Adds Quantity into the DB */
+                $item->quantity += isset($request->quantity) ? (int)$request->quantity : 1;
                 $item->usd_cents = $request->price_cents;
                 $item->save();
-            } elseif( !isset($item) ){
+            } 
+            elseif( !isset($item) ){
                 $item = new CustomerQuoteItem();
                 $item->product_id = $request->product_id;
                 $item->customer_quote_id = $quote->id;
-                $item->quantity = 1;
+                /* Adds Quantity into the DB */
+                $item->quantity += isset($request->quantity) ? (int)$request->quantity : 1;
                 $item->usd_cents = $request->price_cents;
                 $item->save();
             }
@@ -60,9 +68,10 @@ class CustomerQuoteController extends Controller
             $quote->quote_session = $quote_session;
             $quote->ip_address = $ip_address;
             if( Auth::check() ){
-                $quote->user_id = Auth::id();
+                $quote->customer_id = Auth::id();
             }
-            $quote->quantity = 1;
+            /* Adds Quantity into the DB */
+            $quote->quantity += isset($request->quantity) ? (int)$request->quantity : 1;
             $quote->save();
             //
             Cookie::queue('quote_session', $quote_session, 10080);
@@ -71,14 +80,16 @@ class CustomerQuoteController extends Controller
                                                 ->where('customer_quote_id', $quote->id)->first();
             if( isset($item) ){
                 $item->product_name = $item->product->name;
-                $item->quantity += 1;
+                /* Adds Quantity into the DB */
+                $item->quantity += isset($request->quantity) ? (int)$request->quantity : 1;
                 $item->usd_cents = $request->price_cents;
                 $item->save();
             } elseif( !isset($item) ){
                 $item = new CustomerQuoteItem();
                 $item->product_id = $request->product_id;
                 $item->customer_quote_id = $quote->id;
-                $item->quantity = 1;
+                /* Adds Quantity into the DB */
+                $item->quantity += isset($request->quantity) ? (int)$request->quantity : 1;
                 $item->usd_cents = $request->price_cents;
                 $item->save();
             }
@@ -94,9 +105,10 @@ class CustomerQuoteController extends Controller
         // Check
         if( isset($quote_session) || isset($ip_address) ){
             // Check if Ip and Cookie is in DB
-            $quote = CustomerQuote::with('customer_quote_items')->where('quote_session', $quote_session)
-                                                        ->orWhere('ip_address', $ip_address)->first();
-            $data['quote'] = $quote;
+            $quote = CustomerQuote::with('customer_quote_items')
+                                    ->where('quote_session', $quote_session)
+                                    ->orWhere('ip_address', $ip_address)
+                                    ->first();
             if( isset($quote) ){
                 $quantity = $quote->customer_quote_items->sum('quantity');
                 $data['quantity'] = $quantity;
@@ -121,7 +133,10 @@ class CustomerQuoteController extends Controller
         $ip_address = $this->ip();
         /* Shopping Cart */
         if( isset($shopping_session) || $ip_address){
-            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+            $data['cart'] = Cart::with('cart_items')
+                                    ->where('shopping_session', $shopping_session)
+                                    ->orWhere('ip_address', $ip_address)
+                                    ->first();
             if( !empty($data['cart']) ){
                 $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
                 //dd($data['cart_quantity']);
@@ -246,27 +261,90 @@ class CustomerQuoteController extends Controller
         //dd($customer_id);
         
        if( !(Auth::check()) ){
-           return redirect()->route('checkout.login');
+            if( isset($quote_session) || isset($ip_address) ){
+                $quote = CustomerQuote::with('customer_quote_items')
+                                    ->where('quote_session', $quote_session)
+                                    ->orWhere('ip_address', $ip_address)
+                                    ->first();
+                if( isset($quote) ){
+                    $quote->shipping_fee = $request->shipping_feeCents;
+                    $quote->quote_subtotal = $request->quote_subtotalCents;
+                    $quote->grandtotal = $request->quote_totalCents;
+                    $quote->zwl_grandtotal = $request->quote_zwltotalCents;
+                    $quote->save();
+                    $customer_quote_id = $quote->id;
+                    $old_quote_items = CustomerQuoteItem::where('customer_quote_id', $customer_quote_id)->delete();
+                    $product_id = $request->product_id;
+                    if(isset($product_id)){
+                        $count_id = count($request->product_id);
+                        for($i = 0; $i < $count_id; $i++){
+                            $items = new CustomerQuoteItem();
+                            $items->customer_quote_id = $customer_quote_id;
+                            $items->quantity = $request->product_quantity[$i];
+                            $items->product_id = $request->product_id[$i];
+                            if($request->product_variation != ''){
+                                $items->product_variation = $request->product_variation;
+                            }
+                            $items->save();
+                        }
+            
+                        return redirect()->route('customer.quote.checkout.login');
+                    }
+
+                }
+            }else if( !isset($quote_session) && !isset($ip_address)){
+                $quote_session = $this->randomString(30);
+                // SET COOKIE
+                Cookie::queue('quote_session', $quote_session, 10080);
+                $quote = new CustomerQuote();
+                $quote->quote_session = $quote_session;
+                $quote->ip_address = $ip_address;
+                $quote->shipping_fee = $request->shipping_feeCents;
+                $quote->quote_subtotal = $request->quote_subtotalCents;
+                $quote->grandtotal = $request->quote_totalCents;
+                $quote->zwl_grandtotal = $request->quote_zwltotalCents;
+                $quote->save();
+                $customer_quote_id = $quote->id;
+                $old_quote_items = CustomerQuoteItem::where('customer_quote_id', $customer_quote_id)->delete();
+                $product_id = $request->product_id;
+                if(isset($product_id)){
+                    $count_id = count($request->product_id);
+                    for($i = 0; $i < $count_id; $i++){
+                        $items = new CustomerQuoteItem();
+                        $items->customer_quote_id = $customer_quote_id;
+                        $items->quantity = $request->product_quantity[$i];
+                        $items->product_id = $request->product_id[$i];
+                        if($request->product_variation != ''){
+                            $items->product_variation = $request->product_variation;
+                        }
+                        $items->save();
+                    }
+                }
+                return redirect()->route('customer.quote.checkout.login');  
+            }
+            return redirect()->route('customer.quote.checkout.login');
        }
        else{
            $customer_id = Auth::id();
            if( isset($quote_session) || isset($ip_address) ){
-               $quote = CustomerQuote::with('customer_quote_items')->where('quote_session', $quote_session)
-                                                            ->orWhere('ip_address', $ip_address)->first();
+                $quote = CustomerQuote::with('customer_quote_items')
+                                    ->where('quote_session', $quote_session)
+                                    ->orWhere('ip_address', $ip_address)
+                                    ->first();
                 $quote->customer_id = $customer_id;
                 $quote->shipping_fee = $request->shipping_feeCents;
-                $quote->cart_subtotal = $request->cart_subtotalCents;
-                $quote->total = $request->cart_totalCents;
-                $quote->zwl_total = $request->cart_zwltotalCents;
+                $quote->quote_subtotal = $request->quote_subtotalCents;
+                $quote->grandtotal = $request->quote_totalCents;
+                $quote->zwl_grandtotal = $request->quote_zwltotalCents;
                 $quote->save();
-               $quote_id = $quote->id;
-               $old_cart_items = CustomerQuoteItem::where('customer_quote_id', $quote_id)->delete();
-               $product_id = $request->product_id;
-               if(isset($product_id)){
+                $customer_quote_id = $quote->id;
+                $old_quote_items = CustomerQuoteItem::where('customer_quote_id', $customer_quote_id)->delete();
+                $product_id = $request->product_id;
+                if(isset($product_id)){
                    $count_id = count($request->product_id);
                    for($i = 0; $i < $count_id; $i++){
                        $items = new CustomerQuoteItem();
-                       $items->cart_id = $quote_id;
+                       $items->customer_quote_id = $customer_quote_id;
                        $items->quantity = $request->product_quantity[$i];
                        $items->product_id = $request->product_id[$i];
                        if($request->product_variation != ''){
@@ -274,34 +352,23 @@ class CustomerQuoteController extends Controller
                        }
                        $items->save();
                    }
-                   /* Saves new quantity in store */
-                   $in_store_quantity =  $request->in_store_quantity;
-                   for($i = 0; $i < $count_id; $i++){
-                       $product = Product::find($request->product_id[$i]);
-                       $inventory_id = $product->inventories->id;
-                       $inventory = Inventory::find($inventory_id);
-                       $inventory->in_store_quantity = $in_store_quantity[$i];
-                       $inventory->save();
-                   }
-                   return redirect()->route('quote.pdf'); 
-               }
+        
+                   return redirect()->route('customer.quote.checkout'); 
+                }
            }
-           elseif( !(isset($shopping_session)) || !isset($ip_address) ){
+           elseif( !(isset($quote_session)) || !isset($ip_address) ){
                $notification = [
                    'message' => 'You need Products in the Cart to Generate PDF.',
                    'alert-type' => 'danger'
                ];
                
-                   return redirect()->route('index')->with($notification);
+                return redirect()->route('index')->with($notification);
            }
        }
    }
 
 
-   public function pdf(){
-    
-       
-   }
+  
 
 
    public function delete($id){

@@ -75,7 +75,7 @@
                                     @endforeach
                                     @endif
                                     <h2 class="font-size-25 text-lh-1dot2">{!! !empty($product->name) ? $product->name : ""  !!}</h2>
-                                    <input type="hidden" name="product_id" value="{{ !empty($product->id) ? $product->id : '' }}">
+                                    <input type="hidden" name="product_id" value="{{ !empty($product->id) ? $product->id : '' }}" class="product__id">
                                 
                                     <div class="d-md-flex align-items-center">
                                         @if( !empty($product->brands) )
@@ -107,7 +107,7 @@
                                         <input type="hidden" name="in_store_quantity" value="{{ !empty($product->inventories) ? $product->inventories->in_store_quantity : '' }}">
                                 </div>
                                 <div class="flex-horizontal-center flex-wrap mb-4">
-                                    <a href="#" class="text-gray-6 font-size-13 ml-2"><i class="ec ec-compare mr-1 font-size-15"></i> Add to Quote</a>
+                                    
                                 </div>
                                 <div class="mb-2">
                                     {!! !empty($product->short_description) ? : '' !!}
@@ -118,51 +118,17 @@
                                 @if(!empty($product->price))
                                 <div class="mb-4 pricing">
                                     <div class="d-flex align-items-baseline">
-                                        <del class="font-size-18 mr-2 text-gray-2">
-                                            @php
-                                            $usd_price = $product->price;
-                                            $price = $usd_price / 100;
-                                            @endphp
-                                            @if($product->discounts->discount_percent != false)
-                                                ${{ number_format((float)$price, 2, '.', '') }}
-                                            @endif
-                                        </del>
                                         <ins class="font-size-36 text-decoration-none">
                                             @php
-                                                $discount = ($product->discounts->discount_percent / 100) * $usd_price;
-                                                $discount_usd_price = $usd_price - $discount;
-                                                $price = $discount_usd_price / 100;
+                                                $price = $product->price / 100;
                                             @endphp
                                             <span class="price__number">
                                                 ${{ number_format((float)$price, 2, '.', '') }}
                                             </span>
+                                            <input type="hidden" name="product_price" value="{{ $product->price }}" class="product__price">
                                         </ins>
-                                        <input type="hidden" name="discounted_usd_priceCents" value="{{ $discount_usd_price }}">
                                     </div>
-                                    <div class="d-flex align-items-baseline">
-                                        <del class="font-size-18 mr-2 text-gray-2">
-                                            @php
-                                            $zwl_priceCents = ($product->price * $currency->value);
-                                            $zwl_price = $zwl_priceCents / 100;
-                                            @endphp
-                                            @if($zwl_priceCents != false)
-                                                ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
-                                            @endif
-                                        </del>
-                                        <ins class="font-size-36 text-decoration-none">
-                                            @php
-                                                $discount = ($product->discounts->discount_percent / 100) * $zwl_priceCents;
-                                                $discount_price = $zwl_priceCents - $discount;
-                                                $zwl_price = $discount_price / 100;
-                                            @endphp
-                                            <span class="price__number">
-                                            @if($zwl_price != false)
-                                                ZWL${{ number_format((float)$zwl_price, 2, '.', '') }}
-                                            @endif
-                                            </span>
-                                        </ins>
-                                        <input type="hidden" name="discounted_zwl_price" value="{{ $discount_price }}">
-                                    </div>
+                                   
                                 </div>
                                 @endif
                                 <div class="border-top border-bottom py-3 mb-4">
@@ -190,7 +156,7 @@
                                         <div class="border rounded-pill py-2 px-3 border-color-1">
                                             <div class="js-quantity row align-items-center">
                                                 <div class="col">
-                                                    <input type="number" name="product_quantity" value="0" class="js-result form-control h-auto border-0 rounded p-0 shadow-none">
+                                                    <input type="number" name="product_quantity" value="0" class="js-result product__quantity form-control h-auto border-0 rounded p-0 shadow-none">
                                                 </div>
                                                 <div class="col-auto pr-1">
                                                     <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
@@ -203,6 +169,12 @@
                                             </div>
                                         </div>
                                         <!-- End Quantity -->
+                                    </div>
+                                    <div class="ml-md-3"> 
+                                        <button type="button" href="{{ route('quote.add') }}" class="btn add__pageQuoteBtn px-5 btn-secondary-dark transition-3d-hover">
+                                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                                            Add to Quote
+                                        </button>
                                     </div>
                                     <div class="ml-md-3">
                                         @if(intval($product->inventories->in_store_quantity) == 0)
@@ -335,13 +307,10 @@
                                     <div class="prodcut-price">
                                         <div class="text-gray-100">
                                             @php
-                                                $usd_price = intval($product->price);
-                                                $discount = ($product->discounts->discount_percent / 100) * $usd_price;
-                                                $discount_usd_price = $usd_price - $discount;
-                                                $price = $discount_usd_price / 100;
+                                                $price = intval($product->price) / 100;
                                             @endphp
                                             $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
-                                            <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                            <input type="hidden" value="{{ $product->price }}" class="price__cents">
                                         </div>
                                     </div>
                                     <div class=" prodcut-add-cart">
@@ -350,7 +319,7 @@
                                         </div>
                                 </div>
                                 <div class="border-top pt-2 flex-center-between flex-wrap">
-                                    <a href="#" id="{{ $product->id }}" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i>Add To Quote</a>
+                                    
                                 </div>
                             </div>
                         </li>

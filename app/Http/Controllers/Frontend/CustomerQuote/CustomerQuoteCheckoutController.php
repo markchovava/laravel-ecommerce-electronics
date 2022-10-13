@@ -23,11 +23,14 @@ use App\Models\Product\Product;
 use App\Models\Product\Tag\Tag;
 use App\Models\Quote\CustomerQuote;
 use App\Models\Quote\CustomerQuoteItem;
+use App\Models\Quote\CustomerQuoteOrder;
+use App\Models\Quote\CustomerQuoteOrderItem;
 use App\Models\User;
 
 
 class CustomerQuoteCheckoutController extends Controller
 {
+
     public function index(){
         /*   Check Roles    */
         $data['role_id'] = CheckRoles::check_role();
@@ -38,7 +41,10 @@ class CustomerQuoteCheckoutController extends Controller
         $ip_address = $this->ip();
         /* Shopping Cart */
         if( isset($shopping_session) || isset($ip_address) ){
-            $data['cart'] = Cart::with('cart_items')->where('shopping_session', $shopping_session)->orWhere('ip_address', $ip_address)->first();
+            $data['cart'] = Cart::with('cart_items')
+                                ->where('shopping_session', $shopping_session)
+                                ->orWhere('ip_address', $ip_address)
+                                ->first();
             if( !empty($data['cart']) ){
                 $data['cart_quantity'] = $data['cart']->cart_items->sum('quantity');
             } 
@@ -71,15 +77,23 @@ class CustomerQuoteCheckoutController extends Controller
             $data['user'] = User::where('id', $user_id)->first();
             if( isset($quote_session) || isset($ip_address) ){
                 $data['quote'] = CustomerQuote::with('customer_quote_items')
-                                        ->where('quote_session', $quote_session)
-                                        ->orWhere('ip_address', $ip_address)
-                                        ->first();
+                                   ->where('quote_session', $quote_session)
+                                   ->orWhere('ip_address', $ip_address)
+                                   ->first();
                 if( !empty($data['quote']) ){
-                    $data['quote_quantity'] = $data['cart']->cart_items->sum('quantity');
-                    $quote_id =  $data['quote']->id;
-                    $data['cart_items'] = CartItem::with('product')->where('cart_id', $quote_id)->get();
+                    $data['quote_quantity'] = isset($data['quote']->customer_quote_items) 
+                    ? $data['quote']->customer_quote_items->sum('quantity') 
+                    : NULL;
+                    $customer_quote_id =  $data['quote']->id;
+                    $data['customer_quote_items'] = CustomerQuoteItem::with('product')
+                                                        ->where('customer_quote_id', $customer_quote_id)
+                                                        ->get();
+
                     /* Currency Convertion */
                     $data['zwl_currency'] = Miscellaneous::where('name', 'ZWL')->first();
+
+                    /* Message */
+                    $data['message'] = NULL;
 
                      /* 
                     *   Footer Products 
@@ -114,7 +128,7 @@ class CustomerQuoteCheckoutController extends Controller
                     $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
                     $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
 
-                    return view('frontend.pages.checkout.checkout',$data);
+                    return view('frontend.pages.quote.customer_checkout', $data);
                 } else{
                     $data['quote_quantity'] = 0;
                     $data['message'] = "The Shopping Quote is empty at the moment.";
@@ -150,7 +164,7 @@ class CustomerQuoteCheckoutController extends Controller
                     $footer_brands = Brand::orderBy('updated_at', 'desc')->paginate(6);
                     $data['footer_brands'] = (!empty($footer_brands)) ? $footer_brands : NULL;
 
-                    return view('frontend.pages.checkout.checkout',$data);
+                    return view('frontend.pages.quote.customer_checkout', $data);
                 } 
             } 
             else{
@@ -181,7 +195,7 @@ class CustomerQuoteCheckoutController extends Controller
                 ->orderBy('updated_at','desc')
                 ->paginate(3);
 
-                return view('frontend.pages.checkout.checkout',$data);
+                return view('frontend.pages.quote.customer_checkout', $data);
             }
         }
 
@@ -189,31 +203,20 @@ class CustomerQuoteCheckoutController extends Controller
         return redirect()->route('quote.checkout.login');
     }
 
-    /* 
-    *   Custom Function for generating Random Numbers  
-    */
-    public function reference_id(){
-        $date = date('dhis');
-        $rand = rand(0, 100);
-        return 'ORDER' . $date. $rand;
-    }
-
+    
     public function checkout_process(Request $request){
-         /*   Check Roles    */
-         $data['role_id'] = CheckRoles::check_role();
-         /*  Check Cookie */
-         $quote_session = Cookie::get('quote_session');
-         /*  IP Address */
-         $ip_address = $this->ip();
+
+        /*   Check Roles    */
+        $data['role_id'] = CheckRoles::check_role();
+        /*  Check Cookie */
+        $quote_session = Cookie::get('quote_session');
+        /*  IP Address */
+        $ip_address = $this->ip();
          /*   User Id   */
-         $customer_id = Auth::user()->id;
-        $shopping_session = Cookie::get('shopping_session');
-        $payment_session = $this->randomString(40);
-        Cookie::queue('payment_session', $payment_session, 10080);
 
         if( Auth::check() ){
             /* Insert User */
-            $id = Auth::id();
+            $id = Auth::user()->id;
             $user = User::find($id);
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
@@ -225,7 +228,6 @@ class CustomerQuoteCheckoutController extends Controller
             $user->company_phone_number = $request->company_phone_number;
             $user->company_email = $request->company_email;
             $user->company_address = $request->company_address;
-            $user->company_city = $request->company_city;
             $user->company_name = $request->company_name;
             $user->role_id = isset($user->role_id) ? $user->role_id : 4;
             $user->save();      
@@ -233,28 +235,37 @@ class CustomerQuoteCheckoutController extends Controller
             /*
             *   Adds an Order 
             */
-            $order = new CustomerQuoteItem();
-            $order->customer_id = $user->id;            
-            $order->reference_id = $this->reference_id();
-            $order->subtotal = $request->cart_subtotal;
-            $order->shipping_fee = $request->shipping_fee;
-            $order->total = $request->cart_total;
-            $order->zwl_total = $request->cart_zwltotal;
-            $order->status = 'Processing';
-            $order->notes = $request->notes;
-            $order->created_at = now();
-            $order->updated_at = now();
-            $order->delivery = (isset($request->to_company_address)) ? "To Company Address" : "To Delivery Address";
-            $order->save();
+            $customer_quote_order = new CustomerQuoteOrder();
+            $customer_quote_order->customer_id = $user->id;            
+            $customer_quote_order->reference_id = $this->reference_id();
+            $customer_quote_order->subtotal = $request->quote_subtotal;
+            $customer_quote_order->zwl_subtotal = $request->quote_zwl_subtotal;
+            if( isset($request->include_shipping) ){
+                $customer_quote_order->include_shipping = 'Yes';
+            }
+            
+            $customer_quote_order->shipping_fee = $request->shipping_fee;
+            $customer_quote_order->total = $request->quote_total;
+            $customer_quote_order->zwl_total = $request->quote_zwltotal;
+            $customer_quote_order->currency = $request->currency;
+            $customer_quote_order->status = 'Submitted';
+            $customer_quote_order->notes = $request->notes;
+            $customer_quote_order->created_at = now();
+            $customer_quote_order->updated_at = now();
+            $customer_quote_order->delivery = (isset($request->to_company_address)) 
+                                            ? "To Company Address" 
+                                            : "To Delivery Address";
+            $customer_quote_order->save();
             /*
             *   Adds Order Items 
             */
+           
             if($request->product_id){
                 $product_id = count($request->product_id);
                 for($i = 0; $i < $product_id; $i++){
-                    $order_items = new CustomerQuoteItem();
+                    $order_items = new CustomerQuoteOrderItem();
                     $order_items->product_name = $request->product_name[$i];
-                    $order_items->order_id = $order->id;
+                    $order_items->customer_quote_order_id = $customer_quote_order->id;
                     $order_items->product_id = $request->product_id[$i];
                     $order_items->quantity = $request->product_quantity[$i];
                     $order_items->unit_price = $request->product_unit_price[$i];
@@ -266,13 +277,13 @@ class CustomerQuoteCheckoutController extends Controller
             }
             
         
-             /* Delete Cart And Cart Items */
+             /* Delete Quote And Quote Items */
              if(isset($quote_session) || isset($ip_address)){
                 $quote = CustomerQuote::where('quote_session', $quote_session)
                                 ->orWhere('ip_address', $ip_address)
                                 ->first();
                 $quote_id = $quote->id;
-                $customer_quote_items = CustomerQuoteItem::where('quote_id', $quote_id)->delete();
+                $customer_quote_items = CustomerQuoteItem::where('customer_quote_id', $quote_id)->delete();
                 $quote = CustomerQuote::where('quote_session', $quote_session)->delete();
                 Cookie::queue(Cookie::forget('quote_session'));
                 unset($quote_session);
@@ -284,7 +295,7 @@ class CustomerQuoteCheckoutController extends Controller
                 'message' => 'The Order has been processed.',
                 'alert-type' => 'success'
             ];
-            return redirect()->route('payment.index');   /* ---------------- */ 
+            return redirect()->route('customer.quote.pdf');   /* ---------------- */ 
         } else{
             return redirect()->route('customer.login');
         }
@@ -292,6 +303,14 @@ class CustomerQuoteCheckoutController extends Controller
     }
 
 
+    /* 
+    *   Custom Function for generating Random Numbers  
+    */
+    public function reference_id(){
+        $date = date('dhis');
+        $rand = rand(0, 1000);
+        return $date . $rand;
+    }
     /* 
     *   Generate random string
     */

@@ -4,12 +4,9 @@ $(document).ready(function(){
         e.preventDefault();
         let csrf_token = $('#csrf__token').val();
         let cart_quantity = $('#cart__quantity');
-        let product_price = $(this).parent().siblings('.prodcut-price').find('.price__number').text();
-        let price_cents = $(this).parent().siblings('.prodcut-price').find('.price__cents').val();
+        let price = $(this).parent().siblings('.prodcut-price').find('.price__cents').val();
         let cart_add = $(this).attr('href');
         let product_id = $(this).attr('id');
-        let price_centsNumber = Number(price_cents);
-        let product_idNumber = Number(product_id);
      
         $.ajaxSetup({
             headers: {
@@ -24,8 +21,8 @@ $(document).ready(function(){
             method: "POST",
             dataType: "json",
             data: {
-                price_cents: price_centsNumber,
-                product_id: product_idNumber,
+                price_cents: Number(price),
+                product_id: Number(product_id),
                 _token: csrf_token
             },
             success: function(result){

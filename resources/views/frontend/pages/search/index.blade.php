@@ -148,17 +148,14 @@
                                             <div class="prodcut-price">
                                                 <div class="text-gray-100">
                                                     @php
-                                                        $usd_price = intval($product->price);
-                                                        $discount = ($product->discounts->discount_percent / 100) * $usd_price;
-                                                        $discount_usd_price = $usd_price - $discount;
-                                                        $price = $discount_usd_price / 100;
+                                                        $price = (int)$product->price / 100;
                                                     @endphp
-                                                    $<span class="price__number">{{ number_format((float)$price, 2, '.', '') }}</span>
-                                                    <input type="hidden" value="{{ $discount_usd_price }}" class="price__cents">
+                                                    $<span class="price__amount">{{ number_format((float)$price, 2, '.', '') }}</span>
+                                                    <input type="hidden" value="{{ $product->price }}" class="price__cents">
                                                 </div>
                                             </div>
                                             <div class="prodcut-add-cart">
-                                                <a href="" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                <a href="" class="add__searchCartBtn btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
                                             </div>
                                         </div>
                                         <div class="flex-horizontal-center justify-content-between justify-content-wd-center flex-wrap border-top pt-3">

@@ -39,10 +39,12 @@
        <!--  owlcarousel -->
         <script src="{{ asset('frontend/assets/vendor/owlcarousel/js/owl.carousel.min.js') }}"></script>
 
+        <script src="{{ asset('frontend/assets/custom/toastr/toastr.min.js') }}"></script>
+
         <!-- Custom Cart -->
         <script src="{{ asset('frontend/assets/custom/cart.custom.js') }}"></script>
         <!-- :::::   Custom Quote   :::: -->
         <script src="{{ asset('frontend/assets/custom/quote.custom.js') }}"></script>
 
-        <script src="{{ asset('frontend/assets/custom/toastr/toastr.min.js') }}"></script>
+       
 
